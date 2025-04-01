@@ -18,7 +18,7 @@ function App() {
             </div>
           }
         />
-        <Route path="/header" element={<Header />} />
+        <Route path="/header" elemen={<Header />}t />
       </Routes>
     </div>
   </BrowserRouter>
