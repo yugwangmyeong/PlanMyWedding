@@ -2,7 +2,8 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Login from './components/Login';
-import SignUp from './components/SignUp';
+import SignUp from './components/Register';
+import Register from './components/Register';
 
 
 
@@ -20,7 +21,7 @@ function App() {
           }
         />
         <Route path="/header" element={<Header />}/>
-        <Route path="/signup" element={<SignUp />}/>
+        <Route path="/register" element={<Register />}/>
       </Routes>
     </div>
   </BrowserRouter>

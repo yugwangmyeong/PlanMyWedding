@@ -1,5 +1,5 @@
-/* signup.css */
-.signup-container {
+/* register.css */
+.register-container {
   display: flex; /* 부모 요소를 Flexbox로 설정하여 자식 요소의 배치를 유연하게 관리 */
   justify-content: center; /* 자식 요소를 가로축에서 중앙으로 정렬 */
   align-items: center; /* 자식 요소를 세로축에서 중앙으로 정렬 */
@@ -7,7 +7,7 @@
   background-color: #f4f4f4; /* 컨테이너의 배경색을 연한 회색(#f4f4f4)으로 설정 */
   }
   
-  .signup-box {
+  .register-box {
     background: rgb(248, 214, 220);
     padding: 20px;
     border-radius: 8px;
@@ -16,7 +16,7 @@
     text-align: center;
   }
   
-  .sign-box h2 {
+  .register-box h2 {
     text-align: center;
     margin-bottom: 20px;
     color:black;
@@ -51,7 +51,7 @@
     text-align: center;
   }
   
-  .signup-btn {
+  .register-btn {
     width: 80%;
     padding: 10px;
     background-color: white;
@@ -63,7 +63,7 @@
     margin-top: 60px;
   }
   
-  .signup-btn:hover {
+  .register-btn:hover {
     background-color: #0056b3;
   }
   

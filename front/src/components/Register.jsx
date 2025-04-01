@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import './styles/signup.css';
+import './styles/register.css';
 import { useNavigate } from 'react-router-dom';
 
-const SignUp = () => {
+const Register = () => {
   const [name, setName] = useState("")
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -52,8 +52,8 @@ const SignUp = () => {
   };
    
   return (
-    <div className="signup-container">
-      <div className="signup-box">        
+    <div className="register-container">
+      <div className="register-box">        
         <form onSubmit={handleSignUp}>
          <div className="input-group">
           <label htmlFor="name">이름</label>
@@ -96,11 +96,11 @@ const SignUp = () => {
             />
           </div>
           {error && <p className="error-message">{error}</p>}
-          <button type="submit" className="signup-btn">회원가입</button>
+          <button type="submit" className="register-btn">회원가입</button>
         </form>
       </div>
     </div>
   );
 };
 
-export default SignUp;
+export default Register;
