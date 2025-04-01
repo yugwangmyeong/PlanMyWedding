@@ -49,7 +49,7 @@ const Login = () => {
         <h2>로그인</h2>
         <form onSubmit={handleLogin}>
           <div className="input-group">
-            <label htmlFor="email">이메일</label>
+            <label htmlFor="email">계정</label>
             <input
               type="email"
               id="email"
