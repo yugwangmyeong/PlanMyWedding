@@ -10,7 +10,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.smhrd.myapp</groupId>
-	<artifactId>Backend</artifactId>
+	<artifactId>SpringBootPJ-1</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>SpringBootPJ-1</name>
 	<description>Demo project for Spring Boot</description>
