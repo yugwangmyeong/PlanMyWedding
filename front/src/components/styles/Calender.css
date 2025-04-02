@@ -1,0 +1,159 @@
+/* 전체 캘린더 + 사이드 정렬 박스 */
+.calendar-container {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 30px;
+}
+
+/* 캘린더 영역 */
+.calendar-box {
+  max-width: 800px;
+  width: 100%;
+}
+
+/* 오른쪽 사이드 박스 */
+.side-box {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* 공통 카드 스타일 */
+.side-card {
+  padding: 20px;
+  border-radius: 8px;
+  color: #333;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* 색상 테마 */
+.side-card.pink {
+  background: #f8d7da;
+}
+.side-card.blue {
+  background: #d1ecf1;
+}
+.side-card.green {
+  background: #d4edda;
+}
+
+
+
+
+
+
+
+
+
+
+
+/* 일요일 날짜 */
+.fc-day-sun a {
+  color: hotpink !important;
+}
+
+/* 토요일 날짜 */
+.fc-day-sat a {
+  color: hotpink !important;
+}
+
+/* 평일 (월~금) 날짜 */
+.fc-day-mon a,
+.fc-day-tue a,
+.fc-day-wed a,
+.fc-day-thu a,
+.fc-day-fri a {
+  color: #EFA1DC !important; /* 혹은 #ff69b4 */
+}
+
+/* 월(달 이름) 텍스트 색상 핑크로 변경 */
+.fc-toolbar-title {
+  color: #EFA1DC !important; /* 또는 원하는 색상 #ff69b4 */
+}
+
+/* === FullCalendar 버튼 커스터마이징 === */
+.fc-button {
+  background-color: #EFA1DC !important;
+  border: none !important;
+  color: white !important;
+  font-weight: bold;
+  border-radius: 6px !important;
+  padding: 6px 14px !important;
+  cursor: pointer;
+  font-size: 13px !important;
+  padding: 5px 10px !important;
+}
+
+.fc-button:hover {
+  background-color: #EFA1DC !important;
+}
+
+.fc-button-active {
+  background-color: #EFA1DC !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 모달 배경 */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* 모달 창 */
+.modal-content {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* 입력창 */
+.modal-content input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+/* 버튼 */
+.modal-buttons button {
+  padding: 8px 12px;
+  margin-right: 10px;
+  background-color: #efa1dc;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.modal-buttons button:hover {
+  background-color: #e181c4;
+}
