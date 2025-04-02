@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Header from "./components/Header";
 import Login from "./components/Login";
 import Schedule from "./components/Schedule";
-import Moneycontrol from "./components/Moneycontrol";
+import Moneycontrol from "../src/components/Moneycontrol/Moneycontrol";
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token")); // ✅ 상태 생성
 
