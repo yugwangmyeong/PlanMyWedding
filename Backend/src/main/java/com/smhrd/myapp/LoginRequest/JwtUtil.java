@@ -14,7 +14,7 @@ public class JwtUtil{
         return Jwts.builder()
         		.setHeaderParam("typ", "JWT")
                 .setSubject(usernameOrEmail)
-                .claim("username", username) // ✅ 닉네임 claim 추가
+                .claim("username", username)
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60)) // 1시간
                 
                 .signWith(SignatureAlgorithm.HS512, SECRET_KEY.getBytes(StandardCharsets.UTF_8)) // ✅ UTF-8

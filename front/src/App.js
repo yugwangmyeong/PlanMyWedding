@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Header from "./components/Header";
 import Login from "./components/Login";
-import Schedule from "./components/styles/Schedule";
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token")); // ✅ 상태 생성
@@ -27,10 +26,10 @@ function App() {
             element={isLoggedIn ? <Header /> : <Navigate to="/" />}
           />
 
-          <Route
+          {/* <Route
             path="/schedule"
             element={isLoggedIn ? <Schedule /> : <Navigate to="/" />}
-          />
+          /> */}
         </Routes>
       </div>
     </BrowserRouter>
