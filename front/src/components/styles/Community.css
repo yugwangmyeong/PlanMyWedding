@@ -1,97 +1,123 @@
-/* 전체 레이아웃 */
+/* 전체 배경을 하얀색으로 변경 */
+body {
+  background-color: white;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* 페이지 전체 컨테이너 */
 .community-container {
-    display: flex;
-    height: 100vh;
-    width: 60%; /* 본문이 너무 넓지 않게 설정 */
-    margin: 0 auto; /* 자동으로 좌우 여백을 균등하게 */
-    margin-top: 30px;
-  }
-  
-  /* 사이드바 */
-  .sidebar {
-    width: 200px;
-    background-color: white; /* 배경을 흰색으로 변경 */
-    padding: 20px;
-  }
-  
-  .sidebar ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .sidebar li {
-    padding: 10px;
-    font-size: 18px;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-  
-  .sidebar .active {
-    font-weight: bold;
-    background-color: #f8d7da; /* 선택된 항목만 색상 추가 */
-  }
-  
-  /* 헤더 */
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    background-color: #fff;
-    border-bottom: 1px solid #ddd;
-    margin-top: 50px; /* 공백 추가 */
-  }
-  
-  /* 검색창 */
-  .search-bar {
-    flex: 1;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-right: 10px; /* 글작성 버튼과 간격 추가 */
-  }
-  
-  /* 글작성 버튼 */
-  .write-button {
-    padding: 8px 12px;
-    background-color: #ff6b6b;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-left: 10px; /* 검색창과 글작성 버튼 간격 추가 */
-  }
-  
-  /* 이미지 갤러리 */
-  .image-gallery {
-    margin-top: 20px;
-    text-align: left; /* 왼쪽 정렬 */
-  }
-  
-  .images img {
-    width: 200px;
-    height: 150px;
-    margin-right: 10px;
-    border-radius: 10px;
-  }
-  
-  /* 게시글 목록 */
-  .post-list {
-    margin-top: 20px;
-  }
-  
-  .post-item {
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    margin-bottom: 15px;
-  }
-  
-  /* 좋아요 및 댓글 정렬 */
-  .post-meta {
-    display: flex;
-    justify-content: flex-end; /* 오른쪽 정렬 */
-    gap: 15px;
-    color: gray;
-    font-size: 14px;
-  }
+  display: flex;
+  width: 80%;
+  margin: 30px auto;
+}
+
+/* 사이드바 스타일 */
+.sidebar {
+  width: 200px;
+  padding: 20px;
+  background-color: white; /* 사이드바도 하얀색 */
+  border-right: 1px solid #ddd;
+  position: relative;
+  top: 20px; /* 살짝 내려오기 */
+}
+
+/* 사이드바 리스트 */
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  padding: 10px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.sidebar .active {
+  background-color: #f0f0f0;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+/* 메인 컨텐츠 */
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+}
+
+/* 검색창과 글작성 버튼을 같은 크기로 정렬 */
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* 버튼과 검색창 간격 */
+  margin-bottom: 20px; /* 아래 요소와 여백 */
+}
+
+.search-bar {
+  flex-grow: 1;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.write-button {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* 이미지 갤러리 스타일 */
+.image-gallery {
+  margin-top: 20px;
+}
+
+.images {
+  display: flex;
+  gap: 10px;
+}
+
+.images img {
+  width: 150px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+/* 게시글 목록 스타일 */
+.post-list {
+  margin-top: 20px;
+}
+
+.post-item {
+  border-bottom: 1px solid #ddd;
+  padding: 15px 0;
+}
+
+.post-item h3 {
+  font-size: 14px;
+  color: #555;
+}
+
+.post-item h2 {
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.post-item p {
+  color: #777;
+}
+
+.post-meta {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  font-size: 14px;
+  color: #666;
+}
