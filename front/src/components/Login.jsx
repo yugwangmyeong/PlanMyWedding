@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./styles/login.css";
 import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login = ({ setToken }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -33,11 +33,11 @@ const Login = () => {
 
         // ✅ 콘솔에 토큰 출력
         console.log("받은 토큰:", data.token);
-
+        setToken(data.token);
         // ✅ 토큰 저장 (로그인 유지용)
         localStorage.setItem("token", data.token);
-        setToken(data.token);
-        navigate("/header");
+        
+        window.location.href = "/header";
       } else {
         // 로그인 실패
         setError("로그인에 실패했습니다. 다시 시도해주세요.");
