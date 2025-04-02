@@ -2,6 +2,9 @@
 .community-container {
     display: flex;
     height: 100vh;
+    width: 60%; /* 본문이 너무 넓지 않게 설정 */
+    margin: 0 auto; /* 자동으로 좌우 여백을 균등하게 */
+    margin-top: 30px;
   }
   
   /* 사이드바 */
