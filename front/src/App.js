@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./components/Login";
 import Schedule from "./components/Schedule";
-import Mainpage
-
+import Mainpage from "./components/Mainpage";
+import MoneyControl from "./components/Moneycontrol";
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const isLoggedIn = !!token;
@@ -14,10 +14,10 @@ function App() {
       <div className="App">
         <Routes>
           <Route
-            path="/Login"
+            path="/login"
             element={
               <div className="App-header">
-                <Login />
+                <Login setToken={setToken} />
               </div>
             }
           />
@@ -33,7 +33,7 @@ function App() {
 
           { <Route
             path="/moneycontrol"
-            element={isLoggedIn ? <Moneycontrol /> : <Navigate to="/" />}
+            element={isLoggedIn ? <MoneyControl /> : <Navigate to="/" />}
           /> }
 
          

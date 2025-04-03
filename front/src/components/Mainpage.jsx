@@ -1,9 +1,8 @@
 import React from "react";
-import Header from "../Header";
-import MiniRoomSection from "./MiniRoomSection";
-import BudgetSection from "./BudgetSection";
-import ScheduleSection from "./ScheduleSection";
-import "../styles/mainpage.css";
+import Header from "./Header";
+import BudgetSection from "./Mainpage/BudgetSection";
+import ScheduleSection from "./Mainpage/ScheduleSection";
+import "./styles/mainpage.css";
 const Mainpage = () => {
   return (
     <div>

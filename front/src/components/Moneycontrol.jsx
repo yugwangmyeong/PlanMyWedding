@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import Header from "../Header";
-import BudgetRow from "./BudgetRow";
-import BudgetSummary from "./BudgetSummary";
-import "../styles/moneycontrol.css";
+import Header from "./Header";
+import BudgetRow from "./Moneycontrol/BudgetRow";
+import BudgetSummary from "./Moneycontrol/BudgetSummary";
+import "./styles/moneycontrol.css";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 
 const MoneyControl = () => {

@@ -1,10 +1,15 @@
 import React from 'react'
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import interactionPlugin from "@fullcalendar/interaction";
+import CalendarSection from './CalendarSection';
 import '../styles/budgetsection.css';
 const ScheduleSection = () => {
   return (
     <div className="section schedule-section">
     <h2>일정 관리</h2>
-    {/* 캘린더 컴포넌트 삽입 */}
+    <CalendarSection></CalendarSection>
+
   </div>
   )
 }

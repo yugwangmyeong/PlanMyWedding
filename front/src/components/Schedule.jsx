@@ -1,7 +1,7 @@
 import React from 'react'
 import Header from './Header'
 import "./styles/schedule.css";
-//Moneycontrol css랑 같이사용
+
 const Schedule = () => {
   return (
     <div>
