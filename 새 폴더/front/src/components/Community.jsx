@@ -1,59 +1,74 @@
-import React from "react";
-import "./styles/Community.css";
+import React from 'react';
+import Header from '../components/Header';
+import './styles/Community.css';
 
-const Screen = () => {
-  return (
-    <div className="screen">
-      <header className="header">
-        <nav className="category-menu">
-          <div>드레스</div>
-          <div>메이크업</div>
-          <div>스튜디오</div>
-          <div>신혼여행</div>
-          <div>전체</div>
-          <div>웨딩홀</div>
-        </nav>
-      </header>
+function Community() {
+    return (
+        <div className="community-page">
+            <Header />
+            <div className="community-container">
+                {/* 사이드바 */}
+                <aside className="sidebar">
+                    <ul>
+                        <li className="active">전체</li>
+                        <li>웨딩홀</li>
+                        <li>드레스</li>
+                        <li>메이크업</li>
+                        <li>스튜디오</li>
+                        <li>신혼여행</li>
+                    </ul>
+                </aside>
 
-      <section className="community-section">
-        <h2>커뮤니티</h2>
-        <p>만족도 높은 고객님들의 최신 사진 리뷰</p>
-      </section>
+                {/* 메인 컨텐츠 */}
+                <div className="main-content">
+                    {/* 검색창과 글작성 버튼 */}
+                    <header className="header">
+                        <input type="text" placeholder="관심있는 내용을 검색해보세요!" className="search-bar" />
+                        <button className="write-button">글작성</button>
+                    </header>
 
-      <div className="post-list">
-        <PostCard
-          category="웨딩홀"
-          title="광주 인기 웨딩홀 드메르 식장 후기"
-          description="드메르는 인기가 많아서 이미 올해는 예약이 마감 되었다고 해요..."
-          likes={77}
-          comments={10}
-        />
-        <PostCard
-          category="스튜디오"
-          title="광주웨딩드레스 다양한 스타일 르노브해밀"
-          description="최근에 결혼 준비하시는 분들을 보면 광주웨딩드레스에서 괜찮은..."
-          likes={50}
-          comments={12}
-        />
-      </div>
-    </div>
-  );
-};
+                    {/* 이미지 갤러리 */}
+                    <section className="image-gallery">
+                        <h2>고객님들의 최신 사진 리뷰</h2>
+                        <div className="images">
+                            <img src="image1.jpg" alt="웨딩홀" />
+                            <img src="image2.jpg" alt="드레스" />
+                        </div>
+                    </section>
 
-// PostCard 컴포넌트 분리
-const PostCard = ({ category, title, description, likes, comments }) => {
-  return (
-    <div className="post-card">
-      <h3>
-        {category} - {title}
-      </h3>
-      <p>{description}</p>
-      <div className="post-actions">
-        <span>❤️ {likes}</span>
-        <span>💬 {comments}</span>
-      </div>
-    </div>
-  );
-};
+                    {/* 게시글 목록 */}
+                    <section className="post-list">
+                        {[
+                            {
+                                category: '웨딩홀 - 드메르웨딩홀 광주',
+                                title: '광주 인기 웨딩홀 드메르 식장 후기',
+                                description: '드메르는 인기가 많아서 이미 올해는 예약이 마감 되었다고 해요...',
+                                likes: 77,
+                                comments: 10,
+                            },
+                            {
+                                category: '스튜디오 - 르노브해밥 웨딩스튜디오',
+                                title: '광주웨딩드레스 다양한 스타일 르노브해밥',
+                                description: '최근에 결혼 준비하시는 분들은 르노브해밥을 찾는 추세입니다...',
+                                likes: 89,
+                                comments: 14,
+                            },
+                        ].map((post, index) => (
+                            <article key={index} className="post-item">
+                                <h3>{post.category}</h3>
+                                <h2>{post.title}</h2>
+                                <p>{post.description}</p>
+                                <div className="post-meta">
+                                    <span>👍 {post.likes}</span>
+                                    <span>💬 {post.comments}</span>
+                                </div>
+                            </article>
+                        ))}
+                    </section>
+                </div>
+            </div>
+        </div>
+    );
+}
 
-export default Screen;
+export default Community;

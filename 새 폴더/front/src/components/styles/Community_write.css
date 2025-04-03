@@ -91,6 +91,7 @@
     width: 1200px;  /* 🔹 문구를 오른쪽으로 늘리기 */
     white-space: normal; /* 🔹 자동 줄 바꿈 */
     word-wrap: break-word; /* 🔹 긴 단어도 줄 바꿈 */
+    text-align: left;
 }
   
   .screen .overlap-group {

@@ -1,13 +1,15 @@
 import React from "react";
 import "./styles/Community_write.css";
 
-export const Community_write = () => {
+const text_wrapper = 
+<div className="text-wrapper">
+          (선택) 서비스 ▼
+        </div>
+const Community_write = () => {
   return (
     <div className="screen">
       <div className="overlap">
-        <div className="text-wrapper">
-          (선택) 서비스 ▼
-        </div>
+        
 
         <div className="div">
           (선택) 지역 ▼
