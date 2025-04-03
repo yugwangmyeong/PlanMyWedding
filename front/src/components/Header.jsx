@@ -1,13 +1,17 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import "./styles/Header.css";
 import toggleMenuIcon from "./styles/assets/toggleMenu.png";
 
 const Header = () => {
+
+  //토큰사용하기위해서 토큰을 login했을때 백엔드에서 받아와서 저장함
   const token = localStorage.getItem("token");
   const isLoggedIn = !!token;
   const [isMypageOpen, setIsMypageOpen] = useState(false);
 
+  //Navigate사용하려면 필요함
+  const navigate = useNavigate();
   const toggleMypageMenu = () => {
     setIsMypageOpen(!isMypageOpen);
   };
@@ -38,7 +42,10 @@ const Header = () => {
   
   return (
     <header className="header">
-      <div className="logo">Plan my wedding</div>
+      <div className="logo" onClick={()=>navigate("/mainpage")}
+        style={{cursor:"pointer"}}>
+          Plan my wedding
+        </div>
 
       <nav className="nav-links">
         {/* 마이페이지 버튼 - 클릭 시 드롭다운 표시 */}
