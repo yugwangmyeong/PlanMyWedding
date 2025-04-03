@@ -2,9 +2,10 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Login from './components/Login';
-import SignUp from './components/Register';
 import Register from './components/Register';
-
+import Community from './components/Community';
+import CommunityWrite from './components/CommunityWrite';
+import CommunityPost from './components/CommunityPost';
 
 
 function App() {
@@ -23,6 +24,9 @@ function App() {
         <Route path="/header" element={<Header />}/>
         <Route path="/login" element={<Login />}/>
         <Route path="/register" element={<Register />}/>
+        <Route path="/community" element={<Community />} />
+        <Route path="/community/write" element={<CommunityWrite />} />
+        <Route path="/community/post/:postId" element={<CommunityPost />} />
       </Routes>
     </div>
   </BrowserRouter>
