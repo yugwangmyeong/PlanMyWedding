@@ -32,6 +32,10 @@ const Header = () => {
 
   const username = isLoggedIn ? getUsernameFromToken(token) : null;
 
+
+
+
+  
   return (
     <header className="header">
       <div className="logo">Plan my wedding</div>
@@ -48,7 +52,7 @@ const Header = () => {
             <Link to="/moneycontrol">예산관리</Link>
           </div>
         </div>
-        <Link to="/Community" className="header-margin">
+        <Link to="/Community" className="mypage-container">
           커뮤니티
         </Link>
       </nav>
