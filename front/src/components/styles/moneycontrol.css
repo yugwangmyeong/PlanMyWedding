@@ -50,30 +50,9 @@
   }
   
   
-/* 예산 박스 */
-.budget-box {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    background-color: #fde9ec;
-    border: 2px solid #999;
-    border-radius: 12px;
-    padding: 50px;
-    margin: 0 300px; /* 좌우 300px */
-  }
-  
-  .budget-item {
-    flex: 1;
-    text-align: center;
-    font-weight: 500;
-  }
-  
-  .divider {
-    width: 1px;
-    height: 40px;
-    background-color: #333;
-  }
-  
+
+
+
   /*
     예산세부내역
   */
@@ -151,21 +130,4 @@
     text-align: left;
     margin-left: 20px;
   }
-  
-  .input-animate-wrapper {
-    transform: scale(0.95);
-    opacity: 0;
-    animation: popIn 0.25s ease-out forwards;
-  }
-  
-  @keyframes popIn {
-    from {
-      transform: scale(0.95);
-      opacity: 0;
-    }
-    to {
-      transform: scale(1);
-      opacity: 1;
-    }
-  }
-  
+ 

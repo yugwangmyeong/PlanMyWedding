@@ -59,6 +59,26 @@
   -moz-appearance: textfield;
 }
 
+ 
+.input-animate-wrapper {
+  transform: scale(0.95);
+  opacity: 0;
+  animation: popIn 0.25s ease-out forwards;
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+
+
 /* ✅ 삭제 버튼: 행 hover 시만 보이게 */
 .action-buttons-wrapper {
   width: 40px;
