@@ -31,13 +31,15 @@ const Login = ({ setToken }) => {
       if (response.ok) {
         const data = await response.json();
 
-        // ✅ 콘솔에 토큰 출력
-        console.log("받은 토큰:", data.token);
+        
         setToken(data.token);
         // ✅ 토큰 저장 (로그인 유지용)
         localStorage.setItem("token", data.token);
         
-        window.location.href = "/header";
+        window.location.href = "/header";     //  리다이렉트로 새로고침하고 보냄
+        // ✅ 콘솔에 토큰 출력
+        console.log("받은 토큰:", data.token);  //  고침을 하기전에 보여주기는하는데 새로고침후에 바로 콘솔에서는 보이지않음
+        alert("받은 토큰: " + data.token); // 일시적으로 확인용
       } else {
         // 로그인 실패
         setError("로그인에 실패했습니다. 다시 시도해주세요.");
