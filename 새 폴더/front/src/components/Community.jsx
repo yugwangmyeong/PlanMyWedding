@@ -1,7 +1,7 @@
 import React from "react";
 import "./styles/Community.css";
 
-export const Screen = () => {
+const Screen = () => {
   return (
     <div className="screen">
       <header className="header">
