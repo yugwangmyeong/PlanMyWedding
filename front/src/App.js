@@ -11,37 +11,22 @@ function App() {
   const isLoggedIn = !!token;
   return (
     <BrowserRouter>
-      <div className="app-container">
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <div className="App-header">
-                <Login setToken={setToken} />
-              </div>
-            }
-          />
-          
-          <Route
-            path="/header"
-            element={isLoggedIn ? <div className="fix"><Header /></div> : <Navigate to="/" />}
-          />
-
-          { <Route
-            path="/schedule"
-            element={isLoggedIn ? <Schedule /> : <Navigate to="/" />}
-          /> }
-
-          { <Route
-            path="/moneycontrol"
-            element={isLoggedIn ? <Moneycontrol /> : <Navigate to="/" />}
-          /> }
-
-         
-          
-        </Routes>
-      </div>
-    </BrowserRouter>
+    <div className="App">
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <div className="App-header">
+              <Login />
+            </div>
+          }
+        />
+        <Route path="/header" element={<Header />}/>
+        <Route path="/login" element={<Login />}/>
+        <Route path="/register" element={<Register />}/>
+      </Routes>
+    </div>
+  </BrowserRouter>
   );
 }
 
