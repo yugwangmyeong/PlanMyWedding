@@ -2,32 +2,42 @@ import "./App.css";
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./components/Login";
-import Register from "./components/Register";
 import Schedule from "./components/Schedule";
-import Moneycontrol from "../src/components/Moneycontrol/Moneycontrol";
-import Mainpage from "./components/Mainpage/Mainpage";
-import Community from "./components/Community";
-function App() {
-  const [token, setToken] = useState(localStorage.getItem("token")); // ✅ 상태 생성
+import Mainpage
 
+function App() {
+  const [token, setToken] = useState(localStorage.getItem("token"));
   const isLoggedIn = !!token;
+
   return (
     <BrowserRouter>
       <div className="App">
         <Routes>
           <Route
-            path="/"
+            path="/Login"
             element={
               <div className="App-header">
-                <Login setToken={setToken} />
+                <Login />
               </div>
             }
           />
-          <Route path="/mainpage" element={<Mainpage />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/moneycontrol" element={<Moneycontrol/>} />
-          <Route path="/schedule" element={<Schedule/>} />
-          <Route path="/community" element={<Community/>} />
+          <Route
+            path="/mainpage"
+            element={isLoggedIn ? <div className="fix"><Mainpage /></div> : <Navigate to="/" />}
+          />
+
+          { <Route
+            path="/schedule"
+            element={isLoggedIn ? <Schedule /> : <Navigate to="/" />}
+          /> }
+
+          { <Route
+            path="/moneycontrol"
+            element={isLoggedIn ? <Moneycontrol /> : <Navigate to="/" />}
+          /> }
+
+         
+          
         </Routes>
       </div>
     </BrowserRouter>
