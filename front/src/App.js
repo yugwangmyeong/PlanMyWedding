@@ -11,7 +11,7 @@ function App() {
   const isLoggedIn = !!token;
   return (
     <BrowserRouter>
-      <div className="App">
+      <div className="app-container">
         <Routes>
           <Route
             path="/"
