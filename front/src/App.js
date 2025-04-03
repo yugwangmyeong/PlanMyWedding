@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Header from './components/Header';
-import Login from './components/Login';
-import Calender from './components/Calender'; // ✅ 캘린더 import 추가
+import "./App.css";
+import React, { useState } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Header from "./components/Header";
+import Login from "./components/Login";
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
@@ -11,7 +10,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className="App">
+      <div className="app-container">
         <Routes>
           <Route
             path="/"
@@ -21,8 +20,16 @@ function App() {
               </div>
             }
           />
-          <Route path="/header" element={<Header />} />
-          <Route path="/calender" element={<Calender />} /> {/* ✅ 요게 핵심! */}
+
+          <Route
+            path="/header"
+            element={isLoggedIn ? <Header /> : <Navigate to="/" />}
+          />
+
+          {/* <Route
+            path="/schedule"
+            element={isLoggedIn ? <Schedule /> : <Navigate to="/" />}
+          /> */}
         </Routes>
       </div>
     </BrowserRouter>

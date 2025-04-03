@@ -1,26 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined');
 
-
-
-.container {
-    width: 1200px; /* 고정된 너비 */
-    max-width: 100%; /* 화면이 너무 작으면 줄어들도록 설정 */
-    margin: 0 auto; /* 가운데 정렬 */
-    flex-direction: column;
-    display:flex;
-    
-  }
-
-
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background: white;
-    padding: 10px;
+    padding: 20px;
     color: #EFA1DC;
-    margin-bottom:-10px;
     
+    margin-left:300px;
+    margin-right:300px;
+    height:30px;
 }
 
 .logo {
@@ -29,7 +19,7 @@
     font-family: "Nanum Gothic", sans-serif;
     font-style: normal;
     margin-top:-7px;
-    margin-left:50px;
+    text-align: left;
 }
 
 .material-symbols-outlined {
@@ -53,30 +43,20 @@
 }
 .nav-links {
     display: flex;
-    gap: 20px; /* 링크 사이 간격을 20px로 설정 */
-    margin-left: -30px;
-    
 }
 .nav-links2 {
     display: flex;
     gap: 20px; /* 링크 사이 간격을 20px로 설정 */
-    margin-left: 5px; 
-    
 }
 nav a {
     color: black;
     text-decoration: none;
     margin-left: 10px;
 }
-.header-margin{
-  display: flex;  /* 가로 정렬을 위해 flex 사용 */
-  align-items: center;  /* 세로 중앙 정렬 */
-  justify-content: center; /* (필요 시) 가로 중앙 정렬 */
-  margin-top: 9px;  /* 기존 margin 제거 */
-  height: 100%; /* 부모 요소의 높이를 따라가도록 설정 */
+.nickname{
+  padding:10px;
   
 }
-
 
 .login-link {
     margin-left: 380px;
@@ -99,10 +79,14 @@ nav a {
   'opsz' 24
 }
 
-.mypage-container {
-  position: relative;
+a.mypage-container{
+  height: 37px;
   display: inline-block;
+  padding: 0;         /* 가로만 주기 */
+  line-height: 37px;      /* 세로 정렬용 */
+  vertical-align: middle; /* 세로 정렬 */
 }
+
 
 /* 마이페이지 버튼 */
 .mypage-btn {
