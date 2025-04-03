@@ -59,7 +59,7 @@
     border-radius: 15px;
     font-size: 16px;
     cursor: pointer; /* 마우스를 올렸을 때 포인터 모양으로 변경 */
-    margin-top: 60px;
+    margin-top: 40px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 기본 그림자 효과 */ 
   }
   
