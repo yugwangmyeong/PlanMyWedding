@@ -4,7 +4,7 @@
 
 .container {
     width: 1200px; /* 고정된 너비 */
-    max-width: 90%; /* 화면이 너무 작으면 줄어들도록 설정 */
+    max-width: 100%; /* 화면이 너무 작으면 줄어들도록 설정 */
     margin: 0 auto; /* 가운데 정렬 */
     flex-direction: column;
     display:flex;
@@ -29,6 +29,7 @@
     font-family: "Nanum Gothic", sans-serif;
     font-style: normal;
     margin-top:-7px;
+    margin-left:50px;
 }
 
 .material-symbols-outlined {

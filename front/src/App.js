@@ -1,15 +1,18 @@
+import React, { useState } from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Login from './components/Login';
-import Calender from './components/Calender'; // ✅ 캘린더 컴포넌트 import 추가
+import Calender from './components/Calender'; // ✅ 캘린더 import 추가
 
 function App() {
+  const [token, setToken] = useState(localStorage.getItem("token"));
+  const isLoggedIn = !!token;
+
   return (
     <BrowserRouter>
       <div className="App">
         <Routes>
-          {/* 기본 경로 → 로그인 */}
           <Route
             path="/"
             element={
@@ -18,12 +21,8 @@ function App() {
               </div>
             }
           />
-
-          {/* Header 컴포넌트 라우트 */}
           <Route path="/header" element={<Header />} />
-
-          {/* ✅ Calender 컴포넌트 라우트 추가 */}
-          <Route path="/calender" element={<Calender />} />
+          <Route path="/calender" element={<Calender />} /> {/* ✅ 요게 핵심! */}
         </Routes>
       </div>
     </BrowserRouter>
