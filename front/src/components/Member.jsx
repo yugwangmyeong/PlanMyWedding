@@ -14,7 +14,7 @@ const Member = () => {
         {/* 왼쪽 박스 */}
         <div className="left-container">
           <button className="current-btn">회원정보</button><br></br>
-          <button className="btn1">내 활동 정보</button>
+          <button className="btn1">설정</button>
           <br></br>
           <br></br>
           <br></br>
@@ -25,7 +25,7 @@ const Member = () => {
 
         {/* 오른쪽 박스 */}
         <div className="right-container">
-          <div className="title">프로필 편집</div>
+          <div className="title">회원정보 변경</div>
           <br></br>
           <br></br>
           
@@ -56,6 +56,9 @@ const Member = () => {
 
         </div>
       </div>
+
+      <></>
+
     </div>
   );
 };
