@@ -6,36 +6,41 @@ import toggleMenuIcon from "./styles/assets/toggleMenu.png";
 const Community = () => {
   const [isMypageOpen, setIsMypageOpen] = useState(false);
 
+  // 마이페이지 드롭다운 토글
   const toggleMypageMenu = () => {
     setIsMypageOpen(!isMypageOpen);
   };
 
-  // [2] 예시 게시글 데이터 (실제로는 서버에서 받아오거나 Redux, Context 등을 사용할 수 있습니다.)
+  // 임시 게시글 데이터 (실제 데이터는 서버나 전역 상태에서 받아옵니다)
   const [posts] = useState([
     {
       id: 1,
-      title: "웨딩 촬영 후기",
-      content: "드디어 웨딩 촬영을 마쳤어요! 스튜디오 분위기가 너무 좋아서...",
-      thumbnail: "/images/sample1.jpg",
-      date: "2025-04-01",
-      author: "happyBride",
+      title: "광주 인기 웨딩홀 드메르 식장 후기",
+      content: "드메르는 인기가 많아서 이미 주말에는 예약이 마감되었다고 하네요...",
+      likes: 77,        // 좋아요 수 (예시)
+      comments: 5,       // 댓글 수 (예시)
+      images: ["/images/sample1.jpg", "/images/sample2.jpg"], // 썸네일용 이미지
+      service: "웨딩홀",
+      region: "광주"
     },
     {
       id: 2,
-      title: "스드메 업체 추천 부탁드려요",
-      content: "서울 강남권에서 괜찮은 스드메 찾고 있어요! 예산은...",
-      thumbnail: "/images/sample2.jpg",
-      date: "2025-04-02",
-      author: "weddinglover",
+      title: "드레스 투어 후기",
+      content: "드레스 투어를 다녀왔어요. 가장 마음에 들었던 곳은...",
+      likes: 23,
+      comments: 5,
+      images: ["/images/sample3.jpg"],
+      service: "드레스",
+      region: "서울"
     },
     // 필요한 만큼 더미 데이터 추가
   ]);
 
   return (
     <div className="community-container">
+      {/* 헤더 영역 */}
      <header className="header">
       <div className="logo">Plan my wedding</div>
-
       <nav className="nav-links">
         {/* 마이페이지 버튼 - 클릭 시 드롭다운 표시 */}
         <div className={`mypage-container ${isMypageOpen ? "open" : ""}`}>
@@ -178,16 +183,30 @@ const Community = () => {
     <div className="post-list">
       {posts.map((post) => (
         <article className="post-item" key={post.id}>
-          <div className="post-image">
-            <img src={post.thumbnail} alt={post.title} />
-          </div>
+
+          {/* 왼쪽: 글 정보 */}
           <div className="post-info">
-            <h3>{post.title}</h3>
+            <h3 className="post-title">{post.title}</h3>
+
+            {/* 게시글 내용 영역: 구분선 없음 */}
+          <div className="post-content">
             <p>{post.content}</p>
+          </div>
+
+            {/* 좋아요/댓글 영역: 구분선이 적용됨 */}
             <div className="post-meta">
-              <span className="post-author">{post.author}</span>
-              <span className="post-date">{post.date}</span>
+              <span className="post-likes">👍 {post.likes}</span>
+              <span className="post-comments">💬 {post.comments}</span>
             </div>
+          </div>
+          {/* 썸네일 이미지 */}
+          <div className="post-thumbnail">
+          {post.images && post.images.length > 0 ? (
+            // 실제 파일 객체가 아니라 URL이므로 바로 src에 할당
+            <img src={post.images[0]} alt="thumbnail" />
+          ) : (
+            <img src="/images/no-image.jpg" alt="no thumbnail" />
+          )}
           </div>
         </article>
        ))}

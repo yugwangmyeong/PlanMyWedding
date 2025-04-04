@@ -16,17 +16,14 @@ const CommunityWrite = () => {
     // 글 제목, 내용, 카테고리 등 상태 관리
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
-    const [category, setCategory] = useState('자유');
+    const [category, setCategory] = useState('');
     const [service, setService] = useState('');
     const [region, setRegion] = useState('');
-
-    // 이미지 업로드 
     const [images, setImages] = useState([]);
 
     // 글 작성 처리: 작성하기 버튼 클릭 시, 데이터를 전달하며 CommunityPost로 이동
     const handleSubmit = (e) => {
         e.preventDefault();
-    // 글 작성 처리 로직 (ex: fetch POST)
     console.log('제목:', title);
     console.log('내용:', content);
     console.log('카테고리:', category);
@@ -38,7 +35,7 @@ const CommunityWrite = () => {
     navigate('/community/post/1', { 
         state: { 
           post: { 
-            title, 
+            title,
             content, 
             category, 
             service, 
@@ -49,7 +46,6 @@ const CommunityWrite = () => {
       });
     };
 
-    // **이미지 선택 
     const handleImageChange = (e) => {
         const files = Array.from(e.target.files);
         // 기존 이미지 + 새로 선택한 이미지 총합이 15개를 넘으면 제한

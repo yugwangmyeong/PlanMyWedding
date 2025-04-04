@@ -260,7 +260,7 @@ nav a {
 
 /* 글쓰기 버튼 */
 .write-btn {
-  margin-top: 10px;
+  margin-top: 40px;
   padding: 8px 16px;
   border: none;
   background-color: #f8d6dc;
@@ -278,17 +278,36 @@ nav a {
   margin-bottom: 30px;
 }
 
+/* 개별 게시글 아이템 */
 .post-item {
-  display: flex;
+  display: flex;                    /* 썸네일과 정보 가로 배치 */
   align-items: center;
-  border-bottom: 1px solid #eee;
   padding: 15px 0;
+  gap: 15px;                       /* 썸네일과 정보 사이 간격 */
+  border-bottom: 1px solid #e0e0e0;
 }
 
+/* 게시글 내용 영역: 구분선 없음 */
+.post-content {
+  margin-bottom: 10px;  /* 필요에 따라 여백 조정 */
+}
+
+/* 좋아요/댓글 영역: 구분선 적용 */
+.post-meta {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-top: 20px;
+  display: flex;
+  gap: 15px;
+  font-size: 12px;
+  color: #999;
+}
+
+/* 썸네일 이미지 영역 */
 .post-image {
   width: 80px;
   height: 80px;
-  margin-right: 15px;
+  flex-shrink: 0;      /* 이미지 영역 고정 */
 }
 
 .post-image img {
@@ -298,9 +317,29 @@ nav a {
   border-radius: 4px;
 }
 
+/* 게시글 정보 영역 */
 .post-info {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
+
+/* 게시글 제목 */
+.post-info .post-title {
+  font-size: 16px;
+  margin: 0;
+  font-weight: bold;
+}
+
+/* 게시글 내용 미리보기 */
+.post-info .post-preview {
+  font-size: 16px;
+  color: black;
+  text-align: left;
+}
+
+
 
 .post-info h3 {
   font-size: 16px;
@@ -311,13 +350,6 @@ nav a {
   font-size: 14px;
   color: #666;
   margin-bottom: 8px;
-}
-
-.post-meta {
-  font-size: 12px;
-  color: #999;
-  display: flex;
-  gap: 10px;
 }
 
 /* 페이지네이션 */
@@ -400,3 +432,4 @@ nav a {
   outline: none;
   border-color: #f8d6dc;
 }
+
