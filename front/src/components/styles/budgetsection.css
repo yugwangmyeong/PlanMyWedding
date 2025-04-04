@@ -8,8 +8,12 @@
     flex: 1;
   }
   
-  .h1small{
-    font-size: 15px;
+  .h2loc{
+    margin-left: 170px;
+    padding: 10px 10px 10px 10px;
+    font-size: 20px;
+    font-weight: bold;
+  
   }
   /* 📦 각 섹션을 박스로 감싸기 */
   .section-box {
@@ -17,7 +21,8 @@
     padding: 0;                    /* 전체 padding 제거 (내부 요소에 여백 주는 방식으로 변경) */
     border-radius: 0;              /* 둥근 모서리 제거 */
     box-shadow: none;              /* 그림자 제거 */
-    min-height: auto; 
+    min-height: auto;
+    background-color: #fffcfc;
   }
 
   .dot {
@@ -65,3 +70,23 @@
     color: #aaa;
   }
   
+  
+
+  .budget-chart-box {
+    margin-top: 20px;
+    padding: 16px;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    width: 100%;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  .budget-chart{
+    width: "400px";
+    height: "400px";
+  }

@@ -74,8 +74,7 @@ const MoneyControl = () => {
 
   return (
     <div>
-      <Header />
-
+      <Header></Header>
       <div className="title-wrap">
         <h1 className="maintitle">예산관리</h1>
         <button className="invite-btn">+ 초대하기</button>

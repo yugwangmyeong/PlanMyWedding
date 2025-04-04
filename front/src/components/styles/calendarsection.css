@@ -1,77 +1,72 @@
 /* 바깥 Wrapper */
 .calendar-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-  }
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* 📌 더 넓은 박스 */
 .calendar-box {
-    width: 100%;
-    max-width: 600px;
-    min-width: 600px;         /* ✅ 브라우저를 줄여도 줄어들지 않음 */
-    background: #fff;
-    border-radius: 12px;
-    
-    box-sizing: border-box;
-  }
-  /* 실제 캘린더 높이 컨트롤 */
-  .calendar-wrapper {
-    overflow-x: hidden !important;
-    overflow-y: hidden !important;
-    height:450px;
-   
-  }
+  width: 100%;
+  max-width: 600px;
+  min-width: 600px; /* ✅ 브라우저를 줄여도 줄어들지 않음 */
+  background: #fff;
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+/* 실제 캘린더 높이 컨트롤 */
+.calendar-wrapper {
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+  height: 450px;
+}
 
-  .fc {
-    height: 100% !important;  /* 부모인 .calendar-wrapper 기준으로 고정 */
-    
-  }
-  
-  /* 상단 툴바 스타일 */
-  .fc-toolbar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-  .fc-toolbar-title {
-    font-size: 10px !important;
-    color: #333;
-  }
-  .fc-button {
-    background: none !important;
-    border: none !important;
-    color: #6d6c6c !important;
-    font-size: 16px !important;
-    
-  }
-  .fc-button:hover {
-    color: #EFA1DC 
-  }
-  
-  /* 요일 헤더 */
-  .fc-col-header-cell {
-    font-weight: 10;
-    font-size: 14px;
-    color: #999;
-    text-align: center;
-    padding: 8px 0;
-    border-bottom: 1px solid #f0f0f0;
-  }
-  
+.fc {
+  height: 100% !important; /* 부모인 .calendar-wrapper 기준으로 고정 */
+}
 
+/* 상단 툴바 스타일 */
+.fc-toolbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.fc-toolbar-title {
+  font-size: 10px !important;
+  color: #333;
+}
+.fc-button {
+  background: none !important;
+  border: none !important;
+  color: #000000 !important;
+  font-size: 16px !important;
+}
+.fc-button:hover,
+.fc-button:focus,
+.fc-button:active {
+  background: none !important;
+  box-shadow: none !important;
+  color: #faf2f8 !important; /* 원하면 hover 컬러 */
+}
+/* 요일 헤더 */
+.fc-col-header-cell {
+  font-weight: 10;
+  font-size: 14px;
+  color: #999;
+  text-align: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
 
-  /* 일반 날짜 숫자 */
-  .fc-daygrid-day-number {
-    font-size: 12px;     /* 가독성 확보용 */
-    font-weight: 300;
-    color: #000000;
-  }
-  
+/* 일반 날짜 숫자 */
+.fc-daygrid-day-number {
+  font-size: 12px; /* 가독성 확보용 */
+  font-weight: 300;
+  color: #000000;
+}
 
- /* 줄 제거 (깔끔하게) */
+/* 줄 제거 (깔끔하게) */
 .fc-scrollgrid,
 .fc-scrollgrid-section,
 .fc-daygrid-body,
@@ -83,26 +78,23 @@
 
 /* 날짜 숫자 위쪽 정렬 */
 .fc-daygrid-day-top {
-    display: flex;
-    justify-content: center;
-    font-size: 12px;
-  }
+  display: flex;
+  justify-content: center;
+  font-size: 12px;
+}
 
-  /* 날짜 셀 크기 보정 */
+/* 날짜 셀 크기 보정 */
 .fc-daygrid-day-frame {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start; /* 위에 숫자, 아래에 점 */
-    height: 30px;
-    
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* 위에 숫자, 아래에 점 */
+  height: 30px;
+}
 
-
-  .fc-event {
-    background: none !important;
-    border: none !important;
-    padding: 0 !important;
-    font-size: 0 !important;  /* 텍스트 완전 숨기기 */
-  }
-  
+.fc-event {
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  font-size: 0 !important; /* 텍스트 완전 숨기기 */
+}

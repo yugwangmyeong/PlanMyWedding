@@ -24,6 +24,8 @@ const BudgetSection = () => {
   };
 
   const chartOptions = {
+    responsive: true,
+  maintainAspectRatio: false, // ✅ 차트가 부모에 꽉 차도록
     plugins: {
       legend: {
         position: "right", // 👉 'top', 'bottom', 'left', 'right' 가능
@@ -37,48 +39,49 @@ const BudgetSection = () => {
   return (
     <div className="section-box">
       <h1 className="h1small">예산</h1>
-  <div className="budget-summary-open">
-    <div className="budget-row total">
-      <div>
-        총 예산 <span className="percent">100%</span>
+      <div className="budget-summary-open">
+        <div className="budget-row total">
+          <div>
+            총 예산 <span className="percent">100%</span>
+          </div>
+          <div className="amount strong">6,000만원</div>
+        </div>
+
+        <div className="budget-row">
+          <div>
+            사용한 예산 <span className="percent">0%</span>
+          </div>
+          <div className="amount">0만원</div>
+        </div>
+
+        <div className="budget-row">
+          <div>
+            남은 예산 <span className="percent">100%</span>
+          </div>
+          <div className="amount">6,000만원</div>
+        </div>
+
+        <div className="budget-row">
+          <div>
+            신부 예산 <span className="percent">50%</span>
+          </div>
+          <div className="amount">3,000만원</div>
+        </div>
+
+        <div className="budget-row">
+          <div>
+            신랑 부담 <span className="percent">50%</span>
+          </div>
+          <div className="amount">3,000만원</div>
+        </div>
       </div>
-      <div className="amount strong">6,000만원</div>
-    </div>
 
-    <div className="budget-row">
-      <div>
-        사용한 예산 <span className="percent">0%</span>
+      <div className="budget-chart-box">
+      <div className='budget-chart'>
+        <Doughnut data={chartData} options={chartOptions} />
       </div>
-      <div className="amount">0만원</div>
-    </div>
-
-    <div className="budget-row">
-      <div>
-        남은 예산 <span className="percent">100%</span>
       </div>
-      <div className="amount">6,000만원</div>
     </div>
-
-    <div className="budget-row">
-      <div>
-        신부 예산 <span className="percent">50%</span>
-      </div>
-      <div className="amount">3,000만원</div>
-    </div>
-
-    <div className="budget-row">
-      <div>
-        신랑 부담 <span className="percent">50%</span>
-      </div>
-      <div className="amount">3,000만원</div>
-    </div>
-  </div>
-
-  <div className="budget-chart">
-    <Doughnut data={chartData} options={chartOptions} />
-  </div>
-</div>
-
   );
 };
 

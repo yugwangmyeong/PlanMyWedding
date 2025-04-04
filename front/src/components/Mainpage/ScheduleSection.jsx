@@ -7,7 +7,7 @@ import '../styles/budgetsection.css';
 const ScheduleSection = () => {
   return (
     <div className="section schedule-section">
-    <h2>일정 관리</h2>
+    <h2 className='h2loc'>일정 관리</h2>
     <CalendarSection></CalendarSection>
 
   </div>

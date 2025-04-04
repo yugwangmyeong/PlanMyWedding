@@ -51,7 +51,8 @@
 nav a {
     color: black;
     text-decoration: none;
-    margin-left: 10px;
+    text-align: center;
+    
 }
 .nickname{
   padding:10px;
@@ -80,69 +81,12 @@ nav a {
   'opsz' 24
 }
 
-a.mypage-container{
-  height: 37px;
-  display: inline-block;
-  padding: 0;         /* 가로만 주기 */
-  line-height: 37px;      /* 세로 정렬용 */
-  vertical-align: middle; /* 세로 정렬 */
+/* 이미지 스타일 */
+.mypage-icon {
+  width: 15px; /* 아이콘 크기 조절 */
+  height: 15px;
+  transition: transform 0.3s ease;
 }
-
-
-/* 마이페이지 버튼 */
-.mypage-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  color: black;
-  padding: 8px 
-  
-}
-
-/* 드롭다운 메뉴 기본 스타일 */
-.mypage-dropdown {
-  position: absolute;
-  top: 30px; /* 버튼과의 거리 조정 */
-  background: white;
-  border: 2px solid #ddd;
-  border-radius: 6px; /* 둥근 모서리 줄이기 */
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* 그림자 줄이기 */
-  padding: 5px; /* 내부 패딩 줄이기 */
-  margin-left:0;
-  display: none; /* 처음엔 숨김 */
-  flex-direction: column;
-  min-width:90px; /* 드롭다운 너비 줄이기 */
-  font-size: 15px; /* 글자 크기 줄이기 */
-  opacity: 0;
-  transform: translateY(-8px); /* 애니메이션 자연스럽게 조정 */
-  transition: opacity 0.2s ease, transform 0.2s ease;
-}
-
-
-/* 토글이 활성화될 때 스타일 */
-.mypage-container.open .mypage-dropdown {
-  display: flex;
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* 드롭다운 메뉴 항목 스타일 */
-.mypage-dropdown a{
-  text-decoration: none;
-  color: black;
-  padding: 10px ;
-  margin-left:0px;
-  display: block;
-  
-}
-
-/* 메뉴 항목 호버 효과 */
-.mypage-dropdown a:hover {
-  background: #f0f0f0;
-}
-
-
 .mypage-btn {
   background: none;
   border: none;
@@ -154,18 +98,56 @@ a.mypage-container{
   gap: 10px; /* 이미지와 텍스트 사이 간격 */
 }
 
-/* 이미지 스타일 */
-.mypage-icon {
-  width: 15px; /* 아이콘 크기 조절 */
-  height: 15px;
+.mypage-btn:hover {
+  
+  transform: scale(1.05);
+}
+/* 공통 드롭다운 메뉴 */
+.dropdown-menu {
+  position: absolute;
+  top: 40px;
+  background: white;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-width: 120px;
+  font-size: 15px;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 0.2s ease, transform 0.2s ease, max-height 0.3s ease;
 }
 
-
-
-
-
-
-
+/* 열렸을 때 */
+.mypage-container.open .dropdown-menu,
+.recommend-container.open .dropdown-menu {
+  max-height: 300px;
+  opacity: 1;
+  transform: translateY(0);
+  padding: 8px 0;
+  
+}
+.dropdown-menu {
+  position: absolute;
+  z-index: 100;
+}
+.mypage-container {
+  position: relative; /* ✅ 기준이 되는 부모 */
+}
+/* 메뉴 항목 */
+.dropdown-menu a {
+  text-decoration: none;
+  color: black;
+  padding: 10px;
+  display: block;
+}
+.dropdown-menu a:hover {
+  background: #f0f0f0;
+}
 
 
 
