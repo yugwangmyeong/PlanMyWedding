@@ -1,4 +1,8 @@
 import "./App.css";
+import Register from "./components/Register";
+import Community from "./components/Community";
+import CommunityWrite from "./components/CommunityWrite";
+import CommunityPost from "./components/CommunityPost";
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./components/Login";
@@ -6,6 +10,7 @@ import Schedule from "./components/Schedule";
 import Mainpage from "./components/Mainpage";
 import MoneyControl from "./components/Moneycontrol";
 import RecWedding from "./components/RecommendPage/RecWedding";
+
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const isLoggedIn = !!token;
@@ -34,7 +39,6 @@ function App() {
               )
             }
           />
-
           {
             <Route
               path="/schedule"
@@ -42,19 +46,14 @@ function App() {
             />
           }
 
-          {
-            <Route
-              path="/moneycontrol"
-              element={isLoggedIn ? <MoneyControl /> : <Navigate to="/" />}
-            />
-          }
-
-          {
-            <Route
-              path="/recwedding"
-              element={isLoggedIn ? <RecWedding /> : <Navigate to="/" />}
-            />
-          }
+          
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/community" element={<Community />} />
+          <Route path="/community/write" element={<CommunityWrite />} />
+          <Route path="/community/post/:postId" element={<CommunityPost />} />
+          <Route path="recwedding" element={<RecWedding />} />
+          <Route path="moneycontrol" element={<MoneyControl/>} />
         </Routes>
       </div>
     </BrowserRouter>

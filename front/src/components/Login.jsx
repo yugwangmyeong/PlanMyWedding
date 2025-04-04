@@ -149,9 +149,9 @@ const Login = ({ setToken }) => {
           {/* 회원가입 / 아이디 찾기 / 비밀번호 찾기 */}
         <div className="login-options">
           <a href="/register" className="option-item">회원가입</a>
-          <span className="divider"></span>
+          <span className="dividerLogin"></span>
           <a href="/find-id" className="option-item">아이디 찾기</a>
-          <span className="divider"></span>
+          <span className="dividerLogin"></span>
           <a href="/find-password" className="option-item">비밀번호 찾기</a>
         </div>
 

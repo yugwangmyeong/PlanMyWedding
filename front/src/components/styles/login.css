@@ -67,12 +67,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 10px; /* 각 링크 사이 여백 */
+    gap: 10px; 
     margin-top: 15px;
     font-size: 12px;
     margin-top: 30px;
   }
-  
+
   .login-options a {
     text-decoration: none; /* 밑줄 제거 */
     color: black;
@@ -84,7 +84,7 @@
   }
 
   /* 구분선 스타일 */
-  .divider {
+  .dividerLogin {
     width: 1px; /* 선의 두께 */
     height: 30px; /* 선의 길이 */
     background-color: black; /* 선 색상 */
