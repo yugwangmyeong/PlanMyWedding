@@ -1,35 +1,22 @@
-import "./App.css";
-import React, { useState } from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Header from "./components/Header";
-import Login from "./components/Login";
+// App.js
+
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Member from "./components/Member"; // ✅ 컴포넌트가 있어야 함
+import Header from './components/Header';
+import Login from './components/Login';
 
 function App() {
-  const [token, setToken] = useState(localStorage.getItem("token"));
-  const isLoggedIn = !!token;
-
   return (
     <BrowserRouter>
-      <div className="app-container">
+      <div className="App">
         <Routes>
-          <Route
-            path="/"
-            element={
-              <div className="App-header">
-                <Login />
-              </div>
-            }
-          />
+          {/* 기존 라우트 */}
+          <Route path="/" element={<Login />} />
+          <Route path="/header" element={<Header />} />
 
-          <Route
-            path="/header"
-            element={isLoggedIn ? <Header /> : <Navigate to="/" />}
-          />
-
-          {/* <Route
-            path="/schedule"
-            element={isLoggedIn ? <Schedule /> : <Navigate to="/" />}
-          /> */}
+          {/* ✅ 추가된 WeddingHall 경로 */}
+          <Route path="/member" element={<Member />} />
         </Routes>
       </div>
     </BrowserRouter>
