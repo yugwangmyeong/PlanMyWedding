@@ -1,38 +1,38 @@
 import React, { useRef, useEffect, useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
-import interactionPlugin from "@fullcalendar/interaction"; // 드래그 앤 드롭
-import "./styles/Calender.css";
-import Header from "./Header";
+import interactionPlugin from "@fullcalendar/interaction";
+import "../styles/Calender.css";
 
 const Calender = () => {
   const calendarRef = useRef(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);   // 일정 모달 열림 여부
-  const [newTitle, setNewTitle] = useState("");            // 입력된 일정 제목
-  const [newDate, setNewDate] = useState("");              // 시작 날짜
-  const [newEndDate, setNewEndDate] = useState("");        // 종료 날짜
-  const [isCompleted, setIsCompleted] = useState(false);   // 완료 여부 체크
-  const [selectedEvent, setSelectedEvent] = useState(null);// 선택된 이벤트
-  const [openCategory, setOpenCategory] = useState(null);  // ✅ 기본값 null → 아코디언 모두 닫힘
-
-  // ✅ 일정 카테고리별로 상태로 관리 (completed 포함)
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [newTitle, setNewTitle] = useState("");
+  const [newDate, setNewDate] = useState("");
+  const [newEndDate, setNewEndDate] = useState("");
+  const [isCompleted, setIsCompleted] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [openCategory, setOpenCategory] = useState(null);
   const [weddingItems, setWeddingItems] = useState([
-    { category: "웨딩홀", items: [],
+    {
+      category: "웨딩홀",
       items: [
         { title: "웨딩홀 투어", date: "2025-04-15", completed: false },
-        { title: "웨딩홀 예약", date: "2025-04-16", completed: false }
+        { title: "웨딩홀 예약", date: "2025-04-16", completed: false },
       ],
     },
-    { category: "스드메", items: [],
+    {
+      category: "스드메",
       items: [
         { title: "드레스 투어", date: "2025-04-17", completed: false },
-        { title: "드레스 예약", date: "2025-04-18", completed: false }
+        { title: "드레스 예약", date: "2025-04-18", completed: false },
       ],
     },
-    { category: "허니문", items: [],
+    {
+      category: "허니문",
       items: [
         { title: "신혼여행 상담", date: "2025-04-19", completed: false },
-        { title: "신혼여행 당일", date: "2025-04-20", completed: false }
+        { title: "신혼여행 당일", date: "2025-04-20", completed: false },
       ],
     },
     {
@@ -45,9 +45,7 @@ const Calender = () => {
     },
     {
       category: "기타",
-      items: [
-        { title: "상견례 준비", date: "2025-04-24", completed: false }
-      ],
+      items: [{ title: "상견례 준비", date: "2025-04-24", completed: false }],
     },
   ]);
 
@@ -116,14 +114,13 @@ const Calender = () => {
     setOpenCategory(openCategory === category ? null : category);
   };
 
-  // ✅ 체크박스 토글
   const handleCheckboxToggle = (category, itemTitle) => {
-    setWeddingItems(prev =>
-      prev.map(cat =>
+    setWeddingItems((prev) =>
+      prev.map((cat) =>
         cat.category === category
           ? {
               ...cat,
-              items: cat.items.map(item =>
+              items: cat.items.map((item) =>
                 item.title === itemTitle
                   ? { ...item, completed: !item.completed }
                   : item
@@ -135,11 +132,10 @@ const Calender = () => {
   };
 
   return (
+    <div className="calendar-b">
     <div className="container">
-      <Header />
-
-      <div className="calendar-container">
-        <div className="calendar-box">
+      <div className="calendars-container">
+        <div className="calendars-box">
           <FullCalendar
             eventColor="#EFA1DC"
             height={700}
@@ -162,15 +158,25 @@ const Calender = () => {
               setIsModalOpen(true);
             }}
             events={[
-              { title: "웨딩홀 투어", start: "2025-04-15", end: "2025-04-16", color: "#EFA1DC" },
-              { title: "웨딩홀 예약", start: "2025-04-20", end: "2025-04-21", color: "#EFA1DC" },
+              {
+                title: "웨딩홀 투어",
+                start: "2025-04-15",
+                end: "2025-04-16",
+                color: "#EFA1DC",
+              },
+              {
+                title: "웨딩홀 예약",
+                start: "2025-04-20",
+                end: "2025-04-21",
+                color: "#EFA1DC",
+              },
             ]}
           />
         </div>
 
-        <div className="side-box">
+        <div className="sides-box">
           <button
-            className="side-card pink"
+            className="sides-card pinks"
             onClick={() => {
               setSelectedEvent(null);
               setNewTitle("");
@@ -183,28 +189,27 @@ const Calender = () => {
             일정 추가
           </button>
 
-          <div className="side-card blue">
+          <div className="sides-card blues">
             일정 진행도 D-365
             <br />
             <progress className="progress" id="progress" value="50" min="0" max="100"></progress>
           </div>
 
-          <div className="side-card accordion">
+          <div className="sides-card accordions">
             {weddingItems.map(({ category, items }) => (
               <div key={category}>
                 <div
-                  className={`accordion-title ${openCategory === category ? "active" : ""}`}
+                  className={`accordions-title ${openCategory === category ? "active" : ""}`}
                   onClick={() => toggleCategory(category)}
                 >
                   {category}
                   <span>{openCategory === category ? "▲" : "▼"}</span>
                 </div>
                 {openCategory === category && (
-                  <ul className="accordion-content">
+                  <ul className="accordions-content">
                     {items.length > 0 ? (
                       items.map((item) => (
                         <li key={item.title} className="flex items-center gap-2">
-                          
                           <span className={item.completed ? "line-through text-gray-400" : ""}>
                             {item.title}
                           </span>
@@ -227,8 +232,8 @@ const Calender = () => {
       </div>
 
       {isModalOpen && (
-        <div className="modal-backdrop">
-          <div className="modal-content">
+        <div className="modals-backdrop">
+          <div className="modals-content">
             <h3>{selectedEvent ? "일정 수정" : "일정 추가"}</h3>
             <input
               type="text"
@@ -254,12 +259,15 @@ const Calender = () => {
               />{" "}
               완료 여부
             </label>
-            <div className="modal-buttons">
+            <div className="modals-buttons">
               <button onClick={handleAddOrUpdateEvent}>
                 {selectedEvent ? "수정하기" : "추가하기"}
               </button>
               {selectedEvent && (
-                <button onClick={handleDeleteEvent} style={{ background: "#f06292", color: "white" }}>
+                <button
+                  onClick={handleDeleteEvent}
+                  style={{ background: "#f06292", color: "white" }}
+                >
                   삭제하기
                 </button>
               )}
@@ -273,6 +281,7 @@ const Calender = () => {
           </div>
         </div>
       )}
+    </div>
     </div>
   );
 };

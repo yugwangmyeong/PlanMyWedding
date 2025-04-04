@@ -9,7 +9,6 @@ const ScheduleSection = () => {
     <div className="section schedule-section">
     <h2 className='h2loc'>일정 관리</h2>
     <CalendarSection></CalendarSection>
-
   </div>
   )
 }

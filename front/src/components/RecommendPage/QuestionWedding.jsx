@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { questionList } from "./data/question";
 import "./questionwedding.css";
 
-const QuestionWedding = () => {
+const QuestionWedding = ({ onProgress }) => {
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState([]);
   const [fadeOut, setFadeOut] = useState(false);
@@ -33,17 +33,12 @@ const QuestionWedding = () => {
   //step에 맞게 scroll이 자동으로 내려가도록해야함
   useEffect(() => {
     if (chatRef.current) {
-      const wrapper = chatRef.current;
-      // 현재 스크롤이 이미 맨 아래인지 확인
-      const isScrolledToBottom =
-        wrapper.scrollHeight - wrapper.scrollTop === wrapper.clientHeight;
-
-      // ✅ 아래로만 이동하게 처리
-      if (isScrolledToBottom || step === 0) {
-        wrapper.scrollTop = wrapper.scrollHeight;
-      }
+      chatRef.current.scrollTop = chatRef.current.scrollHeight;
     }
-  }, [answers, step]);
+    // 진행률 계산 후 부모에 전달
+    const percent = Math.round((step / questionList.length) * 100);
+    onProgress(percent);
+  }, [answers.length, step]);
   return (
     <div className="chat-wrapper" ref={chatRef}>
       {answers.map((a, idx) => (

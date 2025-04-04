@@ -30,6 +30,7 @@ const renderDotEvent = (arg) => {
 
 const CalendarSection = () => {
   return (
+    <div className='calendar-a'>
     <div className="calendar-container">
       <div className="calendar-box">
         <div className="calendar-wrapper">
@@ -60,6 +61,7 @@ const CalendarSection = () => {
         </div>
             
       </div>
+    </div>
     </div>
   );
     }

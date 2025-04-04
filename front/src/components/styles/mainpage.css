@@ -7,12 +7,7 @@
     margin: 150px 300px 30px 300px; /* 좌우 300px 고정 */
   }
 
-  /* 구분선 */
-  .custom-line {
-    border: none;
-    border-top: 2px solid #e4dede;
-    margin: 0 300px 30px 300px; /* 좌우 300px */
-  }
+
   
   .main-wrapper {
     max-width: 1492px;

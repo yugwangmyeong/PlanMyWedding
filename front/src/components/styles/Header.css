@@ -1,84 +1,68 @@
-@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined');
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined");
 
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: white;
-    padding: 20px;
-    color: #EFA1DC;
-    margin-left:300px;
-    margin-right:300px;
-    height:30px;
-}
-
-.logo {
-    font-size: 1.7em;
-    font-weight: bold;
-    font-family: "Nanum Gothic", sans-serif;
-    font-style: normal;
-    margin-top:-7px;
-    text-align: left;
-    
-}
-
-.material-symbols-outlined {
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 400,
-  'GRAD' 0,
-  'opsz' 24
-}
-
-.Horizon {
-    width: 100%;
-    
-    border-bottom: 1px solid #aaa;
-    line-height: 0.1em;
-    margin: 10px 0 20px;
-}
-.Horizon-text {
-    background: #fff;
-    padding: 0 10px;
-}
-.nav-links {
-    display: flex;
-}
-.nav-links2 {
-    display: flex;
-    gap: 20px; /* 링크 사이 간격을 20px로 설정 */
-}
-nav a {
-    color: black;
-    text-decoration: none;
-    text-align: center;
-    
-}
-.nickname{
-  padding:10px;
-  color:black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 0!important; /* ✅ 명시적으로 제거 */
+  color: #efa1dc;
+  margin-left: 300px;
+  margin-right: 300px;
+  margin-bottom: 30px;
   
 }
 
+.logo {
+  font-size: 1.7em;
+  font-weight: bold;
+  font-family: "Nanum Gothic", sans-serif;
+  font-style: normal;
+  margin-top: -7px;
+  text-align: left;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+.Horizon {
+  width: 100%;
+  border-bottom: 1px solid #aaa;
+  line-height: 0.1em;
+  margin: 10px 0 20px;
+}
+
+.nav-links {
+  display: flex;
+}
+.nav-links2 {
+  display: flex;
+  gap: 10px; /* 링크 사이 간격을 20px로 설정 */
+}
+nav a {
+  color: black;
+  text-decoration: none;
+  text-align: center;
+}
+.nickname {
+  padding: 10px;
+  color: black;
+}
+
 .login-link {
-    margin-left: 380px;
-    margin-right:-10px;
-    margin-top:9px;
+  margin-left: 380px;
+  margin-top: 9px;
 }
 .reg-link {
-    margin-left: -13px;
-    margin-right:-15px;
-    margin-top:9px;
-    
+  margin-left: -13px;
+  margin-right: -15px;
+  margin-top: 9px;
 }
 /* 구글아이콘 */
 .material-symbols-outlined {
-  margin-top:9px;
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 400,
-  'GRAD' 0,
-  'opsz' 24
+  margin-top: 9px;
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
 }
 
 /* 이미지 스타일 */
@@ -99,13 +83,12 @@ nav a {
 }
 
 .mypage-btn:hover {
-  
   transform: scale(1.05);
 }
 /* 공통 드롭다운 메뉴 */
 .dropdown-menu {
   position: absolute;
-  top: 40px;
+  top:40px;
   background: white;
   border: 2px solid #ddd;
   border-radius: 6px;
@@ -120,6 +103,7 @@ nav a {
   opacity: 0;
   transform: translateY(-8px);
   transition: opacity 0.2s ease, transform 0.2s ease, max-height 0.3s ease;
+  
 }
 
 /* 열렸을 때 */
@@ -129,12 +113,8 @@ nav a {
   opacity: 1;
   transform: translateY(0);
   padding: 8px 0;
-  
 }
-.dropdown-menu {
-  position: absolute;
-  z-index: 100;
-}
+
 .mypage-container {
   position: relative; /* ✅ 기준이 되는 부모 */
 }
@@ -149,52 +129,6 @@ nav a {
   background: #f0f0f0;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 캘린더 + 사이드 전체 레이아웃 */
 .calendar-container {
   display: flex;
@@ -208,7 +142,7 @@ nav a {
   flex: 3;
   background: #fff;
   border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   padding: 10px;
 }
 
@@ -224,7 +158,7 @@ nav a {
   padding: 15px;
   border-radius: 10px;
   font-size: 14px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* 색상별 카드 */
@@ -274,4 +208,26 @@ nav a {
   justify-content: space-between;
   padding: 5px 0;
   border-bottom: 1px dotted #ccc;
+}
+
+
+/* 공통 wrapper */
+.nav-item {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 12px;
+}
+
+/* 내부 버튼/링크 */
+.nav-link,
+.mypage-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 15px;
+  color: black;
+  text-decoration: none;
+  gap: 8px;
 }

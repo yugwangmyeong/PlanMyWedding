@@ -99,9 +99,11 @@ const Header = () => {
             <Link to="/recwedding">웨딩홀</Link>
           </div>
         </div>
-        <Link to="/Community" className="nav-link">
-          커뮤니티
-        </Link>
+        <div className="nav-item">
+          <Link to="/Community" className="nav-link">
+            커뮤니티
+          </Link>
+        </div>
       </nav>
 
       <nav className="nav-links2">

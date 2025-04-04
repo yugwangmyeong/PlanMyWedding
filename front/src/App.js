@@ -10,7 +10,7 @@ import Schedule from "./components/Schedule";
 import Mainpage from "./components/Mainpage";
 import MoneyControl from "./components/Moneycontrol";
 import RecWedding from "./components/RecommendPage/RecWedding";
-
+import Calender from "./components/Schedule/Calender";
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const isLoggedIn = !!token;
@@ -54,6 +54,8 @@ function App() {
           <Route path="/community/post/:postId" element={<CommunityPost />} />
           <Route path="recwedding" element={<RecWedding />} />
           <Route path="moneycontrol" element={<MoneyControl/>} />
+          <Route path="calendar" element={<Calender/>} />
+
         </Routes>
       </div>
     </BrowserRouter>

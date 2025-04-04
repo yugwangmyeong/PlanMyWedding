@@ -30,4 +30,24 @@ export const questionList = [
     question: "예식 시간대를 알려주세요.",
     options: ["오전", "오후", "저녁", "상관없음"],
   },
+  {
+    id: 6,
+    type: "single",
+    question: "예식 스타일로 원하는 분위기는 어떤가요?",
+    options: ["모던", "클래식", "로맨틱", "럭셔리"],
+  },
+  {
+    id: 7,
+    type: "single",
+    question: "가장 중요하게 생각하는 요소는 무엇인가요?",
+    options: ["가격", "위치", "식장 분위기", "서비스"],
+  },
+  {
+    id: 8,
+    type: "single",
+    question: "식장은 몇 시간 대여를 원하시나요?",
+    options: ["2시간", "3시간", "4시간 이상", "미정"],
+  },
+
+
 ];

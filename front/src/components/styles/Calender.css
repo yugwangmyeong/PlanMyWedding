@@ -1,40 +1,69 @@
-/* 전체 캘린더 + 사이드 정렬 박스 */
-.calendar-container {
+/* FullCalendar 전용 스타일에 .calendar-b 스코프 추가 */
+.calendar-b .calendars-box .fc {
+  box-shadow: none !important;
+  border: none !important;
+  background: white;
+}
+
+.calendar-b .fc-scrollgrid,
+.calendar-b .fc-scrollgrid-section,
+.calendar-b .fc-daygrid-body {
+  border: none !important;
+}
+
+.calendar-b .fc-day-sun a {
+  color: rgb(0, 0, 0) !important;
+}
+.calendar-b .fc-day-sat a {
+  color: rgb(0, 0, 0) !important;
+}
+.calendar-b .fc-day-mon a,
+.calendar-b .fc-day-tue a,
+.calendar-b .fc-day-wed a,
+.calendar-b .fc-day-thu a,
+.calendar-b .fc-day-fri a {
+  color: #000000 !important;
+}
+
+.calendar-b .fc-toolbar-title {
+  color: #000000 !important;
+}
+
+.calendar-b .fc-button {
+  background-color: #000000 !important;
+  border: none !important;
+  color: white !important;
+  font-weight: bold;
+  border-radius: 6px !important;
+  font-size: 13px !important;
+  padding: 5px 10px !important;
+  cursor: pointer;
+}
+.calendar-b .fc-button:hover,
+.calendar-b .fc-button-active {
+  background-color: #fcc7eb !important;
+}
+
+.calendars-container {
   display: flex;
   justify-content: center;
-  gap: 40px;
+  gap: 80px;
   padding: 30px;
 }
 
-/* 캘린더 영역 */
-.calendar-box {
+.calendars-box {
   max-width: 800px;
   width: 100%;
 }
 
-.calendar-box .fc {
-  box-shadow: none !important;  /* ✅ 그림자 제거 */
-  border: none !important;      /* ✅ 테두리 제거 */
-  background: white;
-}
-
-/* FullCalendar 내부 구조 테두리 제거 */
-.fc-scrollgrid,
-.fc-scrollgrid-section,
-.fc-daygrid-body {
-  border: none !important;
-}
-
-/* 오른쪽 사이드 박스 */
-.side-box {
+.sides-box {
   width: 300px;
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-/* 공통 카드 스타일 */
-.side-card {
+.sides-card {
   border: none;
   outline: none;
   padding: 20px;
@@ -45,59 +74,19 @@
   font-size: 14px;
 }
 
-/* 색상 테마 */
-.side-card.pink {
+.sides-card.pinks {
   background: #f5c6e8;
 }
-.side-card.blue {
+.sides-card.blues {
   background: #f5c6e8;
   height: 60px;
 }
-.side-card.accordion {
+.sides-card.accordions {
   background: #f5c6e8;
   text-align: left;
 }
 
-/* 일요일 날짜 */
-.fc-day-sun a {
-  color: hotpink !important;
-}
-/* 토요일 날짜 */
-.fc-day-sat a {
-  color: hotpink !important;
-}
-/* 평일 날짜 */
-.fc-day-mon a,
-.fc-day-tue a,
-.fc-day-wed a,
-.fc-day-thu a,
-.fc-day-fri a {
-  color: #EFA1DC !important;
-}
-
-/* 월 이름 */
-.fc-toolbar-title {
-  color: #EFA1DC !important;
-}
-
-/* FullCalendar 버튼 */
-.fc-button {
-  background-color: #efa1dc !important;
-  border: none !important;
-  color: white !important;
-  font-weight: bold;
-  border-radius: 6px !important;
-  font-size: 13px !important;
-  padding: 5px 10px !important;
-  cursor: pointer;
-}
-.fc-button:hover,
-.fc-button-active {
-  background-color: #e181c4 !important;
-}
-
-/* 모달 배경 */
-.modal-backdrop {
+.modals-backdrop {
   position: fixed;
   top: 0;
   left: 0;
@@ -110,8 +99,7 @@
   z-index: 1000;
 }
 
-/* 모달 창 */
-.modal-content {
+.modals-content {
   background: #fff;
   padding: 30px;
   border-radius: 12px;
@@ -121,15 +109,13 @@
   gap: 15px;
 }
 
-/* 입력창 */
-.modal-content input {
+.modals-content input {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 6px;
 }
 
-/* 모달 버튼 */
-.modal-buttons button {
+.modals-buttons button {
   padding: 8px 12px;
   margin-right: 10px;
   background-color: #efa1dc;
@@ -138,11 +124,10 @@
   border-radius: 6px;
   cursor: pointer;
 }
-.modal-buttons button:hover {
+.modals-buttons button:hover {
   background-color: #e181c4;
 }
 
-/* 프로그레스 바 */
 #progress {
   appearance: none;
   width: 100%;
@@ -161,13 +146,7 @@
   border-radius: 0px;
 }
 
-
-
-
-
-
-
-.accordion .accordion-title {
+.accordions .accordions-title {
   cursor: pointer;
   padding: 10px;
   background: #f5c6e8;
@@ -177,26 +156,22 @@
   font-weight: bold;
   transition: background 0.3s;
 }
-
-/* 펼쳤을 때 상단 타이틀 (혼수품)만 흰색 */
-.accordion .accordion-title.active {
+.accordions .accordions-title.active {
   background: #FFFFFF;
   color: inherit;
-  border-bottom: 1px solid #ddd; /* 자연스럽게 이어지게 */
-  border-radius: 6px 6px 0 0;     /* 위쪽만 둥글게 */
+  border-bottom: 1px solid #ddd;
+  border-radius: 6px 6px 0 0;
 }
-
-/* 아래 펼쳐진 리스트 */
-.accordion-content {
+.accordions-content {
   background: #FFFFFF;
   list-style: none;
-  padding: 0 10px 10px 10px;     /* 아래 패딩만 살짝 줘서 자연스러움 */
-  margin-top: 0;                 /* 끊기는 느낌 없애기 위해 margin 제거 */
-  border: 1px solid #ddd;        /* 살짝 경계선 */
-  border-top: none;              /* 위에 중복 경계선 제거 */
-  border-radius: 0 0 6px 6px;    /* 아래쪽만 둥글게 */
+  padding: 0 10px 10px 10px;
+  margin-top: 0;
+  border: 1px solid #ddd;
+  border-top: none;
+  border-radius: 0 0 6px 6px;
 }
-.accordion-content li {
+.accordions-content li {
   padding: 5px 0;
   border-bottom: none;
   display: flex;
