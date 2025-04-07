@@ -6,12 +6,14 @@ import CommunityPost from "./components/CommunityPost";
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./components/Login";
-import Schedule from "./components/Schedule";
 import Mainpage from "./components/Mainpage";
 import MoneyControl from "./components/Moneycontrol";
 import RecWedding from "./components/RecommendPage/RecWedding";
 import Calender from "./components/Schedule/Calender";
+import Setting from "./components/Setting";
 function App() {
+  const [token, setToken] = useState(null);
+  const isLoggedIn = !!token;
   return (
     <BrowserRouter>
       <div className="App">
@@ -27,19 +29,15 @@ function App() {
           <Route
             path="/mainpage"
             element={
-              isLoggedIn ? (
-                <div className="fix">
-                  <Mainpage />
-                </div>
-              ) : (
-                <Navigate to="/" />
-              )
+              <div className="fix">
+                <Mainpage />
+              </div>
             }
           />
           {
             <Route
-              path="/schedule"
-              element={isLoggedIn ? <Schedule /> : <Navigate to="/" />}
+              path="/calender"
+              element={<Calender />}
             />
           }
 
@@ -51,6 +49,7 @@ function App() {
           <Route path="recwedding" element={<RecWedding />} />
           <Route path="moneycontrol" element={<MoneyControl />} />
           <Route path="calendar" element={<Calender />} />
+          <Route path="setting" element={<Setting />} />
         </Routes>
       </div>
     </BrowserRouter>

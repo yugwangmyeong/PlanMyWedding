@@ -82,7 +82,7 @@ const Header = () => {
             <img src={toggleMenuIcon} className="mypage-icon" />
           </button>
           <div className="dropdown-menu">
-            <Link to="/schedule">일정관리</Link>
+            <Link to="/calender">일정관리</Link>
             <Link to="/moneycontrol">예산관리</Link>
           </div>
         </div>
@@ -110,7 +110,7 @@ const Header = () => {
         {isLoggedIn ? (
           <>
             <span className="nickname">{username} 님</span>
-            <Link to="/Update">
+            <Link to="/setting">
               <span className="material-symbols-outlined">account_circle</span>
             </Link>
           </>

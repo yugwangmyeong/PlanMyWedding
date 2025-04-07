@@ -3,6 +3,7 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import "../styles/Calender.css";
+import Header from "../Header";
 
 const Calender = () => {
   const calendarRef = useRef(null);
@@ -132,7 +133,9 @@ const Calender = () => {
   };
 
   return (
+    
     <div className="calendar-b">
+      <Header></Header>
     <div className="container">
       <div className="calendars-container">
         <div className="calendars-box">
