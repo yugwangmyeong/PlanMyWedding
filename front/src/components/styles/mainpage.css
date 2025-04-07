@@ -10,9 +10,9 @@
 
   
   .main-wrapper {
-    max-width: 1492px;
-    margin: 0 300px 30px 300px; /* 좌우 300px */
-    padding: 40px 0;
+    display: flex;
+    min-width: 1200px;  /* 또는 원하는 너비 */
+    overflow-x: auto;   /* 가로 스크롤 허용 */
   }
   
   .main-layout {

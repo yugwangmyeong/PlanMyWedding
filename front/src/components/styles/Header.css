@@ -7,10 +7,8 @@
   background: white;
   padding: 0!important; /* ✅ 명시적으로 제거 */
   color: #efa1dc;
-  margin-left: 300px;
-  margin-right: 300px;
-  margin-bottom: 30px;
-  
+  min-width: 1200px; 
+  white-space: nowrap;
 }
 
 .logo {
@@ -149,12 +147,16 @@ nav a {
 .side-box {
   flex: 1;
   display: flex;
+  flex-wrap: nowrap;
+  white-space: nowrap;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
+  min-width: 800px;
 }
 
 /* 사이드카드 공통 */
 .side-card {
+  flex: 0 0 auto;
   padding: 15px;
   border-radius: 10px;
   font-size: 14px;

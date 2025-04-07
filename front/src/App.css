@@ -4,11 +4,13 @@
   min-width: 1080px;
   margin: 0 auto;
   padding: 0px;
-  box-sizing: border-box;
+  box-sizing: border-box;  
+  white-space: nowrap; /* 줄바꿈 방지 */
 }
 
 /* 기본 폰트 & 박스사이징 초기화 */
 body, html {
+  min-width: 1200px;
   margin: 0;
   padding: 0;
   font-family: 'Pretendard', sans-serif;

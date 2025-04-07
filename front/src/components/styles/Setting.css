@@ -7,12 +7,13 @@
 }
 
 .left-container {
-  width: 200px;
+  width: 300px;
   height: 700px;
   padding: 20px;
 }
 
 .right-container {
+  flex: 1;
   width: 500px;
   height: 700px;
   padding: 20px;

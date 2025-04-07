@@ -99,18 +99,16 @@ const Header = () => {
             <Link to="/recwedding">웨딩홀</Link>
           </div>
         </div>
-        <div className="nav-item">
-          <Link to="/Community" className="nav-link">
-            커뮤니티
-          </Link>
-        </div>
+        <Link to="/Community" className="nav-link">
+          커뮤니티
+        </Link>
       </nav>
 
       <nav className="nav-links2">
         {isLoggedIn ? (
           <>
             <span className="nickname">{username} 님</span>
-            <Link to="/setting">
+            <Link to="/Update">
               <span className="material-symbols-outlined">account_circle</span>
             </Link>
           </>
