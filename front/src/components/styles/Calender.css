@@ -1,8 +1,24 @@
+/* 헤더 및 공통 컨테이너 */
+.title-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 150px 300px 30px 300px; /* 좌우 300px 고정 */
+}
+
+
 /* FullCalendar 전용 스타일에 .calendar-b 스코프 추가 */
 .calendar-b .calendars-box .fc {
   box-shadow: none !important;
   border: none !important;
   background: white;
+}
+/* 구분선 */
+.custom-line {
+  border: none;
+  border-top: 2px solid #e4dede;
+  margin: 0 300px 30px 300px; /* 좌우 300px */
 }
 
 .calendar-b .fc-scrollgrid,

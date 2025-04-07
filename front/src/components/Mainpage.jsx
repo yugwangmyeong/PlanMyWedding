@@ -8,7 +8,7 @@ const Mainpage = () => {
   return (
     <div>
       <Header></Header>
-      <hr />
+      
       <div className="main-wrapper">
         {/* 이미 위쪽 헤더/로고/메뉴바는 제외한 영역 */}
         <div className="main-layout">
