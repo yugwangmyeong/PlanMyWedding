@@ -1,0 +1,180 @@
+/* FullCalendar 전용 스타일에 .calendar-b 스코프 추가 */
+.calendar-b .calendars-box .fc {
+  box-shadow: none !important;
+  border: none !important;
+  background: white;
+}
+
+.calendar-b .fc-scrollgrid,
+.calendar-b .fc-scrollgrid-section,
+.calendar-b .fc-daygrid-body {
+  border: none !important;
+}
+
+.calendar-b .fc-day-sun a {
+  color: rgb(0, 0, 0) !important;
+}
+.calendar-b .fc-day-sat a {
+  color: rgb(0, 0, 0) !important;
+}
+.calendar-b .fc-day-mon a,
+.calendar-b .fc-day-tue a,
+.calendar-b .fc-day-wed a,
+.calendar-b .fc-day-thu a,
+.calendar-b .fc-day-fri a {
+  color: #000000 !important;
+}
+
+.calendar-b .fc-toolbar-title {
+  color: #000000 !important;
+}
+
+.calendar-b .fc-button {
+  background-color: #000000 !important;
+  border: none !important;
+  color: white !important;
+  font-weight: bold;
+  border-radius: 6px !important;
+  font-size: 13px !important;
+  padding: 5px 10px !important;
+  cursor: pointer;
+}
+.calendar-b .fc-button:hover,
+.calendar-b .fc-button-active {
+  background-color: #fcc7eb !important;
+}
+
+.calendars-container {
+  display: flex;
+  justify-content: center;
+  gap: 80px;
+  padding: 30px;
+}
+
+.calendars-box {
+  max-width: 800px;
+  width: 100%;
+}
+
+.sides-box {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sides-card {
+  border: none;
+  outline: none;
+  padding: 20px;
+  border-radius: 8px;
+  color: #333;
+  font-weight: bold;
+  text-align: center;
+  font-size: 14px;
+}
+
+.sides-card.pinks {
+  background: #f5c6e8;
+}
+.sides-card.blues {
+  background: #f5c6e8;
+  height: 60px;
+}
+.sides-card.accordions {
+  background: #f5c6e8;
+  text-align: left;
+}
+
+.modals-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #FFFFFF;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modals-content {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.modals-content input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.modals-buttons button {
+  padding: 8px 12px;
+  margin-right: 10px;
+  background-color: #efa1dc;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.modals-buttons button:hover {
+  background-color: #e181c4;
+}
+
+#progress {
+  appearance: none;
+  width: 100%;
+  height: 28px;
+  margin-top: 10px;
+  display: block;
+}
+#progress::-webkit-progress-bar {
+  background: #FFFFFF;
+  border-radius: 12px;
+  border: 1px solid #FFFFFF;
+  overflow: hidden;
+}
+#progress::-webkit-progress-value {
+  background: #e181c4;
+  border-radius: 0px;
+}
+
+.accordions .accordions-title {
+  cursor: pointer;
+  padding: 10px;
+  background: #f5c6e8;
+  border-radius: 0px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+.accordions .accordions-title.active {
+  background: #FFFFFF;
+  color: inherit;
+  border-bottom: 1px solid #ddd;
+  border-radius: 6px 6px 0 0;
+}
+.accordions-content {
+  background: #FFFFFF;
+  list-style: none;
+  padding: 0 10px 10px 10px;
+  margin-top: 0;
+  border: 1px solid #ddd;
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+}
+.accordions-content li {
+  padding: 5px 0;
+  border-bottom: none;
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
