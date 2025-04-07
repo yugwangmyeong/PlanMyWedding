@@ -1,18 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined');
 
-.header {
+.header--main {
     display: flex;
+    flex-wrap: nowrap;
     justify-content: space-between;
     align-items: center;
     background: white;
-    padding: 20px;
+    padding: 10px;
     color: #EFA1DC;
-    margin-left:300px;
-    margin-right:300px;
-    height:30px;
+    margin-bottom: -10;
+    min-width: 1200px;            /* 헤더의 최소 너비 설정 (원하는 값으로 조정) */
 }
 
-.logo {
+.header__logo {
     font-size: 1.7em;
     font-weight: bold;
     font-family: "Nanum Gothic", sans-serif;
@@ -41,6 +41,11 @@
     background: #fff;
     padding: 0 10px;
 }
+
+.nav-link {
+  margin-top: 10px;
+}
+
 .nav-links {
     display: flex;
 }
@@ -148,52 +153,6 @@ nav a {
 .dropdown-menu a:hover {
   background: #f0f0f0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* 캘린더 + 사이드 전체 레이아웃 */
 .calendar-container {

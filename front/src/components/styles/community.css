@@ -144,9 +144,10 @@ nav a {
 
 .community-content {
   display: flex;
-  width: 80%;
-  margin: 20px auto;
-  padding: 20px 0;
+  width: 90%;
+  max-width: 1200px;  /* 최대 너비를 지정해서 큰 화면에서도 과도하게 늘어나지 않게 함 */
+  margin: 1rem auto;  /* 상하 여백은 1rem, 좌우는 자동 중앙정렬 */
+  padding: 1rem 0;    /* 상하 패딩 1rem */
 }
 
 .left-sidebar {

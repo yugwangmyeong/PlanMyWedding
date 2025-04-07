@@ -79,10 +79,10 @@ const Header = () => {
         >
           <button onClick={toggleMypageMenu} className="mypage-btn">
             마이페이지
-            <img src={toggleMenuIcon} className="mypage-icon" />
+            <img src={toggleMenuIcon} className="mypage-icon" alt="toggle menu" />
           </button>
-          <div className="dropdown-menu">
-            <Link to="/schedule">일정관리</Link>
+          <div className="mypage-dropdown">
+            <Link to="/calender">일정관리</Link>
             <Link to="/moneycontrol">예산관리</Link>
           </div>
         </div>
@@ -93,13 +93,13 @@ const Header = () => {
         >
           <button onClick={toggleRecommendMenu} className="mypage-btn">
             추천페이지
-            <img src={toggleMenuIcon} className="mypage-icon" />
+            <img src={toggleMenuIcon} className="mypage-icon" alt="toggle menu" />
           </button>
           <div className="dropdown-menu">
             <Link to="/recwedding">웨딩홀</Link>
           </div>
         </div>
-        <Link to="/Community" className="nav-link">
+        <Link to="/Community" className="header-margin">
           커뮤니티
         </Link>
       </nav>

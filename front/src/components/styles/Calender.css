@@ -28,23 +28,13 @@
 /* 오른쪽 사이드 박스 */
 .side-box {
   width: 300px;
+  min-width: 300px;         /* side-box가 최소 300px은 유지하도록 */
+  overflow-x: auto;         /* 너비가 부족하면 가로 스크롤 생성 */
+  white-space: nowrap;      /* 글자가 줄바꿈되지 않도록 */
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* 공통 카드 스타일 */
 .side-card {
@@ -56,6 +46,7 @@
   font-weight: bold;
   text-align: center;
   font-size: 14px;
+  white-space: nowrap;      /* 글자가 세로로 꺾이지 않도록 */
 }
 
 /* 색상 테마 */

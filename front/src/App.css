@@ -1,10 +1,32 @@
 /* 전체 앱의 최소, 최대 너비 설정 */
 .app-container {
+  width: 90%;
   max-width: 1980px;
-  min-width: 1080px;
+  min-width: 1200px;  /* 원하는 최소 너비로 설정 */
+  overflow-x: auto;   /* 가로 스크롤 허용 */
   margin: 0 auto;
-  padding: 0 16px;
+  padding: 0 2%;
   box-sizing: border-box;
+}
+
+/* 작은 화면에서는 최소 너비 설정 대신 여백을 줄임 */
+@media (max-width: 600px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-links {
+    flex-direction: row; /* 또는 적절히 수정 */
+  }
+
+  .nav-links2 {
+    margin-top: 10px;
+  }
+  .app-container {
+    width: 100%;
+    padding: 0 10px;
+  }
 }
 
 /* 기본 폰트 & 박스사이징 초기화 */
@@ -19,4 +41,8 @@ body, html {
 /* 하위 모든 엘리먼트에도 box-sizing 적용 */
 *, *::before, *::after {
   box-sizing: inherit;
+}
+
+body, .App {
+  min-width: 1200px;  /* 1200px 이하로는 줄어들지 않음 */
 }

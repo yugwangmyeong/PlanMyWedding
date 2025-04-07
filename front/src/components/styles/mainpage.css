@@ -3,21 +3,26 @@
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    margin: 150px 300px 30px 300px; /* 좌우 300px 고정 */
+    justify-content: space-between; 
+    margin: 2rem auto; /* 상하 여백은 2rem, 좌우는 자동 중앙정렬 */
+    max-width: 1200px; /* 최대 너비 지정 */
+    padding: 0 1rem; /* 좌우 패딩 */
   }
 
   /* 구분선 */
   .custom-line {
     border: none;
     border-top: 2px solid #e4dede;
-    margin: 0 300px 30px 300px; /* 좌우 300px */
+    margin: 1.5rem auto; /* 상하 1.5rem, 좌우 자동 중앙정렬 */
+    width: 90%; /* 화면에 비례한 너비 */
+    max-width: 1200px;
   }
   
   .main-wrapper {
-    max-width: 1492px;
-    margin: 0 300px 30px 300px; /* 좌우 300px */
-    padding: 40px 0;
+    max-width: 1200px;
+    margin: 2rem auto 1.5rem auto; /* 상하 여백 조정 */
+    padding: 2rem 1rem; /* 상하 2rem, 좌우 1rem 패딩 */
+    width: 90%; /* 화면 비율에 따른 너비 */
   }
   
   .main-layout {

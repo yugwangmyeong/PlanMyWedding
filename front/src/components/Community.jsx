@@ -1,14 +1,21 @@
-import React, { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import React, { useState, useRef } from "react";
+import { Link, NavLink, } from "react-router-dom";
+import Header from "./Header";
 import "./styles/community.css";
 import toggleMenuIcon from "./styles/assets/toggleMenu.png";
 
 const Community = () => {
   const [isMypageOpen, setIsMypageOpen] = useState(false);
+  const [isRecOpen, setIsRecOpen] = useState(false);  // 추천페이지 열림 상태
+  const recRef = useRef(null);                         // 추천페이지 ref
 
   // 마이페이지 드롭다운 토글
   const toggleMypageMenu = () => {
     setIsMypageOpen(!isMypageOpen);
+  };
+
+  const toggleRecommendMenu = () => {
+    setIsRecOpen(!isRecOpen);
   };
 
   // 임시 게시글 데이터 (실제 데이터는 서버나 전역 상태에서 받아옵니다)
@@ -39,29 +46,9 @@ const Community = () => {
   return (
     <div className="community-container">
       {/* 헤더 영역 */}
-     <header className="header">
-      <div className="logo">Plan my wedding</div>
-      <nav className="nav-links">
-        {/* 마이페이지 버튼 - 클릭 시 드롭다운 표시 */}
-        <div className={`mypage-container ${isMypageOpen ? "open" : ""}`}>
-          <button onClick={toggleMypageMenu} className="mypage-btn">
-            마이페이지 
-            <img
-             src={toggleMenuIcon}
-             className="mypage-icon" 
-             alt="toogle menu" 
-             />
-          </button>
-          <div className="mypage-dropdown">
-            <Link to="/schedule">일정관리</Link>
-            <Link to="/moneycontrol">예산관리</Link>
-          </div>
-        </div>
-        <Link to="/Community" className="header-margin">
-          커뮤니티
-        </Link>
-      </nav>
+     <div><Header></Header>
 
+        
       <nav className="nav-links2">
         <Link to="/Login" className="login-link">로그인</Link>
         <span className="header-margin">/ </span>
@@ -70,7 +57,7 @@ const Community = () => {
           <span className="material-symbols-outlined">account_circle</span>
         </Link>
       </nav>
-    </header>
+    
 
     {/* 커뮤니티 메인 콘텐츠 영역 */}
     <div className="community-content">
@@ -223,6 +210,7 @@ const Community = () => {
    </div>
   </div>
  </div>
+</div>
 </div>
   );
 };
