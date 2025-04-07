@@ -10,7 +10,9 @@ import Mainpage from "./components/Mainpage";
 import MoneyControl from "./components/Moneycontrol";
 import RecWedding from "./components/RecommendPage/RecWedding";
 import Calender from "./components/Schedule/Calender";
-import Setting from "./components/Setting";
+import Setting from "./components/Member/Setting";
+import Member from "./components/Member/Member";
+import SettingLayout from "./components/Member/SettingLayout";
 function App() {
   const [token, setToken] = useState(null);
   const isLoggedIn = !!token;
@@ -45,6 +47,11 @@ function App() {
           <Route path="moneycontrol" element={<MoneyControl />} />
           <Route path="calendar" element={<Calender />} />
           <Route path="setting" element={<Setting />} />
+          <Route path="member" element={<Member />} />
+          <Route path="/setting" element={<SettingLayout />}>
+            <Route index element={<Setting />} />
+            <Route path="member" element={<Member />} />
+          </Route>
         </Routes>
       </div>
     </BrowserRouter>

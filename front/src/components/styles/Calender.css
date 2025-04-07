@@ -7,7 +7,6 @@
   margin: 150px 300px 30px 300px; /* 좌우 300px 고정 */
 }
 
-
 /* FullCalendar 전용 스타일에 .calendar-b 스코프 추가 */
 .calendar-b .calendars-box .fc {
   box-shadow: none !important;
@@ -38,7 +37,7 @@
 .calendar-b .fc-day-wed a,
 .calendar-b .fc-day-thu a,
 .calendar-b .fc-day-fri a {
-  color: #000000 !important;
+  color: #4e4e4e !important;
 }
 
 .calendar-b .fc-toolbar-title {
@@ -46,18 +45,41 @@
 }
 
 .calendar-b .fc-button {
-  background-color: #000000 !important;
-  border: none !important;
-  color: white !important;
-  font-weight: bold;
-  border-radius: 6px !important;
+  background-color: white !important;
+  border: 1px solid #e181c4 !important;
+  color: #e181c4 !important;
+  font-weight: 500;
+  border-radius: 8px !important;
   font-size: 13px !important;
-  padding: 5px 10px !important;
+  padding: 6px 14px !important;
   cursor: pointer;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease-in-out;
+  
+}
+
+.calendar-b .fc-prev-button {
+  margin-right: 15px;
+}
+
+.calendar-b .fc-next-button {
+  margin-left: 5px;
 }
 .calendar-b .fc-button:hover,
 .calendar-b .fc-button-active {
-  background-color: #fcc7eb !important;
+  background: #747373;
+  color: rgb(5, 4, 4);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+  
+}
+
+
+.calendar-b .fc-prev-button,
+.calendar-b .fc-next-button {
+  font-size: 18px;
+  font-weight: bold;
+  padding: 6px 12px;
 }
 
 .calendars-container {
@@ -98,8 +120,21 @@
   height: 60px;
 }
 .sides-card.accordions {
-  background: #f5c6e8;
+  background: #f5f1e6;
+  color: #fad1f1;
   text-align: left;
+  font-family: 'system-ui', 'Times New Roman', serif;
+  border: 1px solid #f3efe7;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.08);
+  background-image: linear-gradient(to bottom, #fdfaf3, #f5f1e6);
+  transition: all 0.3s ease;
+}
+
+.sides-card.accordions:hover {
+  box-shadow: 6px 6px 16px rgba(61, 38, 38, 0.15);  
+  transform: translateY(-2px);
 }
 
 .modals-backdrop {
@@ -108,89 +143,217 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: #FFFFFF;
+  background: #ffffff;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   z-index: 1000;
 }
-
+/* 🔲 모달 개선 */
 .modals-content {
-  background: #fff;
-  padding: 30px;
-  border-radius: 12px;
-  width: 300px;
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 14px;
+  width: 320px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 12px;
+  animation: fadeIn 0.3s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-.modals-content input {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+.modals-content input[type="text"],
+.modals-content input[type="date"] {
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border 0.2s ease;
+}
+.modals-content input:focus {
+  border-color: #442c3d;
+  outline: none;
 }
 
 .modals-buttons button {
-  padding: 8px 12px;
-  margin-right: 10px;
-  background-color: #efa1dc;
+  background-color: #858184;
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 14px;
   cursor: pointer;
+  transition: background 0.3s ease;
 }
 .modals-buttons button:hover {
-  background-color: #e181c4;
+  background-color: #000000;
 }
+
+.modals-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3); /* 반투명 검정 배경 */
+  display: flex;
+  justify-content: center; /* 중앙 정렬 */
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(2px); /* 배경 흐림 효과 (선택) */
+}
+.delete-button {
+  background-color: #f06292;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.delete-button:hover {
+  background-color: #d94b7a;
+  transform: scale(1.03);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+
 
 #progress {
   appearance: none;
   width: 100%;
-  height: 28px;
-  margin-top: 10px;
-  display: block;
-}
-#progress::-webkit-progress-bar {
-  background: #FFFFFF;
-  border-radius: 12px;
-  border: 1px solid #FFFFFF;
+  height: 14px;
+  border-radius: 10px;
   overflow: hidden;
-}
-#progress::-webkit-progress-value {
-  background: #e181c4;
-  border-radius: 0px;
+  background-color: #f0f0f0;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
 }
 
-.accordions .accordions-title {
+/* Webkit (크롬, 사파리) */
+#progress::-webkit-progress-bar {
+  background-color: #f0f0f0;
+  border-radius: 10px;
+}
+
+#progress::-webkit-progress-value {
+  background: linear-gradient(90deg, #e181c4 0%, #f5a6d6 100%);
+  border-radius: 10px;
+  transition: width 0.4s ease;
+}
+
+/* Firefox */
+#progress::-moz-progress-bar {
+  background: linear-gradient(90deg, #e181c4 0%, #f5a6d6 100%);
+  border-radius: 10px;
+  transition: width 0.4s ease;
+}
+
+
+/* ✅ 일정추가 버튼 */
+.sides-card.pinks {
+  background: #fff;
+  border: 1px solid #e181c4;
+  color: #e181c4;
+  transition: all 0.2s ease;
+}
+.sides-card.pinks:hover {
+  background: #e181c4;
+  color: white;
   cursor: pointer;
-  padding: 10px;
-  background: #f5c6e8;
-  border-radius: 0px;
-  display: flex;
-  justify-content: space-between;
-  font-weight: bold;
-  transition: background 0.3s;
+  transform: translateY(-2px);
 }
-.accordions .accordions-title.active {
-  background: #FFFFFF;
-  color: inherit;
-  border-bottom: 1px solid #ddd;
-  border-radius: 6px 6px 0 0;
-}
-.accordions-content {
-  background: #FFFFFF;
-  list-style: none;
-  padding: 0 10px 10px 10px;
-  margin-top: 0;
+
+/* 📊 진행도 카드 */
+.sides-card.blues {
+  background: #f9f9f9;
+  color: #333;
+  font-size: 13px;
   border: 1px solid #ddd;
-  border-top: none;
-  border-radius: 0 0 6px 6px;
+  height: auto;
+  padding: 16px;
 }
-.accordions-content li {
-  padding: 5px 0;
-  border-bottom: none;
+
+
+
+
+
+
+
+
+
+/* 📋 아코디언 개선 */
+/* 아코디언 타이틀 */
+.accordions .accordions-title {
+  background: #ffffff;
+  border: 1px solid #03afff;
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-weight: 600;
+  font-size: 15px;
+  color: #333;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  margin-bottom: 8px;
+}
+
+.accordions .accordions-title:hover {
+  background-color: #f9f9f9;
+}
+
+/* active 상태일 때 */
+.accordions .accordions-title.active {
+  background: #615f60;
+  color: white;
+  border-color: #b9b9b9;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 아코디언 내용 영역 */
+.accordions-content {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-top: none;
+  padding: 12px 16px;
+  border-radius: 0 0 10px 10px;
+  animation: fadeIn 0.3s ease;
+  margin-bottom: 10px;
+}
+
+.accordions-content li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-size: 14px;
+  color: #444;
+  padding: 6px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.accordions-content li:last-child {
+  border-bottom: none;
+}
+
+/* 체크박스 커스텀도 원하면 여기 추가 가능 */
+
+/* Fade-in 애니메이션 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

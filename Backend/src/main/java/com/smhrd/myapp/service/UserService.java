@@ -39,6 +39,18 @@ public class UserService implements UserDetailsService{
         userRepository.deleteUserByEmail(email); 
     }
     
+    @Transactional
+    public void updateUser(String email, String newUsername, String newPassword) {
+        User user = userRepository.findByEmail(email).orElseThrow();
+
+        user.setUsername(newUsername);
+        user.setPassword(newPassword); // 👉  암호화도 가능,암호화가 필요하다면 여기서 처리
+        userRepository.save(user);
+        // JPA의 변경 감지로 자동 반영됨
+    }
+
+
+    
  // ✅ Spring Security가 호출하는 메서드
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {

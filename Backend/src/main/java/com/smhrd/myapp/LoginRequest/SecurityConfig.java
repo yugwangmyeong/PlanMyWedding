@@ -2,6 +2,7 @@ package com.smhrd.myapp.LoginRequest;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -27,6 +28,8 @@ public class SecurityConfig {
 	        .authorizeRequests()
 	            .antMatchers("/api/login").permitAll() // ✅ 여기를 antMatchers로!
 	            .antMatchers("/api/delete").authenticated() // 🔥 이 경로는 인증 필요
+	            .antMatchers(HttpMethod.GET, "/api/member").authenticated()
+	            .antMatchers(HttpMethod.PUT, "/api/member").authenticated()
 	            .anyRequest().authenticated()
 	        .and()
 	        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)

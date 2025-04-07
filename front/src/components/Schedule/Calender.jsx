@@ -295,15 +295,12 @@ const Calender = () => {
                   {selectedEvent && (
                     <button
                       onClick={handleDeleteEvent}
-                      style={{ background: "#f06292", color: "white" }}
+                      className="delete-button"
                     >
                       삭제하기
                     </button>
                   )}
-                  <button
-                    onClick={resetForm}
-                    style={{ marginLeft: "10px", background: "#ccc" }}
-                  >
+                  <button onClick={resetForm} className="delete-button">
                     닫기
                   </button>
                 </div>

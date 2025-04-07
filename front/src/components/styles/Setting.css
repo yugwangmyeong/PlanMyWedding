@@ -32,7 +32,7 @@
   margin: 10px 0px 0px 0px;
 }
 
-.btn1 {
+.member {
   background-color: white;
   color: #333333;
   border: none;
@@ -43,7 +43,7 @@
   border-radius: 5px;
 }
 
-.btn1:hover {
+.member:hover {
   background-color: #f0f0f0;
 }
 
