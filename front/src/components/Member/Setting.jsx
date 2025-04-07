@@ -21,7 +21,7 @@ const Setting = () => {
   const handleLogout = () => {
     if (window.confirm("정말 로그아웃 하시겠습니까?")) {
       sessionStorage.removeItem("token");
-      navigate("/mainpage");
+      window.location.href = "/mainpage"; // 새로고침 포함한 이동
     }
   };
 

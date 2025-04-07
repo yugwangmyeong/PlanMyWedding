@@ -13,7 +13,7 @@ const Member = () => {
 
   // 🟡 사용자 정보 불러오기
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token"); // ✅ 수정
     if (!token) {
       alert("로그인이 필요합니다.");
       navigate("/login");
