@@ -2,7 +2,8 @@ import React from "react";
 import Header from "../Header";
 import { Outlet, useNavigate } from "react-router-dom";
 import "../styles/Setting.css";
-
+import Member from "./Member"
+import Setting from "./Setting"
 const SettingLayout = () => {
   const navigate = useNavigate();
 

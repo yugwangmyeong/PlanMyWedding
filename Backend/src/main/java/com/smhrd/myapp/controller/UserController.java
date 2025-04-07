@@ -80,12 +80,32 @@ public class UserController {
                                         @RequestBody Map<String, String> updates) {
         String email = userDetails.getUsername();
         String newUsername = updates.get("username");
-        String newPassword = updates.get("password");
+        String currentPassword = updates.get("currentPassword"); // 👈 현재 비밀번호
+        String newPassword = updates.get("newPassword");         // 👈 새 비밀번호
 
-        userService.updateUser(email, newUsername, newPassword);
+        
+        boolean success = userService.updateUser(email, currentPassword, newUsername, newPassword);
+        if (!success) {
+            return ResponseEntity.badRequest().body("현재 비밀번호가 일치하지 않습니다.");
+        }
+        
         return ResponseEntity.ok("회원 정보 수정 완료");
     }
 
+    //회원가입 매서드
+    @PostMapping("/signup")
+    public ResponseEntity<?> registerUser(@RequestBody Map<String, String> userData) {
+        String email = userData.get("email");
+        String username = userData.get("name");  // 닉네임
+        String password = userData.get("password");
+
+        if (userService.findByEmail(email) != null) {
+            return ResponseEntity.badRequest().body("이미 등록된 이메일입니다.");
+        }
+
+        userService.saveUser(email, username, password);
+        return ResponseEntity.ok("회원가입 성공");
+    }
 
 
 }

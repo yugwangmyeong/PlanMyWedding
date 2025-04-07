@@ -11,6 +11,7 @@ const Register = () => {
   const [showPassword, setShowPassword] = useState(false); // 비밀번호 & 확인칸 같이 보이기 상태
   const navigate = useNavigate();
 
+  
   const handleSignUp = async (e) => {
     e.preventDefault();
 
@@ -46,7 +47,7 @@ const Register = () => {
       if (response.ok) {
         // 로그인 성공
         console.log("회원가입 성공");
-        navigate("/welcome");
+        navigate("/login");
         // 성공 후 처리 (예: 리디렉션)
       } else {
         // 회원가입 실패
@@ -78,7 +79,7 @@ const Register = () => {
         </div>
         <form onSubmit={handleSignUp}>
           <div className="input-group">
-            <label htmlFor="name">이름</label>
+            <label htmlFor="name">닉네임</label>
             <div style={{ position: "relative" }}>
               <input
                 type="text"
@@ -204,7 +205,7 @@ const Register = () => {
           </div>
 
           {error && <p className="error-message">{error}</p>}
-          <button type="submit" className="register-btn">
+          <button type="submit" className="register-btn" >
             회원가입
           </button>
         </form>

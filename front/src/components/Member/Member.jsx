@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Member.css";
-
+import CustomAlert from "../Customalert";
 const Member = () => {
   const [userInfo, setUserInfo] = useState({ email: "", username: "" });
   const [newPassword, setNewPassword] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [currentPassword, setCurrentPassword] = useState(""); // 현재 비번 확인용
+  const [alertMessage, setAlertMessage] = useState(""); // ✅ 알림 메시지 상태
+  const [showAlert, setShowAlert] = useState(false); // ✅ 알림창 표시 여부
   const navigate = useNavigate();
 
   // 🟡 사용자 정보 불러오기
@@ -32,11 +35,12 @@ const Member = () => {
   // 🟡 회원정보 수정 요청
   const handleUpdate = async () => {
     if (newPassword !== passwordConfirm) {
-      alert("비밀번호가 일치하지 않습니다.");
+      setAlertMessage("비밀번호가 일치하지 않습니다.");
+      setShowAlert(true);
       return;
     }
 
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
 
     const response = await fetch("http://localhost:8081/boot/api/member", {
       method: "PUT",
@@ -46,15 +50,22 @@ const Member = () => {
       },
       body: JSON.stringify({
         username: userInfo.username,
-        password: newPassword,
+        currentPassword: currentPassword,
+        newPassword: newPassword,
       }),
     });
 
     if (response.ok) {
-      alert("회원 정보가 수정되었습니다.");
-      navigate("/setting");
+      setAlertMessage("회원 정보가 수정되었습니다.");
+      setShowAlert(true);
+      console.log("✅ 알림 열림");
+      setTimeout(() => {
+        setShowAlert(false);
+        navigate("/setting"); // ✅ navigate는 알림 닫힌 뒤 이동
+      }, 1000); // 1초 후 이동
     } else {
-      alert("수정 실패");
+      setAlertMessage("수정 실패");
+      setShowAlert(true);
     }
   };
 
@@ -82,16 +93,29 @@ const Member = () => {
         />
       </div>
 
+      {/* 현재 비밀번호 입력칸 */}
       <div className="form-group-row">
-        <label>비밀번호</label>
+        <label>현재 비밀번호</label>
         <input
           type="password"
-          placeholder="비밀번호 입력"
+          placeholder="현재 비밀번호 입력"
+          value={currentPassword}
+          onChange={(e) => setCurrentPassword(e.target.value)}
+        />
+      </div>
+
+      {/* 새로운 비밀번호 입력칸 */}
+      <div className="form-group-row">
+        <label>새로운 비밀번호</label>
+        <input
+          type="password"
+          placeholder="새로운 비밀번호 입력"
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
         />
       </div>
 
+      {/* 새로운 비밀번호 확인칸 */}
       <div className="form-group-row">
         <label>비밀번호 확인</label>
         <input
@@ -102,6 +126,12 @@ const Member = () => {
         />
       </div>
 
+      {showAlert && (
+        <CustomAlert
+          message={alertMessage}
+          onClose={() => setShowAlert(false)}
+        />
+      )}
       <div className="button-wrapper">
         <button className="submit-btn" onClick={handleUpdate}>
           수정하기

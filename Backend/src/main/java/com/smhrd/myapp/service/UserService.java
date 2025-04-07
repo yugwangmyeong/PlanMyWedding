@@ -40,16 +40,32 @@ public class UserService implements UserDetailsService{
     }
     
     @Transactional
-    public void updateUser(String email, String newUsername, String newPassword) {
+    public boolean updateUser(String email, String currentPassword, String newUsername, String newPassword) {
         User user = userRepository.findByEmail(email).orElseThrow();
 
+        // 현재 비밀번호가 일치하는지 확인
+        if (!user.getPassword().equals(currentPassword)) {
+            return false; // 비밀번호 불일치
+        }
+
         user.setUsername(newUsername);
-        user.setPassword(newPassword); // 👉  암호화도 가능,암호화가 필요하다면 여기서 처리
+        user.setPassword(newPassword);
         userRepository.save(user);
-        // JPA의 변경 감지로 자동 반영됨
+
+        return true;
     }
 
 
+
+    @Transactional
+    public void saveUser(String email, String username, String password) {
+        User user = new User();
+        user.setEmail(email);
+        user.setUsername(username);
+        user.setPassword(password); // 👉 나중에 암호화 필요 시 여기서 처리
+
+        userRepository.save(user);
+    }
     
  // ✅ Spring Security가 호출하는 메서드
     @Override

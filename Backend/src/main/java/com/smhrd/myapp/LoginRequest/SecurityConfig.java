@@ -26,6 +26,7 @@ public class SecurityConfig {
 	        .and()
 	        .csrf().disable()
 	        .authorizeRequests()
+	        	.antMatchers("/api/signup").permitAll() // 👈 이거 필수!!
 	            .antMatchers("/api/login").permitAll() // ✅ 여기를 antMatchers로!
 	            .antMatchers("/api/delete").authenticated() // 🔥 이 경로는 인증 필요
 	            .antMatchers(HttpMethod.GET, "/api/member").authenticated()
