@@ -5,8 +5,10 @@
   min-width: 1200px;  /* 원하는 최소 너비로 설정 */
   overflow-x: auto;   /* 가로 스크롤 허용 */
   margin: 0 auto;
-  padding: 0 2%;
-  box-sizing: border-box;
+
+  padding: 0px;
+  box-sizing: border-box;  
+  white-space: nowrap; /* 줄바꿈 방지 */
 }
 
 /* 작은 화면에서는 최소 너비 설정 대신 여백을 줄임 */
@@ -31,6 +33,7 @@
 
 /* 기본 폰트 & 박스사이징 초기화 */
 body, html {
+  min-width: 1200px;
   margin: 0;
   padding: 0;
   font-family: 'Pretendard', sans-serif;

@@ -1,13 +1,13 @@
-import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import './styles/communitypost.css';
-import toggleMenuIcon from './styles/assets/toggleMenu.png';
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
+import "./styles/communitypost.css";
+import toggleMenuIcon from "./styles/assets/toggleMenu.png";
 
 const CommunityPost = () => {
   const location = useLocation();
   const { post } = location.state || {};
 
-  // 헤더 드롭다운 상태 
+  // 헤더 드롭다운 상태
   const [isMypageOpen, setIsMypageOpen] = React.useState(false);
   const toggleMypageMenu = () => {
     setIsMypageOpen(!isMypageOpen);
@@ -19,31 +19,31 @@ const CommunityPost = () => {
 
   // 댓글 상태(임시)
   const [comments, setComments] = React.useState([]);
-  const [newComment, setNewComment] = React.useState('');
+  const [newComment, setNewComment] = React.useState("");
 
   // 좋아요 버튼 클릭
   const handleLike = () => {
     if (liked) {
-        setLikes((prevLikes) => prevLikes - 1);
-        setLiked(false);
-      } else {
-        setLikes((prevLikes) => prevLikes + 1);
-        setLiked(true);
-      }
-};
+      setLikes((prevLikes) => prevLikes - 1);
+      setLiked(false);
+    } else {
+      setLikes((prevLikes) => prevLikes + 1);
+      setLiked(true);
+    }
+  };
 
   // 댓글 작성
   const handleCommentSubmit = (e) => {
     e.preventDefault();
-    if (newComment.trim() === '') return;
+    if (newComment.trim() === "") return;
     // 예: 작성자 익명
     const commentData = {
-        author: "익명",
-        text: newComment
-      };
+      author: "익명",
+      text: newComment,
+    };
     // 임시로 댓글 배열에 추가
     setComments([...comments, newComment]);
-    setNewComment('');
+    setNewComment("");
   };
 
   // 신고하기 버튼 클릭
@@ -58,10 +58,14 @@ const CommunityPost = () => {
       <header className="header">
         <div className="logo">Plan my wedding</div>
         <nav className="nav-links">
-          <div className={`mypage-container ${isMypageOpen ? 'open' : ''}`}>
+          <div className={`mypage-container ${isMypageOpen ? "open" : ""}`}>
             <button onClick={toggleMypageMenu} className="mypage-btn">
               마이페이지
-              <img src={toggleMenuIcon} className="mypage-icon" alt="toggle menu" />
+              <img
+                src={toggleMenuIcon}
+                className="mypage-icon"
+                alt="toggle menu"
+              />
             </button>
             <div className="mypage-dropdown">
               <Link to="/schedule">일정관리</Link>
@@ -73,9 +77,13 @@ const CommunityPost = () => {
           </Link>
         </nav>
         <nav className="nav-links2">
-          <Link to="/Login" className="login-link">로그인</Link>
+          <Link to="/Login" className="login-link">
+            로그인
+          </Link>
           <span className="header-margin">/ </span>
-          <Link to="/Register" className="reg-link">회원가입</Link>
+          <Link to="/Register" className="reg-link">
+            회원가입
+          </Link>
           <Link to="/Update">
             <span className="material-symbols-outlined">account_circle</span>
           </Link>
@@ -85,16 +93,20 @@ const CommunityPost = () => {
       {/* 게시글 상세 내용 영역 */}
       <div className="community-post-wrapper">
         <h2 className="community-heading">커뮤니티</h2>
-        
+
         {/* 제목 */}
         <h2 className="post-title">{post?.title}</h2>
 
         {/* 메타 정보 영역(카테고리, 서비스, 지역 등) */}
         <div className="post-metaPost">
-        {post?.service && <span className="post-service">{post.service}</span>}
+          {post?.service && (
+            <span className="post-service">{post.service}</span>
+          )}
           {post?.region && <span className="post-region">{post.region}</span>}
           {post?.author && <span className="post-author">{post.author}</span>}
-          {post?.category && <span className="post-category">{post.category}</span>}
+          {post?.category && (
+            <span className="post-category">{post.category}</span>
+          )}
         </div>
 
         {/* 이미지 미리보기 영역 */}
@@ -123,7 +135,7 @@ const CommunityPost = () => {
         <div className="post-interactions">
           <div className="like-section">
             <button className="like-btn" onClick={handleLike}>
-               👍
+              👍
             </button>
             <span className="like-count">{likes}</span>
           </div>
@@ -133,9 +145,13 @@ const CommunityPost = () => {
             {comments.map((comment, idx) => (
               <div key={idx} className="comment-item">
                 <div className="comment-left">
-                  <span className="comment-author">{comment.author}</span> : {comment.text}
+                  <span className="comment-author">{comment.author}</span> :{" "}
+                  {comment.text}
                 </div>
-                <button className="report-btn" onClick={() => handleReport(idx)}>
+                <button
+                  className="report-btn"
+                  onClick={() => handleReport(idx)}
+                >
                   신고하기
                 </button>
               </div>
@@ -153,7 +169,6 @@ const CommunityPost = () => {
             <button type="submit">등록</button>
           </form>
         </div>
-
       </div>
     </div>
   );

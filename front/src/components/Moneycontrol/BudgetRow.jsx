@@ -1,13 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
-import '../styles/budgetrow.css';
+import "../styles/budgetrow.css";
 
 const BudgetRow = ({ item, onUpdate, onDelete }) => {
   const [form, setForm] = useState(item);
   const inputRefs = useRef([]);
   const [memoFocus, setMemoFocus] = useState(false);
   const isMemoExpanded = form.memo.length > 20 && memoFocus;
-
-
 
   const fields = [
     { name: "name", type: "text", placeholder: "항목명" },
@@ -39,13 +37,12 @@ const BudgetRow = ({ item, onUpdate, onDelete }) => {
   return (
     <div className="budget-row input-row animate-input">
       {fields.map((field, index) => (
-        
         <div
           className={`budget-col ${
             field.name === "budget" || field.name === "spent" ? "narrow" : ""
           }`}
           key={field.name}
-        > 
+        >
           {field.name === "budget" || field.name === "spent" ? (
             // 예산/지출 항목에 "만원" 단위 붙이기
             <div className="input-with-unit">
@@ -76,7 +73,7 @@ const BudgetRow = ({ item, onUpdate, onDelete }) => {
               <option value="신부">신부</option>
               <option value="함께">함께</option>
             </select>
-          ) :field.name === "memo" ? (
+          ) : field.name === "memo" ? (
             <textarea
               ref={(el) => (inputRefs.current[index] = el)}
               type="text"
@@ -90,10 +87,12 @@ const BudgetRow = ({ item, onUpdate, onDelete }) => {
               onFocus={() => setMemoFocus(true)}
               onKeyDown={(e) => handleKeyDown(e, index)}
               placeholder={field.placeholder}
-              className={`popup-input memo-input ${memoFocus ? "focused" : ""} ${isMemoExpanded ? "expanded" : ""}`}
+              className={`popup-input memo-input ${
+                memoFocus ? "focused" : ""
+              } ${isMemoExpanded ? "expanded" : ""}`}
               maxLength={200}
             />
-          ): (
+          ) : (
             <input
               ref={(el) => (inputRefs.current[index] = el)}
               type={field.type}
