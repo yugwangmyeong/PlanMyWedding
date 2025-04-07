@@ -34,12 +34,7 @@ function App() {
               </div>
             }
           />
-          {
-            <Route
-              path="/calender"
-              element={<Calender />}
-            />
-          }
+          {<Route path="/calender" element={<Calender />} />}
 
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
