@@ -63,7 +63,25 @@
   gap: 20px;
 }
 
+<<<<<<< HEAD
 .sides-card {
+=======
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 공통 카드 스타일 */
+.side-card {
+>>>>>>> origin/CYL
   border: none;
   outline: none;
   padding: 20px;
@@ -86,15 +104,84 @@
   text-align: left;
 }
 
+<<<<<<< HEAD
 .modals-backdrop {
+=======
+
+
+
+
+
+
+
+
+
+
+
+/* 일요일 날짜 */
+.fc-day-sun a {
+  color: hotpink !important;
+}
+/* 토요일 날짜 */
+.fc-day-sat a {
+  color: hotpink !important;
+}
+/* 평일 날짜 */
+.fc-day-mon a,
+.fc-day-tue a,
+.fc-day-wed a,
+.fc-day-thu a,
+.fc-day-fri a {
+  color: #EFA1DC !important;
+}
+
+/* 월 이름 */
+.fc-toolbar-title {
+  color: #EFA1DC !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* FullCalendar 버튼 */
+.fc-button {
+  background-color: #efa1dc !important;
+  border: none !important;
+  color: white !important;
+  font-weight: bold;
+  border-radius: 6px !important;
+  font-size: 13px !important;
+  padding: 5px 10px !important;
+  cursor: pointer;
+}
+.fc-button:hover,
+.fc-button-active {
+  background-color: #e181c4 !important;
+}
+
+/* 모달 배경 */
+.modal-backdrop {
+>>>>>>> origin/CYL
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.4);
+  background: #FFFFFF;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   z-index: 1000;
 }
