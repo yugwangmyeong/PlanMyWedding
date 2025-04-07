@@ -75,4 +75,6 @@ const QuestionWedding = ({ onProgress }) => {
   );
 };
 
+
+
 export default QuestionWedding;
