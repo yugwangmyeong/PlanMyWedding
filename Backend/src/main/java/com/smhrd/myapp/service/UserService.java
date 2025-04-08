@@ -17,4 +17,13 @@ public class UserService {
         Optional<User> user = userRepository.findByEmail(email);
         return user.isPresent() && user.get().getPassword().equals(password);
     }
+<<<<<<< HEAD
+=======
+    
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email).orElse(null);
+    }
+    
+    
+>>>>>>> 9e504d2 (🌸 PlanMyWedding - JSG 브랜치 초기 업로드)
 }
