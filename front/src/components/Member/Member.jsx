@@ -15,6 +15,7 @@ const Member = () => {
   useEffect(() => {
     const token = sessionStorage.getItem("token"); // ✅ 수정
     if (!token) {
+      console.warn("❗ 토큰 없음! Authorization 헤더 누락됨");
       alert("로그인이 필요합니다.");
       navigate("/login");
       return;

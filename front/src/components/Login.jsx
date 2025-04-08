@@ -8,6 +8,7 @@ const Login = ({ setToken }) => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const token = sessionStorage.getItem("token");
+  
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -24,7 +25,7 @@ const Login = ({ setToken }) => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+          
         },
         body: JSON.stringify({ email, password }),
       });
@@ -35,7 +36,6 @@ const Login = ({ setToken }) => {
         // ✅ 토큰 저장
         sessionStorage.setItem("token", data.token);
         console.log("받은 토큰:", data.token);
-
         // ✅ 로그인 후 메인페이지로 이동 (새로고침 포함)
         window.location.href = "/mainpage";
       } else {
