@@ -107,4 +107,88 @@
   .fade-in {
     animation: fadeIn 0.5s ease-in-out;
   }
+
+  /* 중요도 질문용 스타일 */
+.option-list.horizontal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
+  flex-wrap: nowrap;
+}
+
+.option-list.horizontal .label-text {
+  font-size: 0.8rem;
+  color: #666;
+  margin: 0 8px;
+}
+/* 선택지 라벨 정렬 */
+.option-list.horizontal .option-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* 라디오 버튼과 숫자 간격 조정 */
+.option-list.horizontal input[type="radio"] {
+  margin-bottom: 4px;
+}
   
+/* Worst / Best 텍스트 */
+.option-list.horizontal .label-text {
+  font-size: 0.8rem;
+  color: #666;
+  margin: 0 8px;
+}
+
+/* 기존 option-list가 세로 정렬일 경우, horizontal로 오버라이드 */
+.option-list.horizontal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 12px;
+  flex-wrap: nowrap;
+}
+
+/* 중요도 질문용 수평 정렬 스타일 */
+.option-list-10 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: nowrap;
+  margin-top: 12px;
+}
+
+/* 라디오 버튼 감싸는 박스 */
+.option-box-10 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 8px;
+  width: 36px;
+  height: 48px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+/* 선택 시 강조 스타일 */
+.option-box-10 input[type="radio"]:checked + span {
+  font-weight: bold;
+  color: #fff;
+  background-color: #ff69b4;
+  border-radius: 4px;
+  padding: 4px;
+}
+
+/* Worst / Best 레이블 */
+.worst, .best {
+  font-size: 0.8rem;
+  margin: 0 8px;
+  font-weight: bold;
+  color: #999;
+}
