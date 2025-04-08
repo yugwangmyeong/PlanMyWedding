@@ -1,0 +1,170 @@
+
+
+.page-container {
+  margin-left: 300px;
+  margin-right: 300px;
+}
+
+
+/* 헤더 및 공통 컨테이너 */
+.title-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 150px 300px 30px 300px; /* 좌우 300px 고정 */
+}
+
+/* 타이틀 */
+.maintitle {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* 초대 버튼 */
+.invite-btn {
+  padding: 10px 24px;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  outline: none;
+  background: #f8bbd0;
+  border: 2px solid #f48fb1;
+  color: #ffffff;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.invite-btn:hover {
+  background: #ffffff;
+  color: #f06292;
+  border-color: #f06292;
+  transform: scale(1.03);
+}
+
+/* 구분선 */
+.custom-line {
+  border: none;
+  border-top: 2px solid #e4dede;
+  margin: 0 300px 30px 300px; /* 좌우 300px */
+}
+
+/* 예산 박스 */
+.budget-box {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: #fde9ec;
+  border: 2px solid #999;
+  border-radius: 12px;
+  padding: 50px;
+  margin: 0 300px; /* 좌우 300px */
+}
+
+.budget-item {
+  flex: 1;
+  text-align: center;
+  font-weight: 500;
+}
+
+.divider {
+  width: 1px;
+  height: 40px;
+  background-color: #333;
+}
+
+/*
+  예산세부내역
+*/
+.maintitle2{
+  text-align:left;
+  font-size: 20px;
+  padding: 20px;
+  margin: 0 300px; /* 좌우 300px */
+  
+}
+
+.budget-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f7f4f4;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 16px 32px;
+
+  margin: 30px 300px 20px 300px;
+}
+
+.detail-item {
+  flex: 1;
+  text-align: center;
+  font-weight: 500;
+  font-size: 20px;
+  color: #272020;
+}
+
+.divider {
+  width: 1px;
+  height: 24px;
+  background-color: #999;
+}
+
+.budget-detail-wrapper {
+  background-color: #fde9ec;
+  padding: 30px 30px;
+  margin-left:300px;
+  margin-right:300px;
+  border-radius: 30px;
+}
+
+.budget-list {
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 20px;
+}
+
+.budget-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 14px;
+  color: #333;
+}
+
+.budget-col {
+  flex: 1;
+  text-align: center;
+}
+
+
+.add-item-row {
+  padding: 12px;
+  cursor: pointer;
+  color: #f06292;
+  font-weight: bold;
+  text-align: left;
+  margin-left: 20px;
+}
+
+.input-animate-wrapper {
+  transform: scale(0.95);
+  opacity: 0;
+  animation: popIn 0.25s ease-out forwards;
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

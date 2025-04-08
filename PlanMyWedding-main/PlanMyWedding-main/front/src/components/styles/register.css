@@ -1,0 +1,89 @@
+/* register.css */ 
+  /* 회원가입 박스 스타일 */
+  .register-box {
+    background: rgb(248, 214, 220);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+  }
+  
+  /* 회원가입 박스 제목 스타일 */
+  .register-box h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color:black;
+  }
+  
+  /* 입력 그룹 스타일 (각 입력 필드와 라벨을 포함하는 컨테이너) */
+  .input-group {
+    margin-bottom: 15px;
+  }
+
+  /* 입력 필드 라벨 스타일 */
+  .input-group label {
+    font-size: 12px; /* 라벨 글자의 크기를 12px로 설정 */
+    font-weight: bold; /* 라벨 글자를 굵게 표시 */
+    margin-bottom: 5px; /* 라벨과 입력 필드 사이에 5px의 여백 추가 */
+    display: block; /* 라벨을 블록 요소로 설정하여 입력 필드 위에 위치하게 함 */
+    color: black; /* 라벨 글자 색상을 검은색으로 설정 */
+    text-align: left; /* 라벨 텍스트를 왼쪽 정렬 */
+    width: 100%; /* 라벨의 너비를 부모 요소의 전체 너비로 설정 */
+    margin-left: 35px; /* 라벨을 왼쪽에서 오른쪽으로 10px 이동 */
+  }
+  
+  /* 입력 필드 스타일 */
+  .input-group input {
+    width: 80%;
+    font-size: 11px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    box-sizing: border-box;
+  }
+  
+  /* 에러 메시지 스타일 (유효성 검사 실패 시 표시되는 메시지) */
+  .error-message {
+    color: red;
+    font-size: 12px;
+    text-align: center;
+  }
+  
+  /* 회원가입 버튼 스타일 */
+  .register-btn {
+    width: 80%;
+    padding: 10px;
+    background-color: white;
+    color: black;
+    border: none; /* 기본 테두리 없음 */
+    border-radius: 15px;
+    font-size: 16px;
+    cursor: pointer; /* 마우스를 올렸을 때 포인터 모양으로 변경 */
+    margin-top: 40px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 기본 그림자 효과 */ 
+  }
+  
+  /* 회원가입 버튼 호버 효과 스타일 (마우스를 올렸을 때 변화) */
+  .register-btn:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* 마우스를 올렸을 때 그림자 확대 */
+    transform: scale(1.05); /* 버튼이 약간 커지는 효과 */
+  }
+
+  /* 숫자 박스 스타일 */
+.number-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px; /* 박스 너비 */
+  height: 40px; /* 박스 높이 */
+  background-color: #f8d6dc; /* 바깥 배경색과 동일하게 설정 */
+  border: 2px solid black; /* 검은색 테두리 추가 */
+  border-radius: 10px; /* 모서리 둥글게 */
+  margin: 0 auto; /* 가운데 정렬 */
+  margin-bottom: 20px; /* 아래 여백 */
+}
+
+.number-box span {
+  font-size: 25px; /* 글자 크기 */
+  color: black; /* 글자 색상 */
+}
