@@ -1,10 +1,13 @@
 package com.smhrd.myapp.entity;
 
-import javax.persistence.Column;
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -13,6 +16,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "T_WEDDING_HALL")
 @Getter
+@Setter
 public class WeddingHall {
 
     @Id
@@ -23,12 +27,14 @@ public class WeddingHall {
     private String whAddr;
     private String whTel;
     private String whUrl;
-    private String whImg1;
-    private String whImg2;
-    private String whImg3;
-    private String createdAt;
+
     private Double lat;
     private Double lon;
 
-    // 필요에 따라 생성자 추가 가능
+    private String whImg1;
+    private String whImg2;
+    private String whImg3;
+
+    @OneToMany(mappedBy = "weddingHall", fetch = FetchType.LAZY)
+    private List<TPrice> prices;
 }

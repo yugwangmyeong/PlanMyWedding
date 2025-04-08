@@ -1,7 +1,7 @@
 package com.smhrd.myapp.controller;
+import java.util.List;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,20 +11,18 @@ import com.smhrd.myapp.dto.RecommendationRequest;
 import com.smhrd.myapp.dto.WeddingHallResponse;
 import com.smhrd.myapp.service.WeddingRecommenderService;
 
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/wedding-halls")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
-public class WeddingController {
+public class WeddingHallController {
 
-    private final WeddingRecommenderService recommenderService;
+    private final WeddingRecommenderService weddingRecommenderService;
 
-    @PostMapping("/recommend")
-    public ResponseEntity<List<WeddingHallResponse>> recommendWedding(@RequestBody RecommendationRequest request) {
-        List<WeddingHallResponse> result = recommenderService.recommend(request);
-        return ResponseEntity.ok(result);
+    @PostMapping("/details")
+    public ResponseEntity<List<WeddingHallResponse>> getHallDetails(@RequestBody RecommendationRequest request) {
+        List<WeddingHallResponse> hallDetails = weddingRecommenderService.getTop3HallDetails(request.getHallNames());
+        return ResponseEntity.ok(hallDetails);
     }
 }
