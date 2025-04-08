@@ -43,7 +43,8 @@
 }
 .nav-links2 {
   display: flex;
-  gap: 10px; /* 링크 사이 간격을 20px로 설정 */
+  gap: 20px; /* 링크 사이 간격을 20px로 설정 */
+  margin-right: 30px; /* 오른쪽에 20px 마진 추가 */
 }
 nav a {
   color: black;

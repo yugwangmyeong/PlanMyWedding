@@ -5,12 +5,11 @@
   
 
   /* 헤더 및 공통 컨테이너 */
-  .title-wrap {
-    position: relative;
+  .title__wrap {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    margin: 150px 300px 30px 300px; /* 좌우 300px 고정 */
+    margin: 200px 300px; 
+    margin-bottom: 20px;
   }
   
   /* 타이틀 */
@@ -18,10 +17,12 @@
     font-size: 24px;
     font-weight: bold;
     margin: 0;
+    margin-right: 20px; /* 여유 공간 주기 */
   }
   
   /* 초대 버튼 */
   .invite-btn {
+    margin-left: auto;
     padding: 10px 24px;
     font-family: "Segoe UI", sans-serif;
     font-size: 16px;
@@ -54,15 +55,15 @@
   */
   .maintitle2{
     text-align:left;
-    font-size: 20px;
+    font-size: 24px;
     padding: 20px;
-    margin: 0 300px; /* 좌우 300px */
-    
+    margin: 50px 300px; /* 좌우 300px */
+    margin-bottom: 20px;
   }
   
   .budget-detail-header {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr 1fr 1.5fr;
     align-items: center;
     background: #f7f4f4;
     border: 1px solid #ccc;
@@ -70,10 +71,11 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 16px 32px;
     margin: 30px 300px 20px 300px;
+    column-gap: 0.5rem;  /* 각 열 사이의 간격 */
   }
   
   .detail-item {
-    flex: 1;
+    
     text-align: left;
     font-weight: 500;
     font-size: 17px;
@@ -102,8 +104,9 @@
   }
   
   .budget-row {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr 1fr 1.5fr;
+    align-items: center;
     padding: 16px 12px; /* ⬅ padding을 늘려서 전체 높이 증가 */
     border-bottom: 1px solid #f0f0f0;
     font-size: 14px;
@@ -114,7 +117,7 @@
     cursor: grabbing;
   }
   .budget-col {
-    flex: 1;
+    
     text-align: center;
     
   }

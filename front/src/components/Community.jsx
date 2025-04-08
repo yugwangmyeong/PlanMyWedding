@@ -1,5 +1,5 @@
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./styles/community.css";
 import toggleMenuIcon from "./styles/assets/toggleMenu.png";
