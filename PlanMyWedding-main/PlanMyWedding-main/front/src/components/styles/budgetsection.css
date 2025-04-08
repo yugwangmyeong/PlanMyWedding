@@ -1,0 +1,92 @@
+.main-layout {
+    display: flex;
+    gap: 40px;
+  }
+  
+  .left-column,
+  .right-column {
+    flex: 1;
+  }
+  
+  .h2loc{
+    margin-left: 170px;
+    padding: 10px 10px 10px 10px;
+    font-size: 20px;
+    font-weight: bold;
+  
+  }
+  /* 📦 각 섹션을 박스로 감싸기 */
+  .section-box {
+    background-color: transparent; /* 흰 배경 또는 없음 */
+    padding: 0;                    /* 전체 padding 제거 (내부 요소에 여백 주는 방식으로 변경) */
+    border-radius: 0;              /* 둥근 모서리 제거 */
+    box-shadow: none;              /* 그림자 제거 */
+    min-height: auto;
+    background-color: #fffcfc;
+  }
+
+  .dot {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 8px;
+    border-radius: 50%;
+  }
+  
+  .budget-summary-open {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 14px;
+    color: #222;
+  }
+  
+  .budget-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+  }
+  
+  .budget-row.total {
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  .amount {
+    text-align: right;
+  }
+  
+  .amount.strong {
+    font-size: 18px;
+    font-weight: 700;
+    color: #111;
+  }
+  
+  .percent {
+    margin-left: 8px;
+    font-size: 13px;
+    color: #aaa;
+  }
+  
+  
+
+  .budget-chart-box {
+    margin-top: 20px;
+    padding: 16px;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    width: 100%;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  .budget-chart{
+    width: "400px";
+    height: "400px";
+  }
