@@ -1,5 +1,6 @@
-import React from "react";
+import React,{ useMemo }  from "react";
 import "../styles/budgetsummary.css";
+import { calculateSummary } from "./calculateSummary";
 
 const BudgetSummary = ({ items }) => {
   const totalBudget = items.reduce(
@@ -11,7 +12,7 @@ const BudgetSummary = ({ items }) => {
     0
   );
   const remaining = totalBudget - totalSpent;
-
+  const summary = useMemo(() => calculateSummary(items), [items]);
   return (
     <div className="budget-box">
       <div className="budget-item">
@@ -31,5 +32,7 @@ const BudgetSummary = ({ items }) => {
     </div>
   );
 };
+
+
 
 export default BudgetSummary;

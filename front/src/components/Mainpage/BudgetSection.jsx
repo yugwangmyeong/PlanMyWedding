@@ -4,19 +4,38 @@ import { Chart, ArcElement, Tooltip, Legend } from "chart.js";
 
 import "../styles/budgetsection.css";
 
-const BudgetSection = () => {
-  Chart.register(ArcElement, Tooltip, Legend);
-  const total = 1000000;
-  const spent = 400000;
-  const groom = 250000;
-  const bride = 150000;
-  const remaining = total - spent;
+Chart.register(ArcElement, Tooltip, Legend); // ✅ 바깥에서 한 번만 등록
+
+const BudgetSection = ({ summary }) => {
+  const {
+    totalBudget = 0,
+    totalSpent = 0,
+    groomSpent = 0,
+    brideSpent = 0,
+    togetherSpent = 0,
+  } = summary || {};
+
+  const remaining = totalBudget - totalSpent;
+
+  const spentPercent = totalBudget
+    ? ((totalSpent / totalBudget) * 100).toFixed(0)
+    : 0;
+  const groomPercent = totalBudget
+    ? ((groomSpent / totalBudget) * 100).toFixed(0)
+    : 0;
+  const bridePercent = totalBudget
+    ? ((brideSpent / totalBudget) * 100).toFixed(0)
+    : 0;
+  const togetherPercent = totalBudget
+    ? ((togetherSpent / totalBudget) * 100).toFixed(0)
+    : 0;
+  const remainingPercent = 100 - spentPercent;
 
   const chartData = {
-    labels: ["신랑 예산", "신부 예산", "남은 예산"],
+    labels: ["신랑 지출", "신부 지출", "남은 예산"],
     datasets: [
       {
-        data: [groom, bride, remaining],
+        data: [groomSpent, brideSpent, remaining],
         backgroundColor: ["#42a5f5", "#f48fb1", "#c8e6c9"],
         borderWidth: 1,
       },
@@ -36,6 +55,7 @@ const BudgetSection = () => {
       },
     },
   };
+
   return (
     <div className="section-box">
       <h1 className="h1small">예산</h1>
@@ -44,35 +64,44 @@ const BudgetSection = () => {
           <div>
             총 예산 <span className="percent">100%</span>
           </div>
-          <div className="amount strong">6,000만원</div>
+          <div className="amount strong">
+            {totalBudget.toLocaleString()}만원
+          </div>
         </div>
 
         <div className="budget-row">
           <div>
-            사용한 예산 <span className="percent">0%</span>
+            총 지출 <span className="percent">{spentPercent}%</span>
           </div>
-          <div className="amount">0만원</div>
+          <div className="amount">{totalSpent.toLocaleString()}만원</div>
         </div>
 
         <div className="budget-row">
           <div>
-            남은 예산 <span className="percent">100%</span>
+            남은 예산 <span className="percent">{remainingPercent}%</span>
           </div>
-          <div className="amount">6,000만원</div>
+          <div className="amount">{remaining.toLocaleString()}만원</div>
         </div>
 
         <div className="budget-row">
           <div>
-            신부 예산 <span className="percent">50%</span>
+            신부 지출 <span className="percent">{bridePercent}%</span>
           </div>
-          <div className="amount">3,000만원</div>
+          <div className="amount">{brideSpent.toLocaleString()}만원</div>
         </div>
 
         <div className="budget-row">
           <div>
-            신랑 부담 <span className="percent">50%</span>
+            신랑 지출 <span className="percent">{groomPercent}%</span>
           </div>
-          <div className="amount">3,000만원</div>
+          <div className="amount">{groomSpent.toLocaleString()}만원</div>
+        </div>
+
+        <div className="budget-row">
+          <div>
+            함께 지출 <span className="percent">{togetherPercent}%</span>
+          </div>
+          <div className="amount">{togetherSpent.toLocaleString()}만원</div>
         </div>
       </div>
 

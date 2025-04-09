@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Header from "./Header";
 import BudgetRow from "./Moneycontrol/BudgetRow";
+import { calculateSummary } from "./Moneycontrol/calculateSummary";
 import BudgetSummary from "./Moneycontrol/BudgetSummary";
+
 import {
   getBudgetList,
   createBudgetItem,
@@ -13,14 +15,16 @@ import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 
 const MoneyControl = () => {
   const [items, setItems] = useState([]);
+  const summary = calculateSummary(items);
 
   useEffect(() => {
     // 불필요한 중복 호출 방지를 위한 플래그
     let isMounted = true;
-    
+
     getBudgetList()
       .then((res) => {
-        if (isMounted) {  // 컴포넌트가 여전히 마운트 상태일 때만 상태 업데이트
+        if (isMounted) {
+          // 컴포넌트가 여전히 마운트 상태일 때만 상태 업데이트
           console.log("✅ 불러온 예산 목록:", res.data);
           setItems(res.data);
         }
@@ -30,7 +34,7 @@ const MoneyControl = () => {
           console.error("❌ 예산 목록 로딩 실패:", err);
         }
       });
-      
+
     // 클린업 함수
     return () => {
       isMounted = false;
@@ -39,10 +43,23 @@ const MoneyControl = () => {
 
   //수정할수있음
   const handleUpdateItem = async (updatedItem) => {
-    const newList = items.map((item) =>
-      item.bgIdx === updatedItem.bgIdx ? updatedItem : item
-    );
-    setItems(newList);
+    try {
+      let savedItem = updatedItem;
+
+      if (updatedItem.isNew) {
+        const res = await createBudgetItem(updatedItem);
+        savedItem = { ...res.data, isNew: false };
+      } else {
+        await updateBudgetItem(updatedItem);
+      }
+
+      const newList = items.map((item) =>
+        item.bgIdx === savedItem.bgIdx ? savedItem : item
+      );
+      setItems(newList);
+    } catch (err) {
+      console.error("❌ 항목 저장 실패:", err);
+    }
   };
   //삭제함수
   const handleDeleteItem = async (bgIdx) => {
@@ -77,30 +94,32 @@ const MoneyControl = () => {
 
   const handleDragEnd = async (result) => {
     if (!result.destination) return;
-  
+
     const reordered = Array.from(items);
     const [moved] = reordered.splice(result.source.index, 1);
     reordered.splice(result.destination.index, 0, moved);
-  
-    // ✅ sortOrder 다시 지정
+
     const updatedWithSortOrder = reordered.map((item, index) => ({
       ...item,
-      sortOrder: index + 1, // 1부터 시작하는 정렬값
+      sortOrder: index + 1,
     }));
-  
-    setItems(updatedWithSortOrder); // UI 갱신
-  
-    // ✅ 변경된 항목만 백엔드에 업데이트
+
+    const changedItems = updatedWithSortOrder.filter(
+      (item, i) => item.sortOrder !== items[i]?.sortOrder
+    );
+
+    setItems(updatedWithSortOrder);
+
     try {
-      for (const item of updatedWithSortOrder) {
-        await updateBudgetItem(item); // 기존 API 사용
+      for (const item of changedItems) {
+        await updateBudgetItem(item);
       }
-      console.log("✅ 정렬 순서 업데이트 완료");
+      console.log("✅ 변경된 항목만 정렬 업데이트 완료");
     } catch (err) {
       console.error("❌ 정렬 순서 업데이트 실패:", err);
     }
   };
-  
+
   return (
     <div>
       <Header></Header>
