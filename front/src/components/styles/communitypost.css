@@ -15,7 +15,8 @@
   font-size: 1.7em;
   font-weight: bold;
   font-family: "Nanum Gothic", sans-serif;
-  margin-top: -7px;
+  white-space: nowrap;     /* 로고 줄바꿈 방지 */
+  flex-shrink: 0;          /* 작아져도 줄어들지 않게 */
 }
 
 .material-symbols-outlined {

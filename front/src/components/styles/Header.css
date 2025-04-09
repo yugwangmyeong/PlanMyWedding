@@ -1,25 +1,26 @@
 @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined");
-.header--main {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: center;
-    background: white;
-    padding: 10px;
-    color: #EFA1DC;
-    margin-bottom: -10;
-    min-width: 1200px;            /* 헤더의 최소 너비 설정 (원하는 값으로 조정) */
+
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 10px 20px;
+  color: #efa1dc;
+  margin: 0 auto;
+  max-width: 1200px; /* 중앙정렬 + 가로 폭 제한 */
+  width: 100%;
+  box-sizing: border-box;
+  flex-wrap: wrap;        /* 너비 줄어들면 줄바꿈 허용 */
 }
 
-.header__logo {
-    font-size: 1.7em;
-    font-weight: bold;
-    font-family: "Nanum Gothic", sans-serif;
-    font-style: normal;
-    margin-top:-7px;
-    text-align: left;
+.logo {
+  font-size: 1.7em;
+  font-weight: bold;
+  font-family: "Nanum Gothic", sans-serif;
+  white-space: nowrap;     /* 로고 줄바꿈 방지 */
+  flex-shrink: 0;          /* 작아져도 줄어들지 않게 */
 }
-
 
 .material-symbols-outlined {
   font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
@@ -32,19 +33,16 @@
   margin: 10px 0 20px;
 }
 
-
-.nav-link {
-  margin-top: 10px;
-}
-
-
 .nav-links {
   display: flex;
+  flex-direction: row;     /* 가로 정렬 */
+  flex-wrap: nowrap;       /* 줄바꿈 방지 */
+  gap: 30px;               /* 항목 간 간격 */
+  align-items: center;
 }
 .nav-links2 {
   display: flex;
-  gap: 20px; /* 링크 사이 간격을 20px로 설정 */
-  margin-right: 30px; /* 오른쪽에 20px 마진 추가 */
+  gap: 10px; /* 링크 사이 간격을 20px로 설정 */
 }
 nav a {
   color: black;
@@ -155,16 +153,12 @@ nav a {
 .side-box {
   flex: 1;
   display: flex;
-  flex-wrap: nowrap;
-  white-space: nowrap;
   flex-direction: column;
-  gap: 20px;
-  min-width: 800px;
+  gap: 10px;
 }
 
 /* 사이드카드 공통 */
 .side-card {
-  flex: 0 0 auto;
   padding: 15px;
   border-radius: 10px;
   font-size: 14px;

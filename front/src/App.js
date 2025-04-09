@@ -3,6 +3,11 @@ import React, { useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Register from "./components/Register";
 import Community from "./components/Community";
+import Hall from "./components/Community/Hall";
+import Dress from "./components/Community/Dress";
+import Makeup from "./components/Community/Makeup";
+import Studio from "./components/Community/Studio";
+import Honeymoon from "./components/Community/Honeymoon";
 import CommunityWrite from "./components/CommunityWrite";
 import CommunityPost from "./components/CommunityPost";
 import Login from "./components/Login";
@@ -45,6 +50,11 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/community" element={<Community />} />
+          <Route path="/community/hall" element={<Hall />} />
+          <Route path="/community/dress" element={<Dress />} />
+          <Route path="/community/makeup" element={<Makeup />} />
+          <Route path="/community/studio" element={<Studio />} />
+          <Route path="/community/honeymoon" element={<Honeymoon />} />
           <Route path="/community/write" element={<CommunityWrite />} />
           <Route path="/community/post/:postId" element={<CommunityPost />} />
           <Route path="recwedding" element={<RecWedding />} />

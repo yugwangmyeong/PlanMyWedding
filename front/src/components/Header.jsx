@@ -64,7 +64,7 @@ const Header = () => {
   const username = isLoggedIn ? getUsernameFromToken(token) : null;
 
   return (
-    <header className="header">
+    <header className="main-header">
       <div
         className="logo"
         onClick={() => navigate("/mainpage")}
@@ -103,7 +103,7 @@ const Header = () => {
             <Link to="/recwedding">웨딩홀</Link>
           </div>
         </div>
-        <Link to="/Community" className="header-margin">
+        <Link to="/Community" className="mypage-btn">
           커뮤니티
         </Link>
       </nav>

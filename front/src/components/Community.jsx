@@ -24,20 +24,20 @@ const Community = () => {
       id: 1,
       title: "광주 인기 웨딩홀 드메르 식장 후기",
       content:
-        "드메르는 인기가 많아서 이미 주말에는 예약이 마감되었다고 하네요...",
+        "드메르는 인기가 많아서 이미 올해는 예약이 마감되었다고 해요  명성이 자자한 드메르",
       likes: 77, // 좋아요 수 (예시)
       comments: 5, // 댓글 수 (예시)
-      images: ["/images/sample1.jpg", "/images/sample2.jpg"], // 썸네일용 이미지
+      images: ["/images/sample1.png"], // 썸네일용 이미지
       service: "웨딩홀",
       region: "광주",
     },
     {
       id: 2,
-      title: "드레스 투어 후기",
-      content: "드레스 투어를 다녀왔어요. 가장 마음에 들었던 곳은...",
+      title: "바바메이크업",
+      content: "컨시러로 잡티를 또가리고 가려주셔서 완전 만족했어요",
       likes: 23,
       comments: 5,
-      images: ["/images/sample3.jpg"],
+      images: ["/images/sample2.jpg"],
       service: "드레스",
       region: "서울",
     },
@@ -56,11 +56,12 @@ const Community = () => {
         {/* 왼쪽 사이드바: 커뮤니티 제목, 구분선, 카테고리 메뉴 */}
         <div className="left-sidebar">
           <h2>커뮤니티</h2>
-          <hr className="divider" />
+          <hr className="community-divider" />
           <ul className="category-menu">
             <li>
               <NavLink
                 to="/community"
+                end
                 className={({ isActive }) => (isActive ? "active" : "")}
               >
                 전체
@@ -117,11 +118,11 @@ const Community = () => {
               <p>만족도 높은</p>
               <p>고객님들의 최신 사진 리뷰</p>
             </div>
-
+            
             {/* 상단 배너 영역 (왼쪽/오른쪽 이미지 & 글쓰기 버튼) */}
             <div className="community-top-banner">
               <div className="banner-left">
-                <img src="/images/banner1.jpg" alt="banner1" />
+                <img src="/images/sample1.png" alt="banner1" />
 
                 <div className="filter-buttons">
                   <select className="filter-select">
@@ -152,7 +153,7 @@ const Community = () => {
               </div>
 
               <div className="banner-right">
-                <img src="/images/banner2.jpg" alt="banner2" />
+                <img src="/images/sample2.jpg" alt="banner2" />
                 <Link to="/community/write" className="write-btn">
                   글쓰기
                 </Link>
