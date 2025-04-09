@@ -1,199 +1,244 @@
-import React, { useRef, useEffect, useState } from "react";
-import FullCalendar from "@fullcalendar/react";
-import dayGridPlugin from "@fullcalendar/daygrid";
-import interactionPlugin from "@fullcalendar/interaction";
-import "../styles/Calender.css";
+import React, { useState, useEffect } from "react";
+import { Calendar, dateFnsLocalizer } from "react-big-calendar";
+import format from "date-fns/format";
+import parse from "date-fns/parse";
+import startOfWeek from "date-fns/startOfWeek";
+import getDay from "date-fns/getDay";
+import ko from "date-fns/locale/ko";
+import "react-big-calendar/lib/css/react-big-calendar.css";
+import "../styles/calendermain.css";
 import Header from "../Header";
+import Footer from "../Footer";
+import CustomToolbar from "./utils/CustomToolbar";
+import WeddingDateModal from "./utils/WeddingDateModal";
+import useWeddingDate from "./utils/useWeddingDate";
+import EventModal from "./EventModal";
+import { getWeddingDate } from './utils/WeddingApi';
+import CustomAlert from "../Customalert";
+const locales = { ko };
+const localizer = dateFnsLocalizer({
+  format,
+  parse,
+  startOfWeek,
+  getDay,
+  locales,
+});
 
-const Calender = () => {
-  const calendarRef = useRef(null);
+const CalendarPage = () => {
+  const [showWeddingModal, setShowWeddingModal] = useState(false);
+  const [weddingDateInput, setWeddingDateInput] = useState("");
+  const { weddingDate, isLoaded, hasWeddingDate } = useWeddingDate();
+  const [currentDate, setCurrentDate] = useState(new Date());
+  const [currentView, setCurrentView] = useState("month");
+  const [events, setEvents] = useState([]);
+  const [selectedEvent, setSelectedEvent] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [newTitle, setNewTitle] = useState("");
   const [newDate, setNewDate] = useState("");
   const [newEndDate, setNewEndDate] = useState("");
   const [isCompleted, setIsCompleted] = useState(false);
-  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [isAlertVisible, setIsAlertVisible] = useState(false);
+
   const [openCategory, setOpenCategory] = useState(null);
+
   const [weddingItems, setWeddingItems] = useState([
     {
-      category: "웨딩홀",
-      items: [
-        { title: "웨딩홀 투어", date: "2025-04-15", completed: false },
-        { title: "웨딩홀 예약", date: "2025-04-16", completed: false },
-      ],
+      category: "준비 목록",
+      items: [{ title: "웨딩홀 투어", completed: false }],
     },
     {
-      category: "스드메",
-      items: [
-        { title: "드레스 투어", date: "2025-04-17", completed: false },
-        { title: "드레스 예약", date: "2025-04-18", completed: false },
-      ],
-    },
-    {
-      category: "허니문",
-      items: [
-        { title: "신혼여행 상담", date: "2025-04-19", completed: false },
-        { title: "신혼여행 당일", date: "2025-04-20", completed: false },
-      ],
-    },
-    {
-      category: "혼수품",
-      items: [
-        { title: "한복 챙기기", date: "2025-04-21", completed: false },
-        { title: "예복 구입", date: "2025-04-22", completed: false },
-        { title: "한복 가봉", date: "2025-04-23", completed: false },
-      ],
-    },
-    {
-      category: "기타",
-      items: [{ title: "상견례 준비", date: "2025-04-24", completed: false }],
+      category: "필수 일정",
+      items: [{ title: "청첩장 제작", completed: true }],
     },
   ]);
 
-  useEffect(() => {
-    const calendarApi = calendarRef.current?.getApi();
-    calendarApi?.render();
-  }, []);
 
-  const handleAddOrUpdateEvent = () => {
-    const calendarApi = calendarRef.current?.getApi();
-
-    if (!newTitle || !newDate || !newEndDate) {
-      alert("제목, 시작일, 종료일을 모두 입력하세요.");
-      return;
-    }
-
-    if (selectedEvent) {
-      selectedEvent.setProp("title", newTitle);
-      selectedEvent.setStart(newDate);
-      selectedEvent.setEnd(newEndDate);
-      selectedEvent.setProp("color", isCompleted ? "#ff1493" : "#EFA1DC");
-    } else {
-      calendarApi?.addEvent({
-        title: newTitle,
-        start: newDate,
-        end: newEndDate,
-        color: isCompleted ? "#ff1493" : "#EFA1DC",
-        allDay: true,
-      });
-    }
-
-    resetForm();
+  // 알림 닫기 함수
+  const handleCloseAlert = () => {
+    setIsAlertVisible(false);  // 알림 닫기
   };
+  
+  // 📌 일정 템플릿 생성 함수
+  const generateWeddingTemplate = (dateStr) => {
+    const wedding = new Date(dateStr);
+    const today = new Date();
+    const totalDays = Math.ceil((wedding - today) / (1000 * 60 * 60 * 24));
 
-  const handleDeleteEvent = () => {
-    if (selectedEvent) {
-      selectedEvent.remove();
-      resetForm();
-    }
-  };
+    const ratioTasks = [
+      { title: "웨딩홀 투어", ratio: 0.1 },
+      { title: "스드메 상담", ratio: 0.25 },
+      { title: "청첩장 제작", ratio: 0.5 },
+      { title: "예복/한복 맞춤", ratio: 0.7 },
+      { title: "신혼여행 예약", ratio: 0.85 },
+    ];
 
-  const resetForm = () => {
-    setNewTitle("");
-    setNewDate("");
-    setNewEndDate("");
-    setIsCompleted(false);
-    setSelectedEvent(null);
-    setIsModalOpen(false);
-  };
+    const ratioEvents = ratioTasks.map(({ title, ratio }) => {
+      const offsetDays = Math.floor(totalDays * (1 - ratio));
+      const target = new Date(wedding);
+      target.setDate(wedding.getDate() - offsetDays);
+      return {
+        title,
+        start: target,
+        end: target,
+        color: "#EFA1DC",
+      };
+    });
 
-  const handleEventDrop = (info) => {
-    alert(
-      `${info.event.title} 일정이 ${info.event.startStr}로 이동되었습니다.`
-    );
-  };
+    const fixedOffsets = [
+      { title: "식순 회의", offset: -30 },
+      { title: "최종 리허설", offset: -7 },
+      { title: "결혼식 당일", offset: 0 },
+      { title: "허니문 출발", offset: 1 },
+      { title: "혼인신고", offset: 7 },
+    ];
 
-  const handleEventClick = (info) => {
-    const event = info.event;
-    setSelectedEvent(event);
-    setNewTitle(event.title);
-    setNewDate(event.startStr);
-    setNewEndDate(event.endStr || event.startStr);
-    setIsCompleted(event.backgroundColor === "#ff1493");
-    setIsModalOpen(true);
+    const fixedEvents = fixedOffsets.map(({ title, offset }) => {
+      const target = new Date(wedding);
+      target.setDate(wedding.getDate() + offset);
+      return {
+        title,
+        start: target,
+        end: target,
+        color: "#EFA1DC",
+      };
+    });
+
+    return [...ratioEvents, ...fixedEvents];
   };
 
   const toggleCategory = (category) => {
-    setOpenCategory(openCategory === category ? null : category);
+    setOpenCategory((prev) => (prev === category ? null : category));
   };
 
-  const handleCheckboxToggle = (category, itemTitle) => {
+  const handleCheckboxToggle = (category, title) => {
     setWeddingItems((prev) =>
-      prev.map((cat) =>
-        cat.category === category
+      prev.map((section) =>
+        section.category === category
           ? {
-              ...cat,
-              items: cat.items.map((item) =>
-                item.title === itemTitle
+              ...section,
+              items: section.items.map((item) =>
+                item.title === title
                   ? { ...item, completed: !item.completed }
                   : item
               ),
             }
-          : cat
+          : section
       )
     );
   };
+  const handleAddOrUpdateEvent = () => {
+    const newEvent = {
+      title: newTitle,
+      start: new Date(newDate),
+      end: new Date(newEndDate),
+      color: isCompleted ? "#ff1493" : "#EFA1DC",
+    };
 
+    if (selectedEvent) {
+      // 수정
+      setEvents(
+        events.map((event) => (event === selectedEvent ? newEvent : event))
+      );
+    } else {
+      // 추가
+      setEvents([...events, newEvent]);
+    }
+    resetForm();
+  };
+
+  const handleDeleteEvent = () => {
+    if (!selectedEvent) return;
+    setEvents(events.filter((event) => event !== selectedEvent));
+    resetForm();
+  };
+
+  const resetForm = () => {
+    setSelectedEvent(null);
+    setNewTitle("");
+    setNewDate("");
+    setNewEndDate("");
+    setIsCompleted(false);
+    setIsModalOpen(false);
+  };
+  useEffect(() => {
+    const fetchWeddingDate = async () => {
+      try {
+        const existingWeddingDate = await getWeddingDate();
+        if (existingWeddingDate) {
+          // 이미 결혼식 날짜가 등록되어 있으면 모달을 띄우지 않음
+          setAlertMessage("이미 결혼식 날짜가 등록되어 있습니다!");
+          setIsAlertVisible(true);  // 알림 표시
+          setShowWeddingModal(false); // 모달을 숨김
+        } else {
+          // 결혼식 날짜가 없으면 모달을 띄움
+          setShowWeddingModal(true);
+        }
+      } catch (err) {
+        console.error("결혼식 날짜 조회 실패:", err);
+        setAlertMessage("결혼식 날짜 조회에 실패했습니다.");
+        setIsAlertVisible(true);  // 알림 표시
+      }
+    };
+
+    fetchWeddingDate();
+  }, []); // 페이지가 로드될 때 한 번만 실행
   return (
-    <div>
-      <Header></Header>
+    <>
+      <Header />
       <div className="title-wrap">
         <h1 className="maintitle">일정관리</h1>
         <button className="invite-btn">+ 초대하기</button>
       </div>
-      <div className="calendar-b">
-        <hr className="custom-line" />
-        <div className="container">
-          <div className="calendars-container">
-            <div className="calendars-box">
-              <FullCalendar
-                eventColor="#EFA1DC"
-                height={700}
-                plugins={[dayGridPlugin, interactionPlugin]}
-                initialView="dayGridMonth"
-                ref={calendarRef}
-                editable={true}
-                eventStartEditable={true}
-                eventDurationEditable={true}
-                selectable={true}
-                selectMirror={true}
-                eventDrop={handleEventDrop}
-                eventClick={handleEventClick}
-                dateClick={(info) => {
+      <hr className="custom-line" />
+      <div className="calendar-main">
+        <div className="calendar-main-container">
+          <div className="calendar-main-box">
+            <div className="calendar-main-wrapper">
+              <Calendar
+                date={currentDate}
+                onNavigate={(date) => setCurrentDate(date)}
+                view="month"
+                onView={setCurrentView}
+                localizer={localizer}
+                events={events}
+                components={{ toolbar: CustomToolbar }}
+                startAccessor="start"
+                endAccessor="end"
+                selectable
+                onSelectSlot={(slotInfo) => {
+                  setNewDate(slotInfo.start.toISOString().substring(0, 10));
+                  setNewEndDate(slotInfo.end.toISOString().substring(0, 10));
                   setSelectedEvent(null);
-                  setNewTitle("");
-                  setNewDate(info.dateStr);
-                  setNewEndDate(info.dateStr);
-                  setIsCompleted(false);
                   setIsModalOpen(true);
                 }}
-                events={[
-                  {
-                    title: "웨딩홀 투어",
-                    start: "2025-04-15",
-                    end: "2025-04-16",
-                    color: "#EFA1DC",
+                onSelectEvent={(event) => {
+                  setSelectedEvent(event);
+                  setNewTitle(event.title);
+                  setNewDate(event.start.toISOString().substring(0, 10));
+                  setNewEndDate(event.end.toISOString().substring(0, 10));
+                  setIsCompleted(event.color === "#ff1493");
+                  setIsModalOpen(true);
+                }}
+                eventPropGetter={(event) => ({
+                  style: {
+                    backgroundColor: event.color || "#EFA1DC",
+                    borderRadius: "8px",
+                    color: "white",
+                    padding: "2px 5px",
                   },
-                  {
-                    title: "웨딩홀 예약",
-                    start: "2025-04-20",
-                    end: "2025-04-21",
-                    color: "#EFA1DC",
-                  },
-                ]}
+                })}
+                style={{ height: 750 }}
               />
             </div>
+          </div>
 
+          <div className="calendar-main-side">
             <div className="sides-box">
               <button
                 className="sides-card pinks"
                 onClick={() => {
-                  setSelectedEvent(null);
-                  setNewTitle("");
-                  setNewDate("");
-                  setNewEndDate("");
-                  setIsCompleted(false);
-                  setIsModalOpen(true);
+                  setIsModalOpen(true)
                 }}
               >
                 일정 추가
@@ -202,13 +247,7 @@ const Calender = () => {
               <div className="sides-card blues">
                 일정 진행도 D-365
                 <br />
-                <progress
-                  className="progress"
-                  id="progress"
-                  value="50"
-                  min="0"
-                  max="100"
-                ></progress>
+                <progress className="progress" value="50" min="0" max="100" />
               </div>
 
               <div className="sides-card accordions">
@@ -259,58 +298,47 @@ const Calender = () => {
               </div>
             </div>
           </div>
-
-          {isModalOpen && (
-            <div className="modals-backdrop">
-              <div className="modals-content">
-                <h3>{selectedEvent ? "일정 수정" : "일정 추가"}</h3>
-                <input
-                  type="text"
-                  placeholder="일정 제목"
-                  value={newTitle}
-                  onChange={(e) => setNewTitle(e.target.value)}
-                />
-                <input
-                  type="date"
-                  value={newDate}
-                  onChange={(e) => setNewDate(e.target.value)}
-                />
-                <input
-                  type="date"
-                  value={newEndDate}
-                  onChange={(e) => setNewEndDate(e.target.value)}
-                />
-                <label style={{ marginTop: "10px" }}>
-                  <input
-                    type="checkbox"
-                    checked={isCompleted}
-                    onChange={(e) => setIsCompleted(e.target.checked)}
-                  />{" "}
-                  완료 여부
-                </label>
-                <div className="modals-buttons">
-                  <button onClick={handleAddOrUpdateEvent}>
-                    {selectedEvent ? "수정하기" : "추가하기"}
-                  </button>
-                  {selectedEvent && (
-                    <button
-                      onClick={handleDeleteEvent}
-                      className="delete-button"
-                    >
-                      삭제하기
-                    </button>
-                  )}
-                  <button onClick={resetForm} className="delete-button">
-                    닫기
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
         </div>
+
+        {/* 일정 추가/수정 모달 */}
+        <EventModal
+          isModalOpen={isModalOpen} // 모달이 열렸는지 여부
+          selectedEvent={selectedEvent} // 수정할 이벤트가 있는지 여부
+          newTitle={newTitle} // 새 제목
+          newDate={newDate} // 새 시작 날짜
+          newEndDate={newEndDate} // 새 종료 날짜
+          isCompleted={isCompleted} // 완료 여부
+          setNewTitle={setNewTitle} // 제목 설정 함수
+          setNewDate={setNewDate} // 시작 날짜 설정 함수
+          setNewEndDate={setNewEndDate} // 종료 날짜 설정 함수
+          setIsCompleted={setIsCompleted} // 완료 여부 설정 함수
+          handleAddOrUpdateEvent={handleAddOrUpdateEvent} // 일정 추가/수정 함수
+          handleDeleteEvent={handleDeleteEvent} // 일정 삭제 함수
+          resetForm={resetForm} // 폼 리셋 함수
+        />
+
+        {/* 결혼일자 입력 팝업 */}
+        {showWeddingModal && (
+          <WeddingDateModal
+            weddingDate={weddingDateInput}
+            setWeddingDate={setWeddingDateInput}
+            onSuccess={(savedDate) => {
+              const templateEvents = generateWeddingTemplate(savedDate);
+              setEvents(templateEvents);
+              setShowWeddingModal(false);
+            }}
+          />
+        )}
+
+        {/* 알림이 표시될 때 CustomAlert 렌더링 */}
+      {isAlertVisible && (
+        <CustomAlert message={alertMessage} onClose={handleCloseAlert} />
+      )}
+        
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 
-export default Calender;
+export default CalendarPage;
