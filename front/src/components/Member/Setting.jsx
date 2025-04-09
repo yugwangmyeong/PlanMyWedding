@@ -7,7 +7,7 @@ const Setting = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     if (!token) {
       alert("로그인이 필요합니다.");
       navigate("/login");
@@ -16,14 +16,12 @@ const Setting = () => {
     }
   }, [navigate]);
 
-  const goToMemberPage = () => {
-    navigate("/setting/member"); // ✅ 라우팅 구조에 맞게 변경
-  };
+ 
 
   const handleLogout = () => {
     if (window.confirm("정말 로그아웃 하시겠습니까?")) {
-      localStorage.removeItem("token");
-      navigate("/mainpage");
+      sessionStorage.removeItem("token");
+      window.location.href = "/mainpage"; // 새로고침 포함한 이동
     }
   };
 
@@ -31,7 +29,7 @@ const Setting = () => {
     if (!window.confirm("정말 회원 탈퇴하시겠습니까?")) return;
 
     try {
-      const token = localStorage.getItem("token");
+      const token = sessionStorage.getItem("token");
       const response = await fetch("http://localhost:8081/boot/api/delete", {
         method: "DELETE",
         headers: {
@@ -42,7 +40,7 @@ const Setting = () => {
 
       if (response.ok) {
         alert("회원 탈퇴가 완료되었습니다.");
-        localStorage.removeItem("token");
+        sessionStorage.removeItem("token");
         navigate("/mainpage");
       } else {
         const errorData = await response.text();

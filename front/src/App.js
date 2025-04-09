@@ -1,18 +1,19 @@
 import "./App.css";
+import React, { useState } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Register from "./components/Register";
 import Community from "./components/Community";
 import CommunityWrite from "./components/CommunityWrite";
 import CommunityPost from "./components/CommunityPost";
-import React, { useState } from "react";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./components/Login";
 import Mainpage from "./components/Mainpage";
 import MoneyControl from "./components/Moneycontrol";
 import RecWedding from "./components/RecommendPage/RecWedding";
 import Calender from "./components/Schedule/Calender";
-import Setting from "./components/Member/Setting";
 import Member from "./components/Member/Member";
+import Setting from "./components/Member/Setting";
 import SettingLayout from "./components/Member/SettingLayout";
+
 function App() {
   const [token, setToken] = useState(null);
   const isLoggedIn = !!token;
@@ -41,7 +42,6 @@ function App() {
             }
           />
           {<Route path="/calender" element={<Calender />} />}
-
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/community" element={<Community />} />

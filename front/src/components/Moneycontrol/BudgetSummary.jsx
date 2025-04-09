@@ -1,7 +1,8 @@
-import React from "react";
 import { Doughnut } from "react-chartjs-2";
 import { Chart, ArcElement, Tooltip, Legend } from "chart.js";
+import React,{ useMemo }  from "react";
 import "../styles/budgetsummary.css";
+import { calculateSummary } from "./calculateSummary";
 
 // Chart 구성요소 등록
 Chart.register(ArcElement, Tooltip, Legend);
@@ -44,6 +45,7 @@ const BudgetSummary = ({ items }) => {
     },
   };
 
+  const summary = useMemo(() => calculateSummary(items), [items]);
   return (
   <div>
     <div className="budget-box">
@@ -71,5 +73,7 @@ const BudgetSummary = ({ items }) => {
 
   );
 };
+
+
 
 export default BudgetSummary;

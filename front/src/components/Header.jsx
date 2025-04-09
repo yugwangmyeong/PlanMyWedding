@@ -5,9 +5,11 @@ import toggleMenuIcon from "./styles/assets/toggleMenu.png";
 
 const Header = () => {
   //토큰사용하기위해서 토큰을 login했을때 백엔드에서 받아와서 저장함
-  const token = localStorage.getItem("token");
+  
+  
+  const token = sessionStorage.getItem("token");
+  console.log("프론트 토큰 확인:", token); // ✅ 콘솔에서 실제 토큰 출력
   const isLoggedIn = !!token;
-
   //드롭다운
   const [isMypageOpen, setIsMypageOpen] = useState(false);
   const [isRecOpen, setIsRecOpen] = useState(false);

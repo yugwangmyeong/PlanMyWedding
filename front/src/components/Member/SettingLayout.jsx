@@ -2,7 +2,8 @@ import React from "react";
 import Header from "../Header";
 import { Outlet, useNavigate } from "react-router-dom";
 import "../styles/Setting.css";
-
+import Member from "./Member"
+import Setting from "./Setting"
 const SettingLayout = () => {
   const navigate = useNavigate();
 
@@ -11,16 +12,17 @@ const SettingLayout = () => {
 
   const handleLogout = () => {
     if (window.confirm("정말 로그아웃 하시겠습니까?")) {
-      localStorage.removeItem("token");
+      sessionStorage.removeItem("token"); // ✅ 이걸로 토큰 제거해야 함!
       navigate("/mainpage");
     }
   };
+  
 
   const handleDeleteAccount = async () => {
     if (!window.confirm("정말 회원 탈퇴하시겠습니까?")) return;
-
-    const token = localStorage.getItem("token");
-
+  
+    const token = sessionStorage.getItem("token");
+  
     try {
       const res = await fetch("http://localhost:8081/boot/api/delete", {
         method: "DELETE",
@@ -28,10 +30,10 @@ const SettingLayout = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-
+  
       if (res.ok) {
         alert("회원 탈퇴가 완료되었습니다.");
-        localStorage.removeItem("token");
+        sessionStorage.removeItem("token"); // ✅ 토큰 제거
         navigate("/mainpage");
       } else {
         alert("탈퇴 실패");

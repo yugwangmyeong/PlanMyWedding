@@ -1,99 +1,82 @@
-/* 헤더 및 공통 컨테이너 */
-.title-wrap {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 150px 300px 30px 300px; /* 좌우 300px 고정 */
-}
-
-/* FullCalendar 전용 스타일에 .calendar-b 스코프 추가 */
-.calendar-b .calendars-box .fc {
-  box-shadow: none !important;
-  border: none !important;
-  background: white;
-}
-/* 구분선 */
-.custom-line {
-  border: none;
-  border-top: 2px solid #e4dede;
-  margin: 0 300px 30px 300px; /* 좌우 300px */
-}
-
-.calendar-b .fc-scrollgrid,
-.calendar-b .fc-scrollgrid-section,
-.calendar-b .fc-daygrid-body {
-  border: none !important;
-}
-
-.calendar-b .fc-day-sun a {
-  color: rgb(0, 0, 0) !important;
-}
-.calendar-b .fc-day-sat a {
-  color: rgb(0, 0, 0) !important;
-}
-.calendar-b .fc-day-mon a,
-.calendar-b .fc-day-tue a,
-.calendar-b .fc-day-wed a,
-.calendar-b .fc-day-thu a,
-.calendar-b .fc-day-fri a {
-  color: #4e4e4e !important;
-}
-
-.calendar-b .fc-toolbar-title {
-  color: #000000 !important;
-}
-
-.calendar-b .fc-button {
-  background-color: white !important;
-  border: 1px solid #e181c4 !important;
-  color: #e181c4 !important;
-  font-weight: 500;
-  border-radius: 8px !important;
-  font-size: 13px !important;
-  padding: 6px 14px !important;
-  cursor: pointer;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-  transition: all 0.2s ease-in-out;
-  
-}
-
-.calendar-b .fc-prev-button {
-  margin-right: 15px;
-}
-
-.calendar-b .fc-next-button {
-  margin-left: 5px;
-}
-.calendar-b .fc-button:hover,
-.calendar-b .fc-button-active {
-  background: #747373;
-  color: rgb(5, 4, 4);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transform: translateY(-1px);
-  
-}
-
-
-.calendar-b .fc-prev-button,
-.calendar-b .fc-next-button {
-  font-size: 18px;
-  font-weight: bold;
-  padding: 6px 12px;
-}
-
+/* 캘린더 전체 + 우측 정렬 */
 .calendars-container {
   display: flex;
   justify-content: center;
-  gap: 80px;
+  align-items: flex-start;
+  gap: 40px;
   padding: 30px;
 }
 
+/* 캘린더 박스 */
 .calendars-box {
-  max-width: 800px;
+  max-width: 700px;
   width: 100%;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  box-sizing: border-box;
 }
 
+/* FullCalendar 기본 스타일 */
+.fc {
+  font-weight: 300;
+  background: white;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.fc .fc-toolbar-title {
+  font-weight: 500;
+  color: #000 !important;
+}
+.fc .fc-col-header-cell-cushion {
+  font-weight: 500;
+}
+
+.fc .fc-day-sun a {
+  color: #e05d5d !important;
+}
+.fc .fc-day-sat a {
+  color: #6c55eb !important;
+}
+.fc .fc-day-mon a,
+.fc .fc-day-tue a,
+.fc .fc-day-wed a,
+.fc .fc-day-thu a,
+.fc .fc-day-fri a {
+  color: #000 !important;
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+  background-color: #f0f0f0;
+}
+.fc .fc-daygrid-day {
+  border: 1px solid #e0e0e0 !important;
+}
+.fc .fc-col-header-cell {
+  border-top: 2px solid #ccc !important;
+}
+.fc .fc-daygrid-day.fc-day-sun {
+  border-left: 2px solid #ccc !important;
+}
+
+/* FullCalendar 버튼 */
+.fc-button {
+  background-color: #fff !important;
+  border: 1px solid #888 !important;
+  color: #353535 !important;
+  border-radius: 6px !important;
+  font-size: 13px !important;
+  padding: 5px 10px !important;
+}
+.fc-button:focus,
+.fc-button:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* 오른쪽 사이드 박스 */
 .sides-box {
   width: 300px;
   min-width: 300px;         /* side-box가 최소 300px은 유지하도록 */
@@ -104,6 +87,7 @@
   gap: 20px;
 }
 
+/* 공통 카드 스타일 */
 .sides-card {
 
   border: none;
@@ -130,235 +114,100 @@
   text-align: left;
   font-family: 'system-ui', 'Times New Roman', serif;
   border: 1px solid #f3efe7;
+  background: #fff;
+  border: 1px solid #eee;
   border-radius: 10px;
-  padding: 20px;
-  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.08);
-  background-image: linear-gradient(to bottom, #fdfaf3, #f5f1e6);
-  transition: all 0.3s ease;
-}
-
-.sides-card.accordions:hover {
-  box-shadow: 6px 6px 16px rgba(61, 38, 38, 0.15);  
-  transform: translateY(-2px);
-}
-
-.modals-backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #ffffff;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  z-index: 1000;
-}
-/* 🔲 모달 개선 */
-.modals-content {
-  background: #ffffff;
-  padding: 25px;
-  border-radius: 14px;
-  width: 320px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  animation: fadeIn 0.3s ease;
-}
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.modals-content input[type="text"],
-.modals-content input[type="date"] {
-  padding: 10px 12px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 14px;
-  transition: border 0.2s ease;
-}
-.modals-content input:focus {
-  border-color: #442c3d;
-  outline: none;
-}
-
-.modals-buttons button {
-  background-color: #858184;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 8px 14px;
-  font-size: 14px;
+  padding: 15px;
+  font-weight: 500;
   cursor: pointer;
-  transition: background 0.3s ease;
-}
-.modals-buttons button:hover {
-  background-color: #000000;
 }
 
-.modals-backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.3); /* 반투명 검정 배경 */
-  display: flex;
-  justify-content: center; /* 중앙 정렬 */
-  align-items: center;
-  z-index: 1000;
-  backdrop-filter: blur(2px); /* 배경 흐림 효과 (선택) */
-}
-.delete-button {
-  background-color: #f06292;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  padding: 8px 14px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease;
+/* 일정 추가 버튼만 특별히 강조 */
+.sides-card.pinks {
+  font-size: 16px;
+  text-align: center;
 }
 
-.delete-button:hover {
-  background-color: #d94b7a;
-  transform: scale(1.03);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-
-
+/* 진행도 */
 #progress {
   appearance: none;
   width: 100%;
-  height: 14px;
-  border-radius: 10px;
-  overflow: hidden;
-  background-color: #f0f0f0;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  height: 28px;
   margin-top: 10px;
 }
 
-/* Webkit (크롬, 사파리) */
 #progress::-webkit-progress-bar {
-  background-color: #f0f0f0;
-  border-radius: 10px;
+  background: #fff;
+  border-radius: 12px;         /* 전체 틀 둥글게 */
+  border: 1px solid #c0c0c0;
+  overflow: hidden;            /* 틀 밖 내용은 잘라냄 */
 }
 
 #progress::-webkit-progress-value {
-  background: linear-gradient(90deg, #e181c4 0%, #f5a6d6 100%);
-  border-radius: 10px;
-  transition: width 0.4s ease;
+  background: #efa1dc;
+  border-radius: 0;            /* 직각 */
+  margin-left: 0px;            /* 좌측 둥근 부분 피하기 위해 여백 */
+  height: 100%;
 }
 
-/* Firefox */
-#progress::-moz-progress-bar {
-  background: linear-gradient(90deg, #e181c4 0%, #f5a6d6 100%);
-  border-radius: 10px;
-  transition: width 0.4s ease;
-}
-
-
-/* ✅ 일정추가 버튼 */
-.sides-card.pinks {
-  background: #fff;
-  border: 1px solid #e181c4;
-  color: #e181c4;
-  transition: all 0.2s ease;
-}
-.sides-card.pinks:hover {
-  background: #e181c4;
-  color: white;
-  cursor: pointer;
-  transform: translateY(-2px);
-}
-
-/* 📊 진행도 카드 */
-.sides-card.blues {
-  background: #f9f9f9;
-  color: #333;
-  font-size: 13px;
-  border: 1px solid #ddd;
-  height: auto;
-  padding: 16px;
-}
-
-
-
-
-
-
-
-
-
-/* 📋 아코디언 개선 */
-/* 아코디언 타이틀 */
+/* 아코디언 스타일 */
 .accordions .accordions-title {
-  background: #ffffff;
-  border: 1px solid #03afff;
-  border-radius: 10px;
-  padding: 14px 16px;
-  font-weight: 600;
-  font-size: 15px;
-  color: #333;
+  cursor: pointer;
+  padding: 10px;
+  background: #fff;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  margin-bottom: 8px;
+  font-weight: 500;
+  border-bottom: 1px solid #ddd;
 }
-
-.accordions .accordions-title:hover {
-  background-color: #f9f9f9;
-}
-
-/* active 상태일 때 */
 .accordions .accordions-title.active {
-  background: #615f60;
-  color: white;
-  border-color: #b9b9b9;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  background: #fff;
+  border-bottom: 1px solid #ddd;
 }
-
-/* 아코디언 내용 영역 */
 .accordions-content {
-  background: #ffffff;
-  border: 1px solid #e0e0e0;
-  border-top: none;
-  padding: 12px 16px;
-  border-radius: 0 0 10px 10px;
-  animation: fadeIn 0.3s ease;
-  margin-bottom: 10px;
+  background: #fff;
+  padding: 0 10px 10px 10px;
+  list-style: none;
 }
-
 .accordions-content li {
   display: flex;
   justify-content: space-between;
-  align-items: center;
   font-size: 14px;
-  color: #444;
-  padding: 6px 0;
-  border-bottom: 1px solid #f0f0f0;
+  padding: 5px 0;
 }
 
-.accordions-content li:last-child {
-  border-bottom: none;
+/* 모달 */
+.modals-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
 }
-
-/* 체크박스 커스텀도 원하면 여기 추가 가능 */
-
-/* Fade-in 애니메이션 */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-5px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.modals-content {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.modals-content input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+.modals-buttons button {
+  padding: 8px 12px;
+  margin-right: 10px;
+  background-color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }

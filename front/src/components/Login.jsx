@@ -4,25 +4,28 @@ import { useNavigate } from "react-router-dom";
 const Login = ({ setToken }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [showPassword, setShowPassword] = useState(false); // 비밀번호 보기 상태 추가
+  const [showPassword, setShowPassword] = useState(false); // 비밀번호 보기 상태
   const [error, setError] = useState("");
-
+  const navigate = useNavigate();
+  const token = sessionStorage.getItem("token");
+  
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    // 이메일과 비밀번호 유효성 검사
+    // 필수 입력 체크
     if (email === "" || password === "") {
       setError("이메일과 비밀번호를 입력해주세요.");
       return;
     }
 
-    setError(""); // 에러 메시지 초기화
+    setError(""); // 에러 초기화
 
     try {
       const response = await fetch("http://localhost:8081/boot/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          
         },
         body: JSON.stringify({ email, password }),
       });
@@ -30,15 +33,12 @@ const Login = ({ setToken }) => {
       if (response.ok) {
         const data = await response.json();
 
-        setToken(data.token);
-        // ✅ 토큰 저장 (로그인 유지용)
-        localStorage.setItem("token", data.token);
-        window.location.href = "/mainpage"; //  리다이렉트로 새로고침하고 보냄
-        // ✅ 콘솔에 토큰 출력
-        console.log("받은 토큰:", data.token); //  고침을 하기전에 보여주기는하는데 새로고침후에 바로 콘솔에서는 보이지않음
-        alert("받은 토큰: " + data.token); // 일시적으로 확인용
+        // ✅ 토큰 저장
+        sessionStorage.setItem("token", data.token);
+        console.log("받은 토큰:", data.token);
+        // ✅ 로그인 후 메인페이지로 이동 (새로고침 포함)
+        window.location.href = "/mainpage";
       } else {
-        // 로그인 실패
         setError("로그인에 실패했습니다. 다시 시도해주세요.");
       }
     } catch (error) {

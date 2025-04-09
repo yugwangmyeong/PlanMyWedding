@@ -46,6 +46,18 @@ public class JwtFilter extends OncePerRequestFilter {
     	
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String token = authHeader.substring(7);
+            
+         // ✅ null 또는 빈 문자열 방지
+            if (token == null || token.trim().isEmpty() || "null".equals(token)) {
+                System.out.println("❗ 토큰이 null 또는 비어있음");
+                filterChain.doFilter(request, response);
+                return;
+            }else if (authHeader != null) {
+                System.out.println("❗ 잘못된 Authorization 헤더 형식: " + authHeader);
+            } else {
+                System.out.println("ℹ️ Authorization 헤더 없음 (비로그인 상태의 일반 요청일 수 있음)");
+            }
+            
             System.out.println("🛠 받은 토큰: " + token);
             
             if (jwtUtil.validateToken(token)) {
@@ -64,6 +76,7 @@ public class JwtFilter extends OncePerRequestFilter {
                 System.out.println("❌ 유효하지 않은 토큰");
             }
         } else {
+        	//로그인할때 리다이렉트되면서 헤더에 넣어서 전송하는방식이아니라 이거 뜨는거 상관없음
             System.out.println("❗ Authorization 헤더 없음 또는 Bearer 형식 아님");
         }
 
