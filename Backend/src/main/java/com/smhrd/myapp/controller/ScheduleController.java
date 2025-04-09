@@ -13,11 +13,13 @@ import com.smhrd.myapp.service.CustomUserDetails;
 import org.hibernate.annotations.common.util.impl.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 
@@ -36,21 +38,20 @@ public class ScheduleController {
  // ✅ 1. 결혼식 날짜 조회 (없으면 팝업 띄우기)
     @GetMapping("/wedding")
     public ResponseEntity<?> getWeddingDate(@AuthenticationPrincipal CustomUserDetails userDetails) {
-        try {
+    	try {
             Long userId = userDetails.getUser().getId();
 
             // 결혼식 일정 조회
             Optional<Schedule> schedule = scheduleService.getWeddingDate(userId);
             if (schedule.isPresent()) {
-                System.out.println("결혼식 일정 조회 성공: userId: " + userId);
-                return ResponseEntity.ok(schedule.get());  // 결혼식 일정 반환
+                return ResponseEntity.ok(schedule.get());
             } else {
-                // 결혼식 일정이 없으면 팝업을 띄우라고 응답
-                return ResponseEntity.status(204).body("결혼식 일정이 없습니다. 날짜를 입력해주세요.");
+                // 결혼식 일정이 없으면 적절한 ResponseEntity를 반환
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("결혼식 일정이 없습니다.");
             }
         } catch (Exception e) {
-            System.out.println("결혼식 날짜 처리 중 오류 발생: " + e.getMessage());
-            return ResponseEntity.status(500).body("서버 오류가 발생했습니다: " + e.getMessage());
+            // 예외 처리
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("서버 오류 발생");
         }
     }
     
