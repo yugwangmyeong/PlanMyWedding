@@ -1,6 +1,12 @@
 package com.smhrd.myapp.User;
 
+import java.util.List;
+
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
 
 @Entity
@@ -20,4 +26,9 @@ public class User {
 
     @Column(nullable = false)
     private String password;
+    
+ // OneToMany 관계 설정: 한 사용자는 여러 개의 일정을 가질 수 있음
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonBackReference
+    private List<Schedule> schedules; // 사용자의 일정을 조회할 수 있음
 }

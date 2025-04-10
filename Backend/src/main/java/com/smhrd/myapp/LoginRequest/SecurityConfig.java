@@ -31,6 +31,7 @@ public class SecurityConfig {
 	            .antMatchers("/api/delete").authenticated() // 🔥 이 경로는 인증 필요
 	            .antMatchers(HttpMethod.GET, "/api/member").authenticated()
 	            .antMatchers(HttpMethod.PUT, "/api/member").authenticated()
+	            .antMatchers("/api/schedule/wedding").authenticated()
 	            .anyRequest().authenticated()
 	        .and()
 	        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
