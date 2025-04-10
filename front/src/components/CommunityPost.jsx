@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import "./styles/communitypost.css";
 import toggleMenuIcon from "./styles/assets/toggleMenu.png";
+import Header from "./Header";
 
 const CommunityPost = () => {
   const location = useLocation();
@@ -54,41 +55,7 @@ const CommunityPost = () => {
 
   return (
     <div className="community-container">
-      {/* 헤더 영역 (CommunityWrite와 동일) */}
-      <header className="header">
-        <div className="logo">Plan my wedding</div>
-        <nav className="nav-links">
-          <div className={`mypage-container ${isMypageOpen ? "open" : ""}`}>
-            <button onClick={toggleMypageMenu} className="mypage-btn">
-              마이페이지
-              <img
-                src={toggleMenuIcon}
-                className="mypage-icon"
-                alt="toggle menu"
-              />
-            </button>
-            <div className="mypage-dropdown">
-              <Link to="/schedule">일정관리</Link>
-              <Link to="/moneycontrol">예산관리</Link>
-            </div>
-          </div>
-          <Link to="/Community" className="header-margin">
-            커뮤니티
-          </Link>
-        </nav>
-        <nav className="nav-links2">
-          <Link to="/Login" className="login-link">
-            로그인
-          </Link>
-          <span className="header-margin">/ </span>
-          <Link to="/Register" className="reg-link">
-            회원가입
-          </Link>
-          <Link to="/Update">
-            <span className="material-symbols-outlined">account_circle</span>
-          </Link>
-        </nav>
-      </header>
+      <Header />
 
       {/* 게시글 상세 내용 영역 */}
       <div className="community-post-wrapper">
