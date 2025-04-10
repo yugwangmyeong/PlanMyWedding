@@ -1,6 +1,6 @@
 import React from "react";
 import { addMonths, subMonths } from "date-fns";
-
+import "./customtoolbar.css";
 const CustomToolbar = ({ label, date, onNavigate }) => {
   return (
     <div className="rbc-toolbar custom-toolbar">

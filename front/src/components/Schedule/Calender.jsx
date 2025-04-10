@@ -6,7 +6,7 @@ import startOfWeek from "date-fns/startOfWeek";
 import getDay from "date-fns/getDay";
 import ko from "date-fns/locale/ko";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import "../styles/calendermain.css";
+import "./calendermain.css"
 import Header from "../Header";
 import Footer from "../Footer";
 import CustomToolbar from "./utils/CustomToolbar";

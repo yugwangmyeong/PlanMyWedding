@@ -76,7 +76,7 @@
   
   /* 수정/추가 버튼 스타일 */
   .modals-buttons button:not(.delete-button) {
-    background-color: #efa1dc;
+    background-color: #f48fb1;
     color: white;
   }
   

@@ -124,6 +124,7 @@ nav a {
   color: black;
   padding: 10px;
   display: block;
+  margin-left: -5px;
 }
 .dropdown-menu a:hover {
   background: #f0f0f0;

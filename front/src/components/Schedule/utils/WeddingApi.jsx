@@ -130,7 +130,7 @@ export const getUserSchedules = async () => {
 };
 
 
-;
+
 
 // ✅ 일정 삭제
 export const deleteSchedule = async (scheIdx) => {
