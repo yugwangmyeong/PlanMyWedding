@@ -2,7 +2,7 @@ import React from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import "../styles/calendersection.css";
+import "../styles/calendarsection.css";
 
 const renderDotEvent = (arg) => {
   return (
@@ -31,7 +31,6 @@ const renderDotEvent = (arg) => {
 const CalendarSection = () => {
   return (
     <div className="calendar-a">
-      {/* 📌 .calendar-a 안에 있어야 스타일이 먹힘 */}
       <div className="calendar-container">
         <div className="calendar-box">
           <div className="calendar-wrapper">
@@ -44,15 +43,15 @@ const CalendarSection = () => {
                 right: "next",
               }}
               locale="ko"
-              height={400}
-              fixedWeekCount={true}
+              height={400} // 부모 높이 기준
+              fixedWeekCount={true} // 항상 6주 노출
               dateClick={(info) => alert(`${info.dateStr} 선택됨`)}
               events={[
                 { title: "드레스 피팅", date: "2025-04-17" },
                 { title: "예복 맞춤", date: "2025-04-24" },
               ]}
-              eventDisplay="list-item"
-              eventContent={renderDotEvent}
+              eventDisplay="list-item" // 또는 'dot'은 커스터마이징에 한계 있어
+              eventContent={renderDotEvent} // ✅ 아래 함수로 완전 커스터마이징
               eventClick={(info) => {
                 alert(`📌 ${info.event.title}\n📅 ${info.event.startStr}`);
               }}
