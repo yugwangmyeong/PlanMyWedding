@@ -32,4 +32,7 @@ public class Schedule {
 
     @Column
     private String scheCategory = "default";
+    
+    @Column
+    private LocalDate scheduleDate; // 🔹 실제 개별 일정 날짜
 }

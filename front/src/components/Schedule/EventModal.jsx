@@ -1,21 +1,28 @@
-import React from 'react';
-import "./eventmodal.css"
-const EventModal = ({
+import React from "react";
+import "./eventmodal.css";
+const EventModal = (
+  {
+  
   isModalOpen,
   selectedEvent,
   newTitle,
   newDate,
   newEndDate,
   isCompleted,
+  category,
+  setCategory,
   setNewTitle,
   setNewDate,
   setNewEndDate,
   setIsCompleted,
-  handleAddOrUpdateEvent,
+  handleAddEvent,
+  handleUpdateEvent,
   handleDeleteEvent,
   resetForm,
 }) => {
+  console.log("EventModal 렌더링 - isModalOpen:", isModalOpen);
   if (!isModalOpen) return null; // 모달이 열리지 않으면 아무것도 렌더링하지 않음
+  
 
   return (
     <div className="modals-backdrop">
@@ -32,11 +39,18 @@ const EventModal = ({
           value={newDate}
           onChange={(e) => setNewDate(e.target.value)}
         />
-        <input
-          type="date"
-          value={newEndDate}
-          onChange={(e) => setNewEndDate(e.target.value)}
-        />
+        <select
+          value={category}
+          onChange={(e) => {
+            console.log("🟢 선택된 category:", e.target.value);
+            setCategory(e.target.value);
+          }}
+        >
+          <option value="custom">기타</option>
+          <option value="preparation">준비 목록</option>
+          <option value="essential">필수 일정</option>
+          <option value="etc">기타 준비</option>
+        </select>
         <label style={{ marginTop: "10px" }}>
           <input
             type="checkbox"
@@ -46,7 +60,7 @@ const EventModal = ({
           완료 여부
         </label>
         <div className="modals-buttons">
-          <button onClick={handleAddOrUpdateEvent}>
+          <button onClick={selectedEvent ? handleUpdateEvent : handleAddEvent}>
             {selectedEvent ? "수정하기" : "추가하기"}
           </button>
           {selectedEvent && (
