@@ -41,8 +41,24 @@ const Community = () => {
       service: "드레스",
       region: "서울",
     },
+    {
+      id: 3,
+      title: "광주 결혼식 본식 스냅 아이콘 스튜디오 내돈내산 계약 후기",
+      content: "지금부터 약 8개월 남짓 남은 결혼식 남악 스카이 웨딩홀에서 예식 날짜 확정 후 지금까지 계약한건",
+      likes: 75,
+      comments: 10,
+      images: ["/images/sample3.jpg"],
+      service: "드레스",
+      region: "광주",
+    },
     // 필요한 만큼 더미 데이터 추가
   ]);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const postsPerPage = 2; // 한 페이지당 보여줄 게시글 수
+  const totalPages = Math.ceil(posts.length / postsPerPage);
+  const startIndex = (currentPage - 1) * postsPerPage;
+  const currentPosts = posts.slice(startIndex, startIndex + postsPerPage);
 
   return (
     <div className="community-container">
@@ -162,7 +178,7 @@ const Community = () => {
 
             {/* 게시글 목록 영역 */}
             <div className="post-list">
-              {posts.map((post) => (
+              {currentPosts.map((post) => (
                 <article className="post-item" key={post.id}>
                   {/* 왼쪽: 글 정보 */}
                   <div className="post-info">
@@ -194,11 +210,29 @@ const Community = () => {
 
             {/* 하단 페이지네이션 (간단 예시) */}
             <div className="pagination">
-              <button className="page-btn">&lt;</button>
-              <button className="page-btn active">1</button>
-              <button className="page-btn">2</button>
-              <button className="page-btn">3</button>
-              <button className="page-btn">&gt;</button>
+            <button
+              className="page-btn"
+              onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+              >
+                &lt;
+              </button>
+              {[...Array(totalPages)].map((_, index) => (
+                <button
+                  key={index + 1}
+                  className={`page-btn ${currentPage === index + 1 ? "active" : ""}`}
+                  onClick={() => setCurrentPage(index + 1)}
+                >
+                  {index + 1}
+                </button>
+              ))}
+              <button
+                className="page-btn"
+                onClick={() =>
+                  setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+                }
+              >
+                &gt;
+            </button>
             </div>
           </div>
         </div>
