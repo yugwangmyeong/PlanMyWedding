@@ -109,9 +109,12 @@ const Header = () => {
             <Link to="/recwedding">웨딩홀</Link>
           </div>
         </div>
-        <Link to="/Community" className="header-margin">
+        <div className="mypage-btn">
+        <Link to="/Community" >
           커뮤니티
         </Link>
+        </div>
+        
       </nav>
 
       <nav className="nav-links2">
