@@ -1,0 +1,181 @@
+.calendar-a .calendar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar-a .calendar-box {
+  width: 100%;
+  max-width: 600px; 
+  min-width: 600px;
+  background: #fff;
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+
+.calendar-a .calendar-wrapper {
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+  height: 450px;
+}
+
+.calendar-a .fc {
+  height: 100% !important;
+}
+
+/* 상단 툴바 스타일 */
+.calendar-a .fc-toolbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.calendar-a .fc-toolbar-title {
+  font-size: 10px !important;
+  color: #333;
+}
+
+.calendar-a .fc-button {
+  background: none !important;
+  border: none !important;
+  color: #000000 !important;
+  font-size: 16px !important;
+}
+
+.calendar-a .fc-button:hover,
+.calendar-a .fc-button:focus,
+.calendar-a .fc-button:active {
+  background: none !important;
+  box-shadow: none !important;
+  color: #faf2f8 !important;
+}
+
+/* 요일 헤더 */
+.calendar-a .fc-col-header-cell {
+  font-weight: 10;
+  font-size: 14px;
+  color: #999;
+  text-align: center;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+/* 일반 날짜 숫자 */
+.calendar-a .fc-daygrid-day-number {
+  font-size: 12px;
+  font-weight: 300;
+  color: #000000;
+}
+
+/* 줄 제거 */
+.calendar-a .fc-scrollgrid,
+.calendar-a .fc-scrollgrid-section,
+.calendar-a .fc-daygrid-body,
+.calendar-a .fc-daygrid-day,
+.calendar-a .fc-daygrid-day-frame,
+.calendar-a .fc-col-header-cell {
+  border: none !important;
+}
+
+/* 날짜 숫자 위쪽 정렬 */
+.calendar-a .fc-daygrid-day-top {
+  display: flex;
+  justify-content: center;
+  font-size: 12px;
+}
+
+/* 날짜 셀 크기 보정 */
+.calendar-a .fc-daygrid-day-frame {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 30px;
+}
+
+.calendar-a .fc-event {
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  font-size: 0 !important;
+}
+
+/* 날짜 셀에 마우스 호버 시 효과 */
+.calendar-a .fc-daygrid-day:hover {
+  background-color: #fff3f6;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+
+
+
+
+.calendar-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.calendar-modal {
+  background: #fff;
+  border-radius: 16px;
+  padding: 30px;
+  width: 400px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+.calendar-modal-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.calendar-modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.calendar-modal-card {
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 15px;
+  background: #f9f9f9;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.calendar-modal-card:hover {
+  transform: scale(1.02);
+}
+
+.calendar-modal-close {
+  padding: 10px 20px;
+  background: #fa5c66;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.calendar-modal-empty {
+  color: #aaa;
+  font-size: 14px;
+}
+

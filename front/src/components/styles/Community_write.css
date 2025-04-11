@@ -1,0 +1,280 @@
+.screen {
+    background-color: #ffffff;
+    height: 1115px;
+    overflow: hidden;
+    position: relative;
+    width: 1920px;
+  }
+  
+  .screen .overlap {
+    height: 392px;
+    left: -8px;
+    position: absolute;
+    top: 374px;
+    width: 1935px;
+  }
+  
+  .screen .line {
+    height: 2px;
+    left: 456px;
+    position: absolute;
+    top: 11px;
+    width: 455px;
+  }
+  
+  .screen .line-2 {
+    height: 375px;
+    left: 711px;
+    object-fit: cover;
+    position: absolute;
+    top: 13px;
+    width: 1px;
+  }
+  
+  .screen .line-3 {
+    height: 375px;
+    left: 642px;
+    object-fit: cover;
+    position: absolute;
+    top: 13px;
+    width: 1px;
+  }
+  
+  .screen .text-wrapper {
+    color: #8f9cab;
+    font-family: "Noto Sans KR-Regular", Helvetica;
+    font-size: 20px;
+    font-weight: 400;
+    height: 32px;
+    left: 385px;
+    letter-spacing: -0.50px;
+    line-height: 32.0px;
+    position: absolute;
+    top: 0;
+    white-space: nowrap;
+  }
+  
+  .screen .div {
+    color: #8f9cab;
+    font-family: "Noto Sans KR-Regular", Helvetica;
+    font-size: 20px;
+    font-weight: 400;
+    height: 32px;
+    left: 680px;
+    letter-spacing: -0.50px;
+    line-height: 32.0px;
+    position: absolute;
+    top: 0;
+    white-space: nowrap;
+  }
+  
+  .screen .rectangle {
+    background-color: #d6d6d6;
+    height: 1px;
+    left: 0;
+    opacity: 0.5;
+    position: absolute;
+    top: 52px;
+    width: 1935px;
+  }
+  
+  .screen .p {
+    color: #8f9cab;
+    font-family: "Noto Sans KR-Regular", Helvetica;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: -0.50px;
+    line-height: 32.0px;
+    position: absolute;
+    top: 72px;
+    left: 385px;
+    width: 1200px;  /* 🔹 문구를 오른쪽으로 늘리기 */
+    white-space: normal; /* 🔹 자동 줄 바꿈 */
+    word-wrap: break-word; /* 🔹 긴 단어도 줄 바꿈 */
+    text-align: left;
+}
+  
+  .screen .overlap-group {
+    background-color: #f6f7f9;
+    height: 52px;
+    left: -27px;
+    position: absolute;
+    top: 238px;
+    width: 1974px;
+  }
+  
+  .screen .text-wrapper-2 {
+    color: #000000;
+    font-family: "Noto Sans KR-Regular", Helvetica;
+    font-size: 20px;
+    font-weight: 400;
+    height: 32px;
+    left: 444px;
+    letter-spacing: -0.50px;
+    line-height: 32.0px;
+    position: absolute;
+    top: 8px;
+    width: 49px;
+  }
+  
+
+  .screen .text-wrapper-3 { 
+    color: #000000;
+    font-family: "Noto Sans KR-Regular", Helvetica;
+    font-size: 36px;
+    font-weight: 400;
+    position: absolute;
+    top: 171px;
+    left: 372px;
+    white-space: nowrap;
+}
+  
+  .screen .text-wrapper-4 {
+    color: #8f9cab;
+    font-family: "Noto Sans KR-Regular", Helvetica;
+    font-size: 20px;
+    font-weight: 400;
+    height: 32px;
+    left: 377px;
+    letter-spacing: -0.50px;
+    line-height: 32.0px;
+    position: absolute;
+    top: 306px;
+    white-space: nowrap;
+  }
+  
+  .screen .rectangle-2 {
+    background-color: #d6d6d6;
+    height: 1px;
+    left: -8px;
+    opacity: 0.5;
+    position: absolute;
+    top: 355px;
+    width: 1935px;
+  }
+  
+  .screen .rectangle-3 {
+    background-color: #d6d6d6;
+    height: 1px;
+    left: -23px;
+    opacity: 0.5;
+    position: absolute;
+    top: 942px;
+    width: 1950px;
+  }
+  
+  .screen .group {
+    height: 71px;
+    left: 384px;
+    position: absolute;
+    top: 14px;
+    width: 1242px;
+  }
+  
+  .screen .text-wrapper-5 {
+    color: #292929;
+    font-family: "Noto Sans KR-Regular", Helvetica;
+    font-size: 20px;
+    font-weight: 400;
+    height: 56px;
+    left: 283px;
+    letter-spacing: -0.50px;
+    line-height: 32.0px;
+    position: absolute;
+    top: 1px;
+    width: 432px;
+  }
+  
+  .screen .overlap-group-2 {
+    height: 43px;
+    left: 966px;
+    position: absolute;
+    top: 1px;
+    width: 270px;
+  }
+  
+  .screen .OO {
+    color: #292929;
+    font-family: "Noto Sans KR-Regular", Helvetica;
+    font-size: 20px;
+    font-weight: 400;
+    height: 32px;
+    left: 0;
+    letter-spacing: -0.50px;
+    line-height: 32.0px;
+    position: absolute;
+    top: 6px;
+    width: 270px;
+  }
+  
+  .screen .ellipse {
+    height: 40px;
+    left: 150px;
+    position: absolute;
+    top: 2px;
+    width: 40px;
+  }
+  
+  .screen .xnix-line-user {
+    height: 43px !important;
+    left: 148px !important;
+    position: absolute !important;
+    top: 0 !important;
+    width: 43px !important;
+  }
+  
+  .screen .plan-my-wedding-d {
+    color: #efa1db;
+    font-family: "Noto Sans KR-Regular", Helvetica;
+    font-size: 30px;
+    font-weight: 400;
+    height: 71px;
+    left: 0;
+    letter-spacing: -0.50px;
+    line-height: 48.0px;
+    position: absolute;
+    top: 0;
+    width: 270px;
+  }
+  
+  .screen .span {
+    letter-spacing: -0.15px;
+  }
+  
+  .screen .text-wrapper-6 {
+    font-size: 16px;
+    letter-spacing: -0.08px;
+    line-height: 25.6px;
+  }
+
+  
+  .screen .text-wrapper-7 {
+    color: #8f9cab;
+    font-family: "Noto Sans KR-Light", Helvetica;
+    font-size: 28px;
+    font-weight: 300;
+    height: 45px;
+    left: 24px;
+    letter-spacing: -0.50px;
+    line-height: 44.8px;
+    position: absolute;
+    top: 5px;
+    white-space: nowrap;
+    width: 72px;
+  }
+
+  
+.screen .register-button {
+    background-color: #f6f7f9;
+    border-radius: 5px;
+    color: #292929;
+    font-size: 20px;
+    font-weight: 400;
+    position: absolute;
+    top: 175px;
+    left: 650px;  /* 🔹 '커뮤니티' 오른쪽에 적당한 간격 */
+    padding: 10px 20px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+}
+  

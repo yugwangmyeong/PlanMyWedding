@@ -1,0 +1,96 @@
+/* 모달 배경 */
+.modals-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* 어두운 배경 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  /* 모달 콘텐츠 영역 */
+  .modals-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  /* 모달 제목 */
+  .modals-content h3 {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 16px;
+  }
+  
+  /* 입력 필드 스타일 */
+  .modals-content input[type="text"],
+  .modals-content input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+  }
+  
+  /* 완료 여부 체크박스 */
+  .modals-content label {
+    font-size: 14px;
+    color: #333;
+    display: flex;
+    align-items: center;
+  }
+  
+  .modals-content input[type="checkbox"] {
+    margin-right: 8px;
+  }
+  
+  /* 버튼 스타일 */
+  .modals-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  
+  /* 버튼 공통 스타일 */
+  .modals-buttons button {
+    padding: 10px 20px;
+    font-size: 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  /* 수정/추가 버튼 스타일 */
+  .modals-buttons button:not(.delete-button) {
+    background-color: #f48fb1;
+    color: white;
+  }
+  
+  .modals-buttons button:hover:not(.delete-button) {
+    background-color: #e85cab;
+  }
+  
+  /* 삭제 버튼 스타일 */
+  .delete-button {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .delete-button:hover {
+    background-color: #d32f2f;
+  }
+  

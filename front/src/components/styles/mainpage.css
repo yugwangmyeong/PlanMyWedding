@@ -1,0 +1,33 @@
+  /* 헤더 및 공통 컨테이너 */
+  .title-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 150px 300px 30px 300px; /* 좌우 300px 고정 */
+  }
+
+
+  
+  .main-wrapper {
+    max-width: 1492px;
+    margin: 0 300px 30px 300px; /* 좌우 300px */
+    padding: 40px 0;
+  }
+  
+  .main-layout {
+    display: flex;
+    gap: 40px;
+  }
+  
+  .left-column {
+    flex: 2;
+  }
+  
+  .right-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  
