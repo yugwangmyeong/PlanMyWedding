@@ -22,6 +22,13 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 	
 	List<Schedule> findByUserAndScheCategoryAndScheduleDateAndScheTitle(
 		    User user, String scheCategory, LocalDate scheduleDate, String scheTitle);
+	
+	List<Schedule> findAllByUserAndScheCategory(User user, String scheCategory);
+
+	
+	
+
+
 
 
 	

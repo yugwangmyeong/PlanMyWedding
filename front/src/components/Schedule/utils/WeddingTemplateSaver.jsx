@@ -31,8 +31,8 @@ const WeddingTemplateAutoSaver = ({ weddingDate, onSaved }) => {
         const fixedOffsets = [
           { title: "식순 회의", offset: -30 },
           { title: "최종 리허설", offset: -7 },
-          { title: "결혼식 당일", offset: 0 },
-          { title: "허니문 출발", offset: 1 },
+
+          { title: "신혼 여행", offset: 1 },
           { title: "혼인신고", offset: 7 },
         ];
   

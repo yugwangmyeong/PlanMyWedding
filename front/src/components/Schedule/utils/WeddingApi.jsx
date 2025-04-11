@@ -159,7 +159,7 @@ export const deleteSchedule = async (scheIdx) => {
 
 
 
-// WeddingApi.js
+//템플릿저장하는 api
 export const saveWeddingTemplate = async (payload) => {
   const token = sessionStorage.getItem("token");
   return axios.post("http://localhost:8081/boot/api/schedule/weddingTemplate", payload, {
@@ -167,4 +167,18 @@ export const saveWeddingTemplate = async (payload) => {
       Authorization: `Bearer ${token}`,
     },
   });
+};
+
+
+//템플릿일정가져오는 api
+
+
+export const getWeddingTemplates = async () => {
+  const token = sessionStorage.getItem("token");
+  const response = await axios.get("http://localhost:8081/boot/api/schedule/weddingTemplate", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.data;
 };

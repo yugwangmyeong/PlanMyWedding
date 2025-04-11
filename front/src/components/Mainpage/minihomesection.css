@@ -30,9 +30,10 @@
   }
   
   .minihome-image {
-    width: 220px; /* 💡 중간 크기 */
+    width: 500px; /* 💡 중간 크기 */
     height: auto;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    padding:30px;
   }
   
   .minihome-text {
@@ -42,5 +43,22 @@
     white-space: pre-line; /* 줄바꿈(\n) 허용 */
     max-width: 90%;
     line-height: 1.4;
+  }
+  
+  .minihome-nav-buttons {
+    margin-top: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .minihome-nav-buttons button {
+    background-color: #efa1dc;
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 8px;
+    cursor: pointer;
   }
   

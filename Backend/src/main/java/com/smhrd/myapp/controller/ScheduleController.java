@@ -151,7 +151,7 @@ public class ScheduleController {
         Long userId = userDetails.getUser().getId(); // 현재 로그인된 유저 ID 가져오기
         
         try {
-            System.out.println("🔍 getUserSchedules() 호출됨 - 유저 ID: " + userId);
+            System.out.println("🔍 getUserSchedules()API - 유저 ID: " + userId);
             List<Schedule> schedules = scheduleService.getSchedulesByUserId(userId);
             return ResponseEntity.ok(schedules);
         } catch (Exception e) {
@@ -194,6 +194,27 @@ public class ScheduleController {
         Schedule saved = scheduleRepository.save(schedule);
         return ResponseEntity.ok(saved);
     }
+    
+    // ✅ 웨딩 템플릿 일정 조회용 API
+    @GetMapping("/weddingTemplate")
+    public ResponseEntity<?> getWeddingTemplates(@AuthenticationPrincipal CustomUserDetails userDetails) {
+        if (userDetails == null || userDetails.getUser() == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("로그인 정보가 없습니다.");
+        }
+
+        Long userId = userDetails.getUser().getId();
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        List<Schedule> templates = scheduleRepository.findAllByUserAndScheCategory(user, "weddingTemplate");
+        System.out.println("✅ 유저 ID: " + userId);
+        System.out.println("✅ 조회된 템플릿 수: " + templates.size());
+        templates.forEach(t -> System.out.println("⏱️ " + t.getScheTitle() + " | " + t.getScheduleDate()));
+
+        return ResponseEntity.ok(templates);
+    }
+    
+    
 
     
 

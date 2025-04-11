@@ -35,6 +35,7 @@ public class ScheduleService {
 	    	schedule.setUser(user); // 
 	        schedule.setScheTitle("결혼식");
 	        schedule.setReservedAt(weddingDate);
+	        schedule.setScheduleDate(weddingDate);     // ✅ scheduleDate (추가!)
 	        schedule.setScheCategory("wedding");
 	        schedule.setScheStatus("예정");	
 	        schedule.setReservedAt(weddingDate); 
