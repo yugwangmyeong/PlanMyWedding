@@ -12,13 +12,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.smhrd.myapp.User.User;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+@Builder
 @Getter
 @Setter
 @NoArgsConstructor
@@ -49,13 +53,29 @@ public class Community {
 
     @Column(name = "COMM_LIKES")
     private int commLikes;
+    
+    @Column(name = "COMM_SERVICE")
+    private String commService;
 
+    @Column(name = "COMM_REGION")
+    private String commRegion;
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     // ✅ 작성자 (User) 연결
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_ID", nullable = false) // 외래키 컬럼명 설정
+    @JoinColumn(name = "user_id")
+    @JsonManagedReference
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) // ✅ 꼭 있어야 함
     private User user;
     
-    
-   // @Column(name = "id")
-   // private String mbId;
 }

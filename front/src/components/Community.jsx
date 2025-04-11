@@ -1,91 +1,103 @@
-// src/components/Community/Community.jsx
 import React, { useState, useEffect } from "react";
-import { Link, NavLink } from "react-router-dom";
+import axios from "axios";
+import { Link } from "react-router-dom";
 import "./styles/community.css";
 import Header from "./Header";
 
-
 const Community = () => {
   const [posts, setPosts] = useState([]);
+  const [region, setRegion] = useState("");
+  const [category, setCategory] = useState("");
+  const [sortType, setSortType] = useState("latest");
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 10;
 
-  // 페이지별 게시글 잘라내기
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
-
   const totalPages = Math.ceil(posts.length / postsPerPage);
 
-  // 페이지 번호 배열 만들기
-  const pageNumbers = [];
-  for (let i = 1; i <= totalPages; i++) {
-    pageNumbers.push(i);
-  }
+  const pageNumbers = Array.from({ length: totalPages }, (_, i) => i + 1);
+  const pageGroup = Math.floor((currentPage - 1) / 10);
+  const startPage = pageGroup * 10 + 1;
+  const endPage = Math.min(startPage + 9, totalPages);
+  const visiblePageNumbers = pageNumbers.slice(startPage - 1, endPage);
 
-  const handlePageClick = (pageNumber) => {
-    setCurrentPage(pageNumber);
+  const handlePageClick = (number) => {
+    setCurrentPage(number);
+  };
+
+  // ✅ 게시글 불러오기
+  const fetchPosts = async () => {
+    const token = sessionStorage.getItem("token");
+    const headers = {
+      "Content-Type": "application/json",
+      ...(token && { Authorization: `Bearer ${token}` }),
+    };
+
+    try {
+      let res;
+
+      if (!region && !category && sortType === "latest") {
+        // 전체 게시글
+        res = await axios.get("http://localhost:8081/boot/api/community/all", { headers });
+      } else {
+        // 필터 게시글
+        res = await axios.post(
+          "http://localhost:8081/boot/api/community/filter",
+          {
+            region: region || null,
+            category: category || null,
+            sort: sortType,
+          },
+          { headers }
+        );
+      }
+
+      if (Array.isArray(res.data)) {
+        setPosts(res.data);
+        setCurrentPage(1);
+      } else {
+        console.error("📛 응답 형식 오류", res.data);
+        setPosts([]);
+      }
+    } catch (err) {
+      console.error("❌ 게시글 불러오기 실패:", err);
+      setPosts([]);
+    }
   };
 
   useEffect(() => {
-    const fetchCommunityPosts = async () => {
-      const token = sessionStorage.getItem("token");
-  
-      try {
-        const response = await fetch("http://localhost:8081/boot/api/community/all", {
-          method: "POST", // 또는 POST, 백엔드와 맞춰
-          headers: {
-            "Content-Type": "application/json",
-            ...(token && { Authorization: `Bearer ${token}` }),
-          },
-          credentials: "include"
-        });
-  
-        console.log("📦 상태:", response.status);
-  
-        const text = await response.text();
-        console.log("📦 응답 내용 (text):", text);
-  
-        if (!response.ok) {
-          throw new Error(`서버 응답 오류: ${response.status}`);
-        }
-  
-        if (!text || text.trim() === "") {
-          console.warn("⚠️ 서버 응답 본문이 비어 있습니다.");
-          setPosts([]);
-          return;
-        }
-  
-        const data = JSON.parse(text);
-        console.log("✅ 게시글 데이터:", data);
-        setPosts(data);
-      } catch (err) {
-        console.error("❌ 게시글 불러오기 실패:", err);
-      }
-    };
-  
-    fetchCommunityPosts();
-  }, []);
+    fetchPosts();
+  }, [region, category, sortType]);
 
   return (
     <div className="community-container">
       <Header />
       <div className="community-content">
-        {/* 사이드 메뉴 */}
         <div className="left-sidebar">
           <h2>커뮤니티</h2>
           <hr className="community-divider" />
           <ul className="category-menu">
-            <li><NavLink to="/community" end className={({ isActive }) => (isActive ? "active" : "")}>전체</NavLink></li>
-            <li><NavLink to="/community/hall">웨딩홀</NavLink></li>
-            <li><NavLink to="/community/dress">드레스</NavLink></li>
-            <li><NavLink to="/community/makeup">메이크업</NavLink></li>
-            <li><NavLink to="/community/studio">스튜디오</NavLink></li>
-            <li><NavLink to="/community/honeymoon">신혼여행</NavLink></li>
+            {[
+              { label: "전체", value: "" },
+              { label: "웨딩홀", value: "웨딩홀" },
+              { label: "드레스", value: "드레스" },
+              { label: "메이크업", value: "메이크업" },
+              { label: "스튜디오", value: "스튜디오" },
+              { label: "신혼여행", value: "신혼여행" },
+            ].map((item) => (
+              <li
+                key={item.value}
+                className={category === item.value ? "active" : ""}
+                onClick={() => setCategory(item.value)}
+              >
+                {item.label}
+              </li>
+            ))}
           </ul>
         </div>
 
-        {/* 오른쪽 콘텐츠 */}
         <div className="right-content">
           <div className="community-main-wrapper">
             <div className="community-title">
@@ -93,89 +105,89 @@ const Community = () => {
               <p>고객님들의 최신 사진 리뷰</p>
             </div>
 
-    {/* 상단 배너 영역 (왼쪽/오른쪽 이미지 & 글쓰기 버튼) */}
-    <div className="community-top-banner">
-      <div className="banner-left">
-        <img src="/images/banner1.jpg" alt="banner1" />
+            <div className="community-top-banner">
+              <div className="banner-left">
+                <img src="/images/banner1.jpg" alt="banner1" />
 
-        <div className="filter-buttons">
-          <select className="filter-select">
-              <option value="">지역</option>
-              <option value="광주">광주</option>
-              <option value="서울">서울</option>
-              <option value="경기">경기</option>
-              <option value="인천">인천</option>
-              <option value="부산">부산</option>
-              <option value="경남">경남</option>
-              <option value="경북">경북</option>
-              <option value="대구">대구</option>
-              <option value="충남">충남</option>
-              <option value="전북">전북</option>
-              <option value="충북">충북</option>
-              <option value="강원">강원</option>
-              <option value="대전">대전</option>
-              <option value="울산">울산</option>
-              <option value="세종">세종</option>
-              <option value="제주">제주</option>
-          </select>
-          <select className="filter-sort">
-            <option value="popular">인기순</option>
-            <option value="views">조회수순</option>
-            <option value="latest">최신순</option>
-          </select>
-        </div>
-      </div>
+                <div className="filter-buttons">
+                  <select
+                    className="filter-select"
+                    value={region}
+                    onChange={(e) => setRegion(e.target.value)}
+                  >
+                    <option value="">지역</option>
+                    {[
+                      "서울특별시", "부산광역시", "대구광역시", "인천광역시",
+                      "광주광역시", "대전광역시", "울산광역시", "세종특별자치시",
+                      "경기도", "강원특별자치도", "충청북도", "충청남도",
+                      "전라북도", "전라남도", "경상북도", "경상남도", "제주특별자치도"
+                    ].map((r) => (
+                      <option key={r} value={r}>{r}</option>
+                    ))}
+                  </select>
 
-      <div className="banner-right">
-        <img src="/images/banner2.jpg" alt="banner2" />
-        <Link to="/community/write" className="write-btn">글쓰기</Link>
-      </div>
-    </div>
+                  <select
+                    className="filter-sort"
+                    value={sortType}
+                    onChange={(e) => setSortType(e.target.value)}
+                  >
+                    <option value="popular">인기순</option>
+                    <option value="views">조회수순</option>
+                    <option value="latest">최신순</option>
+                  </select>
+                </div>
+              </div>
 
-    {/* 게시글 목록 영역 */}
-    <div className="post-list">
-      {posts.map((post) => (
-        <article className="post-item" key={post.id}>
-
-          {/* 왼쪽: 글 정보 */}
-          <div className="post-info">
-            <h3 className="post-title">{post.title}</h3>
-
-            {/* 게시글 내용 영역: 구분선 없음 */}
-          <div className="post-content">
-            <p>{post.content}</p>
-          </div>
-
-            {/* 좋아요/댓글 영역: 구분선이 적용됨 */}
-            <div className="post-meta">
-              <span className="post-likes">👍 {post.likes}</span>
-              <span className="post-comments">💬 {post.comments}</span>
+              <div className="banner-right">
+                <img src="/images/banner2.jpg" alt="banner2" />
+                <Link to="/community/write" className="write-btn">글쓰기</Link>
+              </div>
             </div>
-          </div>
-          {/* 썸네일 이미지 */}
-          <div className="post-thumbnail">
-          {post.images && post.images.length > 0 ? (
-            // 실제 파일 객체가 아니라 URL이므로 바로 src에 할당
-            <img src={post.images[0]} alt="thumbnail" />
-          ) : (
-            <img src="/images/no-image.jpg" alt="no thumbnail" />
-          )}
-          </div>
-        </article>
-       ))}
-     </div>
 
-            {/* 페이지네이션 */}
+            <div className="post-list">
+              {currentPosts.length > 0 ? (
+                currentPosts.map((post) => (
+                  <Link
+                    key={post.commIdx}
+                    to={`/community/post/${post.commIdx}`}
+                    className="post-item-link"
+                  >
+                    <article className="post-item">
+                      <div className="post-info">
+                        <h3 className="post-title">{post.commTitle}</h3>
+                        <div className="post-content">
+                          <p>{post.commContent}</p>
+                        </div>
+                        <div className="post-meta">
+                          <span className="post-likes">👍 {post.commLikes}</span>
+                          <span className="post-comments">💬 {post.commentCount || 0}</span>
+                          <span className="post-region">📍 지역: {post.commRegion}</span>
+                          <span className="post-category">📌 {post.commService}</span>
+                        </div>
+                      </div>
+                      {post.commFile && (
+                        <div className="post-thumbnail">
+                          <img src={post.commFile} alt="썸네일" />
+                        </div>
+                      )}
+                    </article>
+                  </Link>
+                ))
+              ) : (
+                <p>📭 조건에 맞는 게시글이 없습니다.</p>
+              )}
+            </div>
+
             <div className="pagination">
               <button
                 className="page-btn"
-                onClick={() => currentPage > 1 && setCurrentPage(currentPage - 1)}
-                disabled={currentPage === 1}
+                onClick={() => setCurrentPage(startPage - 10)}
+                disabled={startPage === 1}
               >
-                &lt;
+                &laquo;
               </button>
 
-              {pageNumbers.map((number) => (
+              {visiblePageNumbers.map((number) => (
                 <button
                   key={number}
                   className={`page-btn ${currentPage === number ? "active" : ""}`}
@@ -187,10 +199,10 @@ const Community = () => {
 
               <button
                 className="page-btn"
-                onClick={() => currentPage < totalPages && setCurrentPage(currentPage + 1)}
-                disabled={currentPage === totalPages}
+                onClick={() => setCurrentPage(startPage + 10)}
+                disabled={endPage >= totalPages}
               >
-                &gt;
+                &raquo;
               </button>
             </div>
           </div>

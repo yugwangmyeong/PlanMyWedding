@@ -490,4 +490,7 @@ nav a {
 }
 
 /* 게시글 전체에 적용되는 링크 */
-
+.post-item-link {
+  text-decoration: none;
+  color: inherit;
+}

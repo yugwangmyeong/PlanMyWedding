@@ -1,76 +1,76 @@
 package com.smhrd.myapp.service;
 
-import com.smhrd.myapp.dto.CommunityRequest;
-import com.smhrd.myapp.dto.CommunityResponse;
-import com.smhrd.myapp.entity.Community;
-import com.smhrd.myapp.repository.CommunityRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+
+import com.smhrd.myapp.User.User;
+import com.smhrd.myapp.dto.CommunityDto;
+import com.smhrd.myapp.dto.CommunityFilterDto;
+import com.smhrd.myapp.entity.Community;
+import com.smhrd.myapp.repository.CommunityRepository;
+import com.smhrd.myapp.repository.UserRepository;
+
+import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Sort; 
 
 @Service
+@RequiredArgsConstructor
 public class CommunityService {
 
-    @Autowired
-    private CommunityRepository communityRepo;
+    private final CommunityRepository communityRepository;
+    private final UserRepository userRepository;
 
-    public List<CommunityResponse> getAllPosts() {
-        return communityRepo.findAllByOrderByCommIdxDesc()
-                .stream()
-                .map(this::toResponseDto)
-                .collect(Collectors.toList());
+    public List<Community> findAllPosts() {
+        return communityRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
     }
 
-    public CommunityResponse createPost(CommunityRequest request) {
-        Community post = new Community();
-        post.setCommTitle(request.getCommTitle());
-        post.setCommContent(request.getCommContent());
-        post.setCommFile(request.getCommFile());
-        post.setMbId(request.getMbId());
-        post.setCreatedAt(new Timestamp(System.currentTimeMillis()));
-        post.setCommViews(0);
-        post.setCommLikes(0);
-        Community saved = communityRepo.save(post);
-        return toResponseDto(saved);
+    public List<Community> filterPosts(CommunityFilterDto filter) {
+        return communityRepository.findByFilter(
+            filter.getRegion(),
+            filter.getCategory(),
+            filter.getSort()
+        );
     }
 
-    public Optional<CommunityResponse> getPost(Long id) {
-        return communityRepo.findById(id).map(this::toResponseDto);
+    public Community getPostById(Long id) {
+        return communityRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("게시글 없음"));
     }
 
-    public Optional<CommunityResponse> updatePost(Long id, CommunityRequest request) {
-        return communityRepo.findById(id).map(post -> {
-            post.setCommTitle(request.getCommTitle());
-            post.setCommContent(request.getCommContent());
-            post.setCommFile(request.getCommFile());
-            Community updated = communityRepo.save(post);
-            return toResponseDto(updated);
-        });
-    }
+    public Community createPost(CommunityDto dto) {
+        User user = userRepository.findById(dto.getUserId())
+                .orElseThrow(() -> new RuntimeException("사용자 없음"));
 
-    public boolean deletePost(Long id) {
-        if (communityRepo.existsById(id)) {
-            communityRepo.deleteById(id);
-            return true;
-        }
-        return false;
-    }
-
-    private CommunityResponse toResponseDto(Community post) {
-        return CommunityResponse.builder()
-                .commIdx(post.getCommIdx())
-                .commTitle(post.getCommTitle())
-                .commContent(post.getCommContent())
-                .commFile(post.getCommFile())
-                .commViews(post.getCommViews())
-                .commLikes(post.getCommLikes())
-                .createdAt(post.getCreatedAt())
-                .mbId(post.getMbId())
+        Community post = Community.builder()
+                .commTitle(dto.getCommTitle())
+                .commContent(dto.getCommContent())
+                .commFile(dto.getCommFile())
+                .commService(dto.getCommService())
+                .commRegion(dto.getCommRegion())
+                .commLikes(0)
+                .commViews(0)
+                .createdAt(new Timestamp(System.currentTimeMillis()))
+                .user(user)
                 .build();
+
+        return communityRepository.save(post);
+    }
+
+    public Community updatePost(Long id, CommunityDto dto) {
+        Community post = getPostById(id);
+
+        post.setCommTitle(dto.getCommTitle());
+        post.setCommContent(dto.getCommContent());
+        post.setCommFile(dto.getCommFile());
+        post.setCommService(dto.getCommService());
+        post.setCommRegion(dto.getCommRegion());
+
+        return communityRepository.save(post);
+    }
+
+    public void deletePost(Long id) {
+        communityRepository.deleteById(id);
     }
 }

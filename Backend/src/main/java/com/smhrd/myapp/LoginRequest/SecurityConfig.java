@@ -44,7 +44,14 @@ public class SecurityConfig {
 	            .antMatchers("/api/schedule/wedding").authenticated()
 	            .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                .antMatchers("/wedding-halls/details","/api/community/**").permitAll() // 로그인은 인증 없이 허용
-	            .anyRequest().authenticated()
+	            
+               
+               
+               .antMatchers("/api/user/email/**").permitAll()
+               
+               
+               
+               .anyRequest().authenticated()
 	        .and()
 	        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 	        .and()
@@ -55,4 +62,18 @@ public class SecurityConfig {
 
 	    return http.build();
 	}
+	
+	@Bean
+	public CorsConfigurationSource corsConfigurationSource() {
+	    CorsConfiguration configuration = new CorsConfiguration();
+	    configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "http://192.168.219.50:3000"));
+	    configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+	    configuration.setAllowedHeaders(Arrays.asList("*"));
+	    configuration.setAllowCredentials(true); // ⚠️ credentials 사용 시 필수
+
+	    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+	    source.registerCorsConfiguration("/**", configuration);
+	    return source;
+	}
+	
 }

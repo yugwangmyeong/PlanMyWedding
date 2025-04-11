@@ -1,71 +1,121 @@
-// src/components/Community/CommunityWrite.jsx
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import axios from "axios";
 import "./styles/communitywrite.css";
-import toggleMenuIcon from "./styles/assets/toggleMenu.png";
 import Header from "./Header";
 
 const CommunityWrite = () => {
   const pictureIcon = "/images/picture.jpg";
   const navigate = useNavigate();
+  const location = useLocation();
+  const { id } = useParams(); // 수정할 경우 postId
+  const editingPost = location.state?.post;
+  const isEditMode = !!editingPost;
 
-  const [isMypageOpen, setIsMypageOpen] = useState(false);
-  const toggleMypageMenu = () => setIsMypageOpen(!isMypageOpen);
-
-  // 게시글 정보 상태
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [service, setService] = useState("");
-  const [region, setRegion] = useState("");
+  const [title, setTitle] = useState(editingPost?.commTitle || "");
+  const [content, setContent] = useState(editingPost?.commContent || "");
+  const [service, setService] = useState(editingPost?.commService || "");
+  const [region, setRegion] = useState(editingPost?.commRegion || "");
   const [images, setImages] = useState([]);
+  const [userId, setUserId] = useState(null);
 
-  const userId = sessionStorage.getItem("loginId") || "testuser";
+  const token = sessionStorage.getItem("token");
 
-  // 이미지 서버 업로드
+  // 이메일 추출
+  const getEmailFromToken = (token) => {
+    if (!token) return null;
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1].replace(/-/g, '+').replace(/_/g, '/')));
+      return payload.sub;
+    } catch {
+      return null;
+    }
+  };
+
+  // 이메일로 userId 조회
+  const getUserIdFromEmail = async (email) => {
+    try {
+      const res = await axios.get(`http://localhost:8081/boot/api/user/email/${email}`);
+      return res.data.userId;
+    } catch (err) {
+      console.error("📛 userId 조회 실패:", err);
+      return null;
+    }
+  };
+
+  useEffect(() => {
+    const fetchUserId = async () => {
+      if (!token) return;
+      const email = getEmailFromToken(token);
+      if (!email) return;
+      const fetchedUserId = await getUserIdFromEmail(email);
+      setUserId(fetchedUserId);
+      console.log("✅ 로그인 userId:", fetchedUserId);
+    };
+    fetchUserId();
+  }, [token]);
+
+  // 이미지 업로드
   const handleImageUpload = async (file) => {
     const formData = new FormData();
     formData.append("file", file);
-
     try {
-      const res = await axios.post("http://localhost:8081/api/community/upload", formData);
-      return res.data; // 이미지 URL 반환
+      const res = await axios.post("http://localhost:8081/boot/api/community/upload", formData);
+      return res.data;
     } catch (err) {
       console.error("이미지 업로드 실패", err);
       return null;
     }
   };
 
-  // 게시글 작성
+  // 작성 or 수정 제출
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // 필수 입력 확인
     if (!title.trim() || !content.trim()) {
-      alert("제목과 내용을 모두 입력해주세요.");
+      alert("제목과 내용을 입력해주세요.");
+      return;
+    }
+
+    if (!service || !region) {
+      alert("서비스와 지역을 선택해주세요.");
       return;
     }
 
     const imageUrls = await Promise.all(images.map((img) => handleImageUpload(img)));
+
     const requestData = {
       commTitle: title,
       commContent: content,
-      commFile: imageUrls[0] || "", // 첫 번째 이미지만 대표 썸네일로 저장
-      mbId: userId,
+      commFile: imageUrls[0] || editingPost?.commFile || "",
+      userId: userId,
+      commService: service,
+      commRegion: region
     };
 
+    console.log("📦 최종 요청 데이터:", requestData);
+
     try {
-      const res = await axios.post("http://localhost:8081/api/community/write", requestData,{withCredentials: true,});
-      
-      alert("게시글이 등록되었습니다!");
-      navigate(`/community/post/${res.data.commIdx}`);
+      if (isEditMode) {
+        await axios.put(`http://localhost:8081/boot/api/community/${id}`, requestData);
+        alert("게시글이 수정되었습니다!");
+        navigate(`/community/post/${id}`);
+      } else {
+        const res = await axios.post("http://localhost:8081/boot/api/community/write", requestData);
+        alert("게시글이 등록되었습니다!");
+        if (res.data && res.data.commIdx) {
+          navigate(`/community/post/${res.data.commIdx}`);
+        } else {
+          console.error("commIdx가 응답에 없습니다:", res.data);
+        }
+      }
     } catch (error) {
-      console.error("작성 실패", error);
-      alert("게시글 작성에 실패했습니다. 다시 시도해주세요.");
+      console.error("요청 실패:", error);
+      alert("게시글 처리 중 오류 발생");
     }
   };
 
-  // 이미지 선택 핸들러
+  // 이미지 선택
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
     if (images.length + files.length > 15) {
@@ -78,9 +128,8 @@ const CommunityWrite = () => {
   return (
     <div className="community-container">
       <Header />
-
       <div className="community-main-wrapper">
-        <h2>커뮤니티 글쓰기</h2>
+        <h2>커뮤니티 {isEditMode ? "수정하기" : "글쓰기"}</h2>
 
         <form onSubmit={handleSubmit} className="community-write-form">
           <div className="form-group">
@@ -94,7 +143,7 @@ const CommunityWrite = () => {
           </div>
 
           <div className="options-row">
-            <select value={service} onChange={(e) => setService(e.target.value)} className="option-select">
+            <select value={service} onChange={(e) => setService(e.target.value)} className="option-select" required>
               <option value="">서비스</option>
               <option value="웨딩홀">웨딩홀</option>
               <option value="스튜디오">스튜디오</option>
@@ -103,7 +152,7 @@ const CommunityWrite = () => {
               <option value="기타">기타</option>
             </select>
 
-            <select value={region} onChange={(e) => setRegion(e.target.value)} className="option-select">
+            <select value={region} onChange={(e) => setRegion(e.target.value)} className="option-select" required>
               <option value="">지역</option>
               <option value="서울특별시">서울특별시</option>
               <option value="부산광역시">부산광역시</option>
@@ -150,7 +199,6 @@ const CommunityWrite = () => {
             />
           </div>
 
-          {/* 이미지 미리보기 */}
           {images.length > 0 && (
             <div className="image-preview-container">
               {images.map((file, idx) => (
@@ -165,8 +213,10 @@ const CommunityWrite = () => {
           )}
 
           <div className="button-group">
-            <button type="submit" className="submit-btn">작성하기</button>
-            <button type="button" className="cancel-btn" onClick={() => window.history.back()}>
+            <button type="submit" className="submit-btn">
+              {isEditMode ? "수정하기" : "작성하기"}
+            </button>
+            <button type="button" className="cancel-btn" onClick={() => navigate(-1)}>
               취소
             </button>
           </div>

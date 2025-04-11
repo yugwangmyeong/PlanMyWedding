@@ -45,7 +45,11 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/community" element={<Community />} />
           <Route path="/community/write" element={<CommunityWrite />} />
-          <Route path="/community/:postId" element={<CommunityPost />} />
+
+            {/* 게시글 상세보기 바뀜 */}
+          <Route path="/community/post/:postId" element={<CommunityPost />} />
+          <Route path="/community/update/:id" element={<CommunityWrite />} />
+
           <Route path="recwedding" element={<RecWedding />} />
           <Route path="moneycontrol" element={<MoneyControl />} />
           <Route path="calendar" element={<Calender />} />
