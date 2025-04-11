@@ -6,7 +6,7 @@ const pictureDataList = [
       miniLoc: "center",
     },
     {
-      miniItem: "웨딩홀투어",
+      miniItem: "웨딩홀 투어",
       miniImg: process.env.PUBLIC_URL + "/images/mainpage-img/02.png",
       miniArticle: "우리가 약속할 그 공간을 찾고 있어요",
       miniLoc: "center",

@@ -5,8 +5,7 @@ import toggleMenuIcon from "./styles/assets/toggleMenu.png";
 
 const Header = () => {
   //토큰사용하기위해서 토큰을 login했을때 백엔드에서 받아와서 저장함
-  
-  
+
   const token = sessionStorage.getItem("token");
   console.log("프론트 토큰 확인:", token); // ✅ 콘솔에서 실제 토큰 출력
   const isLoggedIn = !!token;
@@ -81,14 +80,14 @@ const Header = () => {
         >
           <button onClick={toggleMypageMenu} className="mypage-btn">
             마이페이지
-            <img src={toggleMenuIcon} className="mypage-icon" alt="toggle menu" />
-            <img src={toggleMenuIcon} className="mypage-icon" alt="toggle menu" />
+            <img
+              src={toggleMenuIcon}
+              className="mypage-icon"
+              alt="toggle menu"
+            />
           </button>
 
-
           <div className="dropdown-menu">
-
-
             <Link to="/calender">일정관리</Link>
             <Link to="/moneycontrol">예산관리</Link>
           </div>
@@ -100,8 +99,11 @@ const Header = () => {
         >
           <button onClick={toggleRecommendMenu} className="mypage-btn">
             추천페이지
-            <img src={toggleMenuIcon} className="mypage-icon" alt="toggle menu" />
-            <img src={toggleMenuIcon} className="mypage-icon" alt="toggle menu" />
+            <img
+              src={toggleMenuIcon}
+              className="mypage-icon"
+              alt="toggle menu"
+            />
           </button>
           <div className="dropdown-menu">
             <Link to="/recwedding">웨딩홀</Link>
@@ -116,7 +118,7 @@ const Header = () => {
         {isLoggedIn ? (
           <>
             <span className="nickname">{username} 님</span>
-            <Link to="/Update">
+            <Link to="/setting">
               <span className="material-symbols-outlined">account_circle</span>
             </Link>
           </>

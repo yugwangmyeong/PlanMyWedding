@@ -1,11 +1,7 @@
 /* ✅ 기본 행 스타일 */
 .budget-row {
-<<<<<<< HEAD
   display: flex;
   
-=======
-  display: flex; 
->>>>>>> origin/main
   align-items: center;
   padding: 8px;
   border-radius: 10px;
@@ -24,21 +20,11 @@
   
 }
 
-<<<<<<< HEAD
 
 /* ✅ 열 스타일 */
 .budget-col {
   flex: 1;
   padding: 0 8px;
-=======
-/* ✅ 열 스타일 */
-.budget-col {
-  flex: 1;
-  text-align: center;
-  padding: 0 8px;
-  white-space: nowrap;
-  min-width: 80px;
->>>>>>> origin/main
 }
 
 /* ✅ input 스타일 */
@@ -67,10 +53,6 @@ select.popup-input {
   opacity: 1;
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/main
 select.popup-input:focus {
   border-color: #6690ff;
   box-shadow: 0 0 6px rgba(88, 130, 255, 0.3);
@@ -119,10 +101,6 @@ select.popup-input:focus {
   background-color: #fefeff;
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/main
 /* ✅ 숫자 스핀 버튼 제거 */
 .budget-col input[type="number"]::-webkit-inner-spin-button,
 .budget-col input[type="number"]::-webkit-outer-spin-button {
@@ -134,10 +112,7 @@ select.popup-input:focus {
   -moz-appearance: textfield;
 }
 
-<<<<<<< HEAD
  
-=======
->>>>>>> origin/main
 .input-animate-wrapper {
   transform: scale(0.95);
   opacity: 0;
@@ -155,11 +130,8 @@ select.popup-input:focus {
   }
 }
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> origin/main
 /* ✅ 삭제 버튼: 행 hover 시만 보이게 */
 .action-buttons-wrapper {
   width: 40px;

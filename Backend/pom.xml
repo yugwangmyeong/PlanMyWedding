@@ -42,8 +42,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-<<<<<<< HEAD
-=======
+
 
 		<!-- 💡 DB 연결을 위한 MySQL 드라이버 -->
 		<dependency>
@@ -60,7 +59,7 @@
 		</dependency>
 
 		<!-- 💡 개발 중 자동 리로딩 -->
->>>>>>> origin/main
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>

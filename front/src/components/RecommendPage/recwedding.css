@@ -13,11 +13,7 @@
 
   margin-top: 100px;
   background-color: #eff1f5;
-<<<<<<< HEAD
-  min-height: 100vh;
-=======
   min-height: 50vh;
->>>>>>> origin/main
   box-sizing: border-box;
 }
 
@@ -45,13 +41,8 @@
 }
 
 .progress-text {
-<<<<<<< HEAD
-  font-size: 16px;
-  color: #888;
-=======
   font-size: 30px;
   color: #efa1dc;
->>>>>>> origin/main
 }
 
 .progress-bar {
@@ -64,13 +55,7 @@
 
 .progress-fill {
   height: 100%;
-<<<<<<< HEAD
-  background-color: #b8b9b8;
-  transition: width 0.3s ease;
-}
-=======
   background-color: #efa1dc;
   transition: width 0.3s ease;
 }
 
->>>>>>> origin/main

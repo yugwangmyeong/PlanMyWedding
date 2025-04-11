@@ -6,32 +6,17 @@
     justify-content: center; 
     gap: 20px;             /* 사이 간격 */
     margin-top: 40px;
-<<<<<<< HEAD
-=======
-    max-width: 1200px;  /* 원하는 최대 너비 */
-    margin: 0 auto;     /* 가로 중앙 정렬 */
-    padding: 0 20px;    /* 화면이 좁아질 때도 좌우에 최소 여백 확보 */
-    box-sizing: border-box;
->>>>>>> origin/main
   }
   
   /* 왼쪽 박스 */
   .left-container {
-<<<<<<< HEAD
     width: 200px;
-=======
-    width: 300px;
->>>>>>> origin/main
     height: 700px;
     padding: 20px;
   }
   
   /* 오른쪽 박스 */
   .right-container {
-<<<<<<< HEAD
-=======
-    flex: 1;
->>>>>>> origin/main
     width: 500px;
     height: 700px;
     padding: 20px;

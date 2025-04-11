@@ -106,9 +106,6 @@
   .fade-in {
     animation: fadeIn 0.5s ease-in-out;
   }
-<<<<<<< HEAD
-  
-=======
   
 /* 중요도 질문용 수평 정렬 스타일 */
 .option-list-10 {
@@ -201,4 +198,3 @@
   margin-bottom: 10px;
   font-size: 0.95rem;
 }
->>>>>>> origin/main

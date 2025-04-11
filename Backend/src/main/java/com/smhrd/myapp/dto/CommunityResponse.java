@@ -16,5 +16,5 @@ public class CommunityResponse {
     private int commViews;
     private int commLikes;
     private Timestamp createdAt;
-    private String mbId;
+    private Long userId;
 }

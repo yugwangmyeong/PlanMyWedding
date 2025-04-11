@@ -9,5 +9,5 @@ public class CommunityRequest {
     private String commTitle;
     private String commContent;
     private String commFile;
-    private String mbId; // 로그인 사용자 ID
+    private Long userId; // 로그인 사용자 ID
 }

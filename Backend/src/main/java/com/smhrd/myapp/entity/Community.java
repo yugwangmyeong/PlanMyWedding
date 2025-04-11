@@ -4,10 +4,15 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.smhrd.myapp.User.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -45,6 +50,12 @@ public class Community {
     @Column(name = "COMM_LIKES")
     private int commLikes;
 
-    @Column(name = "MB_ID")
-    private String mbId;
+    // ✅ 작성자 (User) 연결
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "USER_ID", nullable = false) // 외래키 컬럼명 설정
+    private User user;
+    
+    
+   // @Column(name = "id")
+   // private String mbId;
 }

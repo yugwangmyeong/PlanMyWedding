@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 @Builder
 public class CommentResponse {
     private Long commentId;
-    private String mbId;
+    private Long userId;
     private String content;
     private Timestamp createdAt;
 }
