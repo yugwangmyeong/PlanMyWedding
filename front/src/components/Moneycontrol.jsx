@@ -99,25 +99,7 @@ const MoneyControl = () => {
     const [moved] = reordered.splice(result.source.index, 1);
     reordered.splice(result.destination.index, 0, moved);
 
-    const updatedWithSortOrder = reordered.map((item, index) => ({
-      ...item,
-      sortOrder: index + 1,
-    }));
-
-    const changedItems = updatedWithSortOrder.filter(
-      (item, i) => item.sortOrder !== items[i]?.sortOrder
-    );
-
-    setItems(updatedWithSortOrder);
-
-    try {
-      for (const item of changedItems) {
-        await updateBudgetItem(item);
-      }
-      console.log("✅ 변경된 항목만 정렬 업데이트 완료");
-    } catch (err) {
-      console.error("❌ 정렬 순서 업데이트 실패:", err);
-    }
+    setItems(reordered);
   };
 
   return (

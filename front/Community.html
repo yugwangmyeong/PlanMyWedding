@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>커뮤니티 게시판</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50">
+    <div class="max-w-6xl mx-auto p-6 flex">
+        <!-- 왼쪽 사이드바 -->
+        <aside class="w-1/4 p-4 bg-white rounded-lg shadow-md">
+            <h1 class="text-2xl font-bold mb-6">커뮤니티</h1>
+            <ul class="space-y-2">
+                <li class="p-2 bg-purple-100 rounded text-purple-700 font-semibold">전체</li>
+                <li class="p-2 hover:bg-gray-200 rounded">드레스</li>
+                <li class="p-2 hover:bg-gray-200 rounded">웨딩홀</li>
+                <li class="p-2 hover:bg-gray-200 rounded">메이크업</li>
+                <li class="p-2 hover:bg-gray-200 rounded">스튜디오</li>
+                <li class="p-2 hover:bg-gray-200 rounded">신혼여행</li>
+            </ul>
+        </aside>
+
+        <!-- 메인 컨텐츠 -->
+        <main class="flex-1 p-6">
+            <!-- 최신 사진 리뷰 -->
+            <h2 class="text-xl font-bold text-pink-600 mb-4">만족도 높은</h2>
+            <h3 class="text-2xl font-bold mb-4">고객님들의 최신 사진 리뷰</h3>
+            <div class="grid grid-cols-2 gap-4 mb-6">
+                <img src="https://via.placeholder.com/300" class="rounded-lg shadow-md">
+                <img src="https://via.placeholder.com/300" class="rounded-lg shadow-md">
+            </div>
+
+            <!-- 필터 버튼 -->
+            <div class="flex space-x-4 mb-4">
+                <button class="border border-gray-300 px-4 py-2 rounded-lg flex items-center">
+                    지역 ⬇
+                </button>
+                <button class="border border-gray-300 px-4 py-2 rounded-lg flex items-center">
+                    인기순 ⬇
+                </button>
+            </div>
+
+            <!-- 게시물 리스트 -->
+            <div class="bg-white p-4 rounded-lg shadow-md mb-4">
+                <p class="text-gray-500 text-sm">웨딩홀 - 드메특일정 광주</p>
+                <h3 class="font-semibold text-lg mt-1">광주 인기 웨딩홀 드메트 식장 후기</h3>
+                <p class="text-gray-600 text-sm mt-2">
+                    드메트는 인기가 많아서 예약이 어렵다고 해요. 1시간 마다 식이 열려서 분할한다고 했는데,
+                    저희 예식은 3월 토요일 오후 예식이었습니다. 명성이 자자한 드메트
+                </p>
+                <div class="flex text-gray-500 text-sm mt-3">
+                    👍 77 &nbsp; 💬 10
+                </div>
+            </div>
+        </main>
+
+        <!-- 글쓰기 버튼 -->
+        <div class="absolute top-6 right-6">
+            <button class="bg-pink-500 text-white px-4 py-2 rounded-lg flex items-center">
+                ✍ 글쓰기
+            </button>
+        </div>
+    </div>
+</body>
+</html>

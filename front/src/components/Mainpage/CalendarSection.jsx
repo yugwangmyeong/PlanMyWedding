@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import "./calendersection.css";
-import { getUserSchedules } from "../Schedule/utils/WeddingApi"; // 🔹 API import
+import '../styles/calendarsection.css';
 
 const renderDotEvent = (arg) => {
   return (
@@ -13,7 +12,7 @@ const renderDotEvent = (arg) => {
         justifyContent: "center",
         alignItems: "center",
         height: "10px",
-        marginTop: "4px",
+        marginTop: "4px"
       }}
       title={arg.event.title}
     >
@@ -116,6 +115,7 @@ const CalendarSection = () => {
       
     </div>
   );
-};
+    }
+    
 
-export default CalendarSection;
+export default CalendarSection

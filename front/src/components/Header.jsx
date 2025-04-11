@@ -64,7 +64,7 @@ const Header = () => {
   const username = isLoggedIn ? getUsernameFromToken(token) : null;
 
   return (
-    <header className="header">
+    <header className="main-header">
       <div
         className="logo"
         onClick={() => navigate("/mainpage")}
@@ -82,9 +82,12 @@ const Header = () => {
           <button onClick={toggleMypageMenu} className="mypage-btn">
             마이페이지
             <img src={toggleMenuIcon} className="mypage-icon" alt="toggle menu" />
+            <img src={toggleMenuIcon} className="mypage-icon" alt="toggle menu" />
           </button>
 
+
           <div className="dropdown-menu">
+
 
             <Link to="/calender">일정관리</Link>
             <Link to="/moneycontrol">예산관리</Link>
@@ -97,6 +100,7 @@ const Header = () => {
         >
           <button onClick={toggleRecommendMenu} className="mypage-btn">
             추천페이지
+            <img src={toggleMenuIcon} className="mypage-icon" alt="toggle menu" />
             <img src={toggleMenuIcon} className="mypage-icon" alt="toggle menu" />
           </button>
           <div className="dropdown-menu">
@@ -112,7 +116,7 @@ const Header = () => {
         {isLoggedIn ? (
           <>
             <span className="nickname">{username} 님</span>
-            <Link to="/setting">
+            <Link to="/Update">
               <span className="material-symbols-outlined">account_circle</span>
             </Link>
           </>

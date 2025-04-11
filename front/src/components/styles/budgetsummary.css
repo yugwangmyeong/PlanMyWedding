@@ -16,12 +16,19 @@
   }
   
   .divider {
+<<<<<<< HEAD
+=======
+    display: none;
+>>>>>>> origin/main
     width: 1px;
     height: 40px;
     background-color: #333;
   }
+<<<<<<< HEAD
   
 
+=======
+>>>>>>> origin/main
 
 .label {
     font-size: 14px;

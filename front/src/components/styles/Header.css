@@ -1,25 +1,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined");
 
-.header {
+.main-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: white;
-  padding: 0!important; /* ✅ 명시적으로 제거 */
+  padding: 10px 20px;
   color: #efa1dc;
-  margin-left: 300px;
-  margin-right: 300px;
-  margin-bottom: 30px;
-  
+  margin: 0 auto;
+  max-width: 1200px; /* 중앙정렬 + 가로 폭 제한 */
+  width: 100%;
+  box-sizing: border-box;
+  flex-wrap: wrap;        /* 너비 줄어들면 줄바꿈 허용 */
 }
 
 .logo {
   font-size: 1.7em;
   font-weight: bold;
   font-family: "Nanum Gothic", sans-serif;
-  font-style: normal;
-  margin-top: -7px;
-  text-align: left;
+  white-space: nowrap;     /* 로고 줄바꿈 방지 */
+  flex-shrink: 0;          /* 작아져도 줄어들지 않게 */
 }
 
 .material-symbols-outlined {
@@ -35,6 +35,10 @@
 
 .nav-links {
   display: flex;
+  flex-direction: row;     /* 가로 정렬 */
+  flex-wrap: nowrap;       /* 줄바꿈 방지 */
+  gap: 30px;               /* 항목 간 간격 */
+  align-items: center;
 }
 .nav-links2 {
   display: flex;

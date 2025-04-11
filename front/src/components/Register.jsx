@@ -179,35 +179,33 @@ const Register = () => {
           {/* 비밀번호 확인 입력칸 */}
           <div className="input-group">
             <label htmlFor="confirmPassword"></label>
-            <div style={{ position: "relative" }}>
-              <input
-                type={showPassword ? "text" : "password"} // 비밀번호 입력칸과 동일한 상태 사용
-                id="confirmPassword"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                placeholder="비밀번호를 한번 더 입력해주세요"
-                style={{ paddingLeft: "30px", width: "calc(100% - 65px)" }}
-              />
-              <img
-                src="/images/pw.jpg"
-                alt="비밀번호 아이콘"
-                style={{
-                  position: "absolute",
-                  left: "40px",
-                  top: "50%",
-                  transform: "translateY(-50%)",
-                  width: "20px",
-                  height: "20px",
-                  pointerEvents: "none",
-                }}
+            <div style={{ position: 'relative' }}>
+            <input
+              type={showPassword ? "text" : "password"}  // 비밀번호 입력칸과 동일한 상태 사용
+              id="confirmPassword"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              placeholder="비밀번호를 한번 더 입력해주세요"
+              style={{ paddingLeft: '30px', width: 'calc(100% - 65px)'}}
+            />
+            <img
+            src="/images/pw.jpg"
+            alt="비밀번호 아이콘"
+            style={{
+              position: 'absolute',
+              left: '40px',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              width: '20px',
+              height: '20px',
+              pointerEvents: 'none',
+              }}         
               />
             </div>
           </div>
 
           {error && <p className="error-message">{error}</p>}
-          <button type="submit" className="register-btn" >
-            회원가입
-          </button>
+          <button type="submit" className="register-btn">회원가입</button>
         </form>
       </div>
     </div>

@@ -30,12 +30,15 @@
   }
   
   .input-group input {
-    width: 100%;
+    width: 90%;
     padding: 10px;
-    font-size: 14px;
+    font-size: 11px;
     border: 1px solid #ccc;
     border-radius: 15px;
     box-sizing: border-box;
+    padding: 0.6rem;
+    /* 필요한 경우 max-width도 추가 */
+    max-width: 400px;
   }
   
   .error-message {

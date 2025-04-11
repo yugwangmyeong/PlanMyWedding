@@ -106,9 +106,9 @@ const BudgetSection = ({ summary }) => {
       </div>
 
       <div className="budget-chart-box">
-        <div className="budget-chart">
-          <Doughnut data={chartData} options={chartOptions} />
-        </div>
+      <div className='budget-chart'>
+        <Doughnut data={chartData} options={chartOptions} />
+      </div>
       </div>
     </div>
   );

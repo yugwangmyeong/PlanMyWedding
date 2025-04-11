@@ -112,6 +112,7 @@ const BudgetRow = ({ item, onUpdate, onDelete, isNew }) => {
           key={field.name}
         >
           {field.name === "budget" || field.name === "spent" ? (
+            // 예산/지출 항목에 "만원" 단위 붙이기
             <div className="input-with-unit">
               <input
                 ref={(el) => (inputRefs.current[index] = el)}
@@ -119,7 +120,7 @@ const BudgetRow = ({ item, onUpdate, onDelete, isNew }) => {
                 name={field.name}
                 value={form[field.name]}
                 onChange={handleChange}
-                onBlur={handleBlur}
+                onBlur={handleSave}
                 onKeyDown={(e) => handleKeyDown(e, index)}
                 placeholder={field.placeholder}
                 className="popup-input"
@@ -130,25 +131,25 @@ const BudgetRow = ({ item, onUpdate, onDelete, isNew }) => {
             <select
               ref={(el) => (inputRefs.current[index] = el)}
               name="manager"
-              value={form.manager || "select"}
+              value={form.manager}
               onChange={handleChange}
               onBlur={handleBlur}
               onKeyDown={(e) => handleKeyDown(e, index)}
               className="popup-input"
             >
-              <option value="선택">선택</option>
+              <option value="">선택</option>
               <option value="신랑">신랑</option>
               <option value="신부">신부</option>
               <option value="함께">함께</option>
             </select>
-          ) : field.name === "memo" ? (
+          ) :field.name === "memo" ? (
             <textarea
               ref={(el) => (inputRefs.current[index] = el)}
               name="memo"
               value={form.memo}
               onChange={handleChange}
-              onBlur={() => {
-                handleBlur();
+              onBlur={(e) => {
+                handleSave();
                 setMemoFocus(false);
               }}
               onFocus={() => setMemoFocus(true)}
