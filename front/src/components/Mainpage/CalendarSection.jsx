@@ -5,6 +5,14 @@ import interactionPlugin from "@fullcalendar/interaction";
 import './calendersection.css';
 import { getUserSchedules } from '../Schedule/utils/WeddingApi';
 const renderDotEvent = (arg) => {
+  const eventsOnSameDay = arg.view?.calendar?.getEvents()?.filter(
+    (event) => event.startStr === arg.event.startStr
+  );
+
+  // 이 날짜에서 첫 번째 이벤트가 아니면 렌더링하지 않음
+  if (eventsOnSameDay && eventsOnSameDay[0]?.id !== arg.event.id) {
+    return null;
+  }
   return (
     <div
       style={{
@@ -38,7 +46,8 @@ const CalendarSection = () => {
     const fetchAndFormatEvents = async () => {
       try {
         const data = await getUserSchedules();
-        const formatted = data.map((item) => ({
+        const formatted = data.map((item, index) => ({
+          id: `${item.scheduleDate}-${index}`, // 고유 ID 보장
           title: item.scheTitle,
           date: item.scheduleDate,
         }));
