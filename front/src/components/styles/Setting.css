@@ -1,18 +1,41 @@
 /*-----------------------큰 박스 CSS -------------------------*/
+<<<<<<< HEAD
+=======
+
+/* 전체 큰 박스 설정 */
+>>>>>>> origin/main
 .container-wrapper {
   display: flex;
   justify-content: center;
   gap: 20px;
   margin-top: 40px;
+<<<<<<< HEAD
 }
 
 .left-container {
   width: 200px;
+=======
+  max-width: 1200px;  /* 원하는 최대 너비 */
+  margin: 0 auto;     /* 가로 중앙 정렬 */
+  padding: 0 20px;    /* 화면이 좁아질 때도 좌우에 최소 여백 확보 */
+  box-sizing: border-box;
+}
+
+/* 왼쪽 박스 */
+.left-container {
+  width: 300px;
+>>>>>>> origin/main
   height: 700px;
   padding: 20px;
 }
 
+<<<<<<< HEAD
 .right-container {
+=======
+/* 오른쪽 박스 */
+.right-container {
+  flex: 1;
+>>>>>>> origin/main
   width: 500px;
   height: 700px;
   padding: 20px;
@@ -20,6 +43,10 @@
 
 
 /*-----------------------왼쪽 버튼 CSS -------------------------*/
+<<<<<<< HEAD
+=======
+/* 왼쪽 버튼 스타일 */
+>>>>>>> origin/main
 .current-btn {
   background-color: #fdd2e1;
   color: #ffffff;
@@ -32,7 +59,11 @@
   margin: 10px 0px 0px 0px;
 }
 
+<<<<<<< HEAD
 .btn1 {
+=======
+.member {
+>>>>>>> origin/main
   background-color: white;
   color: #333333;
   border: none;
@@ -43,7 +74,11 @@
   border-radius: 5px;
 }
 
+<<<<<<< HEAD
 .btn1:hover {
+=======
+.member:hover {
+>>>>>>> origin/main
   background-color: #f0f0f0;
 }
 

@@ -1,38 +1,22 @@
-.App {
-  text-align: center;
+/* 전체 앱의 최소, 최대 너비 설정 */
+.app-container {
+  max-width: 1980px;
+  min-width: 1080px;
+  margin: 0 auto;
+  padding: 0px;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* 기본 폰트 & 박스사이징 초기화 */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Pretendard', sans-serif;
+  box-sizing: border-box;
+  background-color: #fdfdfd;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* 하위 모든 엘리먼트에도 box-sizing 적용 */
+*, *::before, *::after {
+  box-sizing: inherit;
 }

@@ -10,7 +10,11 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.smhrd.myapp</groupId>
+<<<<<<< HEAD
 	<artifactId>SpringBootPJ-1</artifactId>
+=======
+	<artifactId>Backend</artifactId>
+>>>>>>> origin/main
 	<version>0.0.1-SNAPSHOT</version>
 	<name>SpringBootPJ-1</name>
 	<description>Demo project for Spring Boot</description>
@@ -39,7 +43,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/main
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
@@ -61,6 +68,18 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.33</version> <!-- 또는 네가 사용하는 버전 -->
 		</dependency>
+<<<<<<< HEAD
+=======
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
+		</dependency>
+>>>>>>> origin/main
 	</dependencies>
 
 	<build>
