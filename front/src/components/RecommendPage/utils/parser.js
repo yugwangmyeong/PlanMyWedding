@@ -11,3 +11,4 @@ export const parseWon = (str) => {
     const num = str.match(/\d+/); // 숫자만 뽑음
     return num ? parseInt(num[0]) : 0;
   };
+  

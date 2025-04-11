@@ -2,8 +2,14 @@ import React from "react";
 import "../styles/budgetsummary.css";
 
 const BudgetSummary = ({ items }) => {
-  const totalBudget = items.reduce((sum, item) => sum + Number(item.budget || 0), 0);
-  const totalSpent = items.reduce((sum, item) => sum + Number(item.spent || 0), 0);
+  const totalBudget = items.reduce(
+    (sum, item) => sum + Number(item.budget || 0),
+    0
+  );
+  const totalSpent = items.reduce(
+    (sum, item) => sum + Number(item.spent || 0),
+    0
+  );
   const remaining = totalBudget - totalSpent;
 
   return (

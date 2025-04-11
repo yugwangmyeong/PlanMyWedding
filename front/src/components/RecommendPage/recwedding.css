@@ -14,7 +14,7 @@
   
   margin-top:100px;
   background-color: #eff1f5;
-  min-height: 100vh;
+  min-height: 50vh;
   box-sizing: border-box;
     
   }
@@ -46,8 +46,8 @@
 }
 
 .progress-text {
-  font-size: 16px;
-  color: #888;
+  font-size: 30px;
+  color: #efa1dc;
 }
 
 .progress-bar {
@@ -60,6 +60,7 @@
 
 .progress-fill {
   height: 100%;
-  background-color: #b8b9b8;
+  background-color: #efa1dc;
   transition: width 0.3s ease;
 }
+

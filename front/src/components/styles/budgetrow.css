@@ -1,7 +1,6 @@
 /* ✅ 기본 행 스타일 */
 .budget-row {
-  display: flex;
-  
+  display: flex; 
   align-items: center;
   padding: 8px;
   border-radius: 10px;
@@ -20,11 +19,13 @@
   
 }
 
-
 /* ✅ 열 스타일 */
 .budget-col {
   flex: 1;
+  text-align: center;
   padding: 0 8px;
+  white-space: nowrap;
+  min-width: 80px;
 }
 
 /* ✅ input 스타일 */
@@ -52,7 +53,6 @@ select.popup-input {
   transform: translateY(0px);
   opacity: 1;
 }
-
 
 select.popup-input:focus {
   border-color: #6690ff;
@@ -102,7 +102,6 @@ select.popup-input:focus {
   background-color: #fefeff;
 }
 
-
 /* ✅ 숫자 스핀 버튼 제거 */
 .budget-col input[type="number"]::-webkit-inner-spin-button,
 .budget-col input[type="number"]::-webkit-outer-spin-button {
@@ -114,7 +113,6 @@ select.popup-input:focus {
   -moz-appearance: textfield;
 }
 
- 
 .input-animate-wrapper {
   transform: scale(0.95);
   opacity: 0;
@@ -131,8 +129,6 @@ select.popup-input:focus {
     opacity: 1;
   }
 }
-
-
 
 /* ✅ 삭제 버튼: 행 hover 시만 보이게 */
 .action-buttons-wrapper {

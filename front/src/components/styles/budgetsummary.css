@@ -16,12 +16,11 @@
   }
   
   .divider {
+    display: none;
     width: 1px;
     height: 40px;
     background-color: #333;
   }
-  
-
 
 .label {
     font-size: 14px;

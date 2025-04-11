@@ -1,23 +1,25 @@
 package com.smhrd.myapp.User;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import lombok.Data;
 
 @Entity
-@Table(name = "users")
+@Table(name = "T_MEMBER") // 💡 기존에 있는 테이블 이름으로 수정
 @Data
 public class User {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(nullable = false, unique = true)
-    private String username;
-    
-    @Column(nullable = false, unique = true)
+    @Column(name = "MB_ID") // 기존 테이블에서 ID 컬럼에 맞춤
     private String email;
 
-    @Column(nullable = false)
+    @Column(name = "MB_NICK")
+    private String username;
+
+    @Column(name = "MB_PW")
     private String password;
+
+    
 }

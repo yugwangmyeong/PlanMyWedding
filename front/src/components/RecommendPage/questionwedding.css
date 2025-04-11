@@ -107,50 +107,7 @@
   .fade-in {
     animation: fadeIn 0.5s ease-in-out;
   }
-
-  /* 중요도 질문용 스타일 */
-.option-list.horizontal {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 16px;
-  flex-wrap: nowrap;
-}
-
-.option-list.horizontal .label-text {
-  font-size: 0.8rem;
-  color: #666;
-  margin: 0 8px;
-}
-/* 선택지 라벨 정렬 */
-.option-list.horizontal .option-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-/* 라디오 버튼과 숫자 간격 조정 */
-.option-list.horizontal input[type="radio"] {
-  margin-bottom: 4px;
-}
   
-/* Worst / Best 텍스트 */
-.option-list.horizontal .label-text {
-  font-size: 0.8rem;
-  color: #666;
-  margin: 0 8px;
-}
-
-/* 기존 option-list가 세로 정렬일 경우, horizontal로 오버라이드 */
-.option-list.horizontal {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 12px;
-  flex-wrap: nowrap;
-}
-
 /* 중요도 질문용 수평 정렬 스타일 */
 .option-list-10 {
   display: flex;
@@ -191,4 +148,54 @@
   margin: 0 8px;
   font-weight: bold;
   color: #999;
+}
+
+.recommend-result {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 24px;
+  margin: 20px auto;
+  max-width: 600px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+.recommend-result h2 {
+  margin-bottom: 16px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.hall-card {
+  margin-bottom: 24px;
+  padding: 16px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #fafafa;
+}
+
+.hall-card h3 {
+  margin-top: 0;
+}
+
+.hall-card p {
+  margin: 4px 0;
+}
+
+.hall-card img {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 8px;
+}
+
+.price-list {
+  margin-top: 10px;
+  background-color: #f8f8f8;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.price-item {
+  margin-bottom: 10px;
+  font-size: 0.95rem;
 }

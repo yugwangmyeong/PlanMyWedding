@@ -1,5 +1,7 @@
 package com.smhrd.myapp.dto;
 
+import java.util.List;
+
 import lombok.Builder;
 import lombok.Data;
 
@@ -23,4 +25,6 @@ public class WeddingHallResponse {
     private int foodPrice;
     private String hallName;
     private int additionFee;
+    private Integer carParkCt;
+    private List<PriceResponse> prices;
 }

@@ -25,7 +25,7 @@ const BudgetSection = () => {
 
   const chartOptions = {
     responsive: true,
-  maintainAspectRatio: false, // ✅ 차트가 부모에 꽉 차도록
+    maintainAspectRatio: false, // ✅ 차트가 부모에 꽉 차도록
     plugins: {
       legend: {
         position: "right", // 👉 'top', 'bottom', 'left', 'right' 가능
@@ -77,9 +77,9 @@ const BudgetSection = () => {
       </div>
 
       <div className="budget-chart-box">
-      <div className='budget-chart'>
-        <Doughnut data={chartData} options={chartOptions} />
-      </div>
+        <div className="budget-chart">
+          <Doughnut data={chartData} options={chartOptions} />
+        </div>
       </div>
     </div>
   );
