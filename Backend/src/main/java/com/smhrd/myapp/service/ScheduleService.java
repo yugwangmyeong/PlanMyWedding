@@ -2,6 +2,7 @@ package com.smhrd.myapp.service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,20 +12,28 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import com.smhrd.myapp.User.Invitation;
 import com.smhrd.myapp.User.Schedule;
 import com.smhrd.myapp.User.User;
+import com.smhrd.myapp.repository.InvitationRepository;
 import com.smhrd.myapp.repository.ScheduleRepository;
+import com.smhrd.myapp.repository.ScheduleSharedUserRepository;
 import com.smhrd.myapp.repository.UserRepository;
 import com.smhrd.myapp.schedule.ScheduleRequestDTO;
 
 @Service
 public class ScheduleService {
-
-	 @Autowired
-	    private ScheduleRepository scheduleRepository;
-	 
-	 @Autowired
-	    private UserRepository userRepository;  // UserRepository 추가
+	
+		@Autowired
+		private InvitationRepository invitationRepository;
+	
+		 @Autowired
+		 private ScheduleRepository scheduleRepository;
+		 
+		 @Autowired
+		 private UserRepository userRepository;  // UserRepository 추가
+		 
+		 private ScheduleSharedUserRepository sharedRepo;
 
 	    public Schedule saveWeddingDate(Long userId, LocalDate weddingDate) {
 	    	// userId를 통해 User 객체를 조회
@@ -128,7 +137,9 @@ public class ScheduleService {
 	        scheduleRepository.delete(schedule);
 	    }
 
-
+	    
+	    
+	    //템플릿저장함
 	    public Schedule saveWeddingTemplate(Long userId, ScheduleRequestDTO dto) {
 	        User user = userRepository.findById(userId)
 	                .orElseThrow(() -> new RuntimeException("User not found"));
@@ -152,6 +163,37 @@ public class ScheduleService {
 
 	        return scheduleRepository.save(schedule);
 	    }
+	    
+	    
+	    public List<Schedule> getSharedSchedulesOnly(Long userId) {
+	        try {
+	            System.out.println("📌 공유 일정 조회 시작 - userId: " + userId);
+
+	            List<Invitation> acceptedInvites = invitationRepository.findAllByInviteeIdAndStatus(userId, "ACCEPTED");
+	            System.out.println("✅ 수락된 초대 수: " + (acceptedInvites != null ? acceptedInvites.size() : 0));
+
+	            List<Schedule> result = new ArrayList<>();
+
+	            for (Invitation invite : acceptedInvites) {
+	                System.out.println("➡️ 초대한 사람 ID: " + invite.getInviterId());
+	                List<Schedule> schedules = scheduleRepository.findByUserId(invite.getInviterId());
+	                result.addAll(schedules);
+	            }
+
+	            return result;
+
+	        } catch (Exception e) {
+	            System.out.println("❌ 공유 일정 조회 중 오류: " + e.getMessage());
+	            e.printStackTrace();
+	            return List.of(); // 예외 발생 시 빈 리스트 반환
+	        }
+	    }
+
+
+
+	    
+	    
+
 
 
 

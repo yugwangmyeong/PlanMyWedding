@@ -25,6 +25,7 @@ import {
   getUserSchedules,
   saveWeddingTemplate,
 } from "./utils/WeddingApi";
+import HandleInvite from "../HandleInvite";
 
 const locales = { ko };
 const localizer = dateFnsLocalizer({
@@ -162,12 +163,53 @@ const CalendarPage = () => {
     fetchEvents();
   }, []);
 
+  useEffect(() => {
+    const fetchSharedEvents = async () => {
+      const token = sessionStorage.getItem("token");
+  
+      try {
+        const response = await fetch("http://localhost:8081/boot/api/schedule/events/shared", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+  
+        if (response.ok) {
+          const data = await response.json();
+          console.log("📦 공유 일정 받아옴:", data);
+  
+          const formattedShared = data.map((item) => ({
+            title: item.scheTitle + " (공유)",
+            start: new Date(item.scheduleDate),
+            end: new Date(item.scheduleDate),
+            color: "#7C83FD", // 공유 일정은 보라색 계열로
+            scheIdx: item.scheIdx,
+            isShared: true,
+          }));
+  
+          // 기존의 공유 일정 제거하고 새로운 걸 추가
+          setEvents((prev) => [
+            ...prev.filter((e) => !e.isShared),
+            ...formattedShared,
+          ]);
+        } else {
+          console.error("❌ 공유 일정 불러오기 실패:", response.status);
+        }
+      } catch (err) {
+        console.error("❌ 공유 일정 fetch 오류:", err);
+      }
+    };
+  
+    fetchSharedEvents();
+  }, []);
+  
+
   return (
     <>
       <Header />
       <div className="title-wrap">
         <h1 className="maintitle">일정관리</h1>
-        <button className="invite-btn">+ 초대하기</button>
+        <HandleInvite />
       </div>
       <hr className="custom-line" />
       <div className="calendar-main">

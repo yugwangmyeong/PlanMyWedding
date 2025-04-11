@@ -155,3 +155,78 @@
   color: white;
   left: 10px;
 }
+
+/* 📦 초대 목록 전체 wrapper */
+.invite-list-box {
+  margin-top: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* 📦 초대 목록 전체 wrapper */
+.invite-list-box {
+  margin-top: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* 📄 초대 항목 리스트 */
+.invite-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.invite-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 14px;
+  color: #333;
+}
+
+.invite-item:last-child {
+  border-bottom: none;
+}
+
+/* 🎯 버튼 그룹 */
+.invite-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* ✅ 수락 버튼 */
+.accept-btn {
+  padding: 5px 10px;
+  background-color: #efa1dc;
+  color: white;
+  font-size: 13px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.accept-btn:hover {
+  background-color: #e18cbf;
+}
+
+/* ❌ 거절 버튼 */
+.reject-btn {
+  padding: 5px 10px;
+  background-color: #b0b0b0;
+  color: white;
+  font-size: 13px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.reject-btn:hover {
+  background-color: #999;
+}
