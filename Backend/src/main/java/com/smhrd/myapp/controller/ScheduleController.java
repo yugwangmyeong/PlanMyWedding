@@ -402,6 +402,57 @@ public class ScheduleController {
             return ResponseEntity.status(500).body("❌ 서버 오류: " + e.getMessage());
         }
     }
+    
+ // InvitationController.java
+    @GetMapping("/invites/shared-name")
+    public ResponseEntity<?> getSharedInviterName(@AuthenticationPrincipal CustomUserDetails userDetails) {
+        Long userId = userDetails.getUser().getId();
+
+        Optional<Invitation> accepted = invitationRepository
+            .findFirstByInviteeIdAndStatusOrderByCreatedAtDesc(userId, "ACCEPTED");
+
+        if (accepted.isPresent()) {
+            Long inviterId = accepted.get().getInviterId();
+            Optional<User> inviter = userRepository.findById(inviterId);
+            if (inviter.isPresent()) {
+                return ResponseEntity.ok(inviter.get().getUsername());
+            }
+        }
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("공유된 유저 없음");
+    }
+
+    
+    //공유일정 끊는 controller
+    @DeleteMapping("/invites/disconnect")
+    public ResponseEntity<?> disconnectSharedCalendar(@AuthenticationPrincipal CustomUserDetails userDetails) {
+        try {
+            Long userId = userDetails.getUser().getId();
+            invitationService.deleteAcceptedInvites(userId); // <- 초대 수락된 항목만 삭제
+            return ResponseEntity.ok("공유 일정 연결이 해제되었습니다.");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("공유 일정 해제 실패: " + e.getMessage());
+        }
+    }
+
+    
+    @GetMapping("/shared-username")
+    public ResponseEntity<String> getSharedUsername(@AuthenticationPrincipal CustomUserDetails userDetails) {
+        Long userId = userDetails.getUser().getId();
+
+        Optional<Invitation> invite = invitationRepository.findFirstByInviteeIdAndStatusOrderByCreatedAtDesc(userId, "ACCEPTED");
+
+        if (invite.isPresent()) {
+            Long inviterId = invite.get().getInviterId();
+            Optional<User> inviter = userRepository.findById(inviterId);
+
+            return inviter.map(user -> ResponseEntity.ok(user.getUsername()))
+                          .orElseGet(() -> ResponseEntity.status(HttpStatus.NOT_FOUND).body("초대한 사용자 없음"));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("공유된 일정 없음");
+        }
+    }
+
 
     
     

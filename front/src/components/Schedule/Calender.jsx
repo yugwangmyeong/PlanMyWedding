@@ -55,9 +55,15 @@ const CalendarPage = () => {
   const [highlightedDate, setHighlightedDate] = useState(null);
   const calendarRef = useRef();
   const handleCloseAlert = () => setIsAlertVisible(false);
+  const [isSharedUser, setIsSharedUser] = useState(false);
+
 
   // 🔹 일정 추가
   const handleAddEvent = async () => {
+    if (isSharedUser) {
+      alert("공유 일정 사용자로, 일정 추가는 불가능합니다.");
+      return;
+    }
     console.log("➕ 추가 시도 - title:", newTitle, "date:", newDate);
 
     const eventData = {
@@ -138,6 +144,10 @@ const CalendarPage = () => {
   };
 
   const handleAddEventModal = () => {
+    if (isSharedUser) {
+      alert("공유된 일정에서는 직접 추가할 수 없습니다.");
+      return;
+    }
     setSelectedEvent(null);
     setNewTitle("");
     setNewDate(new Date().toISOString().split("T")[0]);
@@ -175,10 +185,13 @@ const CalendarPage = () => {
           }));
   
           setEvents(formatted);
-          setSchedules([]); // 공유 일정만 표시하므로 개인 일정은 제거
+          setSchedules(sharedData); // ✅ 공유 일정도 아코디언에 보내기
+          setIsSharedUser(true); // ✅ 공유받은 사용자임
           return; // 💡 여기서 return 때문에 아래 코드는 실행되지 않음!
         }
       }
+
+      setIsSharedUser(false);
   
       // 2️⃣ 공유 일정 없으면 본인 일정 조회
       const myData = await getUserSchedules();
@@ -193,6 +206,7 @@ const CalendarPage = () => {
   
       setEvents(formattedMy);
       setSchedules(myData);
+      setIsSharedUser(false); // 👈 개인 사용자로 인식
   
     } catch (err) {
       console.error("❌ 전체 일정 로딩 실패:", err);
@@ -253,6 +267,11 @@ const CalendarPage = () => {
                   setIsModalOpen(true);
                 }}
                 onSelectEvent={(event) => {
+
+                  if (event.isShared) {
+                    alert("이 일정은 공유된 일정으로, 수정할 수 없습니다.");
+                    return;
+                  }
                   setSelectedEvent(event);
                   setNewTitle(event.title);
                   setNewDate(event.start.toISOString().substring(0, 10));

@@ -230,3 +230,21 @@
 .reject-btn:hover {
   background-color: #999;
 }
+
+
+.disconnect-btn {
+  background-color: #f06292; /* 핑크 계열 */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 10px rgba(240, 98, 146, 0.3);
+  margin-top: 12px;
+}
+
+.disconnect-btn:hover {
+  background-color: #ec407a; /* 더 진한 핑크 */
+}

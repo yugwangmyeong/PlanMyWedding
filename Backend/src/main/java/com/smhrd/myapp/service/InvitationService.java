@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 @Service
 public class InvitationService {
 
@@ -57,6 +59,14 @@ public class InvitationService {
         invitation.setStatus("REJECTED");
         invitationRepository.save(invitation);
     }
+
+    @Transactional
+    public void deleteAcceptedInvites(Long userId) {
+        List<Invitation> accepted = invitationRepository.findAllByInviteeIdAndStatus(userId, "ACCEPTED");
+        invitationRepository.deleteAll(accepted);
+        System.out.println("✅ 공유 해제됨: 수락된 초대 " + accepted.size() + "개 삭제 완료");
+    }
+
     
     
     

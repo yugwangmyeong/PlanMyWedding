@@ -17,4 +17,9 @@ public interface InvitationRepository extends JpaRepository<Invitation, Long> {
     List<Invitation> findAllByInviterId(Long inviterId);
     
     boolean existsByInviteeIdAndStatus(Long inviteeId, String status);
+    
+    Optional<Invitation> findFirstByInviteeIdAndStatusOrderByCreatedAtDesc(Long inviteeId, String status);
+
+    
+    
 }	

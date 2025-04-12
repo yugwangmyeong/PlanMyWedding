@@ -23,6 +23,8 @@ const WeddingAccordion = ({
   };
 
   useEffect(() => {
+    console.log("✅ 아코디언용 일정 데이터:", schedules);
+
     if (!weddingDate) return;
     const wedding = new Date(weddingDate);
     const today = new Date();
@@ -46,74 +48,89 @@ const WeddingAccordion = ({
   };
 
   const groupedSchedules = schedules.reduce((acc, schedule) => {
-    const category = schedule.scheCategory || "기타";
+    const category = schedule.scheCategory || "custom";
     if (!acc[category]) acc[category] = [];
     acc[category].push(schedule);
     return acc;
   }, {});
+  
+  const hasGroupedItems = Object.values(groupedSchedules).some((items) => items.length > 0);
+  
+
+  
+
+  const isSharedData =
+    schedules.length > 0 && schedules[0].scheTitle?.includes("(공유)");
 
   return (
     <div className="calendar-main-side">
-      <div className="sides-box">
-        <button className="sides-card pinks" onClick={onAddEvent}>
-          일정 추가
-        </button>
+  <div className="sides-box">
+    {/* ✅ 공유 데이터가 아닐 때만 표시 */}
+    {!isSharedData && (
+      <button className="sides-card pinks" onClick={onAddEvent}>
+        일정 추가
+      </button>
+    )}
 
-        <div className="sides-card blues">
-          일정 진행도 D-{daysLeft}
-          <br />
-          <progress
-            className="progress"
-            value={progress.toFixed(0)}
-            min="0"
-            max="100"
-          />
-          <span>{Math.round(progress)}%</span>
-        </div>
-
-        <div className="sides-card accordions">
-          {Object.entries(groupedSchedules).map(([category, items]) => (
-            <div key={category}>
-              <div
-                className={`accordions-title ${
-                  openCategory === category ? "active" : ""
-                }`}
-                onClick={() => toggleCategory(category)}
-              >
-                {categoryDisplayMap[category] || category}
-                <span>{openCategory === category ? "▲" : "▼"}</span>
-              </div>
-              {openCategory === category && (
-                <div className="accordions-content">
-                  {items.length > 0 ? (
-                    items.map((schedule) => (
-                      <button
-                        key={schedule.scheIdx}
-                        className="schedule-button"
-                        onClick={() => handleScheduleClick(schedule)}
-                      >
-                        {schedule.scheTitle}
-                        <small>
-                          {schedule.scheCategory === "wedding"
-                            ? new Date(schedule.reservedAt).toLocaleDateString(
-                                "ko-KR"
-                              )
-                            : new Date(
-                                schedule.scheduleDate
-                              ).toLocaleDateString("ko-KR")}
-                        </small>
-                      </button>
-                    ))
-                  ) : (
-                    <p className="text-sm text-gray-400">일정 없음</p>
-                  )}
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
+    <div className="sides-card blues">
+      일정 진행도 D-{daysLeft}
+      <br />
+      <progress
+        className="progress"
+        value={progress.toFixed(0)}
+        min="0"
+        max="100"
+      />
+      <span>{Math.round(progress)}%</span>
     </div>
+
+    <div className="sides-card accordions">
+  {hasGroupedItems ? (
+    Object.entries(groupedSchedules).map(([category, items]) => (
+      <div key={category}>
+        <div
+          className={`accordions-title ${openCategory === category ? "active" : ""}`}
+          onClick={() => toggleCategory(category)}
+        >
+          {categoryDisplayMap[category] || category}
+          <span>{openCategory === category ? "▲" : "▼"}</span>
+        </div>
+        {openCategory === category && (
+          <div className="accordions-content">
+            {items.length > 0 ? (
+              items.map((schedule) => (
+                <button
+                  key={schedule.scheIdx}
+                  className="schedule-button"
+                  onClick={() => handleScheduleClick(schedule)}
+                >
+                  {schedule.scheTitle}
+                  <small>
+                    {schedule.scheCategory === "wedding"
+                      ? new Date(schedule.reservedAt).toLocaleDateString("ko-KR")
+                      : new Date(schedule.scheduleDate).toLocaleDateString("ko-KR")}
+                  </small>
+                </button>
+              ))
+            ) : (
+              <p className="text-sm text-gray-400">일정 없음</p>
+            )}
+          </div>
+        )}
+      </div>
+    ))
+  ) : (
+    <div className="accordions-empty">
+      <p className="text-sm text-gray-400">표시할 일정이 없습니다.</p>
+    </div>
+  )}
+</div>
+
+
+    </div>
+  </div>
+
+
   );
 };
 

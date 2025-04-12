@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../styles/Setting.css";
 import { UseInviteActions } from "./UseInviteActions";
+import { fetchSharedUsername } from "./UseInviteActions";
 import Footer from "../Footer";
 
 const Setting = () => {
-  // useState 선언되어 있어야 함
   const [inviteList, setInviteList] = useState([]);
-  const { handleAcceptInvite, handleRejectInvite } = UseInviteActions({setInviteList});
+  const [sharedUsername, setSharedUsername] = useState(null);
+  const { handleAcceptInvite, handleRejectInvite, handleDisconnect } =
+    UseInviteActions({ setInviteList });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,9 +18,6 @@ const Setting = () => {
       alert("로그인이 필요합니다.");
       navigate("/login");
     } else {
-      console.log("현재 저장된 토큰:", token);
-
-      // ✅ 초대 목록 불러오기
       const fetchInvites = async () => {
         try {
           const response = await fetch(
@@ -32,8 +31,7 @@ const Setting = () => {
 
           if (response.ok) {
             const data = await response.json();
-            console.log("📩 받은 초대 목록:", data);
-            setInviteList(data); // ✅ 초대 목록 상태에 저장
+            setInviteList(data);
           } else {
             console.error("초대 목록 조회 실패:", response.status);
           }
@@ -42,31 +40,52 @@ const Setting = () => {
         }
       };
 
-      fetchInvites(); // 📡 API 호출
+      // ✅ fetchSharedUsername 결과 처리
+      const fetchUsername = async () => {
+        const username = await fetchSharedUsername();
+        setSharedUsername(username);
+      };
+
+      fetchInvites();
+      fetchUsername(); // ✅ async/await 처리
     }
   }, [navigate]);
 
   return (
     <div>
-      {/* 오른쪽 콘텐츠 */}
       <div className="right-container">
         <div className="title">설정</div>
         <div className="sub-title" style={{ marginTop: "30px" }}>
-          캘린더 설정
+          1
         </div>
 
-        <div className="setting-section">
-          <span className="setting-label">
-            정보공유(초대한사람/초대받은사람)
-          </span>
-          <div className="toggle-wrapper">
-            <input type="checkbox" id="chk1" className="toggle-input" />
-            <label htmlFor="chk1" className="toggle-label"></label>
+        {/* ✅ 공유 중인 사용자 정보 표시 */}
+        {sharedUsername && (
+          <div className="setting-section">
+            <span className="setting-label">
+              📎 현재 <strong>{sharedUsername}</strong> 님과 일정 공유 중입니다.
+            </span>
+            <button className="disconnect-btn" onClick={handleDisconnect}>
+              <span
+                className="material-symbols-outlined"
+                style={{ verticalAlign: "middle", marginRight: "8px" }}
+              >
+                link_off
+              </span>
+              공유 해제
+            </button>
           </div>
-        </div>
+        )}
 
-        {/* ✅ 초대 요청 목록은 따로 아래로 분리 */}
-        {/* ✅ 초대 요청 리스트 박스: setting-section 아래에 위치 */}
+        {!sharedUsername && (
+          <div className="setting-section">
+            <span className="setting-label">
+              🔒 현재 공유된 사용자가 없습니다.
+            </span>
+          </div>
+        )}
+
+        {/* ✅ 초대 요청 목록 */}
         <div className="invite-list-box">
           {inviteList.length === 0 ? (
             <p className="empty-invite">받은 초대 요청이 없습니다.</p>
