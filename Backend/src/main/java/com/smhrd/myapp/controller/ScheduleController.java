@@ -14,6 +14,7 @@ import ch.qos.logback.classic.Logger;
 import com.smhrd.myapp.User.User;
 import com.smhrd.myapp.dto.InvitationResponseDTO;
 import com.smhrd.myapp.dto.InviteRequestDTO;
+import com.smhrd.myapp.dto.ScheduleResponseDTO;
 import com.smhrd.myapp.repository.InvitationRepository;
 import com.smhrd.myapp.repository.ScheduleRepository;
 import com.smhrd.myapp.repository.ScheduleSharedUserRepository;
@@ -166,20 +167,10 @@ public class ScheduleController {
         }
     }
 
-    //일정조회
-    @GetMapping("/events")
-    public ResponseEntity<List<Schedule>> getUserSchedules(@AuthenticationPrincipal CustomUserDetails userDetails) {
-        Long userId = userDetails.getUser().getId(); // 현재 로그인된 유저 ID 가져오기
-        
-        try {
-            System.out.println("🔍 getUserSchedules()API - 유저 ID: " + userId);
-            List<Schedule> schedules = scheduleService.getSchedulesByUserId(userId);
-            return ResponseEntity.ok(schedules);
-        } catch (Exception e) {
-            System.out.println("❌ 일정 조회 중 오류 발생: " + e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
-    }
+    
+
+
+
     
  // ✅ 웨딩 템플릿 일정 저장
     @PostMapping("/weddingTemplate")
@@ -311,11 +302,28 @@ public class ScheduleController {
         return ResponseEntity.ok(response);
     }
 
+  //일정조회
+    @GetMapping("/events")
+    public ResponseEntity<List<ScheduleResponseDTO>> getEventsByRole(@AuthenticationPrincipal CustomUserDetails userDetails) {
+        Long userId = userDetails.getUser().getId();
+
+        try {
+            List<Schedule> schedules = scheduleService.getSchedulesByRole(userId);
+            List<ScheduleResponseDTO> response = schedules.stream()
+                .map(ScheduleResponseDTO::new)
+                .collect(Collectors.toList());
+
+            return ResponseEntity.ok(response);
+        } catch (Exception e) {
+            System.out.println("❌ 일정 조회 실패: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
     
     //초대받은 사람은 초대한사람의 일정을 공유
     @GetMapping("/events/shared")
     public ResponseEntity<?> getSharedSchedulesOnly(@AuthenticationPrincipal CustomUserDetails userDetails) {
-        System.out.println("📥 [API 호출됨] /events/shared");
+        System.out.println("📥 [공유 일정 API 호출됨] /events/shared");
 
         if (userDetails == null || userDetails.getUser() == null) {
             System.out.println("❌ [인증 실패] userDetails 또는 user null");
@@ -324,18 +332,36 @@ public class ScheduleController {
 
         try {
             Long userId = userDetails.getUser().getId();
-            System.out.println("✅ userId = " + userId);
+            System.out.println("✅ 로그인한 사용자 ID: " + userId);
 
             List<Schedule> schedules = scheduleService.getSharedSchedulesOnly(userId);
-            return ResponseEntity.ok(schedules);
+            System.out.println("📦 공유 일정 개수: " + schedules.size());
+
+            // ✨ 엔티티 → DTO로 변환
+            List<ScheduleResponseDTO> response = schedules.stream()
+                .map(ScheduleResponseDTO::new)
+                .collect(Collectors.toList());
+
+            return ResponseEntity.ok(response);
         } catch (Exception e) {
-            System.out.println("❌ [공유 일정 API 오류] " + e.getMessage());
+            System.out.println("❌ [공유 일정 오류] " + e.getMessage());
             e.printStackTrace();
             return ResponseEntity.status(500).body("서버 오류: " + e.getMessage());
         }
     }
 
-    
+    //초대받은 사람인지 여부 판단 controller
+    @GetMapping("/isInvitedUser")
+    public ResponseEntity<?> isInvitedUser(@AuthenticationPrincipal CustomUserDetails userDetails) {
+        if (userDetails == null || userDetails.getUser() == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(false);
+        }
+
+        Long userId = userDetails.getUser().getId();
+        boolean invited = invitationRepository.existsByInviteeIdAndStatus(userId, "ACCEPTED");
+        return ResponseEntity.ok(invited);
+    }
+
     
     //수락하는 controller
     @PostMapping("/invites/accept/{inviteId}")
@@ -377,6 +403,8 @@ public class ScheduleController {
         }
     }
 
+    
+    
     
 
 

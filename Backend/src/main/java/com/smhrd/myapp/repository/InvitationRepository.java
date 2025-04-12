@@ -15,4 +15,6 @@ public interface InvitationRepository extends JpaRepository<Invitation, Long> {
 
     // 초대한 유저가 보낸 초대 내역
     List<Invitation> findAllByInviterId(Long inviterId);
+    
+    boolean existsByInviteeIdAndStatus(Long inviteeId, String status);
 }	

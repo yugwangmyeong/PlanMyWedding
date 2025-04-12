@@ -3,6 +3,7 @@ package com.smhrd.myapp.User;
 import lombok.Data;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.time.LocalDate;
@@ -19,6 +20,7 @@ public class Schedule {
     @ManyToOne(fetch = FetchType.LAZY) // User와의 관계
     @JoinColumn(name = "user_id")  // user_id 외래 키
     @JsonManagedReference
+    @JsonIgnore
     private User user;  // 사용자 엔티티와 연관
 
     @Column(nullable = false)

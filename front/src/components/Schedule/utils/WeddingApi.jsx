@@ -117,10 +117,13 @@ export const updateSchedule = async (scheIdx, payload) => {
 
 
 // 유저의 모든 일정 가져오기
+
+
+// 개인 일정만 불러오는 API
 export const getUserSchedules = async () => {
   const token = sessionStorage.getItem("token");
 
-  const res = await axios.get(`${API_BASE}/events`, {
+  const res = await axios.get("http://localhost:8081/boot/api/schedule/events", {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -128,7 +131,6 @@ export const getUserSchedules = async () => {
 
   return res.data; // 일정 데이터 반환
 };
-
 
 
 

@@ -145,6 +145,60 @@ const CalendarPage = () => {
     setIsCompleted(false);
     setIsModalOpen(true);
   };
+
+
+  
+
+  const fetchAllEvents = async (setEvents, setSchedules) => {
+    const token = sessionStorage.getItem("token");
+    if (!token) return;
+  
+    try {
+      // 1️⃣ 공유 일정 먼저 시도
+      const sharedRes = await fetch("http://localhost:8081/boot/api/schedule/events/shared", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+  
+      if (sharedRes.ok) {
+        const sharedData = await sharedRes.json();
+        if (sharedData.length > 0) {
+          // 👉 공유 일정 존재 시
+          const formatted = sharedData.map((item) => ({
+            title: item.scheTitle + " (공유)",
+            start: new Date(item.scheduleDate),
+            end: new Date(item.scheduleDate),
+            color: "#7C83FD",
+            scheIdx: item.scheIdx,
+            isShared: true,
+          }));
+  
+          setEvents(formatted);
+          setSchedules([]); // 공유 일정만 표시하므로 개인 일정은 제거
+          return; // 💡 여기서 return 때문에 아래 코드는 실행되지 않음!
+        }
+      }
+  
+      // 2️⃣ 공유 일정 없으면 본인 일정 조회
+      const myData = await getUserSchedules();
+      const formattedMy = myData.map((item) => ({
+        title: item.scheTitle,
+        start: new Date(item.scheduleDate),
+        end: new Date(item.scheduleDate),
+        color: item.scheStatus === "완료" ? "#ff1493" : "#EFA1DC",
+        scheIdx: item.scheIdx,
+        isShared: false,
+      }));
+  
+      setEvents(formattedMy);
+      setSchedules(myData);
+  
+    } catch (err) {
+      console.error("❌ 전체 일정 로딩 실패:", err);
+    }
+  };
+  
   useEffect(() => {
     const checkWeddingDate = async () => {
       try {
@@ -158,50 +212,16 @@ const CalendarPage = () => {
         setIsAlertVisible(true);
       }
     };
-
+  
     checkWeddingDate();
-    fetchEvents();
+    fetchAllEvents(setEvents, setSchedules);
   }, []);
-
-  useEffect(() => {
-    const fetchSharedEvents = async () => {
-      const token = sessionStorage.getItem("token");
   
-      try {
-        const response = await fetch("http://localhost:8081/boot/api/schedule/events/shared", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
   
-        if (response.ok) {
-          const data = await response.json();
-          console.log("📦 공유 일정 받아옴:", data);
   
-          const formattedShared = data.map((item) => ({
-            title: item.scheTitle + " (공유)",
-            start: new Date(item.scheduleDate),
-            end: new Date(item.scheduleDate),
-            color: "#7C83FD", // 공유 일정은 보라색 계열로
-            scheIdx: item.scheIdx,
-            isShared: true,
-          }));
   
-          // 기존의 공유 일정 제거하고 새로운 걸 추가
-          setEvents((prev) => [
-            ...prev.filter((e) => !e.isShared),
-            ...formattedShared,
-          ]);
-        } else {
-          console.error("❌ 공유 일정 불러오기 실패:", response.status);
-        }
-      } catch (err) {
-        console.error("❌ 공유 일정 fetch 오류:", err);
-      }
-    };
+ 
   
-    fetchSharedEvents();
-  }, []);
   
 
   return (
@@ -329,7 +349,7 @@ const CalendarPage = () => {
         {weddingDate && (
           <WeddingTemplateAutoSaver
             weddingDate={weddingDate}
-            onSaved={fetchEvents}
+            onSaved={() => fetchAllEvents(setEvents, setSchedules)}
           />
         )}
 

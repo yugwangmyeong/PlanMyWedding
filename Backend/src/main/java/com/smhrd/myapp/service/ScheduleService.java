@@ -95,13 +95,31 @@ public class ScheduleService {
 	    
 	 // 유저 ID로 일정을 조회하는 메서드
 	    public List<Schedule> getSchedulesByUserId(Long userId) {
-	        // 유저 ID로 유저를 찾음
-	        User user = userRepository.findById(userId)
-	            .orElseThrow(() -> new RuntimeException("User not found"));
+	        try {
+	            System.out.println("📌 전체 일정 조회 시작 - userId: " + userId);
 
-	        // 유저가 가진 일정을 조회
-	        return scheduleRepository.findByUser(user);  // 여기서 ScheduleRepository의 findByUser를 사용
+	            // "다른 사람에게 초대받은" 경우만 체크
+	            boolean isInvitee = invitationRepository
+	                    .findAllByInviteeIdAndStatus(userId, "ACCEPTED")
+	                    .stream()
+	                    .anyMatch(invite -> !invite.getInviterId().equals(userId));
+
+	            System.out.println("🔎 진짜 초대받은 사람인지?: " + isInvitee);
+
+	            if (isInvitee) {
+	                return getSharedSchedulesOnly(userId);
+	            } else {
+	                return scheduleRepository.findByUserId(userId);
+	            }
+
+	        } catch (Exception e) {
+	            System.out.println("❌ 일정 조회 중 오류: " + e.getMessage());
+	            e.printStackTrace();
+	            return List.of();
+	        }
 	    }
+
+
 	    
 	    public Schedule updateSchedule(Long scheIdx, Long userId, ScheduleRequestDTO dto) {
 	        User user = userRepository.findById(userId)
@@ -165,28 +183,74 @@ public class ScheduleService {
 	    }
 	    
 	    
-	    public List<Schedule> getSharedSchedulesOnly(Long userId) {
+	    public List<Schedule> getSchedulesByRole(Long userId) {
 	        try {
-	            System.out.println("📌 공유 일정 조회 시작 - userId: " + userId);
+	            // 자신이 초대받은 적이 있는 경우만 공유 모드
+	            boolean hasReceivedInvite = invitationRepository.existsByInviteeIdAndStatus(userId, "ACCEPTED");
 
-	            List<Invitation> acceptedInvites = invitationRepository.findAllByInviteeIdAndStatus(userId, "ACCEPTED");
-	            System.out.println("✅ 수락된 초대 수: " + (acceptedInvites != null ? acceptedInvites.size() : 0));
-
-	            List<Schedule> result = new ArrayList<>();
-
-	            for (Invitation invite : acceptedInvites) {
-	                System.out.println("➡️ 초대한 사람 ID: " + invite.getInviterId());
-	                List<Schedule> schedules = scheduleRepository.findByUserId(invite.getInviterId());
-	                result.addAll(schedules);
+	            if (hasReceivedInvite) {
+	                // 초대받은 사용자 → 공유 일정만 보기
+	                return getSharedSchedulesOnly(userId);
+	            } else {
+	                // 초대한 사용자 또는 일반 사용자 → 본인 일정 보기
+	                return scheduleRepository.findByUserId(userId);
 	            }
 
-	            return result;
-
 	        } catch (Exception e) {
-	            System.out.println("❌ 공유 일정 조회 중 오류: " + e.getMessage());
+	            System.out.println("❌ 전체 일정 조회 오류: " + e.getMessage());
 	            e.printStackTrace();
-	            return List.of(); // 예외 발생 시 빈 리스트 반환
+	            return List.of();
 	        }
+	    }
+	    
+	 // 개인 일정만 반환
+	    public List<Schedule> getMyOwnSchedules(Long userId) {
+	        return scheduleRepository.findByUserId(userId);
+	    }
+
+	    
+	 // ScheduleService.java
+	    public List<Schedule> getSharedSchedulesOnly(Long userId) {
+	        System.out.println("📌 공유 일정 조회 시작 - userId: " + userId);
+
+	        List<Invitation> acceptedInvites = invitationRepository.findAllByInviteeIdAndStatus(userId, "ACCEPTED");
+	        System.out.println("✅ 수락된 초대 수: " + acceptedInvites.size());
+
+	        List<Schedule> result = new ArrayList<>();
+
+	        for (Invitation invite : acceptedInvites) {
+	            Long inviterId = invite.getInviterId();
+	            System.out.println("➡️ 초대한 사람 ID: " + inviterId);
+
+	            List<Schedule> schedules = scheduleRepository.findByUserId(inviterId);
+	            System.out.println("🗂 " + inviterId + "의 일정 수: " + schedules.size());
+
+	            result.addAll(schedules);
+	        }
+
+	        return result;
+	    }
+
+	    
+	    public List<Schedule> getSharedSchedulesFromInviters(Long userId) {
+	        System.out.println("📌 공유 일정 조회 시작 - userId: " + userId);
+
+	        List<Invitation> acceptedInvites = invitationRepository.findAllByInviteeIdAndStatus(userId, "ACCEPTED");
+	        System.out.println("✅ 수락된 초대 수: " + acceptedInvites.size());
+
+	        List<Schedule> result = new ArrayList<>();
+
+	        for (Invitation invite : acceptedInvites) {
+	            Long inviterId = invite.getInviterId();
+	            System.out.println("➡️ 초대한 사람 ID: " + inviterId);
+
+	            List<Schedule> schedules = scheduleRepository.findByUserId(inviterId);
+	            System.out.println("🗂 " + inviterId + "의 일정 수: " + schedules.size());
+
+	            result.addAll(schedules);
+	        }
+
+	        return result;
 	    }
 
 
