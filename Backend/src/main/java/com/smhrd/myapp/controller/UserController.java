@@ -1,19 +1,27 @@
 package com.smhrd.myapp.controller;
 
-import com.smhrd.myapp.LoginRequest.JwtUtil;
-import com.smhrd.myapp.LoginRequest.LoginRequest;
-import com.smhrd.myapp.User.User;
-import com.smhrd.myapp.service.UserService;
-
-import lombok.RequiredArgsConstructor;
-
 import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.smhrd.myapp.LoginRequest.JwtUtil;
+import com.smhrd.myapp.LoginRequest.LoginRequest;
+import com.smhrd.myapp.User.User;
+import com.smhrd.myapp.service.UserService;
+
+import lombok.RequiredArgsConstructor;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
@@ -108,8 +116,18 @@ public class UserController {
                                  .body("회원 탈퇴 중 서버 오류 발생");
         }
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
-    // ✅ 프론트가 이메일 → userId 매핑 요청 시 사용하는 API
+    /* ✅ 프론트가 이메일 → userId 매핑 요청 시 사용하는 API
     @GetMapping("/user/email/{email}")
     public ResponseEntity<?> getUserIdByEmail(@PathVariable String email) {
         User user = userService.findByEmail(email);
@@ -118,4 +136,20 @@ public class UserController {
         }
         return ResponseEntity.ok(Map.of("userId", user.getId()));
     }
+    */
+    
+    @GetMapping("/user/email/{email}")
+    public ResponseEntity<?> getUserIdByEmail(@PathVariable String email) {
+        User user = userService.findByEmail(email);
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        LoginRequest dto = new LoginRequest();
+        dto.setUserId(user.getId());
+        dto.setUsername(user.getUsername()); // 닉네임
+
+        return ResponseEntity.ok(dto);
+    }
+    
 }

@@ -3,6 +3,7 @@ package com.smhrd.myapp.service;
 import java.sql.Timestamp;
 import java.util.List;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.smhrd.myapp.User.User;
@@ -12,8 +13,7 @@ import com.smhrd.myapp.entity.Community;
 import com.smhrd.myapp.repository.CommunityRepository;
 import com.smhrd.myapp.repository.UserRepository;
 
-import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Sort; 
+import lombok.RequiredArgsConstructor; 
 
 @Service
 @RequiredArgsConstructor
@@ -21,6 +21,8 @@ public class CommunityService {
 
     private final CommunityRepository communityRepository;
     private final UserRepository userRepository;
+    
+ 
 
     public List<Community> findAllPosts() {
         return communityRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
@@ -52,6 +54,7 @@ public class CommunityService {
                 .commLikes(0)
                 .commViews(0)
                 .createdAt(new Timestamp(System.currentTimeMillis()))
+                .commFilePath(dto.getCommFilePath())
                 .user(user)
                 .build();
 
@@ -64,6 +67,7 @@ public class CommunityService {
         post.setCommTitle(dto.getCommTitle());
         post.setCommContent(dto.getCommContent());
         post.setCommFile(dto.getCommFile());
+        post.setCommFilePath(dto.getCommFilePath());
         post.setCommService(dto.getCommService());
         post.setCommRegion(dto.getCommRegion());
 
@@ -72,5 +76,10 @@ public class CommunityService {
 
     public void deletePost(Long id) {
         communityRepository.deleteById(id);
+    }
+    
+    
+    public Community save(Community post) {
+        return communityRepository.save(post);
     }
 }

@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -42,9 +43,15 @@ public class Community {
     @Column(name = "COMM_CONTENT")
     private String commContent;
 
+    
+    
+    // ✅ 이미지 BLOB 저장
+    @Lob
     @Column(name = "COMM_FILE")
-    private String commFile;
-
+    private byte[] commFile;
+    
+    
+    
     @Column(name = "CREATED_AT")
     private Timestamp createdAt;
 
@@ -60,7 +67,8 @@ public class Community {
     @Column(name = "COMM_REGION")
     private String commRegion;
 
-    
+    @Column(name = "comm_file_path")
+    private String commFilePath;
     
     
     

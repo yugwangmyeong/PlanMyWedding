@@ -8,7 +8,7 @@ const CommunityWrite = () => {
   const pictureIcon = "/images/picture.jpg";
   const navigate = useNavigate();
   const location = useLocation();
-  const { id } = useParams(); // 수정할 경우 postId
+  const { id } = useParams();
   const editingPost = location.state?.post;
   const isEditMode = !!editingPost;
 
@@ -18,10 +18,12 @@ const CommunityWrite = () => {
   const [region, setRegion] = useState(editingPost?.commRegion || "");
   const [images, setImages] = useState([]);
   const [userId, setUserId] = useState(null);
-
   const token = sessionStorage.getItem("token");
 
-  // 이메일 추출
+  const maxTitleLength = 100;
+  const maxContentLength = 2000;
+  const maxImageCount = 1;
+
   const getEmailFromToken = (token) => {
     if (!token) return null;
     try {
@@ -32,10 +34,9 @@ const CommunityWrite = () => {
     }
   };
 
-  // 이메일로 userId 조회
   const getUserIdFromEmail = async (email) => {
     try {
-      const res = await axios.get(`http://localhost:8081/boot/api/user/email/${email}`);
+      const res = await axios.get(`http://localhost:8081/boot/api/community/user/email/${email}`);
       return res.data.userId;
     } catch (err) {
       console.error("📛 userId 조회 실패:", err);
@@ -55,74 +56,81 @@ const CommunityWrite = () => {
     fetchUserId();
   }, [token]);
 
-  // 이미지 업로드
-  const handleImageUpload = async (file) => {
-    const formData = new FormData();
-    formData.append("file", file);
-    try {
-      const res = await axios.post("http://localhost:8081/boot/api/community/upload", formData);
-      return res.data;
-    } catch (err) {
-      console.error("이미지 업로드 실패", err);
-      return null;
-    }
-  };
-
-  // 작성 or 수정 제출
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    if (!title.trim() || !content.trim()) {
-      alert("제목과 내용을 입력해주세요.");
-      return;
-    }
-
-    if (!service || !region) {
-      alert("서비스와 지역을 선택해주세요.");
-      return;
-    }
-
-    const imageUrls = await Promise.all(images.map((img) => handleImageUpload(img)));
-
-    const requestData = {
-      commTitle: title,
-      commContent: content,
-      commFile: imageUrls[0] || editingPost?.commFile || "",
-      userId: userId,
-      commService: service,
-      commRegion: region
-    };
-
-    console.log("📦 최종 요청 데이터:", requestData);
-
-    try {
-      if (isEditMode) {
-        await axios.put(`http://localhost:8081/boot/api/community/${id}`, requestData);
-        alert("게시글이 수정되었습니다!");
-        navigate(`/community/post/${id}`);
-      } else {
-        const res = await axios.post("http://localhost:8081/boot/api/community/write", requestData);
-        alert("게시글이 등록되었습니다!");
-        if (res.data && res.data.commIdx) {
-          navigate(`/community/post/${res.data.commIdx}`);
-        } else {
-          console.error("commIdx가 응답에 없습니다:", res.data);
-        }
-      }
-    } catch (error) {
-      console.error("요청 실패:", error);
-      alert("게시글 처리 중 오류 발생");
-    }
-  };
-
-  // 이미지 선택
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
-    if (images.length + files.length > 15) {
-      alert("최대 15개까지 업로드할 수 있어요.");
+    const maxFileSize = 10 * 1024 * 1024; // 10MB
+
+    if (files.some(file => file.size > maxFileSize)) {
+      alert("파일 크기는 최대 10MB까지 업로드 가능합니다.");
       return;
     }
+
+    if (images.length + files.length > maxImageCount) {
+      alert(`최대 ${maxImageCount}개까지 업로드할 수 있어요.`);
+      return;
+    }
+
     setImages((prev) => [...prev, ...files]);
+  };
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData();
+  formData.append("title", title);
+  formData.append("content", content);
+  formData.append("userId", userId);
+  formData.append("service", service);
+  formData.append("region", region);
+
+  if (images.length > 0) {
+    formData.append("file", images[0]);  // 이미지 파일 추가
+  }
+
+  try {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const res = await axios.put(
+      `http://localhost:8081/boot/api/community/${id}`,  // 수정하려는 게시글 ID
+      formData,
+      config
+    );
+
+    alert("게시글이 수정되었습니다!");
+    if (res.data && res.data.commIdx) {
+      navigate(`/community/post/${res.data.commIdx}`);
+    } else {
+      console.error("commIdx가 응답에 없습니다:", res.data);
+    }
+  } catch (error) {
+    console.error("요청 실패:", error);
+    alert("게시글 수정 중 오류 발생");
+  }
+};
+
+  
+
+  const handleDelete = async () => {
+    if (window.confirm("정말 삭제하시겠습니까?")) {
+      try {
+        const config = { headers: { Authorization: `Bearer ${token}` } };
+        const res = await axios.delete(`http://localhost:8081/boot/api/community/${id}`, config);
+
+        if (res.status === 200) {
+          alert("삭제 완료!");
+          navigate("/community");
+        } else {
+          alert("삭제 실패!");
+          console.error("삭제 오류:", res);
+        }
+      } catch (err) {
+        alert("삭제 실패!");
+        console.error("삭제 오류:", err);
+      }
+    }
   };
 
   return (
@@ -154,23 +162,14 @@ const CommunityWrite = () => {
 
             <select value={region} onChange={(e) => setRegion(e.target.value)} className="option-select" required>
               <option value="">지역</option>
-              <option value="서울특별시">서울특별시</option>
-              <option value="부산광역시">부산광역시</option>
-              <option value="대구광역시">대구광역시</option>
-              <option value="인천광역시">인천광역시</option>
-              <option value="광주광역시">광주광역시</option>
-              <option value="대전광역시">대전광역시</option>
-              <option value="울산광역시">울산광역시</option>
-              <option value="세종특별자치시">세종특별자치시</option>
-              <option value="경기도">경기도</option>
-              <option value="강원특별자치도">강원특별자치도</option>
-              <option value="충청북도">충청북도</option>
-              <option value="충청남도">충청남도</option>
-              <option value="전라북도">전라북도</option>
-              <option value="전라남도">전라남도</option>
-              <option value="경상북도">경상북도</option>
-              <option value="경상남도">경상남도</option>
-              <option value="제주특별자치도">제주특별자치도</option>
+              {[
+                "서울특별시", "부산광역시", "대구광역시", "인천광역시",
+                "광주광역시", "대전광역시", "울산광역시", "세종특별자치시",
+                "경기도", "강원특별자치도", "충청북도", "충청남도",
+                "전라북도", "전라남도", "경상북도", "경상남도", "제주특별자치도"
+              ].map((r) => (
+                <option key={r} value={r}>{r}</option>
+              ))}
             </select>
           </div>
 
@@ -187,7 +186,7 @@ const CommunityWrite = () => {
           <div className="image-upload-container">
             <label htmlFor="imageUpload" className="image-upload-label">
               <img src={pictureIcon} alt="사진 아이콘" className="image-icon" />
-              <span>{images.length}/15</span>
+              <span>{images.length}/1</span>
             </label>
             <input
               type="file"
@@ -213,12 +212,24 @@ const CommunityWrite = () => {
           )}
 
           <div className="button-group">
-            <button type="submit" className="submit-btn">
-              {isEditMode ? "수정하기" : "작성하기"}
-            </button>
-            <button type="button" className="cancel-btn" onClick={() => navigate(-1)}>
-              취소
-            </button>
+            <div className="left-buttons">
+              <button type="submit" className="submit-btn">
+                {isEditMode ? "수정하기" : "작성하기"}
+              </button>
+              <button type="button" className="cancel-btn" onClick={() => navigate(-1)}>
+                취소
+              </button>
+            </div>
+
+            {isEditMode && (
+              <button
+                type="button"
+                className="delete-btn"
+                onClick={handleDelete}
+              >
+                🗑 삭제
+              </button>
+            )}
           </div>
         </form>
       </div>

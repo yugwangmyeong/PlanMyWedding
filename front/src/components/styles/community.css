@@ -140,6 +140,7 @@ nav a {
   min-height: 100vh;
   background-color: #fff;
   font-family: "Nanum Gothic", sans-serif;
+  overflow-x: hidden; 
 }
 
 .community-content {
@@ -151,19 +152,24 @@ nav a {
 }
 
 .left-sidebar {
-  width: 200px;
+  width: 100%;
+  top: 100px;           /* 상단 여백 조절 */
+  left: 40px;           /* 좌측 여백 조절 */
   margin-right: 30px;
+  margin-top: 20px;
+  overflow-x: hidden; 
 }
 
 .left-sidebar h2 {
-  font-size: 28px;
+  width: 100%;
+  font-size: 18px;
   font-weight: bold;
   margin: 0 0 10px;
   color: #333;
 }
 
 .community-divider {
-  width: 550%;
+  width: 1000%;
   height: 1px;
   background-color: #ddd; /* 연한 회색으로 설정 */
   border: none;
@@ -211,7 +217,7 @@ nav a {
 
 .community-main-wrapper {
   /* 실제 커뮤니티 메인 콘텐츠 영역 */
-  width: 80%;
+  width: 98%;
   margin: 0 auto;
   padding: 20px 0;
 }
@@ -235,7 +241,7 @@ nav a {
 }
 
 .community-title p:first-child {
-  margin-top: 60px;
+  margin-top: 0px;
   font-size: 18px;       /* '만족도 높은'은 조금 작게 */
   font-weight: normal;   /* 기본 굵기 */
 }

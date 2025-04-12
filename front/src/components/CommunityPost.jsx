@@ -39,14 +39,18 @@ const CommunityPost = () => {
 
   const getUserIdFromEmail = async (email) => {
     try {
+      if (!email) {
+        console.error("이메일이 없습니다.");
+        return null;
+      }
       const res = await axios.get(`${API_BASE}/user/email/${email}`);
-      console.log("📦 게시글 정보:", post);
-      console.log("🧑 작성자:", post.user);
-      console.log("📦 현재 글의 작성자 userId:", post?.user?.id);
-      console.log("👤 현재 로그인한 userId:", currentUserId);
-      console.log("✅ post.user.username:", res.data.user?.username);
-      return res.data.userId;
-      
+      if (res.data && res.data.userId) {
+        console.log("📦 유저 정보:", res.data);
+        return res.data.userId;
+      } else {
+        console.error("📛 유저 정보를 찾을 수 없습니다.");
+        return null;
+      }
     } catch (err) {
       console.error("📛 userId 조회 실패:", err);
       return null;
@@ -87,12 +91,28 @@ const CommunityPost = () => {
 
   useEffect(() => {
     const init = async () => {
-      await fetchPost(); // post 상태 업데이트
-      fetchComments();
-      initUser(); // 로그인한 사용자 정보
+      await fetchPost(); // 게시글 먼저 불러오기
+      await fetchComments(); // 댓글 불러오기
     };
     init();
-  }, [postId]);
+  }, [postId]); // ✅ post는 제거하여 무한 호출 방지
+  
+  // post가 로드된 이후 user 정보 초기화
+  useEffect(() => {
+    const setupUser = async () => {
+      if (post?.user && token) {
+        const userInfo = getEmailFromToken(token);
+        if (!userInfo) return;
+  
+        setCurrentUsername(userInfo.username);
+  
+        const userId = await getUserIdFromEmail(userInfo.email);
+        setCurrentUserId(userId);
+      }
+    };
+  
+    setupUser();
+  }, [post, token]); // ✅ post 바뀐 후에 user 초기화
 
   const handleLike = async () => {
     try {
@@ -130,92 +150,79 @@ const CommunityPost = () => {
     }
   };
 
-  const handleDelete = async () => {
-    if (window.confirm("정말 삭제하시겠습니까?")) {
-      try {
-        await axios.delete(`${BASE_URL}/${postId}`);
-        alert("삭제 완료!");
-        navigate("/community");
-      } catch (err) {
-        alert("삭제 실패!");
-      }
+  
+
+
+  const handleEdit = () => {
+    if (Number(currentUserId) !== post.user?.id) {
+      alert("작성자만 수정할 수 있습니다.");
+      return;
     }
+    navigate(`/community/update/${post.commIdx}`, { state: { post } });
   };
 
   return (
     <div className="community-container">
       <Header />
+
       <div className="community-post-wrapper">
-        <h2 className="community-heading">커뮤니티</h2>
-        <button onClick={() => navigate(`/community/update/${post.commIdx}`, { state: { post } })}>
-          ✏️ 수정
-        </button>
-        {post ? (
-  <>
-    <h2 className="post-title">{post.commTitle}</h2>
-
-    <div className="post-metaPost">
-      <span className="post-service">작성자: {post.user?.username || "익명"}</span>
-      <span>조회수: {post.commViews}</span>
-      <span>좋아요: {likes}</span>
-    </div>
-
-    {post.commFile && (
-      <div className="post-images">
-        <img src={post.commFile} alt="업로드 이미지" className="post-image-preview" />
-      </div>
-    )}
-
-    <div className="post-content">
-      <p>{post.commContent}</p>
-    </div>
-
-    <div className="post-interactions">
-      <div className="like-section">
-        <button className="like-btn" onClick={handleLike}>❤️ 좋아요</button>
-      </div>
-
-      {/* 작성자만 보이는 수정/삭제 버튼 */}
-      {currentUserId === post.user?.id && (
-        <div className="edit-buttons">
-          <button
-            className="edit-btn"
-            onClick={() => navigate(`/community/update/${post.commIdx}`, { state: { post } })}
-          >
-            ✏️ 수정
-          </button>
-          <button className="delete-btn" onClick={handleDelete}>🗑 삭제</button>
+        <div className="community-post-header">
+          <h2 className="community-heading">커뮤니티</h2>
+          <button className="edit-button" onClick={handleEdit}>✏️ 수정</button>
         </div>
-      )}
-    </div>
 
-            <hr className="divider-line" />
-            <div className="comment-list">
-              <h3>댓글</h3>
-              {comments.length > 0 ? (
-                comments.map((c, i) => (
-                  <div key={i} className="comment-item">
-                    <span className="comment-author">{c.username || c.user?.username || "익명"}</span>
-                    <span>{c.content}</span>
-                  </div>
-                ))
-              ) : (
-                <p>아직 댓글이 없습니다.</p>
-              )}
+        {post ? (
+          <>
+            <h2 className="post-title">{post.commTitle}</h2>
+
+            <div className="post-meta">
+              <span className="post-author">작성자: {post.user?.username || "익명"}</span>
+              <span className="post-views">조회수: {post.commViews}</span>
+              <span className="post-likes">좋아요: {likes}</span>
             </div>
 
-            <form onSubmit={handleCommentSubmit} className="comment-form">
-              <input
-                type="text"
-                placeholder="댓글을 입력하세요"
-                value={newComment}
-                onChange={(e) => setNewComment(e.target.value)}
-              />
-              <button type="submit">댓글 작성</button>
-            </form>
+            
+            <div className="post-content">
+              <p>{post.commContent}</p>
+            </div>
+
+            <div className="post-interactions">
+              <button className="like-btn" onClick={handleLike}>❤️ 좋아요</button>
+            </div>
+
+            <hr className="divider-line" />
+
+            <div className="comment-section">
+              <h3>댓글</h3>
+
+              <div className="comment-list">
+                {comments.length > 0 ? (
+                  comments.map((c, i) => (
+                    <div key={i} className="comment-item">
+                      <span className="comment-author">
+                        {c.username || c.user?.username || "익명"}
+                      </span>
+                      <span className="comment-content">{c.content}</span>
+                    </div>
+                  ))
+                ) : (
+                  <p className="no-comments">아직 댓글이 없습니다.</p>
+                )}
+              </div>
+
+              <form onSubmit={handleCommentSubmit} className="comment-form">
+                <input
+                  type="text"
+                  placeholder="댓글을 입력하세요"
+                  value={newComment}
+                  onChange={(e) => setNewComment(e.target.value)}
+                />
+                <button type="submit">댓글 작성</button>
+              </form>
+            </div>
           </>
         ) : (
-          <p>게시글을 불러오는 중입니다...</p>
+          <p className="loading-post">게시글을 불러오는 중입니다...</p>
         )}
       </div>
     </div>
