@@ -154,11 +154,17 @@ const Community = () => {
                   >
                     <article className="post-item">
                       <div className="post-info">
-                        <h3 className="post-title">{post.commTitle}</h3>
+                        <div className="post-title-container">
+                          <h3 className="post-title">{post.commTitle}</h3>
+                          <span className="post-date">
+                            {new Date(post.createdAt).toLocaleDateString()}
+                          </span>
+                        </div>
                         <div className="post-content">
                           <p>{post.commContent}</p>
                         </div>
                         <div className="post-meta">
+                        <span className="post-views">👁 {post.commViews}</span>
                           <span className="post-likes">👍 {post.commLikes}</span>
                           <span className="post-comments">💬 {post.commentCount || 0}</span>
                           <span className="post-region">📍 지역: {post.commRegion}</span>

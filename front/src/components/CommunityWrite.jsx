@@ -125,6 +125,21 @@ const CommunityWrite = () => {
     setImages((prev) => [...prev, ...files]);
   };
 
+  const handleDelete = async () => {
+    if (!window.confirm("정말로 게시글을 삭제하시겠습니까?")) {
+      return;
+    }
+  
+    try {
+      await axios.delete(`http://localhost:8081/boot/api/community/${id}`);
+      alert("게시글이 삭제되었습니다!");
+      navigate("/community");  // 삭제 후 게시글 목록 페이지로 이동
+    } catch (error) {
+      console.error("게시글 삭제 실패:", error);
+      alert("게시글 삭제 중 오류 발생");
+    }
+  };
+
   return (
     <div className="community-container">
       <Header />
@@ -213,12 +228,23 @@ const CommunityWrite = () => {
           )}
 
           <div className="button-group">
+          <div className="left-buttons">
             <button type="submit" className="submit-btn">
               {isEditMode ? "수정하기" : "작성하기"}
             </button>
             <button type="button" className="cancel-btn" onClick={() => navigate(-1)}>
               취소
             </button>
+            </div>
+            <div className="right-buttons">
+            {isEditMode && (
+              <div className="button-group">
+                <button type="button" className="delete-btn" onClick={handleDelete}>
+                  삭제하기
+                </button>
+              </div>
+            )}
+            </div>
           </div>
         </form>
       </div>

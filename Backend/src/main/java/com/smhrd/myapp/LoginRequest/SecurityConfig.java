@@ -45,8 +45,9 @@ public class SecurityConfig {
 	            .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                .antMatchers("/wedding-halls/details","/api/community/**").permitAll() // 로그인은 인증 없이 허용
 	            
-               
-               
+               .antMatchers("/api/community/user/email/**").permitAll()
+
+               .antMatchers("/boot/api/community/**").permitAll()
                .antMatchers("/api/user/email/**").permitAll()
                
                

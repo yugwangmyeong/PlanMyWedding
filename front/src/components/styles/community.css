@@ -494,3 +494,14 @@ nav a {
   text-decoration: none;
   color: inherit;
 }
+
+.post-title-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post-date {
+  font-size: 0.9em;
+  color: #888;
+}
