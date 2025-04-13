@@ -298,9 +298,11 @@ nav a {
 
 /* 글쓰기 버튼 */
 .write-btn {
+  text-decoration: none; /* 밑줄 제거 */ 
   margin-top: 40px;
   padding: 8px 16px;
-  font-weight: bold;
+
+  color: #747474;
   background-color: #f8d6dc;
   border-radius: 20px;
   cursor: pointer;
@@ -309,6 +311,7 @@ nav a {
 
 .write-btn:hover {
   background-color: #f4bec7;
+  color: #000;
 }
 
 /* 게시글 목록 */
@@ -334,7 +337,7 @@ nav a {
 
 /* ✅ 마우스 올렸을 때 파란 배경으로 */
 .post-item:hover {
-  background-color: #f0f8ff; /* AliceBlue 또는 #e6f0ff 같이 연한 파랑 추천 */
+  background-color: #f8ebf0; /* AliceBlue 또는 #e6f0ff 같이 연한 파랑 추천 */
     box-shadow: 0 4px 12px rgba(235, 243, 252, 0.2);
 }
 
@@ -386,7 +389,7 @@ nav a {
 }
 
 .post-item:hover .post-title {
-  color: #3d7eff; /* 제목도 파랗게 변화 */
+  color: #f19ebe; /* 제목도 파랗게 변화 */
 }
 
 /* 게시글 내용 미리보기 */

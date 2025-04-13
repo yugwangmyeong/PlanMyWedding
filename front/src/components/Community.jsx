@@ -140,7 +140,9 @@ const Community = () => {
 
               <div className="banner-right">
                 <img src="/images/banner2.jpg" alt="banner2" />
+                
                 <Link to="/community/write" className="write-btn">글쓰기</Link>
+                
               </div>
             </div>
 
