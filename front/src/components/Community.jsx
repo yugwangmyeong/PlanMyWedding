@@ -102,13 +102,14 @@ const Community = () => {
           <div className="community-main-wrapper">
             <div className="community-title">
               <p>만족도 높은</p>
-              <p>고객님들의 최신 사진 리뷰</p>
+              <p>광주 더 시그너스 웨딩 (광고배너입니다) 광주메이크업 Revenue 르베뉴</p>
             </div>
 
             <div className="community-top-banner">
               <div className="banner-left">
+              <Link to= "http://www.thesignus.com/page/intro/wedding">
                 <img src="/images/banner1.jpg" alt="banner1" />
-
+              </Link> 
                 <div className="filter-buttons">
                   <select
                     className="filter-select"
@@ -139,10 +140,11 @@ const Community = () => {
               </div>
 
               <div className="banner-right">
+              <Link to= "https://www.instagram.com/revenue.makeup/">
                 <img src="/images/banner2.jpg" alt="banner2" />
-                
+              </Link>
                 <Link to="/community/write" className="write-btn">글쓰기</Link>
-                
+               
               </div>
             </div>
 
