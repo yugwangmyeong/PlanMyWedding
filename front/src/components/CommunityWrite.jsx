@@ -198,7 +198,7 @@ const CommunityWrite = () => {
               required
             />
           </div>
-
+{/*
           <div className="image-upload-container">
             <label htmlFor="imageUpload" className="image-upload-label">
               <img src={pictureIcon} alt="사진 아이콘" className="image-icon" />
@@ -226,7 +226,7 @@ const CommunityWrite = () => {
               ))}
             </div>
           )}
-
+*/}
           <div className="button-group">
           <div className="left-buttons">
             <button type="submit" className="submit-btn">
