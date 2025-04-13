@@ -131,9 +131,9 @@ const Community = () => {
                     value={sortType}
                     onChange={(e) => setSortType(e.target.value)}
                   >
+                    <option value="latest">최신순</option>
                     <option value="popular">인기순</option>
                     <option value="views">조회수순</option>
-                    <option value="latest">최신순</option>
                   </select>
                 </div>
               </div>

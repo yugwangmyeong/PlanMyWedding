@@ -38,13 +38,21 @@ public class CommunityService {
         return communityRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
     }
 
-    // 게시글 필터링 조회
+    // 필터 조회: 필터 조건만 적용한 결과를 가져온 후, sort값에 따라 정렬
     public List<Community> filterPosts(CommunityFilterDto filter) {
-        return communityRepository.findByFilter(
+        List<Community> posts = communityRepository.findByFilterWithoutSort(
                 filter.getRegion(),
-                filter.getCategory(),
-                filter.getSort()
+                filter.getCategory()
         );
+
+        if ("popular".equalsIgnoreCase(filter.getSort())) {
+            posts.sort((a, b) -> b.getCommLikes() - a.getCommLikes());
+        } else if ("views".equalsIgnoreCase(filter.getSort())) {
+            posts.sort((a, b) -> b.getCommViews() - a.getCommViews());
+        } else {
+            posts.sort((a, b) -> b.getCreatedAt().compareTo(a.getCreatedAt()));
+        }
+        return posts;
     }
 
     // id로 게시글 조회 (없으면 예외 발생)
