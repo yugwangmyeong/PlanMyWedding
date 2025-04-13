@@ -154,4 +154,13 @@ public class CommunityController {
         
         return ResponseEntity.ok(dto);
     }
+    
+    @PutMapping("/{id}")
+    public ResponseEntity<Community> updateCommunityPost(@PathVariable("id") Long id, 
+                                                         @RequestBody CommunityDto communityDto) {
+        Community updatedPost = communityService.updatePost(id, communityDto);
+        return ResponseEntity.ok(updatedPost);
+    }
+    
+    
 }

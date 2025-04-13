@@ -189,6 +189,10 @@
      line-height: 1.6;
      text-align: left;
    }
+
+   .post-content-a p {
+    white-space: pre-wrap;
+  }
    
    .post-images {
      display: flex;
@@ -253,42 +257,59 @@
      margin-bottom: 20px;
      text-align: left;
    }
-   
    .comment-item {
-     display: flex;
-     justify-content: flex-start;
-     align-items: center;
-     margin-bottom: 8px;
-     font-size: 14px;
-     color: var(--text-color);
-   }
-   
-   /* 댓글 작성자(왼쪽), 댓글 내용(중앙), 액션 버튼(오른쪽) */
-   .comment-author {
-     font-weight: bold;
-     margin-right: 5px;
-     color: red;
-   }
-   
-   .comment-content {
-     flex: 1;
-     margin: 0 10px;
-     color: gray;
-     text-align: left;
-   }
-   
-   .report-btn {
-     margin-left: 10px;
-     border: none;
-     background: none;
-     color: #999;
-     cursor: pointer;
-     font-size: 14px;
-   }
-   
-   .report-btn:hover {
-     color: red;
-   }
+    display: flex;
+    align-items: center;
+    padding: 8px 10px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .comment-item:hover {
+    background-color: #e0e0e0;
+  }
+  
+  .comment-author {
+    min-width: 100px;
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  .comment-content-container {
+    flex: 1;
+    margin-right: 10px;
+  }
+  
+  .comment-content {
+    color: gray;
+  }
+  
+  .comment-edit-input {
+    width: 100%;
+    padding: 8px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  /* 오른쪽 액션 버튼 영역: margin-left: auto; 로 오른쪽 끝에 고정 */
+  .comment-actions {
+    margin-left: auto;
+    display: flex;
+    gap: 5px;
+  }
+  
+  .comment-actions button {
+    border: none;
+    background: none;
+    color: #007bff;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .comment-actions button:hover {
+    color: #0056b3;
+  }
    
    /* 댓글 작성 폼 */
    .comment-form {

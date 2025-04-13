@@ -160,32 +160,23 @@ const CommunityWrite = () => {
           <div className="options-row">
             <select value={service} onChange={(e) => setService(e.target.value)} className="option-select" required>
               <option value="">서비스</option>
-              <option value="웨딩홀">웨딩홀</option>
-              <option value="스튜디오">스튜디오</option>
-              <option value="드레스">드레스</option>
-              <option value="메이크업">메이크업</option>
-              <option value="기타">기타</option>
+                {[
+                  "웨딩홀", "드레스", "메이크업", "스튜디오", "신혼여행", "신혼집", "혼수", "예물", "청첩장", "부케", "한복", "질문", "기타"
+                ].map((r) => (
+                  <option key={r} value={r}>{r}</option>
+                ))}
             </select>
 
             <select value={region} onChange={(e) => setRegion(e.target.value)} className="option-select" required>
               <option value="">지역</option>
-              <option value="서울특별시">서울특별시</option>
-              <option value="부산광역시">부산광역시</option>
-              <option value="대구광역시">대구광역시</option>
-              <option value="인천광역시">인천광역시</option>
-              <option value="광주광역시">광주광역시</option>
-              <option value="대전광역시">대전광역시</option>
-              <option value="울산광역시">울산광역시</option>
-              <option value="세종특별자치시">세종특별자치시</option>
-              <option value="경기도">경기도</option>
-              <option value="강원특별자치도">강원특별자치도</option>
-              <option value="충청북도">충청북도</option>
-              <option value="충청남도">충청남도</option>
-              <option value="전라북도">전라북도</option>
-              <option value="전라남도">전라남도</option>
-              <option value="경상북도">경상북도</option>
-              <option value="경상남도">경상남도</option>
-              <option value="제주특별자치도">제주특별자치도</option>
+              {[
+                "서울특별시", "부산광역시", "대구광역시", "인천광역시",
+                "광주광역시", "대전광역시", "울산광역시", "세종특별자치시",
+                "경기도", "강원특별자치도", "충청북도", "충청남도",
+                "전라북도", "전라남도", "경상북도", "경상남도", "제주특별자치도"
+              ].map((r) => (
+                <option key={r} value={r}>{r}</option>
+              ))}
             </select>
           </div>
 

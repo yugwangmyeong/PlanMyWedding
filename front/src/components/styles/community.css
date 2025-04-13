@@ -300,10 +300,10 @@ nav a {
 .write-btn {
   text-decoration: none; /* 밑줄 제거 */ 
   margin-top: 40px;
-  padding: 8px 16px;
-
-  color: #747474;
-  background-color: #f8d6dc;
+  padding: 7px 15px;
+  border: 1px solid #ddd;
+  color: #000000;
+  background-color: #ffffff;
   border-radius: 20px;
   cursor: pointer;
   font-size: 16px;
@@ -344,6 +344,16 @@ nav a {
 /* 게시글 내용 영역: 구분선 없음 */
 .post-content {
   margin-bottom: 10px;  /* 필요에 따라 여백 조정 */
+}
+
+.post-content p {
+  display: -webkit-box;           /* 플렉스 박스 형태로 변경 */
+  -webkit-box-orient: vertical;   /* 수직 방향으로 정렬 */
+  -webkit-line-clamp: 3;          /* 텍스트를 최대 3줄로 제한 */
+  overflow: hidden;               /* 넘치는 텍스트는 숨김 처리 */
+  white-space: pre-wrap;
+  word-break: break-all;           /* 너무 긴 단어(혹은 연속된 문자열)도 자동 줄바꿈 */
+  overflow-wrap: break-word;       /* 단어 단위로 줄바꿈이 안 될 경우에도 강제 줄바꿈 */
 }
 
 /* 좋아요/댓글 영역: 구분선 적용 */

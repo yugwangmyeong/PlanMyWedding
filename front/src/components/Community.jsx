@@ -86,6 +86,14 @@ const Community = () => {
               { label: "메이크업", value: "메이크업" },
               { label: "스튜디오", value: "스튜디오" },
               { label: "신혼여행", value: "신혼여행" },
+              { label: "신혼집", value: "신혼집"},
+              { label: "혼수", value: "혼수"},
+              { label: "예물", value: "예물"},
+              { label: "청첩장", value: "청첩장"},
+              { label: "부케", value: "부케"},
+              { label: "한복", value: "한복"},
+              { label: "질문", value: "질문"},
+              { label: "기타", value: "기타"}
             ].map((item) => (
               <li
                 key={item.value}

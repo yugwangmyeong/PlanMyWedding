@@ -287,7 +287,7 @@ const CommunityPost = () => {
                 />
               </div>
             )}
-            <div className="post-content">
+            <div className="post-content-a">
               <p>{post.commContent}</p>
             </div>
             <div className="post-interactions">
@@ -309,44 +309,47 @@ const CommunityPost = () => {
               {currentComments && currentComments.length > 0 ? (
                 currentComments.map((c) => (
                   <div key={c.commentId} className="comment-item">
-                    <span className="comment-author">
+                    {/* 왼쪽: 작성자 영역 */}
+                    <div className="comment-author">
                       {c.user?.username || "익명"}
-                    </span>
-                    {editingCommentId === c.commentId ? (
-                      <>
+                    </div>
+                    
+                    {/* 중앙: 댓글 내용 영역 */}
+                    <div className="comment-content-container">
+                      {editingCommentId === c.commentId ? (
                         <input
                           type="text"
                           value={editedContent}
                           onChange={(e) => setEditedContent(e.target.value)}
+                          className="comment-edit-input"
                         />
-                        <span className="comment-actions">
-                          <button onClick={() => handleUpdateComment(c.commentId)}>
-                            저장
-                          </button>
-                          <button
-                            onClick={() => {
-                              setEditingCommentId(null);
-                              setEditedContent("");
-                            }}
-                          >
-                            취소
-                          </button>
-                        </span>
-                      </>
-                    ) : (
-                      <>
+                      ) : (
                         <span className="comment-content">{c.content}</span>
-                        {c.user?.id === currentUserId && (
-                          <span className="comment-actions">
-                            <button onClick={() => handleStartEdit(c)}>
-                              수정
+                      )}
+                    </div>
+                    
+                    {/* 오른쪽: 액션 버튼 영역 - 현재 댓글의 작성자일 때만 표시 */}
+                    {c.user?.id === currentUserId && (
+                      <div className="comment-actions">
+                        {editingCommentId === c.commentId ? (
+                          <>
+                            <button onClick={() => handleUpdateComment(c.commentId)}>저장</button>
+                            <button
+                              onClick={() => {
+                                setEditingCommentId(null);
+                                setEditedContent("");
+                              }}
+                            >
+                              취소
                             </button>
-                            <button onClick={() => handleDeleteComment(c.commentId)}>
-                              삭제
-                            </button>
-                          </span>
+                          </>
+                        ) : (
+                          <>
+                            <button onClick={() => handleStartEdit(c)}>수정</button>
+                            <button onClick={() => handleDeleteComment(c.commentId)}>삭제</button>
+                          </>
                         )}
-                      </>
+                      </div>
                     )}
                   </div>
                 ))
