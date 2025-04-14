@@ -133,7 +133,13 @@ const BudgetRow = ({ item, onUpdate, onDelete, isNew }) => {
               name="manager"
               value={form.manager}
               onChange={handleChange}
-              onBlur={handleBlur}
+              onBlur={(e) => {
+                if (e.target.value === "") {
+                  alert("담당자를 선택해주세요!"); // ❗ 경고만 하고 return
+                } else {
+                  handleBlur(); // ✅ 선택된 값이 있을 때만 실행됨
+                }
+              }}
               onKeyDown={(e) => handleKeyDown(e, index)}
               className="popup-input"
             >

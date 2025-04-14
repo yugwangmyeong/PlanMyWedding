@@ -78,7 +78,7 @@ const RecWedding = () => {
       <div className="progressbar-wrapper">
         <h1 className="maintitle">광주 웨딩홀</h1>
         <div className="progress-bar-wrapper">
-          <span className="progress-text">{progress}</span>
+          <span className="progress-text">{progress} %</span>
           <div className="progress-bar">
             <div className="progress-fill" style={{ width:`${progress}%` }}></div>
           </div>

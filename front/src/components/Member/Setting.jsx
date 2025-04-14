@@ -56,7 +56,7 @@ const Setting = () => {
       <div className="right-container">
         <div className="title">설정</div>
         <div className="sub-title" style={{ marginTop: "30px" }}>
-          1
+          
         </div>
 
         {/* ✅ 공유 중인 사용자 정보 표시 */}
