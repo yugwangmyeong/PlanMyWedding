@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./styles/login.css"; // 로그인 페이지와 동일한 CSS 사용
+import Footer from "./Footer";
 
 const FindPassword = () => {
   const [email, setEmail] = useState("");
