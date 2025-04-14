@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./styles/register.css";
 import { useNavigate } from "react-router-dom";
+import Footer from "./Footer";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -215,7 +216,9 @@ const Register = () => {
           <button type="submit" className="register-btn">회원가입</button>
         </form>
       </div>
+
     </div>
+    
   );
 };
 

@@ -1,7 +1,7 @@
 // src/api/weddingApi.js
 import axios from "axios";
 
-const API_BASE = "http://localhost:8081/boot/api/schedule";
+const API_BASE = "http://192.168.219.50:8081/boot/api/schedule";
 
 // ✅ 1. 결혼식 날짜 조회
 export const getWeddingDate = async () => {
@@ -104,7 +104,7 @@ export const updateSchedule = async (scheIdx, payload) => {
   console.log("🛠 수정 요청 payload:", payload); // 수정 요청 payload 확인
   const token = sessionStorage.getItem("token");
   const res = await axios.put(
-    `http://localhost:8081/boot/api/schedule/event/${scheIdx}`,
+    `http://192.168.219.50:8081/boot/api/schedule/event/${scheIdx}`,
     payload,
     {
       headers: {
@@ -142,7 +142,7 @@ export const deleteSchedule = async (scheIdx) => {
 
   try {
     const res = await axios.delete(
-      `http://localhost:8081/boot/api/schedule/event/${scheIdx}`,
+      `http://192.168.219.50:8081/boot/api/schedule/event/${scheIdx}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -162,7 +162,7 @@ export const deleteSchedule = async (scheIdx) => {
 // WeddingApi.js
 export const saveWeddingTemplate = async (payload) => {
   const token = sessionStorage.getItem("token");
-  return axios.post("http://localhost:8081/boot/api/schedule/weddingTemplate", payload, {
+  return axios.post("http://192.168.219.50:8081/boot/api/schedule/weddingTemplate", payload, {
     headers: {
       Authorization: `Bearer ${token}`,
     },

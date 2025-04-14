@@ -12,7 +12,7 @@ module.exports = function (app) {
   app.use(
     "/wedding-halls",
     createProxyMiddleware({
-      target: "http://localhost:8081",
+      target: "http://192.168.219.50:8081",
       changeOrigin: true,
       pathRewrite: {
         "^/wedding-halls": "/boot/wedding-halls" 

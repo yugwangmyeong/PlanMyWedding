@@ -4,6 +4,8 @@ import { Outlet, useNavigate } from "react-router-dom";
 import "../styles/Setting.css";
 import Member from "./Member"
 import Setting from "./Setting"
+import Footer from "../Footer";
+
 const SettingLayout = () => {
   const navigate = useNavigate();
 
@@ -62,6 +64,7 @@ const SettingLayout = () => {
         {/* 오른쪽 콘텐츠 영역 */}
         <Outlet />
       </div>
+      <Footer/>
     </div>
   );
 };
