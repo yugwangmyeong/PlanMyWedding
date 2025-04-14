@@ -17,11 +17,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/wedding-halls")
 @RequiredArgsConstructor
-<<<<<<< HEAD
-@CrossOrigin(origins = "http://localhost:3000") // 이 부분 추가
-=======
 @CrossOrigin(origins = {"http://localhost:3000", "http://192.168.219.50:3000"}) // 이 부분 추가
->>>>>>> origin/JSG3
 public class WeddingHallController {
 
     private final WeddingRecommenderService weddingRecommenderService;

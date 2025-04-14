@@ -3,10 +3,7 @@ import Header from "../Header";
 import "./recwedding.css";
 import { questionList } from "./data/question";
 import QuestionWedding from "./QuestionWedding";
-<<<<<<< HEAD
-=======
 import Footer from "../Footer"
->>>>>>> origin/JSG3
 
 
 const RecWedding = () => {
@@ -82,11 +79,7 @@ const RecWedding = () => {
       <div className="progressbar-wrapper">
         <h1 className="maintitle">광주 웨딩홀</h1>
         <div className="progress-bar-wrapper">
-<<<<<<< HEAD
-          <span className="progress-text">{progress} %</span>
-=======
           <span className="progress-text">{progress}</span>
->>>>>>> origin/JSG3
           <div className="progress-bar">
             <div className="progress-fill" style={{ width:`${progress}%` }}></div>
           </div>
@@ -100,11 +93,7 @@ const RecWedding = () => {
         hallDetails={hallDetails}
       />
       </div>
-<<<<<<< HEAD
-
-=======
     <Footer />
->>>>>>> origin/JSG3
     </div>
   );
 };

@@ -1,9 +1,5 @@
 .chat-wrapper {
-<<<<<<< HEAD
-  width: 100%;
-=======
   width: 670px;
->>>>>>> origin/JSG3
   max-width: 670px;
   height: 600px; /* ✅ 고정 높이 */
   overflow-y: auto;
@@ -15,14 +11,7 @@
   box-sizing: border-box;
   scroll-behavior: smooth; /* 선택사항: 자연스럽게 스크롤 */
 }
-<<<<<<< HEAD
-/* Chrome, Safari, Opera */
-.chat-wrapper::-webkit-scrollbar {
-  display: none;
-}
-=======
 
->>>>>>> origin/JSG3
 .chat-bubble {
   max-width: 80%;
   width: fit-content;
@@ -35,8 +24,6 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-<<<<<<< HEAD
-=======
 .question-card {
   background: #ffffff;
   border-radius: 12px;
@@ -67,7 +54,6 @@
   display: none;
 }
 
->>>>>>> origin/JSG3
 .chat-bubble.question {
   align-self: flex-start;
   background: #fff;
@@ -119,22 +105,6 @@
   width: 18px;
   height: 18px;
 }
-<<<<<<< HEAD
-.question-card {
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  align-self: flex-start;
-  width: fit-content;
-  max-width: 100%;
-  box-sizing: border-box;
-}
-=======
->>>>>>> origin/JSG3
 
 @keyframes fadeIn {
     from {
@@ -193,18 +163,6 @@
   color: #999;
 }
 
-<<<<<<< HEAD
-.recommend-result {
-  background-color: #fff;
-  border-radius: 12px;
-  padding: 24px;
-  margin: 20px auto;
-  max-width: 600px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  animation: fadeIn 0.6s ease-in-out;
-}
-=======
->>>>>>> origin/JSG3
 
 .recommend-result h2 {
   margin-bottom: 16px;

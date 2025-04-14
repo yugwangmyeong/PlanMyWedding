@@ -1,16 +1,5 @@
 package com.smhrd.myapp.repository;
 
-<<<<<<< HEAD
-import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.smhrd.myapp.entity.Community;
-
-import java.util.List;
-
-public interface CommunityRepository extends JpaRepository<Community, Long> {
-    List<Community> findAllByOrderByCommIdxDesc();
-}
-=======
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -50,4 +39,3 @@ public interface CommunityRepository extends JpaRepository<Community, Long> {
     Page<Community> searchByTitleOrContent(@Param("keyword") String keyword, Pageable pageable);
     
 }
->>>>>>> origin/JSG3

@@ -46,17 +46,11 @@ const EventModal = (
             setCategory(e.target.value);
           }}
         >
-<<<<<<< HEAD
           <option value="wedding">결혼식</option>
           <option value="custom">기타</option>
           <option value="preparation">준비 목록</option>
           <option value="essential">필수 일정</option>
           <option value="weddingTemplate">결혼 템플릿</option> {/* ✅ 이거 빠지면 안 됨 */}
-=======
-          <option value="custom">기타</option>
-          <option value="preparation">준비 목록</option>
-          <option value="essential">필수 일정</option>
->>>>>>> origin/JSG3
           <option value="etc">기타 준비</option>
         </select>
         <label style={{ marginTop: "10px" }}>

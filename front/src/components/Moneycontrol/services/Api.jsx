@@ -1,11 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-<<<<<<< HEAD
   baseURL: "http://localhost:8081/boot/api", // spring 주소
-=======
-  baseURL: "http://192.168.219.50:8081/boot/api", // spring 주소
->>>>>>> origin/JSG3
 });
 
 api.interceptors.request.use((config) => {

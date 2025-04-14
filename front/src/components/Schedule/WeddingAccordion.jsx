@@ -11,10 +11,7 @@ const WeddingAccordion = ({
   const [openCategory, setOpenCategory] = useState(null);
   const [daysLeft, setDaysLeft] = useState(0);
   const [progress, setProgress] = useState(0);
-<<<<<<< HEAD
   const [selectedScheduleIdx, setSelectedScheduleIdx] = useState(null);
-=======
->>>>>>> origin/JSG3
 
   // 카테고리 매핑 객체
   const categoryDisplayMap = {
@@ -27,11 +24,8 @@ const WeddingAccordion = ({
   };
 
   useEffect(() => {
-<<<<<<< HEAD
     console.log("✅ 아코디언용 일정 데이터:", schedules);
 
-=======
->>>>>>> origin/JSG3
     if (!weddingDate) return;
     const wedding = new Date(weddingDate);
     const today = new Date();
@@ -50,7 +44,6 @@ const WeddingAccordion = ({
     setOpenCategory(openCategory === category ? null : category);
   };
 
-<<<<<<< HEAD
   // ✅ 선택된 일정 변화 추적
   useEffect(() => {
     console.log(
@@ -68,20 +61,11 @@ const WeddingAccordion = ({
 
   const groupedSchedules = schedules.reduce((acc, schedule) => {
     const category = schedule.scheCategory || "custom";
-=======
-  const handleScheduleClick = (schedule) => {
-    onScheduleSelect(schedule);
-  };
-
-  const groupedSchedules = schedules.reduce((acc, schedule) => {
-    const category = schedule.scheCategory || "기타";
->>>>>>> origin/JSG3
     if (!acc[category]) acc[category] = [];
     acc[category].push(schedule);
     return acc;
   }, {});
 
-<<<<<<< HEAD
   const hasGroupedItems = Object.values(groupedSchedules).some(
     (items) => items.length > 0
   );
@@ -98,14 +82,6 @@ const WeddingAccordion = ({
             일정 추가
           </button>
         )}
-=======
-  return (
-    <div className="calendar-main-side">
-      <div className="sides-box">
-        <button className="sides-card pinks" onClick={onAddEvent}>
-          일정 추가
-        </button>
->>>>>>> origin/JSG3
 
         <div className="sides-card blues">
           일정 진행도 D-{daysLeft}
@@ -120,7 +96,6 @@ const WeddingAccordion = ({
         </div>
 
         <div className="sides-card accordions">
-<<<<<<< HEAD
           {hasGroupedItems ? (
             Object.entries(groupedSchedules).map(([category, items]) => (
               <div key={category}>
@@ -173,47 +148,6 @@ const WeddingAccordion = ({
               <p className="text-sm text-gray-400">표시할 일정이 없습니다.</p>
             </div>
           )}
-=======
-          {Object.entries(groupedSchedules).map(([category, items]) => (
-            <div key={category}>
-              <div
-                className={`accordions-title ${
-                  openCategory === category ? "active" : ""
-                }`}
-                onClick={() => toggleCategory(category)}
-              >
-                {categoryDisplayMap[category] || category}
-                <span>{openCategory === category ? "▲" : "▼"}</span>
-              </div>
-              {openCategory === category && (
-                <div className="accordions-content">
-                  {items.length > 0 ? (
-                    items.map((schedule) => (
-                      <button
-                        key={schedule.scheIdx}
-                        className="schedule-button"
-                        onClick={() => handleScheduleClick(schedule)}
-                      >
-                        {schedule.scheTitle}
-                        <small>
-                          {schedule.scheCategory === "wedding"
-                            ? new Date(schedule.reservedAt).toLocaleDateString(
-                                "ko-KR"
-                              )
-                            : new Date(
-                                schedule.scheduleDate
-                              ).toLocaleDateString("ko-KR")}
-                        </small>
-                      </button>
-                    ))
-                  ) : (
-                    <p className="text-sm text-gray-400">일정 없음</p>
-                  )}
-                </div>
-              )}
-            </div>
-          ))}
->>>>>>> origin/JSG3
         </div>
       </div>
     </div>

@@ -5,7 +5,6 @@ import interactionPlugin from "@fullcalendar/interaction";
 import './calendersection.css';
 import { getUserSchedules } from '../Schedule/utils/WeddingApi';
 const renderDotEvent = (arg) => {
-<<<<<<< HEAD
   const eventsOnSameDay = arg.view?.calendar?.getEvents()?.filter(
     (event) => event.startStr === arg.event.startStr
   );
@@ -14,8 +13,6 @@ const renderDotEvent = (arg) => {
   if (eventsOnSameDay && eventsOnSameDay[0]?.id !== arg.event.id) {
     return null;
   }
-=======
->>>>>>> origin/JSG3
   return (
     <div
       style={{
@@ -49,12 +46,8 @@ const CalendarSection = () => {
     const fetchAndFormatEvents = async () => {
       try {
         const data = await getUserSchedules();
-<<<<<<< HEAD
         const formatted = data.map((item, index) => ({
           id: `${item.scheduleDate}-${index}`, // 고유 ID 보장
-=======
-        const formatted = data.map((item) => ({
->>>>>>> origin/JSG3
           title: item.scheTitle,
           date: item.scheduleDate,
         }));
@@ -104,11 +97,7 @@ const CalendarSection = () => {
       {isModalOpen && (
         <div className="calendar-modal-backdrop">
           <div className="calendar-modal">
-<<<<<<< HEAD
             <h1 className="calendar-modal-title">📅 {selectedDate} 일정</h1>
-=======
-            <h2 className="calendar-modal-title">📅 {selectedDate} 일정</h2>
->>>>>>> origin/JSG3
 
             <div className="calendar-modal-content">
               {dailyEvents.length > 0 ? (

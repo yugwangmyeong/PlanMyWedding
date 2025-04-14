@@ -1,11 +1,7 @@
 // src/api/weddingApi.js
 import axios from "axios";
 
-<<<<<<< HEAD
 const API_BASE = "http://localhost:8081/boot/api/schedule";
-=======
-const API_BASE = "http://192.168.219.50:8081/boot/api/schedule";
->>>>>>> origin/JSG3
 
 // ✅ 1. 결혼식 날짜 조회
 export const getWeddingDate = async () => {
@@ -108,11 +104,7 @@ export const updateSchedule = async (scheIdx, payload) => {
   console.log("🛠 수정 요청 payload:", payload); // 수정 요청 payload 확인
   const token = sessionStorage.getItem("token");
   const res = await axios.put(
-<<<<<<< HEAD
     `http://localhost:8081/boot/api/schedule/event/${scheIdx}`,
-=======
-    `http://192.168.219.50:8081/boot/api/schedule/event/${scheIdx}`,
->>>>>>> origin/JSG3
     payload,
     {
       headers: {
@@ -125,7 +117,6 @@ export const updateSchedule = async (scheIdx, payload) => {
 
 
 // 유저의 모든 일정 가져오기
-<<<<<<< HEAD
 
 
 // 개인 일정만 불러오는 API
@@ -133,12 +124,6 @@ export const getUserSchedules = async () => {
   const token = sessionStorage.getItem("token");
 
   const res = await axios.get("http://localhost:8081/boot/api/schedule/events", {
-=======
-export const getUserSchedules = async () => {
-  const token = sessionStorage.getItem("token");
-
-  const res = await axios.get(`${API_BASE}/events`, {
->>>>>>> origin/JSG3
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -149,10 +134,6 @@ export const getUserSchedules = async () => {
 
 
 
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/JSG3
 // ✅ 일정 삭제
 export const deleteSchedule = async (scheIdx) => {
   const token = sessionStorage.getItem("token");
@@ -163,11 +144,7 @@ export const deleteSchedule = async (scheIdx) => {
 
   try {
     const res = await axios.delete(
-<<<<<<< HEAD
       `http://localhost:8081/boot/api/schedule/event/${scheIdx}`,
-=======
-      `http://192.168.219.50:8081/boot/api/schedule/event/${scheIdx}`,
->>>>>>> origin/JSG3
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -184,23 +161,15 @@ export const deleteSchedule = async (scheIdx) => {
 
 
 
-<<<<<<< HEAD
 //템플릿저장하는 api
 export const saveWeddingTemplate = async (payload) => {
   const token = sessionStorage.getItem("token");
   return axios.post("http://localhost:8081/boot/api/schedule/weddingTemplate", payload, {
-=======
-// WeddingApi.js
-export const saveWeddingTemplate = async (payload) => {
-  const token = sessionStorage.getItem("token");
-  return axios.post("http://192.168.219.50:8081/boot/api/schedule/weddingTemplate", payload, {
->>>>>>> origin/JSG3
     headers: {
       Authorization: `Bearer ${token}`,
     },
   });
 };
-<<<<<<< HEAD
 
 
 //템플릿일정가져오는 api
@@ -228,5 +197,3 @@ export const checkIfTemplateExists = async () => {
   if (!res.ok) throw new Error("템플릿 존재 여부 확인 실패");
   return await res.json(); // true or false
 };
-=======
->>>>>>> origin/JSG3

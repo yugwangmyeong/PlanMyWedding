@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import "./styles/register.css";
 import { useNavigate } from "react-router-dom";
-<<<<<<< HEAD
-=======
-import Footer from "./Footer";
->>>>>>> origin/JSG3
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -40,11 +36,7 @@ const Register = () => {
     setError(""); // 에러 메시지 초기화
 
     try {
-<<<<<<< HEAD
       const response = await fetch("http://localhost:8081/boot/api/signup", {
-=======
-      const response = await fetch("http://http://192.168.219.50:8081/boot/api/signup", {
->>>>>>> origin/JSG3
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -223,13 +215,7 @@ const Register = () => {
           <button type="submit" className="register-btn">회원가입</button>
         </form>
       </div>
-<<<<<<< HEAD
     </div>
-=======
-
-    </div>
-    
->>>>>>> origin/JSG3
   );
 };
 

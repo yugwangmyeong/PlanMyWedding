@@ -9,14 +9,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-<<<<<<< HEAD
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-import com.smhrd.myapp.User.User;
-
-import lombok.AllArgsConstructor;
-=======
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -27,15 +19,11 @@ import com.smhrd.myapp.User.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
->>>>>>> origin/JSG3
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-<<<<<<< HEAD
-=======
 @Builder
->>>>>>> origin/JSG3
 @Getter
 @Setter
 @NoArgsConstructor
@@ -52,10 +40,7 @@ public class Community {
     @Column(name = "COMM_TITLE")
     private String commTitle;
 
-<<<<<<< HEAD
-=======
     @Lob
->>>>>>> origin/JSG3
     @Column(name = "COMM_CONTENT")
     private String commContent;
 
@@ -70,17 +55,6 @@ public class Community {
 
     @Column(name = "COMM_LIKES")
     private int commLikes;
-<<<<<<< HEAD
-
-    // ✅ 작성자 (User) 연결
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "USER_ID", nullable = false) // 외래키 컬럼명 설정
-    private User user;
-    
-    
-   // @Column(name = "id")
-   // private String mbId;
-=======
     
     @Column(name = "COMM_SERVICE")
     private String commService;
@@ -110,5 +84,4 @@ public class Community {
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"}) // ✅ 꼭 있어야 함
     private User user;
     
->>>>>>> origin/JSG3
 }

@@ -1,13 +1,9 @@
 package com.smhrd.myapp.controller;
 
 
-<<<<<<< HEAD
 import com.smhrd.myapp.User.Invitation;
 import com.smhrd.myapp.User.Schedule;
 import com.smhrd.myapp.User.ScheduleSharedUser;
-=======
-import com.smhrd.myapp.User.Schedule;
->>>>>>> origin/JSG3
 import com.smhrd.myapp.schedule.ScheduleRequestDTO;
 import com.smhrd.myapp.schedule.WeddingDateRequestDTO;
 import com.smhrd.myapp.service.ScheduleService;
@@ -16,7 +12,6 @@ import com.smhrd.myapp.service.UserService;
 import ch.qos.logback.classic.Logger;
 
 import com.smhrd.myapp.User.User;
-<<<<<<< HEAD
 import com.smhrd.myapp.dto.InvitationResponseDTO;
 import com.smhrd.myapp.dto.InviteRequestDTO;
 import com.smhrd.myapp.dto.ScheduleResponseDTO;
@@ -26,11 +21,6 @@ import com.smhrd.myapp.repository.ScheduleSharedUserRepository;
 import com.smhrd.myapp.repository.UserRepository;
 import com.smhrd.myapp.service.CustomUserDetails;
 import com.smhrd.myapp.service.InvitationService;
-=======
-import com.smhrd.myapp.repository.ScheduleRepository;
-import com.smhrd.myapp.repository.UserRepository;
-import com.smhrd.myapp.service.CustomUserDetails;
->>>>>>> origin/JSG3
 
 import org.hibernate.annotations.common.util.impl.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,17 +31,11 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-<<<<<<< HEAD
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-=======
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Optional;
->>>>>>> origin/JSG3
 
 
 @RestController
@@ -61,12 +45,9 @@ public class ScheduleController {
 	
 	@Autowired
 	private ScheduleRepository scheduleRepository;
-<<<<<<< HEAD
 	
 	@Autowired
 	private ScheduleSharedUserRepository sharedRepo;
-=======
->>>>>>> origin/JSG3
 
 	
 	@Autowired
@@ -74,7 +55,6 @@ public class ScheduleController {
 	
 	@Autowired
     private ScheduleService scheduleService;
-<<<<<<< HEAD
 	
 	@Autowired
 	private InvitationRepository invitationRepository;
@@ -85,9 +65,6 @@ public class ScheduleController {
 
 
 	
-=======
-
->>>>>>> origin/JSG3
     
 
  // ✅ 1. 결혼식 날짜 조회 (없으면 팝업 띄우기)
@@ -190,27 +167,10 @@ public class ScheduleController {
         }
     }
 
-<<<<<<< HEAD
     
 
 
 
-=======
-    //일정조회
-    @GetMapping("/events")
-    public ResponseEntity<List<Schedule>> getUserSchedules(@AuthenticationPrincipal CustomUserDetails userDetails) {
-        Long userId = userDetails.getUser().getId(); // 현재 로그인된 유저 ID 가져오기
-        
-        try {
-            System.out.println("🔍 getUserSchedules() 호출됨 - 유저 ID: " + userId);
-            List<Schedule> schedules = scheduleService.getSchedulesByUserId(userId);
-            return ResponseEntity.ok(schedules);
-        } catch (Exception e) {
-            System.out.println("❌ 일정 조회 중 오류 발생: " + e.getMessage());
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-        }
-    }
->>>>>>> origin/JSG3
     
  // ✅ 웨딩 템플릿 일정 저장
     @PostMapping("/weddingTemplate")
@@ -246,7 +206,6 @@ public class ScheduleController {
         Schedule saved = scheduleRepository.save(schedule);
         return ResponseEntity.ok(saved);
     }
-<<<<<<< HEAD
     
     // ✅ 웨딩 템플릿 일정 조회용 API
     @GetMapping("/weddingTemplate")
@@ -515,8 +474,6 @@ public class ScheduleController {
 
 
     
-=======
->>>>>>> origin/JSG3
 
     
 

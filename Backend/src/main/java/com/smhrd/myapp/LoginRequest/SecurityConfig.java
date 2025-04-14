@@ -44,9 +44,6 @@ public class SecurityConfig {
 	            .antMatchers("/api/schedule/wedding").authenticated()
 	            .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                .antMatchers("/wedding-halls/details","/api/community/**").permitAll() // 로그인은 인증 없이 허용
-<<<<<<< HEAD
-	            .anyRequest().authenticated()
-=======
 	            
                .antMatchers("/api/community/user/email/**").permitAll()
 
@@ -56,7 +53,6 @@ public class SecurityConfig {
                
                
                .anyRequest().authenticated()
->>>>>>> origin/JSG3
 	        .and()
 	        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 	        .and()
@@ -68,8 +64,6 @@ public class SecurityConfig {
 	    return http.build();
 	}
 	
-<<<<<<< HEAD
-=======
 	@Bean
 	public CorsConfigurationSource corsConfigurationSource() {
 	    CorsConfiguration configuration = new CorsConfiguration();
@@ -85,6 +79,5 @@ public class SecurityConfig {
 	    source.registerCorsConfiguration("/**", configuration);
 	    return source;
 	}
->>>>>>> origin/JSG3
 	
 }
