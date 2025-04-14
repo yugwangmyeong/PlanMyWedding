@@ -115,8 +115,12 @@ const Setting = () => {
               ))}
             </ul>
           )}
+          
         </div>
+        
       </div>
+
+      
     </div>
   );
 };

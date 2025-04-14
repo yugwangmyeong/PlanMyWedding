@@ -87,8 +87,10 @@ const Community = () => {
       ...(token && { Authorization: `Bearer ${token}` }),
     };
 
+
+    // "http://192.168.219.50:8081/boot/api/community/search"
     try {
-      const res = await axios.get("http://192.168.219.50:8081/boot/api/community/search", {
+      const res = await axios.get("http://localhost:8081/boot/api/community/search", {
         params: {
           searchType, 
           keyword: searchKeyword,

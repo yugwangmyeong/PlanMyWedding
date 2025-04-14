@@ -36,7 +36,7 @@ const CommunityWrite = () => {
   // 이메일로 userId 조회
   const getUserIdFromEmail = async (email) => {
     try {
-      const res = await axios.get(`http://192.168.219.50:8081/boot/api/user/email/${email}`);
+      const res = await axios.get(`http://localhost:8081/boot/api/user/email/${email}`);
       return res.data.userId;
     } catch (err) {
       console.error("📛 userId 조회 실패:", err);

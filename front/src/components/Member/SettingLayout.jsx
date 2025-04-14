@@ -3,6 +3,7 @@ import Header from "../Header";
 import { Outlet, useNavigate } from "react-router-dom";
 import "../styles/Setting.css";
 import Member from "./Member"
+import Footer from "../Footer"
 import Setting from "./Setting"
 const SettingLayout = () => {
   const navigate = useNavigate();
@@ -62,6 +63,7 @@ const SettingLayout = () => {
         {/* 오른쪽 콘텐츠 영역 */}
         <Outlet />
       </div>
+      <Footer></Footer>
     </div>
   );
 };
