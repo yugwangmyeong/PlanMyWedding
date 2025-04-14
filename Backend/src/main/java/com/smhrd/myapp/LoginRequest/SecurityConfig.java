@@ -44,7 +44,19 @@ public class SecurityConfig {
 	            .antMatchers("/api/schedule/wedding").authenticated()
 	            .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                .antMatchers("/wedding-halls/details","/api/community/**").permitAll() // 로그인은 인증 없이 허용
+<<<<<<< HEAD
 	            .anyRequest().authenticated()
+=======
+	            
+               .antMatchers("/api/community/user/email/**").permitAll()
+
+               .antMatchers("/boot/api/community/**").permitAll()
+               .antMatchers("/api/user/email/**").permitAll()
+               
+               
+               
+               .anyRequest().authenticated()
+>>>>>>> origin/JSG3
 	        .and()
 	        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 	        .and()
@@ -56,5 +68,23 @@ public class SecurityConfig {
 	    return http.build();
 	}
 	
+<<<<<<< HEAD
+=======
+	@Bean
+	public CorsConfigurationSource corsConfigurationSource() {
+	    CorsConfiguration configuration = new CorsConfiguration();
+	    configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", 
+	    		"http://192.168.219.50:3000", 
+	    		"http://<외부_IP>:3000",
+	    	    "http://your-dev-domain.com"));
+	    configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+	    configuration.setAllowedHeaders(Arrays.asList("*"));
+	    configuration.setAllowCredentials(true); // ⚠️ credentials 사용 시 필수
+
+	    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+	    source.registerCorsConfiguration("/**", configuration);
+	    return source;
+	}
+>>>>>>> origin/JSG3
 	
 }

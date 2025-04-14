@@ -30,10 +30,17 @@
 
 .material-symbols-outlined {
   font-variation-settings:
+<<<<<<< HEAD
   'FILL' 0,
   'wght' 400,
   'GRAD' 0,
   'opsz' 24
+=======
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
+>>>>>>> origin/JSG3
 }
 
 .nav-links {
@@ -67,6 +74,10 @@ nav a {
   margin-right: -10px;
   margin-top: 9px;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/JSG3
 .reg-link {
   margin-left: -13px;
   margin-right: -15px;
@@ -131,7 +142,10 @@ nav a {
   height: 15px;
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/JSG3
 /* ===== 커뮤니티 메인 영역 스타일 ===== */
 
 .community-container {
@@ -153,6 +167,10 @@ nav a {
 .left-sidebar {
   width: 200px;
   margin-right: 30px;
+<<<<<<< HEAD
+=======
+  flex: 0 0 150px;
+>>>>>>> origin/JSG3
 }
 
 .left-sidebar h2 {
@@ -163,22 +181,56 @@ nav a {
 }
 
 .community-divider {
+<<<<<<< HEAD
   width: 550%;
   height: 1px;
   background-color: #ddd; /* 연한 회색으로 설정 */
   border: none;
   margin: 10px 0 20px; /* 위아래 여백 */
   
+=======
+  width: 700%;
+  height: 1px;
+  background-color: #ddd;
+  border: none;
+  margin: 10px 0 20px;
+>>>>>>> origin/JSG3
 }
 
 .category-menu {
   list-style: none;
+<<<<<<< HEAD
   margin-top: 80px;
   padding: 0; 
 }
 
 .category-menu li {
   margin-bottom: 55px;
+=======
+  margin-top: 34px;
+  padding: 0;
+}
+
+.category-menu li {
+  padding: 10px 15px;
+  margin: 5px 0;
+  background-color: #f1f1f1;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* 마우스 오버 시 색상 변경 */
+.category-menu li:hover {
+  background-color: #fce6ee;
+}
+
+/* 선택된(활성) 카테고리 */
+.category-menu li.active {
+  background-color: #fce6ee;
+  font-weight: bold;
+>>>>>>> origin/JSG3
 }
 
 .category-menu a {
@@ -188,6 +240,7 @@ nav a {
   font-weight: bold;
   transition: color 0.2s ease;
   display: block;
+<<<<<<< HEAD
   padding-left: 16px;  /* 💡 모든 항목 왼쪽 여백 통일 */
 }
 
@@ -199,6 +252,19 @@ nav a {
   color: black;              /* 텍스트 색상 (필요 시) */
   font-weight: bold;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); /* 부드러운 음영 효과 */
+=======
+  padding-left: 16px;
+}
+
+.category-menu a.active {
+  background-color: #fce6ee;
+  border-radius: 12px;
+  padding: 12px 16px;
+  padding-left: 16px;
+  color: black;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+>>>>>>> origin/JSG3
 }
 
 .category-menu a:hover {
@@ -206,7 +272,11 @@ nav a {
 }
 
 .right-content {
+<<<<<<< HEAD
   flex: 1;
+=======
+  flex: 0 0 900px;
+>>>>>>> origin/JSG3
 }
 
 .community-main-wrapper {
@@ -236,14 +306,24 @@ nav a {
 
 .community-title p:first-child {
   margin-top: 60px;
+<<<<<<< HEAD
   font-size: 18px;       /* '만족도 높은'은 조금 작게 */
   font-weight: normal;   /* 기본 굵기 */
+=======
+  font-size: 18px;
+  font-weight: normal;
+>>>>>>> origin/JSG3
 }
 
 .community-title p + p {
   margin-top: 10px;
+<<<<<<< HEAD
   font-size: 24px;       /* '고객님들의 최신 사진 리뷰'는 더 크게 */
   font-weight: bold;     /* 글씨 굵게 */
+=======
+  font-size: 24px;
+  font-weight: bold;
+>>>>>>> origin/JSG3
 }
 
 /* 상단 배너 */
@@ -256,7 +336,11 @@ nav a {
 .banner-left {
   display: flex;
   flex-direction: column;
+<<<<<<< HEAD
   align-items: center; /* 필요 시 중앙 정렬 */
+=======
+  align-items: center;
+>>>>>>> origin/JSG3
   margin: 0 10px;
   margin-left: -1px;
 }
@@ -264,24 +348,43 @@ nav a {
 .banner-right {
   display: flex;
   flex-direction: column;
+<<<<<<< HEAD
   align-items: flex-end; /* 필요 시 중앙 정렬 */
+=======
+  align-items: flex-end;
+>>>>>>> origin/JSG3
   margin: 0 10px;
 }
 
 .banner-left img,
 .banner-right img {
+<<<<<<< HEAD
   width: 330px;            /* 고정 크기 지정 */
   height: 330px;
   border-radius: 20px;
   
+=======
+  width: 330px;
+  height: 330px;
+  border-radius: 20px;
+>>>>>>> origin/JSG3
 }
 
 /* 글쓰기 버튼 */
 .write-btn {
+<<<<<<< HEAD
   margin-top: 40px;
   padding: 8px 16px;
   font-weight: bold;
   background-color: #f8d6dc;
+=======
+  text-decoration: none;
+  margin-top: 40px;
+  padding: 7px 15px;
+  border: 1px solid #ddd;
+  color: #000;
+  background-color: #fff;
+>>>>>>> origin/JSG3
   border-radius: 20px;
   cursor: pointer;
   font-size: 16px;
@@ -289,6 +392,10 @@ nav a {
 
 .write-btn:hover {
   background-color: #f4bec7;
+<<<<<<< HEAD
+=======
+  color: #000;
+>>>>>>> origin/JSG3
 }
 
 /* 게시글 목록 */
@@ -298,7 +405,11 @@ nav a {
 
 /* 개별 게시글 아이템 */
 .post-item {
+<<<<<<< HEAD
   text-decoration: none; /* 밑줄 제거 */ 
+=======
+  text-decoration: none;
+>>>>>>> origin/JSG3
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -308,6 +419,7 @@ nav a {
   margin-bottom: 20px;
   background-color: white;
   transition: background-color 0.2s ease;
+<<<<<<< HEAD
   cursor: pointer; /* 커서도 포인터로 */
 }
 
@@ -324,6 +436,33 @@ nav a {
 }
 
 /* 좋아요/댓글 영역: 구분선 적용 */
+=======
+  cursor: pointer;
+}
+
+/* 마우스 올렸을 때 파란 배경으로 */
+.post-item:hover {
+  background-color: #f8ebf0;
+  box-shadow: 0 4px 12px rgba(235, 243, 252, 0.2);
+}
+
+/* 게시글 내용 영역 */
+.post-content {
+  margin-bottom: 10px;
+}
+
+.post-content p {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  white-space: pre-wrap;
+  word-break: break-all;
+  overflow-wrap: break-word;
+}
+
+/* 좋아요/댓글 영역 */
+>>>>>>> origin/JSG3
 .post-meta {
   padding-top: 10px;
   padding-bottom: 10px;
@@ -338,7 +477,11 @@ nav a {
 .post-image {
   width: 80px;
   height: 80px;
+<<<<<<< HEAD
   flex-shrink: 0;      /* 이미지 영역 고정 */
+=======
+  flex-shrink: 0;
+>>>>>>> origin/JSG3
 }
 
 .post-image img {
@@ -354,8 +497,13 @@ nav a {
   display: flex;
   flex-direction: column;
   gap: 5px;
+<<<<<<< HEAD
   max-width: 100%;     /* 영역 제한 해제 */
   word-break: keep-all; /* 단어 기준 줄바꿈 */
+=======
+  max-width: 100%;
+  word-break: keep-all;
+>>>>>>> origin/JSG3
 }
 
 /* 게시글 제목 */
@@ -366,7 +514,11 @@ nav a {
 }
 
 .post-item:hover .post-title {
+<<<<<<< HEAD
   color: #3d7eff; /* 제목도 파랗게 변화 */
+=======
+  color: #f19ebe;
+>>>>>>> origin/JSG3
 }
 
 /* 게시글 내용 미리보기 */
@@ -380,14 +532,23 @@ nav a {
   width: 130px;
   height: 130px;
   flex-shrink: 0;
+<<<<<<< HEAD
   border-radius: 12px;        /* 둥글게 */
   overflow: hidden;           /* 둥근 테두리 밖은 숨김 */
+=======
+  border-radius: 12px;
+  overflow: hidden;
+>>>>>>> origin/JSG3
 }
 
 .post-thumbnail img {
   width: 100%;
   height: 100%;
+<<<<<<< HEAD
   object-fit: cover;          /* 비율 유지하면서 꽉 채움 */
+=======
+  object-fit: cover;
+>>>>>>> origin/JSG3
   border-radius: 12px;
 }
 
@@ -418,7 +579,11 @@ nav a {
   cursor: pointer;
 }
 
+<<<<<<< HEAD
 .page-btn.active{
+=======
+.page-btn.active {
+>>>>>>> origin/JSG3
   background-color: #f8d6dc;
   font-weight: bold;
 }
@@ -428,6 +593,7 @@ nav a {
   border-color: #f8d6dc;
 }
 
+<<<<<<< HEAD
 /* banner-left 내부에 추가한 필터 버튼들 컨테이너 */
 .filter-buttons {
   margin-top: 40px;    /* 이미지와 필터 영역 사이에 40px 간격을 둠 */
@@ -471,6 +637,44 @@ nav a {
 /* 버튼에 호버하면 배경색이 살짝 변합니다. */
 .filter-btn:hover {
   background-color: #f8f8f8;  /* 호버 시 약간 밝은 회색 배경 */
+=======
+/* banner-left 내부에 추가한 필터 버튼 컨테이너 */
+.filter-buttons {
+  margin-top: 40px;
+  align-self: flex-start;
+  display: flex;
+  gap: 10px;
+}
+
+/* 지역 선택 드롭다운 스타일 */
+.filter-select {
+  padding: 8px 16px 10px 16px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #fff;
+  margin-right: 10px;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: #f8d6dc;
+}
+
+/* 각 필터 버튼 스타일 */
+.filter-btn {
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 6px 14px;
+  background-color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.filter-btn:hover {
+  background-color: #f8f8f8;
+>>>>>>> origin/JSG3
 }
 
 /* 정렬 기준 드롭다운 스타일 */
@@ -483,11 +687,32 @@ nav a {
   cursor: pointer;
 }
 
+<<<<<<< HEAD
 /* 포커스 스타일 */
+=======
+>>>>>>> origin/JSG3
 .filter-sort:focus {
   outline: none;
   border-color: #f8d6dc;
 }
 
 /* 게시글 전체에 적용되는 링크 */
+<<<<<<< HEAD
 
+=======
+.post-item-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.post-title-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post-date {
+  font-size: 0.9em;
+  color: #888;
+}
+>>>>>>> origin/JSG3

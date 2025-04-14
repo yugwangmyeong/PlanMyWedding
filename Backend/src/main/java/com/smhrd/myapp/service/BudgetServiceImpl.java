@@ -40,7 +40,11 @@ public class BudgetServiceImpl implements BudgetService {
 
         List<Budget> budgets = budgetRepository.findAllByUserId(userId);
         System.out.println("📥 유저별 예산 목록 불러오기: " + userId);
+<<<<<<< HEAD
     	budgets.forEach(b -> System.out.println("➡️ 예산항목: " + b.getName() + ", 정렬값: " + b.getSortOrder()));
+=======
+    	budgets.forEach(b -> System.out.println("➡️ 예산: " + b.getName() + ", 정렬값: " + b.getSortOrder()));
+>>>>>>> origin/JSG3
         
         // Budget → BudgetDto로 변환
         return budgets.stream()

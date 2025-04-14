@@ -196,10 +196,30 @@ textarea {
 
 .button-group {
   display: flex;
+<<<<<<< HEAD
   gap: 10px;
   margin-top: 20px;
 }
 
+=======
+  justify-content: space-between; /* 좌우 정렬 */
+  align-items: center;
+  margin-top: 20px;
+}
+
+
+/* 왼쪽 버튼 그룹 */
+.left-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+/* 오른쪽 버튼 (삭제) */
+.right-buttons {
+  display: flex;
+}
+
+>>>>>>> origin/JSG3
 .submit-btn,
 .cancel-btn {
   padding: 10px 20px;
@@ -210,7 +230,11 @@ textarea {
 }
 
 .submit-btn {
+<<<<<<< HEAD
   background-color: #f8d6dc;
+=======
+  background-color: #efa1dc;;
+>>>>>>> origin/JSG3
   color: #333;
 }
 
@@ -257,6 +281,7 @@ textarea {
     display: none;
   }
   
+<<<<<<< HEAD
   .options-row {
     display: flex;
     gap: 10px;         /* 두 드롭다운 사이 간격 */
@@ -273,6 +298,25 @@ textarea {
     font-size: 14px;               /* 글자 크기 설정 */
     outline: none;                 /* 포커스 시 기본 아웃라인 제거 */
   }
+=======
+/* ===== 드롭다운 옵션 ===== */
+.options-row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.option-select {
+  border: none;
+  border-bottom: 1px solid #ccc; /* 아래쪽에만 1px 실선 추가 */
+  border-radius: 0;
+  background-color: transparent;
+  padding: 8px 12px;
+  font-size: 14px;
+  outline: none;
+}
+>>>>>>> origin/JSG3
 
   /* 라벨이 없는 form-group인 경우, 라벨 자체를 숨길 수도 있음 */
 .form-group.no-label label {
@@ -295,3 +339,24 @@ textarea {
   .form-group.no-label textarea::placeholder {
     color: #aaa;
   }
+<<<<<<< HEAD
+=======
+
+
+
+
+/* ===== '삭제' 버튼 ===== */
+.delete-btn {
+  background-color: #ff9aac; /* 기존 스타일과 유사한 색상 */
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px; /* 둥근 테두리 */
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background-color: #fd1e44; /* hover 시 색상 변화 */
+}
+>>>>>>> origin/JSG3

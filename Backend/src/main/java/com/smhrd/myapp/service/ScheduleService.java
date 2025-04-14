@@ -2,9 +2,12 @@ package com.smhrd.myapp.service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+<<<<<<< HEAD
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+=======
+>>>>>>> origin/JSG3
 import java.util.List;
 import java.util.Optional;
 
@@ -14,17 +17,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+<<<<<<< HEAD
 import com.smhrd.myapp.User.Invitation;
 import com.smhrd.myapp.User.Schedule;
 import com.smhrd.myapp.User.User;
 import com.smhrd.myapp.repository.InvitationRepository;
 import com.smhrd.myapp.repository.ScheduleRepository;
 import com.smhrd.myapp.repository.ScheduleSharedUserRepository;
+=======
+import com.smhrd.myapp.User.Schedule;
+import com.smhrd.myapp.User.User;
+import com.smhrd.myapp.repository.ScheduleRepository;
+>>>>>>> origin/JSG3
 import com.smhrd.myapp.repository.UserRepository;
 import com.smhrd.myapp.schedule.ScheduleRequestDTO;
 
 @Service
 public class ScheduleService {
+<<<<<<< HEAD
 	
 		@Autowired
 		private InvitationRepository invitationRepository;
@@ -36,6 +46,14 @@ public class ScheduleService {
 		 private UserRepository userRepository;  // UserRepository 추가
 		 
 		 private ScheduleSharedUserRepository sharedRepo;
+=======
+
+	 @Autowired
+	    private ScheduleRepository scheduleRepository;
+	 
+	 @Autowired
+	    private UserRepository userRepository;  // UserRepository 추가
+>>>>>>> origin/JSG3
 
 	    public Schedule saveWeddingDate(Long userId, LocalDate weddingDate) {
 	    	// userId를 통해 User 객체를 조회
@@ -46,7 +64,10 @@ public class ScheduleService {
 	    	schedule.setUser(user); // 
 	        schedule.setScheTitle("결혼식");
 	        schedule.setReservedAt(weddingDate);
+<<<<<<< HEAD
 	        schedule.setScheduleDate(weddingDate);     // ✅ scheduleDate (추가!)
+=======
+>>>>>>> origin/JSG3
 	        schedule.setScheCategory("wedding");
 	        schedule.setScheStatus("예정");	
 	        schedule.setReservedAt(weddingDate); 
@@ -97,6 +118,7 @@ public class ScheduleService {
 	    
 	 // 유저 ID로 일정을 조회하는 메서드
 	    public List<Schedule> getSchedulesByUserId(Long userId) {
+<<<<<<< HEAD
 	        try {
 	            System.out.println("📌 전체 일정 조회 시작 - userId: " + userId);
 
@@ -122,6 +144,15 @@ public class ScheduleService {
 	    }
 
 
+=======
+	        // 유저 ID로 유저를 찾음
+	        User user = userRepository.findById(userId)
+	            .orElseThrow(() -> new RuntimeException("User not found"));
+
+	        // 유저가 가진 일정을 조회
+	        return scheduleRepository.findByUser(user);  // 여기서 ScheduleRepository의 findByUser를 사용
+	    }
+>>>>>>> origin/JSG3
 	    
 	    public Schedule updateSchedule(Long scheIdx, Long userId, ScheduleRequestDTO dto) {
 	        User user = userRepository.findById(userId)
@@ -135,6 +166,7 @@ public class ScheduleService {
 	        }
 
 	        schedule.setScheTitle(dto.getScheTitle());
+<<<<<<< HEAD
 	        
 	        schedule.setScheStatus(dto.getScheStatus());
 	        schedule.setScheCategory(dto.getScheCategory()); // ✅ 이거 반드시 있어야 함
@@ -146,6 +178,13 @@ public class ScheduleService {
 	            } catch (DateTimeParseException e) {
 	                throw new RuntimeException("❌ 잘못된 날짜 형식: " + dto.getScheduleDate(), e);
 	            }
+=======
+	        schedule.setScheCategory(dto.getScheCategory());
+	        schedule.setScheStatus(dto.getScheStatus());
+
+	        if (dto.getScheduleDate() != null) {
+	            schedule.setScheduleDate(LocalDate.parse(dto.getScheduleDate()));
+>>>>>>> origin/JSG3
 	        }
 
 	        return scheduleRepository.save(schedule);
@@ -163,9 +202,13 @@ public class ScheduleService {
 	        scheduleRepository.delete(schedule);
 	    }
 
+<<<<<<< HEAD
 	    
 	    
 	    //템플릿저장함
+=======
+
+>>>>>>> origin/JSG3
 	    public Schedule saveWeddingTemplate(Long userId, ScheduleRequestDTO dto) {
 	        User user = userRepository.findById(userId)
 	                .orElseThrow(() -> new RuntimeException("User not found"));
@@ -189,6 +232,7 @@ public class ScheduleService {
 
 	        return scheduleRepository.save(schedule);
 	    }
+<<<<<<< HEAD
 	    
 	    
 	    public List<Schedule> getSchedulesByRole(Long userId) {
@@ -271,6 +315,8 @@ public class ScheduleService {
 	    
 	    
 
+=======
+>>>>>>> origin/JSG3
 
 
 

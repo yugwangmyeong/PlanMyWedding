@@ -21,7 +21,11 @@ const Member = () => {
       return;
     }
 
+<<<<<<< HEAD
     fetch("http://localhost:8081/boot/api/member", {
+=======
+    fetch("http://http://192.168.219.50:8081/boot/api/member", {
+>>>>>>> origin/JSG3
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
@@ -43,7 +47,11 @@ const Member = () => {
 
     const token = sessionStorage.getItem("token");
 
+<<<<<<< HEAD
     const response = await fetch("http://localhost:8081/boot/api/member", {
+=======
+    const response = await fetch("http:http://192.168.219.50:8081/boot/api/member", {
+>>>>>>> origin/JSG3
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

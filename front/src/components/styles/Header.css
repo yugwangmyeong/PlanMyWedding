@@ -12,6 +12,10 @@
   box-sizing: border-box;
   /* flex-wrap: wrap;  -- 반응형 줄바꿈 제거 */
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/JSG3
 .logo {
   font-size: 1.7em;
   font-weight: bold;
@@ -235,3 +239,7 @@ nav a {
   gap: 8px;
 }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/JSG3

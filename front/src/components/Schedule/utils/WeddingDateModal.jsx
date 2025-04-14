@@ -15,7 +15,10 @@ const WeddingDateModal = ({ weddingDate, setWeddingDate, onSuccess }) => {
 
       // ✅ 페이지 새로고침
       window.location.reload();
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/JSG3
     } catch (err) {
       console.error("날짜 저장 실패:", err);
       alert("날짜 저장에 실패했습니다.");

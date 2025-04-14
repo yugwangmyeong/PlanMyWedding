@@ -12,9 +12,12 @@ import java.util.Optional;
 public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 	List<Schedule> findByUser(User user);  // 👍userid
 	
+<<<<<<< HEAD
 	void deleteByUser(User user);
 
 	
+=======
+>>>>>>> origin/JSG3
 	Optional<Schedule> findByUserAndScheCategory(User user, String scheCategory);
 	
 	List<Schedule> findByUserAndScheduleDate(User user, LocalDate scheduleDate);
@@ -25,6 +28,7 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 	
 	List<Schedule> findByUserAndScheCategoryAndScheduleDateAndScheTitle(
 		    User user, String scheCategory, LocalDate scheduleDate, String scheTitle);
+<<<<<<< HEAD
 	
 	List<Schedule> findAllByUserAndScheCategory(User user, String scheCategory);
 
@@ -37,6 +41,15 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 	boolean existsByUserIdAndScheCategory(Long userId, String scheCategory);
 
 
+=======
+
+
+	
+	
+	
+	
+	
+>>>>>>> origin/JSG3
 
 
 }

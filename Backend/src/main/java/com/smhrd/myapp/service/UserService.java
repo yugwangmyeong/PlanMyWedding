@@ -1,7 +1,10 @@
 package com.smhrd.myapp.service;
 
 import com.smhrd.myapp.User.User;
+<<<<<<< HEAD
 import com.smhrd.myapp.repository.ScheduleRepository;
+=======
+>>>>>>> origin/JSG3
 import com.smhrd.myapp.repository.UserRepository;
 
 import io.jsonwebtoken.lang.Collections;
@@ -24,7 +27,10 @@ import java.util.Collection;
 public class UserService implements UserDetailsService{
 
     private final UserRepository userRepository;
+<<<<<<< HEAD
     private final ScheduleRepository scheduleRepository;
+=======
+>>>>>>> origin/JSG3
 
     public boolean login(String email, String password) {
         Optional<User> user = userRepository.findByEmail(email);
@@ -38,6 +44,7 @@ public class UserService implements UserDetailsService{
     // 회원 탈퇴 메서드
     @Transactional
     public void deleteUserByEmail(String email) {
+<<<<<<< HEAD
         Optional<User> optionalUser = userRepository.findByEmail(email);
         if (optionalUser.isEmpty()) return;
 
@@ -49,6 +56,9 @@ public class UserService implements UserDetailsService{
 
         // 2️⃣ 그 다음 유저 삭제
         userRepository.delete(user);
+=======
+        userRepository.deleteUserByEmail(email); 
+>>>>>>> origin/JSG3
     }
     
     @Transactional

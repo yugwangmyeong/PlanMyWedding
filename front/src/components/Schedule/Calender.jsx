@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import React, { useState, useEffect, useRef } from "react";
+=======
+import React, { useState, useEffect,useRef} from "react";
+>>>>>>> origin/JSG3
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import format from "date-fns/format";
 import parse from "date-fns/parse";
@@ -6,7 +10,11 @@ import startOfWeek from "date-fns/startOfWeek";
 import getDay from "date-fns/getDay";
 import ko from "date-fns/locale/ko";
 import "react-big-calendar/lib/css/react-big-calendar.css";
+<<<<<<< HEAD
 import "./calendermain.css";
+=======
+import "./calendermain.css"
+>>>>>>> origin/JSG3
 import Header from "../Header";
 import Footer from "../Footer";
 import CustomToolbar from "./utils/CustomToolbar";
@@ -25,7 +33,10 @@ import {
   getUserSchedules,
   saveWeddingTemplate,
 } from "./utils/WeddingApi";
+<<<<<<< HEAD
 import HandleInvite from "../HandleInvite";
+=======
+>>>>>>> origin/JSG3
 
 const locales = { ko };
 const localizer = dateFnsLocalizer({
@@ -55,6 +66,7 @@ const CalendarPage = () => {
   const [highlightedDate, setHighlightedDate] = useState(null);
   const calendarRef = useRef();
   const handleCloseAlert = () => setIsAlertVisible(false);
+<<<<<<< HEAD
   const [isSharedUser, setIsSharedUser] = useState(false);
   const [clickCoords, setClickCoords] = useState({ x: 0, y: 0 });
   const [morePopupInfo, setMorePopupInfo] = useState({
@@ -69,6 +81,11 @@ const CalendarPage = () => {
       alert("공유 일정 사용자로, 일정 추가는 불가능합니다.");
       return;
     }
+=======
+
+  // 🔹 일정 추가
+  const handleAddEvent = async () => {
+>>>>>>> origin/JSG3
     console.log("➕ 추가 시도 - title:", newTitle, "date:", newDate);
 
     const eventData = {
@@ -92,6 +109,7 @@ const CalendarPage = () => {
     console.log("✏️ 수정 시도 - title:", newTitle, "date:", newDate);
     if (!selectedEvent?.scheIdx) return;
 
+<<<<<<< HEAD
     // ✅ 템플릿은 카테고리 유지
     const fixedCategory =
       selectedEvent?.scheCategory === "weddingTemplate"
@@ -100,6 +118,8 @@ const CalendarPage = () => {
           : category // 유지하고 싶을 때만 고정
         : category;
 
+=======
+>>>>>>> origin/JSG3
     const eventData = {
       scheTitle: newTitle,
       scheduleDate: newDate,
@@ -117,7 +137,10 @@ const CalendarPage = () => {
       console.error("일정 수정 실패:", err);
     }
   };
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/JSG3
   const handleDeleteEvent = async () => {
     if (!selectedEvent?.scheIdx) return;
 
@@ -148,6 +171,7 @@ const CalendarPage = () => {
         title: item.scheTitle,
         start: new Date(item.scheduleDate),
         end: new Date(item.scheduleDate),
+<<<<<<< HEAD
         color:
           item.scheCategory === "essential"
             ? "#FFB6B9"
@@ -159,6 +183,10 @@ const CalendarPage = () => {
         scheIdx: item.scheIdx,
         scheCategory: item.scheCategory, // ✅ 이거 포함
         scheStatus: item.scheStatus, // ✅ 이거도 같이
+=======
+        color: item.scheStatus === "완료" ? "#ff1493" : "#EFA1DC",
+        scheIdx: item.scheIdx,
+>>>>>>> origin/JSG3
       }));
       setEvents(formatted);
     } catch (err) {
@@ -167,10 +195,13 @@ const CalendarPage = () => {
   };
 
   const handleAddEventModal = () => {
+<<<<<<< HEAD
     if (isSharedUser) {
       alert("공유된 일정에서는 직접 추가할 수 없습니다.");
       return;
     }
+=======
+>>>>>>> origin/JSG3
     setSelectedEvent(null);
     setNewTitle("");
     setNewDate(new Date().toISOString().split("T")[0]);
@@ -178,6 +209,7 @@ const CalendarPage = () => {
     setIsCompleted(false);
     setIsModalOpen(true);
   };
+<<<<<<< HEAD
 
   const fetchAllEvents = async (setEvents, setSchedules) => {
     const token = sessionStorage.getItem("token");
@@ -259,6 +291,8 @@ const CalendarPage = () => {
     }
   };
 
+=======
+>>>>>>> origin/JSG3
   useEffect(() => {
     const checkWeddingDate = async () => {
       try {
@@ -274,6 +308,7 @@ const CalendarPage = () => {
     };
 
     checkWeddingDate();
+<<<<<<< HEAD
     fetchAllEvents(setEvents, setSchedules);
   }, []);
 
@@ -292,6 +327,9 @@ const CalendarPage = () => {
         calendarRoot.removeEventListener("click", handleClick);
       }
     };
+=======
+    fetchEvents();
+>>>>>>> origin/JSG3
   }, []);
 
   return (
@@ -299,7 +337,11 @@ const CalendarPage = () => {
       <Header />
       <div className="title-wrap">
         <h1 className="maintitle">일정관리</h1>
+<<<<<<< HEAD
         <HandleInvite />
+=======
+        <button className="invite-btn">+ 초대하기</button>
+>>>>>>> origin/JSG3
       </div>
       <hr className="custom-line" />
       <div className="calendar-main">
@@ -307,11 +349,15 @@ const CalendarPage = () => {
           <div className="calendar-main-box">
             <div className="calendar-main-wrapper">
               <Calendar
+<<<<<<< HEAD
                 events={events}
+=======
+>>>>>>> origin/JSG3
                 date={currentDate}
                 onNavigate={(date) => setCurrentDate(date)}
                 view="month"
                 localizer={localizer}
+<<<<<<< HEAD
                 eventPropGetter={(event) => {
                   const isHighlighted =
                     selectedEvent?.scheIdx === event.scheIdx;
@@ -338,6 +384,9 @@ const CalendarPage = () => {
                     },
                   };
                 }}
+=======
+                events={events}
+>>>>>>> origin/JSG3
                 components={{ toolbar: CustomToolbar }}
                 startAccessor="start"
                 endAccessor="end"
@@ -349,14 +398,18 @@ const CalendarPage = () => {
                   setIsModalOpen(true);
                 }}
                 onSelectEvent={(event) => {
+<<<<<<< HEAD
                   if (event.isShared) {
                     alert("이 일정은 공유된 일정으로, 수정할 수 없습니다.");
                     return;
                   }
+=======
+>>>>>>> origin/JSG3
                   setSelectedEvent(event);
                   setNewTitle(event.title);
                   setNewDate(event.start.toISOString().substring(0, 10));
                   setNewEndDate(event.end.toISOString().substring(0, 10));
+<<<<<<< HEAD
                   setIsCompleted(event.scheStatus === "완료"); // ✅ 색상은 scheStatus로 구분 중
 
                   setCategory(event.scheCategory || "custom"); // ✅ 수정: event에서 정확히 가져옴
@@ -383,6 +436,38 @@ const CalendarPage = () => {
                       left: adjustedLeft,
                     },
                   });
+=======
+                  setIsCompleted(event.color === "#ff1493");
+                  setIsModalOpen(true);
+                }}
+                eventPropGetter={(event) => {
+                  const isHighlighted =
+                    highlightedDate === event.start.toISOString().split("T")[0];
+
+                  return {
+                    style: {
+                      backgroundColor: isHighlighted
+                        ? "#ff6347"
+                        : event.color || "#EFA1DC",
+                      borderRadius: "8px",
+                      color: "white",
+                      padding: "2px 5px",
+                      transition: "all 0.3s ease-in-out",
+                      transform: isHighlighted ? "scale(1.05)" : "scale(1)",
+                      boxShadow: isHighlighted ? "0 0 10px #ff6347" : "none",
+                    },
+                  };
+                }}
+                dayPropGetter={(date) => {
+                  const isSameDate =
+                    highlightedDate &&
+                    new Date(highlightedDate).toDateString() ===
+                      date.toDateString();
+
+                  return {
+                    className: isSameDate ? "highlight-day" : "",
+                  };
+>>>>>>> origin/JSG3
                 }}
                 style={{ height: 750 }}
               />
@@ -397,7 +482,11 @@ const CalendarPage = () => {
                 weddingDate={weddingDate}
                 onAddEvent={handleAddEventModal}
                 onScheduleSelect={(schedule) => {
+<<<<<<< HEAD
                   setSelectedEvent(schedule); // ✅ 캘린더 이벤트 강조용
+=======
+                  setSelectedEvent(schedule);
+>>>>>>> origin/JSG3
                   setNewTitle(schedule.scheTitle);
                   setNewDate(schedule.scheduleDate);
                   setCategory(schedule.scheCategory);
@@ -445,13 +534,18 @@ const CalendarPage = () => {
         {weddingDate && (
           <WeddingTemplateAutoSaver
             weddingDate={weddingDate}
+<<<<<<< HEAD
             onSaved={() => fetchAllEvents(setEvents, setSchedules)}
+=======
+            onSaved={fetchEvents}
+>>>>>>> origin/JSG3
           />
         )}
 
         {isAlertVisible && (
           <CustomAlert message={alertMessage} onClose={handleCloseAlert} />
         )}
+<<<<<<< HEAD
         {morePopupInfo.isOpen && (
           <div
             className="more-popup-wrapper"
@@ -482,6 +576,8 @@ const CalendarPage = () => {
             </div>
           </div>
         )}
+=======
+>>>>>>> origin/JSG3
       </div>
       <Footer />
     </>

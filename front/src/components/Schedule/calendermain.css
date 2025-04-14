@@ -46,6 +46,7 @@
 .sides-card.pinks {
   font-size: 16px;
   text-align: center;
+<<<<<<< HEAD
   background-color:  #EDE9FE;
   border: none;
   color: #5B21B6; /* 진보라 */
@@ -59,6 +60,14 @@
 .popup-close-btn:hover {
   background-color: #7C3AED; /* 퍼플 강조 */
 }
+=======
+  background-color: #fad0e9;
+  border: none;
+  color: #333;
+  font-weight: 600;
+}
+
+>>>>>>> origin/JSG3
 .sides-card.blues {
   font-size: 14px;
   color: #333;
@@ -66,12 +75,16 @@
 
 /* 이벤트 스타일 */
 .fc-event {
+<<<<<<< HEAD
   
+=======
+>>>>>>> origin/JSG3
   background: none !important;
   border: none !important;
   padding: 0 !important;
   font-size: 0 !important;
 }
+<<<<<<< HEAD
 
 .more-popup {
   background: white;
@@ -158,3 +171,5 @@
     transform: translateY(0);
   }
 }
+=======
+>>>>>>> origin/JSG3

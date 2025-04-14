@@ -21,7 +21,11 @@ const Login = ({ setToken }) => {
     setError(""); // 에러 초기화
 
     try {
+<<<<<<< HEAD
       const response = await fetch("http://localhost:8081/boot/api/login", {
+=======
+      const response = await fetch("http://192.168.219.50:8081/boot/api/login", {
+>>>>>>> origin/JSG3
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -168,11 +172,19 @@ const Login = ({ setToken }) => {
             <div className="line"></div>
           </div>
 
+<<<<<<< HEAD
           {/* 카카오 로그인 버튼
           <button className="kakao-login">
             <img src="/images/kakao.png" alt="카카오톡 로그인" />
             <span>카카오톡 로그인</span>
           </button> */}
+=======
+          {/* 카카오 로그인 버튼 */}
+          <button className="kakao-login">
+            <img src="/images/kakao.png" alt="카카오톡 로그인" />
+            <span>카카오톡 로그인</span>
+          </button>
+>>>>>>> origin/JSG3
         </form>
       </div>
     </div>

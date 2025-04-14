@@ -4,6 +4,11 @@ import { Outlet, useNavigate } from "react-router-dom";
 import "../styles/Setting.css";
 import Member from "./Member"
 import Setting from "./Setting"
+<<<<<<< HEAD
+=======
+import Footer from "../Footer";
+
+>>>>>>> origin/JSG3
 const SettingLayout = () => {
   const navigate = useNavigate();
 
@@ -24,7 +29,11 @@ const SettingLayout = () => {
     const token = sessionStorage.getItem("token");
   
     try {
+<<<<<<< HEAD
       const res = await fetch("http://localhost:8081/boot/api/delete", {
+=======
+      const res = await fetch("http://192.168.219.50:8081/boot/api/delete", {
+>>>>>>> origin/JSG3
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -62,6 +71,10 @@ const SettingLayout = () => {
         {/* 오른쪽 콘텐츠 영역 */}
         <Outlet />
       </div>
+<<<<<<< HEAD
+=======
+      <Footer/>
+>>>>>>> origin/JSG3
     </div>
   );
 };
