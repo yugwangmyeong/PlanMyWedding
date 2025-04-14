@@ -4,7 +4,6 @@ import { saveWeddingTemplate, checkIfTemplateExists } from "./WeddingApi";
 const WeddingTemplateAutoSaver = ({ weddingDate, onSaved }) => {
   const isSavedRef = useRef(false);
   useEffect(() => {
-    isSavedRef.current = true; // ✅ 저장 시점 기록
     if (!weddingDate || isSavedRef.current) return;
 
     const generateAndSaveTemplates = async () => {
@@ -63,6 +62,9 @@ const WeddingTemplateAutoSaver = ({ weddingDate, onSaved }) => {
 
         if (onSaved) onSaved();
         console.log("✅ 웨딩 템플릿 자동 생성 및 저장 완료");
+
+          // 성공적으로 저장된 후에 flag 업데이트
+        isSavedRef.current = true;
       } catch (err) {
         console.error("❌ 템플릿 저장 실패:", err);
       }

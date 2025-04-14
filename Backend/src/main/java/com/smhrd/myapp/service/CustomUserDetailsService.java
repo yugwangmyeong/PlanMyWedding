@@ -1,21 +1,18 @@
 package com.smhrd.myapp.service;
 
-import java.util.Collections;
-
-import org.springframework.context.annotation.Primary;
+import com.smhrd.myapp.User.User;
+import com.smhrd.myapp.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import com.smhrd.myapp.User.User;
-import com.smhrd.myapp.repository.UserRepository;
-
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service("customUserDetailsService")
 public class CustomUserDetailsService implements UserDetailsService {
 
+    private static final Logger logger = LoggerFactory.getLogger(CustomUserDetailsService.class);
     private final UserRepository userRepository;
 
     public CustomUserDetailsService(UserRepository userRepository) {
@@ -24,10 +21,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-    	 System.out.println("🔐 사용자 조회 요청 이메일: " + email);
+        logger.info("🔐 사용자 조회 요청 이메일: {}", email);
         User user = userRepository.findByEmail(email)
-            .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-
-        return new CustomUserDetails(user); // ✅ 여기만 바뀜!
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
+        return new CustomUserDetails(user);
     }
 }

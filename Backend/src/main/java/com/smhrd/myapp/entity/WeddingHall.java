@@ -27,22 +27,28 @@ public class WeddingHall {
 
     @Column(name = "WH_NAME")
     private String whName;
+    
     @Column(name = "WH_ADDR")
     private String whAddr;
+    
     @Column(name = "WH_TEL")
     private String whTel;
+    
     @Column(name = "WH_URL")
     private String whUrl;
 
     @Column(name = "LAT")
     private Double lat;
+    
     @Column(name = "LON")
     private Double lon;
 
     @Column(name = "WH_IMG1")
     private String whImg1;
+    
     @Column(name = "WH_IMG2")
     private String whImg2;
+    
     @Column(name = "WH_IMG3")
     private String whImg3;
     

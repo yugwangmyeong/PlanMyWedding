@@ -22,18 +22,25 @@ public class TPrice {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "PRICE_IDX")
     private Long priceIdX;
+    
     @Column(name = "WED_CATEGORY")
     private String wedCategory;
+    
     @Column(name = "WED_TIME")
     private String wedTime;
+    
     @Column(name = "RENTAL_FEE")
     private int rentalFee;
+    
     @Column(name = "BASIC_CNT")
     private int basicCnt;
+    
     @Column(name = "FOOD_PRICE")
     private int foodPrice;
+    
     @Column(name = "HALL_NAME")
     private String hallName;
+    
     @Column(name = "ADDITION_FEE")
     private int additionFee;
 

@@ -108,7 +108,15 @@ public class UserController {
         return ResponseEntity.ok("회원가입 성공");
     }
     
-    
+    // ✅ 프론트가 이메일 → userId 매핑 요청 시 사용하는 API
+    @GetMapping("/user/email/{email}")
+    public ResponseEntity<?> getUserIdByEmail(@PathVariable String email) {
+        User user = userService.findByEmail(email);
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(Map.of("userId", user.getId()));
+    }
     
 
 
