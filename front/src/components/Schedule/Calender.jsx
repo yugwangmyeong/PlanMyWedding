@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useRef} from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Calendar, dateFnsLocalizer } from "react-big-calendar";
 import format from "date-fns/format";
 import parse from "date-fns/parse";
@@ -6,7 +6,7 @@ import startOfWeek from "date-fns/startOfWeek";
 import getDay from "date-fns/getDay";
 import ko from "date-fns/locale/ko";
 import "react-big-calendar/lib/css/react-big-calendar.css";
-import "./calendermain.css"
+import "./calendermain.css";
 import Header from "../Header";
 import Footer from "../Footer";
 import CustomToolbar from "./utils/CustomToolbar";
@@ -56,7 +56,12 @@ const CalendarPage = () => {
   const calendarRef = useRef();
   const handleCloseAlert = () => setIsAlertVisible(false);
   const [isSharedUser, setIsSharedUser] = useState(false);
-
+  const [clickCoords, setClickCoords] = useState({ x: 0, y: 0 });
+  const [morePopupInfo, setMorePopupInfo] = useState({
+    isOpen: false,
+    date: null,
+    events: [],
+  });
 
   // 🔹 일정 추가
   const handleAddEvent = async () => {
@@ -87,6 +92,14 @@ const CalendarPage = () => {
     console.log("✏️ 수정 시도 - title:", newTitle, "date:", newDate);
     if (!selectedEvent?.scheIdx) return;
 
+    // ✅ 템플릿은 카테고리 유지
+    const fixedCategory =
+      selectedEvent?.scheCategory === "weddingTemplate"
+        ? category === "weddingTemplate"
+          ? "weddingTemplate"
+          : category // 유지하고 싶을 때만 고정
+        : category;
+
     const eventData = {
       scheTitle: newTitle,
       scheduleDate: newDate,
@@ -104,6 +117,7 @@ const CalendarPage = () => {
       console.error("일정 수정 실패:", err);
     }
   };
+
   const handleDeleteEvent = async () => {
     if (!selectedEvent?.scheIdx) return;
 
@@ -134,8 +148,17 @@ const CalendarPage = () => {
         title: item.scheTitle,
         start: new Date(item.scheduleDate),
         end: new Date(item.scheduleDate),
-        color: item.scheStatus === "완료" ? "#ff1493" : "#EFA1DC",
+        color:
+          item.scheCategory === "essential"
+            ? "#FFB6B9"
+            : item.scheCategory === "preparation"
+            ? "#fa5c66"
+            : item.scheCategory === "weddingTemplate"
+            ? "#E0BBE4"
+            : "#FF0B55",
         scheIdx: item.scheIdx,
+        scheCategory: item.scheCategory, // ✅ 이거 포함
+        scheStatus: item.scheStatus, // ✅ 이거도 같이
       }));
       setEvents(formatted);
     } catch (err) {
@@ -156,21 +179,21 @@ const CalendarPage = () => {
     setIsModalOpen(true);
   };
 
-
-  
-
   const fetchAllEvents = async (setEvents, setSchedules) => {
     const token = sessionStorage.getItem("token");
     if (!token) return;
-  
+
     try {
       // 1️⃣ 공유 일정 먼저 시도
-      const sharedRes = await fetch("http://localhost:8081/boot/api/schedule/events/shared", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-  
+      const sharedRes = await fetch(
+        "http://localhost:8081/boot/api/schedule/events/shared",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
       if (sharedRes.ok) {
         const sharedData = await sharedRes.json();
         if (sharedData.length > 0) {
@@ -178,12 +201,23 @@ const CalendarPage = () => {
           const formatted = sharedData.map((item) => ({
             title: item.scheTitle + " (공유)",
             start: new Date(item.scheduleDate),
-            end: new Date(item.scheduleDate),
-            color: "#7C83FD",
+            color:
+              item.scheCategory === "essential"
+                ? "#c5c1f9"
+                : item.scheCategory === "preparation"
+                ? "#b8d1ff"
+                : item.scheCategory === "weddingTemplate"
+                ? "#d3f8ff"
+                : item.scheCategory === "wedding"
+                ? "#ffe29a"
+                : "#d3d3d3",
             scheIdx: item.scheIdx,
             isShared: true,
+            end: new Date(item.scheduleDate), // ✅ 필수
+            scheCategory: item.scheCategory, // ✅ 모달 값 설정에 필요
+            scheStatus: item.scheStatus, // ✅ 색상 로직 및 완료여부에 필요
           }));
-  
+
           setEvents(formatted);
           setSchedules(sharedData); // ✅ 공유 일정도 아코디언에 보내기
           setIsSharedUser(true); // ✅ 공유받은 사용자임
@@ -192,27 +226,39 @@ const CalendarPage = () => {
       }
 
       setIsSharedUser(false);
-  
+
       // 2️⃣ 공유 일정 없으면 본인 일정 조회
       const myData = await getUserSchedules();
+      console.log("📦 getUserSchedules() 결과:", myData);
+
       const formattedMy = myData.map((item) => ({
         title: item.scheTitle,
         start: new Date(item.scheduleDate),
         end: new Date(item.scheduleDate),
-        color: item.scheStatus === "완료" ? "#ff1493" : "#EFA1DC",
+        color:
+          item.scheCategory === "essential"
+            ? "#c5c1f9"
+            : item.scheCategory === "preparation"
+            ? "#b8d1ff"
+            : item.scheCategory === "weddingTemplate"
+            ? "#d3f8ff"
+            : item.scheCategory === "wedding"
+            ? "#ffe29a"
+            : "#d3d3d3",
         scheIdx: item.scheIdx,
         isShared: false,
+        scheCategory: item.scheCategory, // ✅ 포함
+        scheStatus: item.scheStatus,
       }));
-  
+
       setEvents(formattedMy);
       setSchedules(myData);
       setIsSharedUser(false); // 👈 개인 사용자로 인식
-  
     } catch (err) {
       console.error("❌ 전체 일정 로딩 실패:", err);
     }
   };
-  
+
   useEffect(() => {
     const checkWeddingDate = async () => {
       try {
@@ -226,17 +272,27 @@ const CalendarPage = () => {
         setIsAlertVisible(true);
       }
     };
-  
+
     checkWeddingDate();
     fetchAllEvents(setEvents, setSchedules);
   }, []);
-  
-  
-  
-  
- 
-  
-  
+
+  useEffect(() => {
+    const handleClick = (e) => {
+      setClickCoords({ x: e.clientX, y: e.clientY });
+    };
+
+    const calendarRoot = document.querySelector(".calendar-main-wrapper");
+    if (calendarRoot) {
+      calendarRoot.addEventListener("click", handleClick);
+    }
+
+    return () => {
+      if (calendarRoot) {
+        calendarRoot.removeEventListener("click", handleClick);
+      }
+    };
+  }, []);
 
   return (
     <>
@@ -251,11 +307,37 @@ const CalendarPage = () => {
           <div className="calendar-main-box">
             <div className="calendar-main-wrapper">
               <Calendar
+                events={events}
                 date={currentDate}
                 onNavigate={(date) => setCurrentDate(date)}
                 view="month"
                 localizer={localizer}
-                events={events}
+                eventPropGetter={(event) => {
+                  const isHighlighted =
+                    selectedEvent?.scheIdx === event.scheIdx;
+                  const color =
+                    event.scheCategory === "essential"
+                      ? "#8E7DBE"
+                      : event.scheCategory === "preparation"
+                      ? "#BEE4D0"
+                      : event.scheCategory === "weddingTemplate"
+                      ? "#F7CFD8"
+                      : event.scheCategory === "wedding"
+                      ? "#9FB3DF"
+                      : "#d3d3d3";
+                  return {
+                    style: {
+                      backgroundColor: isHighlighted ? "#ff6347" : color,
+                      borderRadius: "8px",
+                      color: "white",
+                      padding: "2px 5px",
+                      fontSize: "14px",
+                      transition: "all 0.3s ease-in-out",
+                      transform: isHighlighted ? "scale(1.05)" : "scale(1)",
+                      boxShadow: isHighlighted ? "0 0 10px #ff6347" : "none",
+                    },
+                  };
+                }}
                 components={{ toolbar: CustomToolbar }}
                 startAccessor="start"
                 endAccessor="end"
@@ -267,7 +349,6 @@ const CalendarPage = () => {
                   setIsModalOpen(true);
                 }}
                 onSelectEvent={(event) => {
-
                   if (event.isShared) {
                     alert("이 일정은 공유된 일정으로, 수정할 수 없습니다.");
                     return;
@@ -276,36 +357,32 @@ const CalendarPage = () => {
                   setNewTitle(event.title);
                   setNewDate(event.start.toISOString().substring(0, 10));
                   setNewEndDate(event.end.toISOString().substring(0, 10));
-                  setIsCompleted(event.color === "#ff1493");
+                  setIsCompleted(event.scheStatus === "완료"); // ✅ 색상은 scheStatus로 구분 중
+
+                  setCategory(event.scheCategory || "custom"); // ✅ 수정: event에서 정확히 가져옴
                   setIsModalOpen(true);
                 }}
-                eventPropGetter={(event) => {
-                  const isHighlighted =
-                    highlightedDate === event.start.toISOString().split("T")[0];
+                onShowMore={(events, date) => {
+                  const { x, y } = clickCoords;
 
-                  return {
-                    style: {
-                      backgroundColor: isHighlighted
-                        ? "#ff6347"
-                        : event.color || "#EFA1DC",
-                      borderRadius: "8px",
-                      color: "white",
-                      padding: "2px 5px",
-                      transition: "all 0.3s ease-in-out",
-                      transform: isHighlighted ? "scale(1.05)" : "scale(1)",
-                      boxShadow: isHighlighted ? "0 0 10px #ff6347" : "none",
+                  const adjustedTop = Math.min(
+                    y + window.scrollY,
+                    window.innerHeight - 220
+                  );
+                  const adjustedLeft = Math.min(
+                    x + window.scrollX,
+                    window.innerWidth - 270
+                  );
+
+                  setMorePopupInfo({
+                    isOpen: true,
+                    date,
+                    events,
+                    position: {
+                      top: adjustedTop,
+                      left: adjustedLeft,
                     },
-                  };
-                }}
-                dayPropGetter={(date) => {
-                  const isSameDate =
-                    highlightedDate &&
-                    new Date(highlightedDate).toDateString() ===
-                      date.toDateString();
-
-                  return {
-                    className: isSameDate ? "highlight-day" : "",
-                  };
+                  });
                 }}
                 style={{ height: 750 }}
               />
@@ -320,7 +397,7 @@ const CalendarPage = () => {
                 weddingDate={weddingDate}
                 onAddEvent={handleAddEventModal}
                 onScheduleSelect={(schedule) => {
-                  setSelectedEvent(schedule);
+                  setSelectedEvent(schedule); // ✅ 캘린더 이벤트 강조용
                   setNewTitle(schedule.scheTitle);
                   setNewDate(schedule.scheduleDate);
                   setCategory(schedule.scheCategory);
@@ -374,6 +451,36 @@ const CalendarPage = () => {
 
         {isAlertVisible && (
           <CustomAlert message={alertMessage} onClose={handleCloseAlert} />
+        )}
+        {morePopupInfo.isOpen && (
+          <div
+            className="more-popup-wrapper"
+            style={{
+              position: "absolute",
+              top: morePopupInfo.position.top,
+              left: morePopupInfo.position.left,
+            }}
+          >
+            <div className="more-popup-card">
+              <div className="popup-header">
+                📅 {new Date(morePopupInfo.date).toISOString().split("T")[0]}{" "}
+                일정
+              </div>
+              <div className="popup-body">
+                {morePopupInfo.events.map((event, idx) => (
+                  <div key={idx} className="popup-event">
+                    {event.title}
+                  </div>
+                ))}
+              </div>
+              <button
+                className="popup-close-btn"
+                onClick={null}
+              >
+                닫기
+              </button>
+            </div>
+          </div>
         )}
       </div>
       <Footer />

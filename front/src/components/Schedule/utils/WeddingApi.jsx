@@ -184,3 +184,16 @@ export const getWeddingTemplates = async () => {
   });
   return response.data;
 };
+
+export const checkIfTemplateExists = async () => {
+  const token = sessionStorage.getItem("token");
+ 
+  const res = await fetch("http://localhost:8081/boot/api/schedule/events/template/exist", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  console.log("📡 템플릿 존재 확인 응답:", res.status);
+  if (!res.ok) throw new Error("템플릿 존재 여부 확인 실패");
+  return await res.json(); // true or false
+};

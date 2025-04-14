@@ -1,35 +1,54 @@
-import React from 'react';  
+import React, { useState } from "react";
 import axios from "axios";
+import CustomAlert from "./Customalert";
+import InviteModal from "./Invitemodal";
 
 const HandleInvite = () => {
-    const handleInviteClick = async () => {
-        console.log("상대방을 초대합니다")
-        const email = prompt("공유할 유저의 이메일을 입력하세요:");
-        if (!email) return;
+  const [alertMessage, setAlertMessage] = useState("");
+  const [showAlert, setShowAlert] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
-        const token = sessionStorage.getItem("token"); // ✅ JWT 토큰 꺼내기
-    
-        try {
-            await axios.post(
-                "http://localhost:8081/boot/api/schedule/invites",
-                { email },
-                {
-                  headers: {
-                    Authorization: `Bearer ${token}`, // ✅ 헤더에 토큰 포함
-                  },
-                });
-          alert("✅ 초대 요청을 보냈습니다!");
-        } catch (err) {
-          console.error("❌ 초대 실패:", err);
-          alert("❌ 초대 실패: " + (err.response?.data?.message || "서버 오류"));
+  const handleInvite = async (email) => {
+    const token = sessionStorage.getItem("token");
+    try {
+      await axios.post(
+        "http://localhost:8081/boot/api/schedule/invites",
+        { email },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
-      };
-    
-      return (
-        <button className="invite-btn" onClick={handleInviteClick}>
-          + 초대하기
-        </button>
       );
+      setAlertMessage("✅ 초대 요청을 보냈습니다!");
+    } catch (err) {
+      const errorMsg =
+        err.response?.data || "서버 오류로 인해 초대를 보낼 수 없습니다.";
+      setAlertMessage("❌ 초대 실패: " + errorMsg);
+    }
+    setShowAlert(true);
+  };
+
+  return (
+    <>
+      <button className="invite-btn" onClick={() => setShowModal(true)}>
+        + 초대하기
+      </button>
+
+      {showAlert && (
+        <CustomAlert
+          message={alertMessage}
+          onClose={() => setShowAlert(false)}
+        />
+      )}
+
+      <InviteModal
+        isOpen={showModal}
+        onClose={() => setShowModal(false)}
+        onSend={handleInvite}
+      />
+    </>
+  );
 };
 
-export default HandleInvite
+export default HandleInvite;

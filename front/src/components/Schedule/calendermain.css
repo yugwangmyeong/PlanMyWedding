@@ -46,12 +46,19 @@
 .sides-card.pinks {
   font-size: 16px;
   text-align: center;
-  background-color: #fad0e9;
+  background-color:  #EDE9FE;
   border: none;
-  color: #333;
+  color: #5B21B6; /* 진보라 */
   font-weight: 600;
 }
+/* 버튼 색상 교체 */
+.popup-close-btn {
+  background-color: #A78BFA; /* 라벤더 */
+}
 
+.popup-close-btn:hover {
+  background-color: #7C3AED; /* 퍼플 강조 */
+}
 .sides-card.blues {
   font-size: 14px;
   color: #333;
@@ -59,8 +66,95 @@
 
 /* 이벤트 스타일 */
 .fc-event {
+  
   background: none !important;
   border: none !important;
   padding: 0 !important;
   font-size: 0 !important;
+}
+
+.more-popup {
+  background: white;
+  border-radius: 8px;
+  padding: 10px 15px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  width: 220px;
+}
+
+.more-popup-content h4 {
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.more-popup-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.more-popup-content li {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.more-popup-wrapper {
+  z-index: 9999;
+  animation: fadeIn 0.3s ease;
+}
+
+.more-popup-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  min-width: 240px;
+  max-width: 300px;
+  font-family: 'Noto Sans KR', sans-serif;
+  transition: all 0.3s ease-in-out;
+}
+
+.popup-header {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.popup-body {
+  background-color: #f8f8f8;
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+.popup-event {
+  padding: 4px 0;
+}
+
+.popup-close-btn {
+  background-color: #ff6b6b;
+  border: none;
+  padding: 8px 14px;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.popup-close-btn:hover {
+  background-color: #ff4d4d;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

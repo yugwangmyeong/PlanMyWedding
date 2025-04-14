@@ -7,13 +7,11 @@
   background: white;
   padding: 10px 20px;
   color: #efa1dc;
-  margin: 0 auto;
-  max-width: 1200px; /* 중앙정렬 + 가로 폭 제한 */
-  width: 100%;
+  margin: 0 auto;              /* 중앙정렬 */
+  width: 1200px;               /* 고정된 가로폭 */
   box-sizing: border-box;
-  flex-wrap: wrap;        /* 너비 줄어들면 줄바꿈 허용 */
+  /* flex-wrap: wrap;  -- 반응형 줄바꿈 제거 */
 }
-
 .logo {
   font-size: 1.7em;
   font-weight: bold;

@@ -1,6 +1,7 @@
 package com.smhrd.myapp.service;
 
 import com.smhrd.myapp.User.User;
+import com.smhrd.myapp.repository.ScheduleRepository;
 import com.smhrd.myapp.repository.UserRepository;
 
 import io.jsonwebtoken.lang.Collections;
@@ -23,6 +24,7 @@ import java.util.Collection;
 public class UserService implements UserDetailsService{
 
     private final UserRepository userRepository;
+    private final ScheduleRepository scheduleRepository;
 
     public boolean login(String email, String password) {
         Optional<User> user = userRepository.findByEmail(email);
@@ -36,7 +38,17 @@ public class UserService implements UserDetailsService{
     // 회원 탈퇴 메서드
     @Transactional
     public void deleteUserByEmail(String email) {
-        userRepository.deleteUserByEmail(email); 
+        Optional<User> optionalUser = userRepository.findByEmail(email);
+        if (optionalUser.isEmpty()) return;
+
+        User user = optionalUser.get();
+        
+
+        // 1️⃣ 유저 일정 먼저 삭제
+        scheduleRepository.deleteByUser(user);
+
+        // 2️⃣ 그 다음 유저 삭제
+        userRepository.delete(user);
     }
     
     @Transactional

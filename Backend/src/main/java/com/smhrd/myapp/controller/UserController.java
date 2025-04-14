@@ -60,6 +60,7 @@ public class UserController {
 
             return ResponseEntity.ok("회원 탈퇴 완료");
         } catch (Exception e) {
+        	System.out.println("❌ 회원탈퇴 중 오류 발생: " + e.getMessage());
             e.printStackTrace(); // 🧨 실제 에러 콘솔 출력
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                                  .body("회원 탈퇴 중 서버 오류 발생");

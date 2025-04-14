@@ -26,4 +26,11 @@
     color: #666;
     font-size: 14px;
   }
+
+  .schedule-button.selected {
+    background-color: #ffc8e1;
+    color: #333;
+    border: 2px solid #efa1dc;
+    font-weight: bold;
+  }
   

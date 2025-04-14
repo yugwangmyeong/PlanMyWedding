@@ -168,11 +168,11 @@ const Login = ({ setToken }) => {
             <div className="line"></div>
           </div>
 
-          {/* 카카오 로그인 버튼 */}
+          {/* 카카오 로그인 버튼
           <button className="kakao-login">
             <img src="/images/kakao.png" alt="카카오톡 로그인" />
             <span>카카오톡 로그인</span>
-          </button>
+          </button> */}
         </form>
       </div>
     </div>

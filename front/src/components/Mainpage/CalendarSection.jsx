@@ -97,7 +97,7 @@ const CalendarSection = () => {
       {isModalOpen && (
         <div className="calendar-modal-backdrop">
           <div className="calendar-modal">
-            <h2 className="calendar-modal-title">📅 {selectedDate} 일정</h2>
+            <h1 className="calendar-modal-title">📅 {selectedDate} 일정</h1>
 
             <div className="calendar-modal-content">
               {dailyEvents.length > 0 ? (

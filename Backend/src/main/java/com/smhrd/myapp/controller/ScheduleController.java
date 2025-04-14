@@ -310,8 +310,9 @@ public class ScheduleController {
         try {
             List<Schedule> schedules = scheduleService.getSchedulesByRole(userId);
             List<ScheduleResponseDTO> response = schedules.stream()
-                .map(ScheduleResponseDTO::new)
-                .collect(Collectors.toList());
+                    .map(ScheduleResponseDTO::new) // ← 여기서 생성자 활용!
+                    .collect(Collectors.toList());
+
 
             return ResponseEntity.ok(response);
         } catch (Exception e) {
@@ -452,6 +453,17 @@ public class ScheduleController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("공유된 일정 없음");
         }
     }
+    
+    @GetMapping("/events/template/exist")
+    public ResponseEntity<Boolean> checkIfTemplateExists(@AuthenticationPrincipal CustomUserDetails userDetails) {
+    	if (userDetails == null) {
+            throw new RuntimeException("❗ 사용자 인증 정보가 없습니다.");
+        }
+        Long userId = userDetails.getUser().getId();
+        boolean exists = scheduleService.checkIfTemplateExists(userId);
+        return ResponseEntity.ok(exists);
+    }
+
 
 
     

@@ -2,6 +2,8 @@ package com.smhrd.myapp.service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -133,11 +135,17 @@ public class ScheduleService {
 	        }
 
 	        schedule.setScheTitle(dto.getScheTitle());
-	        schedule.setScheCategory(dto.getScheCategory());
+	        
 	        schedule.setScheStatus(dto.getScheStatus());
+	        schedule.setScheCategory(dto.getScheCategory()); // ✅ 이거 반드시 있어야 함
 
-	        if (dto.getScheduleDate() != null) {
-	            schedule.setScheduleDate(LocalDate.parse(dto.getScheduleDate()));
+	        if (dto.getScheduleDate() != null && !dto.getScheduleDate().trim().isEmpty()) {
+	            try {
+	                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	                schedule.setScheduleDate(LocalDate.parse(dto.getScheduleDate(), formatter));
+	            } catch (DateTimeParseException e) {
+	                throw new RuntimeException("❌ 잘못된 날짜 형식: " + dto.getScheduleDate(), e);
+	            }
 	        }
 
 	        return scheduleRepository.save(schedule);
@@ -252,6 +260,11 @@ public class ScheduleService {
 
 	        return result;
 	    }
+	    
+	    public boolean checkIfTemplateExists(Long userId) {
+	        return scheduleRepository.existsByUserIdAndScheCategory(userId, "weddingTemplate");
+	    }
+
 
 
 
