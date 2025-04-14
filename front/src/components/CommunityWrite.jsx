@@ -3,6 +3,7 @@ import { useNavigate, useLocation, useParams } from "react-router-dom";
 import axios from "axios";
 import "./styles/communitywrite.css";
 import Header from "./Header";
+import Footer from "./Footer";
 
 const CommunityWrite = () => {
   const pictureIcon = "/images/picture.jpg";
@@ -239,6 +240,7 @@ const CommunityWrite = () => {
           </div>
         </form>
       </div>
+      <Footer/>
     </div>
   );
 };

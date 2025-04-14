@@ -3,6 +3,7 @@ import Header from "../Header";
 import "./recwedding.css";
 import { questionList } from "./data/question";
 import QuestionWedding from "./QuestionWedding";
+import Footer from "../Footer"
 
 
 const RecWedding = () => {
@@ -92,7 +93,7 @@ const RecWedding = () => {
         hallDetails={hallDetails}
       />
       </div>
-
+    <Footer />
     </div>
   );
 };

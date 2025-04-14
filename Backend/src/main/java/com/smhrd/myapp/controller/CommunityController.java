@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -27,6 +28,7 @@ import com.smhrd.myapp.LoginRequest.LoginRequest;
 import com.smhrd.myapp.User.User;
 import com.smhrd.myapp.dto.CommunityDto;
 import com.smhrd.myapp.dto.CommunityFilterDto;
+import com.smhrd.myapp.dto.CommunitySearchDto;
 import com.smhrd.myapp.entity.Community;
 import com.smhrd.myapp.entity.CommunityLike;
 import com.smhrd.myapp.repository.CommunityLikeRepository;
@@ -161,6 +163,23 @@ public class CommunityController {
         Community updatedPost = communityService.updatePost(id, communityDto);
         return ResponseEntity.ok(updatedPost);
     }
+    
+    @GetMapping("/search")
+    public Page<Community> searchCommunity(
+        @RequestParam String searchType,
+        @RequestParam String keyword,
+        @RequestParam int page,
+        @RequestParam int size) {
+
+        CommunitySearchDto searchDto = new CommunitySearchDto();
+        searchDto.setSearchType(searchType);
+        searchDto.setKeyword(keyword);
+        searchDto.setPage(page);
+        searchDto.setSize(size);
+
+        return communityService.searchPosts(searchDto); // searchPosts() 로 수정!
+    }
+
     
     
 }

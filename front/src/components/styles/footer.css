@@ -1,59 +1,60 @@
 .footer {
-    background-color: #fff;
-    border-top: 1px solid #e5e5e5;
-    margin-top: 80px;
-    font-size: 14px;
-    color: #777;
-  }
-  
-  .footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 30px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-wrap: wrap;
-  }
-  
-  .footer-left {
-    max-width: 300px;
-  }
-  
-  .footer-logo {
-    font-size: 18px;
-    font-weight: bold;
-    color: #e96fba; /* 상단 로고와 어울리는 분홍색 */
-    margin-bottom: 8px;
-  }
-  
-  .footer-desc {
-    font-size: 13px;
-    color: #aaa;
-  }
-  
-  .footer-links {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-    margin-top: 10px;
-  }
-  
-  .footer-links a {
-    color: #666;
-    text-decoration: none;
-  }
-  
-  .footer-links a:hover {
-    color: #e96fba;
-    text-decoration: underline;
-  }
-  
-  .footer-bottom {
-    text-align: center;
-    padding: 15px 0;
-    font-size: 12px;
-    color: #aaa;
-    border-top: 1px solid #eee;
-  }
-  
+  background-color: #fff;
+  border-top: 1px solid #e5e5e5;
+  margin-top: 80px;
+  font-size: 14px;
+  color: #777;
+  /* footer 배경영역은 전체 너비에 걸쳐있길 원한다면 아래 코드를 제거하고, 
+     내부 컨테이너만 고정 폭으로 지정할 수 있습니다. */
+}
+
+.footer-container {
+  width: 1200px;       /* 고정된 폭 적용 */
+  margin: 0 auto;
+  padding: 30px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.footer-left {
+  max-width: 300px;
+}
+
+.footer-logo {
+  font-size: 18px;
+  font-weight: bold;
+  color: #e96fba; /* 상단 로고와 어울리는 분홍색 */
+  margin-bottom: 8px;
+}
+
+.footer-desc {
+  font-size: 13px;
+  color: #aaa;
+}
+
+.footer-links {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.footer-links a {
+  color: #666;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: #e96fba;
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 15px 0;
+  font-size: 12px;
+  color: #aaa;
+  border-top: 1px solid #eee;
+}

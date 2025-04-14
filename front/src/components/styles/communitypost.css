@@ -397,3 +397,18 @@ css
   font-size: 0.9em;
   color: #888;
 }
+
+/* 반응형 디자인: 뷰포트가 600px 이상일 때는 기존 값 활용, 600px 이하에서는 고정 */
+@media screen and (max-width: 600px) {
+  /* 왼쪽/오른쪽 중앙 정렬을 위해 margin 속성도 함께 지정 */
+  .chat-wrapper,
+  .community-container,
+  .community-post-wrapper,
+  .comment-list,
+  .comment-form {
+    width: 600px;
+    min-width: 600px;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}

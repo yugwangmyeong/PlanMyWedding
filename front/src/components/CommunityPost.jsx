@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./styles/communitypost.css";
 import Header from "./Header";
+import Footer from "./Footer";
 
 // 백엔드의 기본 URL
 const BASE_URL = "http://localhost:8081/boot/api/community";
@@ -396,6 +397,7 @@ const CommunityPost = () => {
           <p>게시글을 불러오는 중입니다...</p>
         )}
       </div>
+      <Footer/>
     </div>
   );
 };

@@ -4,17 +4,16 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.smhrd.myapp.User.User;
 import com.smhrd.myapp.dto.CommunityDto;
 import com.smhrd.myapp.dto.CommunityFilterDto;
+import com.smhrd.myapp.dto.CommunitySearchDto;
 import com.smhrd.myapp.entity.Community;
 import com.smhrd.myapp.entity.CommunityLike;
 import com.smhrd.myapp.repository.CommentRepository;
@@ -147,6 +146,24 @@ public class CommunityService {
             community.setCommLikes(community.getCommLikes() + 1);
         }
         return communityRepository.save(community);
+    }
+    
+    public Page<Community> searchPosts(CommunitySearchDto searchDto) {
+        PageRequest pageRequest = PageRequest.of(searchDto.getPage(), searchDto.getSize());
+        String pattern = "%" + searchDto.getKeyword() + "%";
+
+        switch (searchDto.getSearchType()) {
+            case "author":
+                return communityRepository.searchByAuthor(pattern, pageRequest);
+            case "title":
+                return communityRepository.searchByTitle(pattern, pageRequest);
+            case "content":
+                return communityRepository.searchByContent(pattern, pageRequest);
+            case "title_content":
+                return communityRepository.searchByTitleOrContent(pattern, pageRequest);
+            default:
+                throw new IllegalArgumentException("Invalid search type: " + searchDto.getSearchType());
+        }
     }
     
     
