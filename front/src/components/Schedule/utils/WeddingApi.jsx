@@ -1,7 +1,7 @@
 // src/api/weddingApi.js
 import axios from "axios";
 
-const API_BASE = "http://localhost:8081/boot/api/schedule";
+const API_BASE = "http://192.168.219.50:8081/boot/api/schedule";
 
 // ✅ 1. 결혼식 날짜 조회
 export const getWeddingDate = async () => {
@@ -104,7 +104,7 @@ export const updateSchedule = async (scheIdx, payload) => {
   console.log("🛠 수정 요청 payload:", payload); // 수정 요청 payload 확인
   const token = sessionStorage.getItem("token");
   const res = await axios.put(
-    `http://localhost:8081/boot/api/schedule/event/${scheIdx}`,
+    `http://192.168.219.50:8081/boot/api/schedule/event/${scheIdx}`,
     payload,
     {
       headers: {
@@ -123,7 +123,7 @@ export const updateSchedule = async (scheIdx, payload) => {
 export const getUserSchedules = async () => {
   const token = sessionStorage.getItem("token");
 
-  const res = await axios.get("http://localhost:8081/boot/api/schedule/events", {
+  const res = await axios.get("http://192.168.219.50:8081/boot/api/schedule/events", {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -144,7 +144,7 @@ export const deleteSchedule = async (scheIdx) => {
 
   try {
     const res = await axios.delete(
-      `http://localhost:8081/boot/api/schedule/event/${scheIdx}`,
+      `http://192.168.219.50:8081/boot/api/schedule/event/${scheIdx}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -164,7 +164,7 @@ export const deleteSchedule = async (scheIdx) => {
 //템플릿저장하는 api
 export const saveWeddingTemplate = async (payload) => {
   const token = sessionStorage.getItem("token");
-  return axios.post("http://localhost:8081/boot/api/schedule/weddingTemplate", payload, {
+  return axios.post("http://192.168.219.50:8081/boot/api/schedule/weddingTemplate", payload, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -177,7 +177,7 @@ export const saveWeddingTemplate = async (payload) => {
 
 export const getWeddingTemplates = async () => {
   const token = sessionStorage.getItem("token");
-  const response = await axios.get("http://localhost:8081/boot/api/schedule/weddingTemplate", {
+  const response = await axios.get("http://192.168.219.50:8081/boot/api/schedule/weddingTemplate", {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -188,7 +188,7 @@ export const getWeddingTemplates = async () => {
 export const checkIfTemplateExists = async () => {
   const token = sessionStorage.getItem("token");
  
-  const res = await fetch("http://localhost:8081/boot/api/schedule/events/template/exist", {
+  const res = await fetch("http://192.168.219.50:8081/boot/api/schedule/events/template/exist", {
     headers: {
       Authorization: `Bearer ${token}`,
     },

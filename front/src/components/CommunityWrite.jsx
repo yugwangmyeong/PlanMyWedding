@@ -36,7 +36,7 @@ const CommunityWrite = () => {
   // 이메일로 userId 조회
   const getUserIdFromEmail = async (email) => {
     try {
-      const res = await axios.get(`http://localhost:8081/boot/api/user/email/${email}`);
+      const res = await axios.get(`http://192.168.219.50:8081/boot/api/user/email/${email}`);
       return res.data.userId;
     } catch (err) {
       console.error("📛 userId 조회 실패:", err);
@@ -183,7 +183,16 @@ const CommunityWrite = () => {
 
           <div className="form-group no-label">
             <textarea
-              placeholder="내용을 입력해주세요..."
+              placeholder=" 💍 당신의 소중한 결혼 준비 경험을 공유해주세요! 
+          💍 웨딩홀, 스드메, 신혼여행까지!
+          결혼을 준비하면서 직접 경험한 서비스나 업체가 있으신가요?
+          √ 만족했던 부분 
+          √ 아쉬웠던 점 
+          √ 꿀팁까지! 
+          여러분의 솔직한 리뷰가 예비 신혼부부들에게 큰 도움이 됩니다. 😊✨ 
+          지금 바로 리뷰를 남겨주세요! 💌
+          ※ 주제에 맞지 않는 글이나 커뮤니티 이용정책에 위배되는 글은 신고의 대상이 됩니다. 
+          ※ 일정 수 이상의 신고를 받으면 작성한 글이 숨김 및 삭제될 수 있습니다."
               value={content}
               onChange={(e) => setContent(e.target.value)}
               rows="8"

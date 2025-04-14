@@ -52,11 +52,11 @@ const Community = () => {
       // 검색 모드가 아닐 때 실행 (검색창에 키워드가 없으면 필터/전체 조회)
       if (!region && !category && sortType === "latest") {
         // 전체 게시글
-        res = await axios.get("localhost:8081/boot/api/community/all", { headers });
+        res = await axios.get("http://192.168.219.50:8081/boot/api/community/all", { headers });
       } else {
         // 필터 게시글
         res = await axios.post(
-          "localhost:8081/boot/api/community/filter",
+          "http://192.168.219.50:8081/boot/api/community/filter",
           {
             region: region || null,
             category: category || null,
@@ -90,7 +90,7 @@ const Community = () => {
 
     // "http://192.168.219.50:8081/boot/api/community/search"
     try {
-      const res = await axios.get("http://localhost:8081/boot/api/community/search", {
+      const res = await axios.get("http://192.168.219.50:8081/boot/api/community/search", {
         params: {
           searchType, 
           keyword: searchKeyword,

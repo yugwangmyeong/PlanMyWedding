@@ -21,7 +21,7 @@ const Setting = () => {
       const fetchInvites = async () => {
         try {
           const response = await fetch(
-            "http://localhost:8081/boot/api/schedule/invites",
+            "http://192.168.219.50:8081/boot/api/schedule/invites",
             {
               headers: {
                 Authorization: `Bearer ${token}`,

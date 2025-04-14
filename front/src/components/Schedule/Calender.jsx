@@ -186,7 +186,7 @@ const CalendarPage = () => {
     try {
       // 1️⃣ 공유 일정 먼저 시도
       const sharedRes = await fetch(
-        "http://localhost:8081/boot/api/schedule/events/shared",
+        "http://192.168.219.50:8081/boot/api/schedule/events/shared",
         {
           headers: {
             Authorization: `Bearer ${token}`,
