@@ -49,7 +49,7 @@ public class SecurityConfig {
 
                .antMatchers("/boot/api/community/**").permitAll()
                .antMatchers("/api/user/email/**").permitAll()
-               
+               .antMatchers("/api/budget/**").authenticated()
                
                
                .anyRequest().authenticated()

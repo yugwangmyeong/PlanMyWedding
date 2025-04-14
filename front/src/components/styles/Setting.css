@@ -99,6 +99,23 @@
   color: #333;
 }
 
+.setting-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: nowrap; /* 줄바꿈 방지 */
+  width: 100%;
+  gap: 12px;
+}
+.setting-label {
+  flex: 1; /* 나머지 공간을 차지하게 함 */
+  min-width: 0; /* 줄바꿈 가능하게 함 */
+  word-break: break-word; /* 긴 단어 줄바꿈 */
+}
+.disconnect-btn {
+  white-space: nowrap; /* 버튼 안 줄바꿈 방지 */
+}
+
 .toggle-wrapper {
   position: absolute;
   right: 0;

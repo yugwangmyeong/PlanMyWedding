@@ -6,7 +6,7 @@ import {
 } from "./services/Budgetapi";
 import "../styles/budgetrow.css";
 
-const BudgetRow = ({ item, onUpdate, onDelete, isNew }) => {
+const BudgetRow = ({ item, onUpdate, onDelete, isNew, readOnly = false }) => {
   const [form, setForm] = useState(item);
   const inputRefs = useRef([]);
   const [memoFocus, setMemoFocus] = useState(false);
@@ -73,10 +73,10 @@ const BudgetRow = ({ item, onUpdate, onDelete, isNew }) => {
       preventBlurSaveRef.current = false;
       return;
     }
-    
+
     // 기존 타임아웃이 있다면 제거
     if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current);
-    
+
     // 새 타임아웃 설정
     saveTimeoutRef.current = setTimeout(() => {
       handleSave();
@@ -123,6 +123,8 @@ const BudgetRow = ({ item, onUpdate, onDelete, isNew }) => {
                 onBlur={handleSave}
                 onKeyDown={(e) => handleKeyDown(e, index)}
                 placeholder={field.placeholder}
+                readOnly={readOnly}
+                disabled={readOnly}
                 className="popup-input"
               />
               <span className="unit-label">만원</span>
@@ -133,6 +135,7 @@ const BudgetRow = ({ item, onUpdate, onDelete, isNew }) => {
               name="manager"
               value={form.manager}
               onChange={handleChange}
+              disabled={readOnly}
               onBlur={(e) => {
                 if (e.target.value === "") {
                   alert("담당자를 선택해주세요!"); // ❗ 경고만 하고 return
@@ -148,12 +151,13 @@ const BudgetRow = ({ item, onUpdate, onDelete, isNew }) => {
               <option value="신부">신부</option>
               <option value="함께">함께</option>
             </select>
-          ) :field.name === "memo" ? (
+          ) : field.name === "memo" ? (
             <textarea
               ref={(el) => (inputRefs.current[index] = el)}
               name="memo"
               value={form.memo}
               onChange={handleChange}
+              readOnly={readOnly}
               onBlur={(e) => {
                 handleSave();
                 setMemoFocus(false);
@@ -185,15 +189,17 @@ const BudgetRow = ({ item, onUpdate, onDelete, isNew }) => {
           )}
         </div>
       ))}
-      <div className="action-buttons-wrapper">
-        <button
-          type="button"
-          className="delete-icon-inline"
-          onClick={() => onDelete(form.bgIdx)}
-        >
-          ✖
-        </button>
-      </div>
+      {!readOnly && (
+        <div className="action-buttons-wrapper">
+          <button
+            type="button"
+            className="delete-icon-inline"
+            onClick={() => onDelete(form.bgIdx)}
+          >
+            ✖
+          </button>
+        </div>
+      )}
     </div>
   );
 };

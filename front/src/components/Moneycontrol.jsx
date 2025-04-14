@@ -3,7 +3,7 @@ import Header from "./Header";
 import BudgetRow from "./Moneycontrol/BudgetRow";
 import { calculateSummary } from "./Moneycontrol/calculateSummary";
 import BudgetSummary from "./Moneycontrol/BudgetSummary";
-
+import InviteModal from "./Moneycontrol/InviteModal";
 import {
   getBudgetList,
   createBudgetItem,
@@ -45,22 +45,31 @@ const MoneyControl = () => {
   const handleUpdateItem = async (updatedItem) => {
     try {
       let savedItem = updatedItem;
-
+  
       if (updatedItem.isNew) {
         const res = await createBudgetItem(updatedItem);
         savedItem = { ...res.data, isNew: false };
       } else {
         await updateBudgetItem(updatedItem);
       }
-
-      const newList = items.map((item) =>
-        item.bgIdx === savedItem.bgIdx ? savedItem : item
-      );
+  
+      const newList = items.map((item) => {
+        if (
+          item.bgIdx === savedItem.bgIdx || // 기존 항목 업데이트
+          (item.isNew && !item.bgIdx)       // 신규 항목 대체
+        ) {
+          return { ...savedItem, isNew: false };
+        }
+        return item;
+      });
+  
       setItems(newList);
     } catch (err) {
       console.error("❌ 항목 저장 실패:", err);
     }
   };
+  
+  
   //삭제함수
   const handleDeleteItem = async (bgIdx) => {
     try {
@@ -102,12 +111,69 @@ const MoneyControl = () => {
     setItems(reordered);
   };
 
+  // state 추가
+  const [isBudgetModalOpen, setIsBudgetModalOpen] = useState(false);
+
+  // 모달 열고 닫는 함수
+  const openBudgetModal = () => setIsBudgetModalOpen(true);
+  const closeBudgetModal = () => setIsBudgetModalOpen(false);
+  // 초대 전송 함수
+  const sendBudgetInvite = async (email) => {
+    const token = sessionStorage.getItem("token");
+    try {
+      const res = await fetch("http://localhost:8081/boot/api/budget/invite", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (res.ok) {
+        alert("✅ 초대가 전송되었습니다!");
+      } else {
+        alert("❌ 초대 실패");
+      }
+    } catch (err) {
+      console.error("초대 전송 오류:", err);
+      alert("에러 발생");
+    }
+  };
+
+  useEffect(() => {
+    const token = sessionStorage.getItem("token");
+    const isShared = sessionStorage.getItem("budgetShared") === "true";
+  
+    const fetchBudget = async () => {
+      try {
+        const res = await fetch(
+          isShared
+            ? "http://localhost:8081/boot/api/budget/shared"
+            : "http://localhost:8081/boot/api/budget/list",
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          }
+        );
+        const data = await res.json();
+        setItems(data);
+      } catch (err) {
+        console.error("예산 로딩 오류:", err);
+      }
+    };
+  
+    fetchBudget();
+  }, []);
+  
   return (
     <div>
       <Header></Header>
       <div className="title-wrap">
         <h1 className="maintitle">예산관리</h1>
-        <button className="invite-btn">+ 초대하기</button>
+
+        <button className="invite-btn" onClick={openBudgetModal}>
+          + 초대하기
+        </button>
       </div>
 
       <hr className="custom-line" />
@@ -168,6 +234,11 @@ const MoneyControl = () => {
             )}
           </Droppable>
         </DragDropContext>
+        <InviteModal
+          isOpen={isBudgetModalOpen}
+          onClose={closeBudgetModal}
+          onSend={sendBudgetInvite}
+        />
       </div>
     </div>
   );
