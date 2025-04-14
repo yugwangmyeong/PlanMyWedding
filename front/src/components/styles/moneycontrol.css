@@ -1,154 +1,154 @@
+/* 1. 전체 페이지 컨테이너 - 고정폭 930px, 중앙 정렬 */
 .page-container {
-  width: 930px;
+  width: clamp(930px, 100%, 1200px);
   margin: 0 auto;
   padding: 0 15px;
   box-sizing: border-box;
 }
-  
 
-  /* 헤더 및 공통 컨테이너 */
-  .title-wrap {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 150px 0 30px 0; /* 상단 150px, 하단 30px */
-  }
+/* 2. 헤더 및 공통 섹션 */
+.title-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 150px 0 30px 0; /* 상단 150px, 하단 30px */
+}
 
-  
+.maintitle {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
 
-  /* 타이틀 */
-  .maintitle {
-    font-size: 24px;
-    font-weight: bold;
-    margin: 0;
-  }
-  
-  /* 초대 버튼 */
-  .invite-btn {
-    padding: 10px 24px;
-    font-family: "Segoe UI", sans-serif;
-    font-size: 16px;
-    font-weight: bold;
-    outline: none;
-    background: #f8bbd0;
-    border: 2px solid #f48fb1;
-    color: #ffffff;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  .invite-btn:hover {
-    background: #ffffff;
-    color: #f06292;
-    border-color: #f06292;
-    transform: scale(1.03);
-  }
-  
-  /* 구분선 */
-  .custom-line {
-    border: none;
-    border-top: 2px solid #e4dede;
-    margin: 0 300px 30px 300px; /* 좌우 300px */
-  }
-  
-  
+.invite-btn {
+  padding: 10px 24px;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  background: #f8bbd0;
+  border: 2px solid #f48fb1;
+  color: #ffffff;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
 
+.invite-btn:hover {
+  background: #ffffff;
+  color: #f06292;
+  border-color: #f06292;
+  transform: scale(1.03);
+}
 
+.custom-line {
+  border: none;
+  border-top: 2px solid #e4dede;
+  margin-bottom: 30px;
+}
 
-  /*
-    예산세부내역
-  */
-  .maintitle2 {
-    text-align: left;
-    font-size: 20px;
-    padding: 20px 0;
-    margin: 0;
-  }
+/* 3. 예산 세부 내역 헤더 */
+.maintitle2 {
+  text-align: left;
+  font-size: 20px;
+  padding: 20px 0;
+  margin: 0;
+}
 
-  .budget-detail-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #f7f4f4;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 16px 32px;
-    margin: 30px 300px 20px 300px;
-  }
-  
-  .detail-item {
-    flex: 1;
-    text-align: left;
-    font-weight: 500;
-    font-size: 17px;
-    color: #272020;
-  }
-  
-  .divider {
-    width: 1px;
-    height: 24px;
-    background-color: #999;
-  }
-  
+.budget-detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f7f4f4;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 16px 32px;
+  margin: 30px 0 20px 0;
+}
+
+.detail-item {
+  flex: 1;
+  text-align: left;
+  padding: 0 10px;  /* 좌우 10px 패딩 추가 */
+  font-weight: 500;
+  font-size: 17px;
+  color: #272020;
+}
+
+.divider {
+  width: 1px;
+  height: 24px;
+  background-color: #999;
+  margin: 0 10px;  /* 좌우 10px 여백 추가해서 구분선과 텍스트 사이 간격 확보 */
+}
+
+/* 4. 예산 세부 내역 영역 */
 .budget-detail-wrapper {
   background-color: #fde9ec;
   padding: 15px;
-  margin: 0;
+  margin-bottom: 30px;
   border-radius: 30px;
 }
-  
-  .budget-list {
-    background-color: white;
-    border-radius: 8px;
-    overflow: hidden;
-    padding: 5px;
-  }
-  
-  .budget-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 16px 12px; /* 패딩을 늘려서 높이를 증가 */
-    border-bottom: 1px solid #f0f0f0;
-    font-size: 14px;
-    color: #333;
-    cursor: grab;
-  }
 
-  .budget-row:active {
-    cursor: grabbing;
-  }
-  .budget-col {
-    flex: 1;
-    text-align: center;
-    
-  }
-  
-  
-/* 추가 항목(행) 추가 버튼 */
+.budget-list {
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 5px;
+}
+
+/* 5. 예산 행 (BudgetRow) 스타일 */
+.budget-row {
+  display: flex;
+  align-items: stretch; /* 각 컬럼을 동일 높이로 맞춤 */
+  justify-content: space-between;
+  padding: 16px 12px;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 14px;
+  color: #333;
+  cursor: grab;
+  min-height: 60px;
+}
+
+.budget-row:active {
+  cursor: grabbing;
+}
+
+.budget-col {
+  flex: 1;
+  text-align: center;
+  display: flex;
+  align-items: center;   /* 내부 컨텐츠 센터 정렬 */
+  justify-content: center;
+}
+
+/* unit-label: 만원 텍스트가 줄바꿈 없이 한 줄에 표시되도록 */
+.unit-label {
+  white-space: nowrap;
+  margin-left: 4px;
+  font-size: 14px;
+}
+
+/* 6. 추가 항목 추가 버튼 */
 .add-item-row {
   padding: 12px;
   cursor: pointer;
   color: #ffa8c5;
   font-weight: bold;
   text-align: left;
-  margin-left: 20px;
+  margin: 20px;
   border-radius: 8px;
   transition: all 0.2s ease;
   user-select: none;
 }
- 
-  .add-item-row:hover {
-    background-color: #ffe4ec;
-    transform: translateY(-1px);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  }
 
+.add-item-row:hover {
+  background-color: #ffe4ec;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
 
-/* 6. 예산 박스 (BudgetSummary 영역) */
-/* 이 영역도 컨테이너 내부에 위치하므로 좌우 마진 제거 */
+/* 7. 예산 박스 (BudgetSummary 영역) */
 .budget-box {
   display: flex;
   justify-content: space-evenly;
@@ -157,7 +157,7 @@
   border: 1px solid #e0e0e0;
   border-radius: 12px;
   padding: 50px;
-  margin: 20px 0;  /* 상하 여백만 적용 */
+  margin: 20px 0;
   width: 100%;
 }
 
@@ -184,7 +184,7 @@
   color: #333;
 }
 
-/* 7. 차트 박스 (Budget Chart) */
+/* 8. 차트 박스 (Budget Chart) */
 .budget-chart-box {
   margin-top: 20px;
   padding: 16px;
@@ -202,4 +202,44 @@
 .budget-chart {
   width: 400px;
   height: 400px;
+}
+
+/* 9. 메모 입력 영역 - 높이를 약간 늘려서 좀 더 길게 표시 */
+.memo-input {
+  width: 100%;
+  min-height: 40px;
+  max-height: 120px; /* 필요에 따라 조정 */
+  padding: 6px;
+  font-size: 14px;
+  border: 1px solid #6690ff;
+  border-radius: 12px;
+  background-color: #fff;
+  resize: vertical;
+  transition: all 0.3s ease;
+  overflow-y: auto;
+  text-align: left;
+  color: #333;
+  margin-left: 10px; /* 오른쪽으로 10px 이동 */
+}
+
+/* 담당자 선택창 (select.popup-input)의 크기를 줄이고 오른쪽으로 10px 이동 */
+.budget-col select.popup-input {
+  width: 80px;       /* 적절한 크기로 줄임 (필요에 따라 값을 조정) */
+  margin-left: 10px; /* 구분선보다 오른쪽에 위치하도록 여백 추가 */
+}
+
+.memo-input:focus {
+  border-color: #6690ff;
+  box-shadow: 0 0 6px rgba(102, 144, 255, 0.2);
+}
+
+.input-with-unit {
+  display: flex;
+  align-items: center;
+}
+.unit-label {
+  display: inline-block;
+  white-space: nowrap; /* 줄바꿈 방지 */
+  margin-left: 4px;
+  font-size: 14px;
 }

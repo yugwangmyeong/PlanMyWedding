@@ -10,14 +10,15 @@ const BudgetRow = ({ item, onUpdate, onDelete, isNew }) => {
   const [form, setForm] = useState(item);
   const inputRefs = useRef([]);
   const [memoFocus, setMemoFocus] = useState(false);
-  const isMemoExpanded = form.memo.length > 20 && memoFocus;
   const [prevForm, setPrevForm] = useState(item); // 변경 감지용
   const [saving, setSaving] = useState(false);
-  const saveTimeoutRef = useRef(null); // ✅ 변경
+  const saveTimeoutRef = useRef(null);
+  const preventBlurSaveRef = useRef(false);
 
   useEffect(() => {
-    return () => clearTimeout(saveTimeoutRef.current); // ✅ 컴포넌트 언마운트 시 클린업
+    return () => clearTimeout(saveTimeoutRef.current);
   }, []);
+
   const normalizeForm = (form) => ({
     ...form,
     budget: Number(form.budget),
@@ -42,13 +43,10 @@ const BudgetRow = ({ item, onUpdate, onDelete, isNew }) => {
   const handleSave = async () => {
     if (saving) return;
     const dataToSave = normalizeForm(form);
-
     if (JSON.stringify(dataToSave) === JSON.stringify(prevForm)) return;
-
     try {
       setSaving(true);
       let savedItem;
-
       if (!form.bgIdx) {
         const res = await createBudgetItem(dataToSave);
         savedItem = { ...res.data, isNew: false };
@@ -56,7 +54,6 @@ const BudgetRow = ({ item, onUpdate, onDelete, isNew }) => {
         await updateBudgetItem(dataToSave);
         savedItem = { ...dataToSave, isNew: false };
       }
-
       onUpdate(savedItem);
       setForm(savedItem);
       setPrevForm(savedItem);
@@ -68,40 +65,27 @@ const BudgetRow = ({ item, onUpdate, onDelete, isNew }) => {
   };
 
   const handleBlur = () => {
-    // Enter 키 이후의 blur면 저장하지 않음
     if (preventBlurSaveRef.current) {
       preventBlurSaveRef.current = false;
       return;
     }
-    
-    // 기존 타임아웃이 있다면 제거
     if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current);
-    
-    // 새 타임아웃 설정
     saveTimeoutRef.current = setTimeout(() => {
       handleSave();
     }, 200);
   };
 
-  // 추가할 ref
-  const preventBlurSaveRef = useRef(false);
-
   const handleKeyDown = (e, index) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
-
-      // Blur에서 예약된 저장을 막기
       if (saveTimeoutRef.current) clearTimeout(saveTimeoutRef.current);
-
-      // Enter 키 이후의 blur 이벤트에서는 저장하지 않도록 설정
       preventBlurSaveRef.current = true;
-
       handleSave();
-
       const next = inputRefs.current[index + 1];
       if (next) next.focus();
     }
   };
+
   return (
     <div className="budget-row input-row animate-input">
       {fields.map((field, index) => (
@@ -135,9 +119,9 @@ const BudgetRow = ({ item, onUpdate, onDelete, isNew }) => {
               onChange={handleChange}
               onBlur={(e) => {
                 if (e.target.value === "") {
-                  alert("담당자를 선택해주세요!"); // ❗ 경고만 하고 return
+                  alert("담당자를 선택해주세요!");
                 } else {
-                  handleBlur(); // ✅ 선택된 값이 있을 때만 실행됨
+                  handleBlur();
                 }
               }}
               onKeyDown={(e) => handleKeyDown(e, index)}
@@ -148,24 +132,37 @@ const BudgetRow = ({ item, onUpdate, onDelete, isNew }) => {
               <option value="신부">신부</option>
               <option value="함께">함께</option>
             </select>
-          ) :field.name === "memo" ? (
-            <textarea
-              ref={(el) => (inputRefs.current[index] = el)}
-              name="memo"
-              value={form.memo}
-              onChange={handleChange}
-              onBlur={(e) => {
-                handleSave();
-                setMemoFocus(false);
-              }}
-              onFocus={() => setMemoFocus(true)}
-              onKeyDown={(e) => handleKeyDown(e, index)}
-              placeholder={field.placeholder}
-              className={`popup-input memo-input ${
-                memoFocus ? "focused" : ""
-              } ${isMemoExpanded ? "expanded" : ""}`}
-              maxLength={200}
-            />
+          ) : field.name === "memo" ? (
+            <div className="memo-wrapper">
+              <textarea
+                name="memo"
+                className="memo-input"
+                value={form.memo}
+                // 초기 inline style로 60px(3줄) 고정
+                style={{ height: "60px" }}
+                onChange={(e) => {
+                  handleChange(e);
+                  if (memoFocus) {
+                    e.target.style.height = "auto";
+                    e.target.style.height = `${e.target.scrollHeight}px`;
+                  }
+                }}
+                onFocus={(e) => {
+                  setMemoFocus(true);
+                  // 포커스 시 내용에 맞게 확장
+                  e.target.style.height = "auto";
+                  e.target.style.height = `${e.target.scrollHeight}px`;
+                }}
+                onBlur={(e) => {
+                  handleSave();
+                  setMemoFocus(false);
+                  // 포커스 빠지면 60px로 복원
+                  e.target.style.height = "60px";
+                }}
+                placeholder="메모를 입력하세요"
+                maxLength={200}
+              />
+            </div>
           ) : (
             <input
               ref={(el) => (inputRefs.current[index] = el)}

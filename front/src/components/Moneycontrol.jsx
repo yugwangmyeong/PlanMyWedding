@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
-import Header from "./Header";
-import BudgetRow from "./Moneycontrol/BudgetRow";
-import BudgetSummary from "./Moneycontrol/BudgetSummary";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
+import Header from "./Header";
+import BudgetSummary from "./Moneycontrol/BudgetSummary";
+import BudgetRow from "./Moneycontrol/BudgetRow";
 import {
   getBudgetList,
   createBudgetItem,
   updateBudgetItem,
   deleteBudgetItem,
 } from "./Moneycontrol/services/Budgetapi";
-import "./styles/moneycontrol.css";  // 위의 통합 CSS 포함
-import Footer from "./Footer";
+import "./styles/moneycontrol.css";
 
 const MoneyControl = () => {
   const [items, setItems] = useState([]);
@@ -25,6 +24,7 @@ const MoneyControl = () => {
       });
   }, []);
 
+  // 항목 수정 (신규 항목이면 등록, 아니면 업데이트)
   const handleUpdateItem = async (updatedItem) => {
     try {
       let savedItem;
@@ -45,6 +45,7 @@ const MoneyControl = () => {
     }
   };
 
+  // 항목 삭제
   const handleDeleteItem = async (bgIdx) => {
     try {
       await deleteBudgetItem(bgIdx);
@@ -54,8 +55,10 @@ const MoneyControl = () => {
     }
   };
 
+  // 한 번에 한 개의 새 항목만 추가하도록 리팩토링 (옵션 2)
   const handleAddRow = () => {
-    if (items.some((item) => item.isNew)) return;
+    // 이미 isNew인 항목이 있으면 사용자에게 먼저 저장하도록 요청
+    
     const newItem = {
       name: "",
       budget: 0,
@@ -68,6 +71,7 @@ const MoneyControl = () => {
     setItems((prev) => [...prev, newItem]);
   };
 
+  // 드래그 앤 드롭 종료 시 항목 순서 업데이트
   const handleDragEnd = (result) => {
     if (!result.destination) return;
     const reordered = Array.from(items);
@@ -81,7 +85,7 @@ const MoneyControl = () => {
       <Header />
       <div className="title-wrap">
         <h1 className="maintitle">예산관리</h1>
-        <button className="invite-btn">+ 초대하기</button>
+        
       </div>
       <hr className="custom-line" />
       <BudgetSummary items={items} />
@@ -136,7 +140,6 @@ const MoneyControl = () => {
           </Droppable>
         </DragDropContext>
       </div>
-      <Footer/>
     </div>
   );
 };
