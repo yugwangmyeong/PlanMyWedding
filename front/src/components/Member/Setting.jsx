@@ -30,7 +30,7 @@ const Setting = () => {
 
     try {
       const token = sessionStorage.getItem("token");
-      const response = await fetch("http://localhost:8081/boot/api/delete", {
+      const response = await fetch("http://192.168.219.50:8081/boot/api/delete", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

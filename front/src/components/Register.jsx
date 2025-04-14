@@ -36,7 +36,7 @@ const Register = () => {
     setError(""); // 에러 메시지 초기화
 
     try {
-      const response = await fetch("http://localhost:8081/boot/api/signup", {
+      const response = await fetch("http://http://192.168.219.50:8081/boot/api/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

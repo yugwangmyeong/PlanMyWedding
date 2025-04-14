@@ -36,7 +36,7 @@ const CommunityWrite = () => {
   // 이메일로 userId 조회
   const getUserIdFromEmail = async (email) => {
     try {
-      const res = await axios.get(`http://localhost:8081/boot/api/user/email/${email}`);
+      const res = await axios.get(`http://192.168.219.50:8081/boot/api/user/email/${email}`);
       return res.data.userId;
     } catch (err) {
       console.error("📛 userId 조회 실패:", err);
@@ -61,7 +61,7 @@ const CommunityWrite = () => {
     const formData = new FormData();
     formData.append("file", file);
     try {
-      const res = await axios.post("http://localhost:8081/boot/api/community/upload", formData);
+      const res = await axios.post("http://192.168.219.50:8081/boot/api/community/upload", formData);
       return res.data;
     } catch (err) {
       console.error("이미지 업로드 실패", err);
@@ -98,11 +98,11 @@ const CommunityWrite = () => {
 
     try {
       if (isEditMode) {
-        await axios.put(`http://localhost:8081/boot/api/community/${id}`, requestData);
+        await axios.put(`http://192.168.219.50:8081/boot/api/community/${id}`, requestData);
         alert("게시글이 수정되었습니다!");
         navigate(`/community/post/${id}`);
       } else {
-        const res = await axios.post("http://localhost:8081/boot/api/community/write", requestData);
+        const res = await axios.post("http://192.168.219.50:8081/boot/api/community/write", requestData);
         alert("게시글이 등록되었습니다!");
         if (res.data && res.data.commIdx) {
           navigate(`/community/post/${res.data.commIdx}`);
@@ -132,7 +132,7 @@ const CommunityWrite = () => {
     }
   
     try {
-      await axios.delete(`http://localhost:8081/boot/api/community/${id}`);
+      await axios.delete(`http://192.168.219.50:8081/boot/api/community/${id}`);
       alert("게시글이 삭제되었습니다!");
       navigate("/community");  // 삭제 후 게시글 목록 페이지로 이동
     } catch (error) {
