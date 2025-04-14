@@ -158,3 +158,67 @@
     transform: translateY(0);
   }
 }
+
+.handle-invite-wrapper {
+  margin-left: auto;
+}
+
+/* 고정 범위 컨테이너: 상단 '일정관리 ~ 초대하기' 영역과 아래 달력 영역이 동일한 1060px 범위를 갖도록 */
+.fixed-range {
+  max-width: 1060px;
+  min-width: 1060px;
+  margin: 0 auto;
+}
+
+/* 상단 제목 영역 */
+.title-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* 왼쪽과 오른쪽 끝에 배치 */
+  width: 100%;
+  margin-bottom: 16px;
+  margin-left: 0; /* 불필요한 margin 제거 */
+  margin-top: 80px;
+}
+
+.maintitle {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* 구분선 */
+.custom-line {
+  border: 0;
+  height: 1px;
+  background-color: #e0e0e0;
+  margin: 20px auto;
+  max-width: 1060px;
+}
+
+/* 통합된 메인 캘린더 영역 (좌측 달력 + 우측 아코디언) */
+/* 1060px에서 고정됨 */
+.calendar-main-fixed {
+  display: flex;
+  width: 1060px;
+  margin: 0 auto;
+  gap: 40px;
+}
+
+/* 좌측 달력 영역 */
+.calendar-left {
+  flex: 3;
+}
+
+/* 달력 내부 wrapper: FullCalendar가 부모 width 100%를 채우도록 함 */
+.calendar-main-wrapper {
+  width: 100%;
+  height: 750px;
+  box-sizing: border-box;
+}
+
+/* 우측 일정 아코디언 영역 */
+.calendar-right {
+  flex: 1;
+  min-width: 250px;
+}

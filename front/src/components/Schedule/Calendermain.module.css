@@ -1,0 +1,110 @@
+/* Calendermain.module.css */
+
+/* 전체 캘린더 페이지 영역 */
+.calendarFullContainer {
+    max-width: 1200px;
+    min-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* 상단 헤더 영역 */
+  .calendarHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  .calendarHeaderTitle {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* 구분선 */
+  .dividerLine {
+    border: 0;
+    height: 1px;
+    background-color: #e0e0e0;
+    margin-bottom: 20px;
+  }
+  
+  /* 메인 콘텐츠 영역 */
+  .calendarContent {
+    position: relative;
+  }
+  
+  /* 좌우 레이아웃 컨테이너 */
+  .calendarContentContainer {
+    display: flex;
+    gap: 40px;
+  }
+  
+  /* 왼쪽 달력 영역 */
+  .calendarLeft {
+    flex: 3;
+  }
+  .calendarLeftInner {
+    background: #fff;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    height: 85vh;
+    box-sizing: border-box;
+  }
+  
+  /* 오른쪽 일정 아코디언 영역 */
+  .calendarRight {
+    flex: 1;
+    min-width: 250px;
+  }
+  
+  /* 팝업 영역 */
+  .popupWrapper {
+    z-index: 9999;
+    animation: fadeIn 0.3s ease;
+  }
+  .popupCard {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    min-width: 240px;
+    max-width: 300px;
+    transition: all 0.3s ease-in-out;
+  }
+  .popupHeader {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+  }
+  .popupBody {
+    background-color: #f8f8f8;
+    border-radius: 10px;
+    padding: 12px;
+    margin-bottom: 16px;
+    font-size: 14px;
+  }
+  .popupEvent {
+    padding: 4px 0;
+  }
+  .popupCloseBtn {
+    background-color: #ff6b6b;
+    border: none;
+    padding: 8px 14px;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .popupCloseBtn:hover {
+    background-color: #ff4d4d;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
