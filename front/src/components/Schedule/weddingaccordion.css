@@ -1,36 +1,41 @@
 .schedule-button {
-    display: block;
-    width: 100%;
-    padding: 8px 12px;
-    margin: 4px 0;
-    background: #f8f9fa;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    text-align: left;
-    cursor: pointer;
-  }
-  
-  .schedule-button:hover {
-    background: #e9ecef;
-  }
-  
-  .schedule-button small {
-    display: block;
-    color: #666;
-    font-size: 0.8em;
-  }
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  margin: 4px 0;
+  background: #f8f9fa;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  text-align: left;
+  cursor: pointer;
+}
 
-  .accordions-empty {
-    text-align: center;
-    padding: 20px;
-    color: #666;
-    font-size: 14px;
-  }
+.schedule-button:hover {
+  background: #e9ecef;
+}
 
-  .schedule-button.selected {
-    background-color: #ffc8e1;
-    color: #333;
-    border: 2px solid #efa1dc;
-    font-weight: bold;
-  }
-  
+.schedule-button small {
+  display: block;
+  color: #666;
+  font-size: 0.8em;
+}
+
+.accordions-empty {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  font-size: 14px;
+}
+
+.schedule-button.selected {
+  background-color: #ffc8e1;
+  color: #333;
+  border: 2px solid #efa1dc;
+  font-weight: bold;
+}
+
+.sides-card.blues progress {
+
+  width: calc(80%);
+  margin-right: 17px;
+}

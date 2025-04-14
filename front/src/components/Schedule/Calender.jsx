@@ -27,6 +27,7 @@ import {
 } from "./utils/WeddingApi";
 import HandleInvite from "../HandleInvite";
 
+
 const locales = { ko };
 const localizer = dateFnsLocalizer({
   format,
@@ -297,6 +298,7 @@ const CalendarPage = () => {
   return (
     <>
       <Header />
+      <div className="calendar-wrapper">
       <div className="title-wrap">
         <h1 className="maintitle">일정관리</h1>
         <HandleInvite />
@@ -482,6 +484,7 @@ const CalendarPage = () => {
             </div>
           </div>
         )}
+        </div>
       </div>
       <Footer />
     </>
