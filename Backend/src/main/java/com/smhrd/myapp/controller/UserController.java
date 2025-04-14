@@ -119,6 +119,29 @@ public class UserController {
     }
     
 
+    // 신규 API: 아이디 찾기 (닉네임을 통한)
+    @GetMapping("/user/find-id")
+    public ResponseEntity<?> findIdByUsername(@RequestParam String username) {
+        User user = userService.findByUsername(username);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                                 .body("해당 닉네임에 해당하는 사용자를 찾을 수 없습니다.");
+        }
+        // 일반적으로 로그인 아이디는 이메일로 사용
+        return ResponseEntity.ok(Map.of("email", user.getEmail()));
+    }
+    
+    // 신규 API: 비밀번호 찾기 (아이디를 통한)
+    @GetMapping("/user/find-password")
+    public ResponseEntity<?> findPasswordByEmail(@RequestParam String email) {
+        User user = userService.findByEmail(email);
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                                 .body("해당 이메일에 해당하는 사용자를 찾을 수 없습니다.");
+        }
+        // 보안상 문제될 수 있음: 실제 서비스에서는 임시 비밀번호, 인증 절차 등이 필요함
+        return ResponseEntity.ok(Map.of("password", user.getPassword()));
+    }
 
 
 }

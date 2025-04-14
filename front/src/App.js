@@ -13,7 +13,8 @@ import Member from "./components/Member/Member";
 import Setting from "./components/Member/Setting";
 import SettingLayout from "./components/Member/SettingLayout";
 import Community from "./components/Community.jsx";
-import Community_write from "./components/Community_write.jsx"; // 커뮤니티 글쓰기 추가
+import FindId from "./components/FindId.jsx";
+import FindPassword from "./components/FindPassword.jsx";
 
 function App() {
   const [token, setToken] = useState(null);
@@ -42,11 +43,17 @@ function App() {
           {<Route path="/calender" element={<Calender />} />}
           {<Route path="/calender" element={<Calender />} />}
           <Route path="/login" element={<Login />} />
+
+            {/*아이디 비밀번호 찾기*/}
+          <Route path="/find-id" element={<FindId />} />
+          <Route path="/find-password" element={<FindPassword />} />
+
+
           <Route path="/register" element={<Register />} />
           <Route path="/community" element={<Community />} />
           <Route path="/community/write" element={<CommunityWrite />} />
 
-            {/* 게시글 상세보기 바뀜 */}
+      
           <Route path="/community/post/:postId" element={<CommunityPost />} />
           <Route path="/community/update/:id" element={<CommunityWrite />} />
 

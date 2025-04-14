@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
+import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import Header from "./Header";
+import BudgetSummary from "./Moneycontrol/BudgetSummary";
 import BudgetRow from "./Moneycontrol/BudgetRow";
 import { calculateSummary } from "./Moneycontrol/calculateSummary";
-import BudgetSummary from "./Moneycontrol/BudgetSummary";
-
 import {
   getBudgetList,
   createBudgetItem,
@@ -11,75 +11,68 @@ import {
   deleteBudgetItem,
 } from "./Moneycontrol/services/Budgetapi";
 import "./styles/moneycontrol.css";
-import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
+import "./styles/budgetcontainer.css";
+import Footer from "./Footer";
 
 const MoneyControl = () => {
   const [items, setItems] = useState([]);
-  const summary = calculateSummary(items);
+
+  // API로부터 예산 항목 리스트를 불러와 상태 업데이트
+  const fetchBudgetList = useCallback(async () => {
+    try {
+      const res = await getBudgetList();
+      console.log("✅ 불러온 예산 목록:", res.data);
+      setItems(res.data);
+    } catch (err) {
+      console.error("❌ 예산 목록 로딩 실패:", err);
+    }
+  }, []);
 
   useEffect(() => {
-    // 불필요한 중복 호출 방지를 위한 플래그
     let isMounted = true;
-
-    getBudgetList()
-      .then((res) => {
-        if (isMounted) {
-          // 컴포넌트가 여전히 마운트 상태일 때만 상태 업데이트
-          console.log("✅ 불러온 예산 목록:", res.data);
-          setItems(res.data);
-        }
-      })
-      .catch((err) => {
-        if (isMounted) {
-          console.error("❌ 예산 목록 로딩 실패:", err);
-        }
-      });
-
-    // 클린업 함수
+    fetchBudgetList();
     return () => {
       isMounted = false;
     };
-  }, []); // 의존성 배열 확인
+  }, [fetchBudgetList]);
 
-  //수정할수있음
+  // 항목 수정 (신규 항목이면 등록, 아니면 업데이트)
   const handleUpdateItem = async (updatedItem) => {
     try {
-      let savedItem = updatedItem;
-
+      let savedItem;
       if (updatedItem.isNew) {
         const res = await createBudgetItem(updatedItem);
         savedItem = { ...res.data, isNew: false };
       } else {
         await updateBudgetItem(updatedItem);
+        savedItem = { ...updatedItem, isNew: false };
       }
-
-      const newList = items.map((item) =>
-        item.bgIdx === savedItem.bgIdx ? savedItem : item
+      setItems((prevItems) =>
+        prevItems.map((item) =>
+          item.bgIdx === savedItem.bgIdx ? savedItem : item
+        )
       );
-      setItems(newList);
     } catch (err) {
       console.error("❌ 항목 저장 실패:", err);
     }
   };
-  //삭제함수
+
+  // 항목 삭제
   const handleDeleteItem = async (bgIdx) => {
     try {
       await deleteBudgetItem(bgIdx);
-      const res = await getBudgetList();
-      const newList = res.data.filter((item) => item.bgIdx !== undefined);
-      setItems(newList); // undefined 제거
+      setItems((prevItems) =>
+        prevItems.filter((item) => item.bgIdx !== bgIdx)
+      );
     } catch (err) {
       console.error("❌ 삭제 실패:", err.response?.data || err.message);
     }
   };
 
-  //항목추가 함수
-  // 수정된 handleAddRow 예시
+  // 새로운 항목 추가
   const handleAddRow = () => {
-    // 이미 isNew가 존재하면 추가하지 않음
-    const hasNew = items.some((item) => item.isNew);
-    if (hasNew) return;
-
+    // 이미 신규 항목이 존재하면 추가하지 않음
+    if (items.some((item) => item.isNew)) return;
     const newItem = {
       name: "",
       budget: 0,
@@ -87,35 +80,33 @@ const MoneyControl = () => {
       manager: "",
       memo: "",
       isNew: true,
-      bgIdx: null, // 이게 없으면 key 중복이나 저장 오류 발생 가능
+      bgIdx: null,
     };
     setItems((prev) => [...prev, newItem]);
   };
 
-  const handleDragEnd = async (result) => {
+  // 드래그 앤 드롭 종료 시 항목 순서 업데이트
+  const handleDragEnd = (result) => {
     if (!result.destination) return;
-
     const reordered = Array.from(items);
     const [moved] = reordered.splice(result.source.index, 1);
     reordered.splice(result.destination.index, 0, moved);
-
     setItems(reordered);
   };
 
   return (
     <div>
-      <Header></Header>
+      <Header />
+      <div className="budget-container">
       <div className="title-wrap">
         <h1 className="maintitle">예산관리</h1>
         <button className="invite-btn">+ 초대하기</button>
       </div>
-
       <hr className="custom-line" />
 
       <BudgetSummary items={items} />
 
       <h1 className="maintitle2">예산 세부 내역</h1>
-
       <div className="budget-detail-header">
         <div className="detail-item">항목</div>
         <div className="divider" />
@@ -152,15 +143,13 @@ const MoneyControl = () => {
                         <BudgetRow
                           item={item}
                           onUpdate={handleUpdateItem}
-                          onDelete={handleDeleteItem} // bgIdx 자동으로 들어감
+                          onDelete={handleDeleteItem}
                         />
                       </div>
                     )}
                   </Draggable>
                 ))}
-
                 {provided.placeholder}
-
                 <div className="add-item-row" onClick={handleAddRow}>
                   + 새 항목 추가
                 </div>
@@ -169,6 +158,8 @@ const MoneyControl = () => {
           </Droppable>
         </DragDropContext>
       </div>
+      </div>
+      <Footer/>
     </div>
   );
 };

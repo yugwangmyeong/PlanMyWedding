@@ -50,6 +50,8 @@ public class SecurityConfig {
                .antMatchers("/boot/api/community/**").permitAll()
                .antMatchers("/api/user/email/**").permitAll()
                
+               .antMatchers(HttpMethod.GET, "/api/user/find-id").permitAll()
+               .antMatchers(HttpMethod.GET, "/api/user/find-password").permitAll()
                
                
                .anyRequest().authenticated()

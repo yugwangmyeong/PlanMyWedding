@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./styles/login.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+
 const Login = ({ setToken }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -8,7 +9,7 @@ const Login = ({ setToken }) => {
   const [error, setError] = useState("");
   const navigate = useNavigate();
   const token = sessionStorage.getItem("token");
-  
+
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -24,8 +25,7 @@ const Login = ({ setToken }) => {
       const response = await fetch("http://192.168.219.50:8081/boot/api/login", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
-          
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({ email, password }),
       });
@@ -99,7 +99,7 @@ const Login = ({ setToken }) => {
             <label htmlFor="password">비밀번호</label>
             <div style={{ position: "relative" }}>
               <input
-                type={showPassword ? "text" : "password"} // 비밀번호 보기 상태에 따라 타입 변경
+                type={showPassword ? "text" : "password"}
                 id="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -120,9 +120,7 @@ const Login = ({ setToken }) => {
                 }}
               />
               <img
-                src={
-                  showPassword ? "/images/openeye.png" : "/images/closeeye.png"
-                } // 상태에 따라 아이콘 변경
+                src={showPassword ? "/images/openeye.png" : "/images/closeeye.png"}
                 alt="비밀번호 보기 아이콘"
                 style={{
                   position: "absolute",
@@ -131,9 +129,9 @@ const Login = ({ setToken }) => {
                   transform: "translateY(-50%)",
                   width: "13px",
                   height: "13px",
-                  pointerEvents: "pointer",
+                  cursor: "pointer",
                 }}
-                onClick={() => setShowPassword(!showPassword)} // 클릭하면 두 칸 다 상태 변경
+                onClick={() => setShowPassword(!showPassword)}
               />
             </div>
           </div>
@@ -148,31 +146,20 @@ const Login = ({ setToken }) => {
 
           {/* 회원가입 / 아이디 찾기 / 비밀번호 찾기 */}
           <div className="login-options">
-            <a href="/register" className="option-item">
+            <Link to="/register" className="option-item">
               회원가입
-            </a>
+            </Link>
             <span className="dividerLogin"></span>
-            <a href="/find-id" className="option-item">
+            <Link to="/find-id" className="option-item">
               아이디 찾기
-            </a>
+            </Link>
             <span className="dividerLogin"></span>
-            <a href="/find-password" className="option-item">
+            <Link to="/find-password" className="option-item">
               비밀번호 찾기
-            </a>
+            </Link>
           </div>
 
-          {/* "OR"을 포함한 구분선 */}
-          <div className="or-divider">
-            <div className="line"></div>
-            <span>OR</span>
-            <div className="line"></div>
-          </div>
-
-          {/* 카카오 로그인 버튼 */}
-          <button className="kakao-login">
-            <img src="/images/kakao.png" alt="카카오톡 로그인" />
-            <span>카카오톡 로그인</span>
-          </button>
+         
         </form>
       </div>
     </div>

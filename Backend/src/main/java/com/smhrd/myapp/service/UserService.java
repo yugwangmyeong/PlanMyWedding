@@ -35,6 +35,11 @@ public class UserService implements UserDetailsService{
         return userRepository.findByEmail(email).orElse(null);
     }
     
+ // 추가: 닉네임(사용자명)으로 사용자 조회
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username).orElse(null);
+    }
+    
     // 회원 탈퇴 메서드
     @Transactional
     public void deleteUserByEmail(String email) {
