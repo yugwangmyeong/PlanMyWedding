@@ -463,32 +463,52 @@ const CalendarPage = () => {
             <CustomAlert message={alertMessage} onClose={handleCloseAlert} />
           )}
   
-          {morePopupInfo.isOpen && (
-            <div
-              className="popupWrapper"
-              style={{
-                position: "absolute",
-                top: morePopupInfo.position.top,
-                left: morePopupInfo.position.left,
-              }}
-            >
-              <div className="popupCard">
-                <div className="popupHeader">
-                  📅 {new Date(morePopupInfo.date).toISOString().split("T")[0]} 일정
-                </div>
-                <div className="popupBody">
-                  {morePopupInfo.events.map((event, idx) => (
-                    <div key={idx} className="popupEvent">
-                      {event.title}
-                    </div>
-                  ))}
-                </div>
-                <button className="popupCloseBtn" onClick={null}>
-                  닫기
-                </button>
-              </div>
+  {morePopupInfo.isOpen && (
+        <div
+          className="more-popup-wrapper"
+          style={{
+            position: "absolute",
+            top: morePopupInfo.position.top,
+            left: morePopupInfo.position.left,
+          }}
+        >
+          <div className="more-popup-card">
+            <div className="popup-header">
+            📅{" "}
+              {
+                new Date(
+                  new Date(morePopupInfo.date).setDate(
+                    new Date(morePopupInfo.date).getDate() +1
+                  )
+                )
+                  .toISOString()
+                  .split("T")[0]
+              }{" "}
+              일정
             </div>
-          )}
+            <div className="popup-body">
+              {morePopupInfo.events.map((event, idx) => (
+                <div key={idx} className="popup-event">
+                  {event.title}
+                </div>
+              ))}
+            </div>
+            <button
+              className="popup-close-btn"
+              onClick={() =>
+                setMorePopupInfo({
+                  isOpen: false,
+                  date: null,
+                  events: [],
+                  position: { top: 0, left: 0 },
+                })
+              }
+            >
+              닫기
+            </button>
+          </div>
+        </div>
+      )}
  
       <Footer />
     </>

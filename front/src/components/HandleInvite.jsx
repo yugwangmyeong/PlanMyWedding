@@ -24,7 +24,7 @@ const HandleInvite = () => {
     } catch (err) {
       const errorMsg =
         err.response?.data || "서버 오류로 인해 초대를 보낼 수 없습니다.";
-      setAlertMessage("❌ 초대 실패: " + errorMsg);
+      setAlertMessage("❌ 초대 실패 ");
     }
     setShowAlert(true);
   };
