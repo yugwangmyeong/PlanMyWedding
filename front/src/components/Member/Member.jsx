@@ -15,7 +15,7 @@ const Member = () => {
   useEffect(() => {
     const token = sessionStorage.getItem("token"); // ✅ 수정
     if (!token) {
-      console.warn("❗ 토큰 없음! Authorization 헤더 누락됨");
+      //console.warn("❗ 토큰 없음! Authorization 헤더 누락됨");
       alert("로그인이 필요합니다.");
       navigate("/login");
       return;
@@ -59,7 +59,7 @@ const Member = () => {
     if (response.ok) {
       setAlertMessage("회원 정보가 수정되었습니다.");
       setShowAlert(true);
-      console.log("✅ 알림 열림");
+      //console.log("✅ 알림 열림");
       setTimeout(() => {
         setShowAlert(false);
         navigate("/setting"); // ✅ navigate는 알림 닫힌 뒤 이동

@@ -39,7 +39,7 @@ const FindPassword = () => {
         setFoundPassword("");
       }
     } catch (err) {
-      console.error("비밀번호 찾기 요청 오류:", err);
+      //console.error("비밀번호 찾기 요청 오류:", err);
       setError("서버와의 연결에 실패했습니다.");
       setFoundPassword("");
     }

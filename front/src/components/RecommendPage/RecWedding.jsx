@@ -24,14 +24,14 @@ const RecWedding = () => {
       });
   
       if (!res.ok) {
-        throw new Error(`추천 서버 응답 오류: ${res.status}`);
+        //throw new Error(`추천 서버 응답 오류: ${res.status}`);
       }
   
       const result = await res.json();
       
     
       if (!result.recommendations || result.recommendations.length === 0) {
-        throw new Error("추천 결과가 없습니다");
+        //throw new Error("추천 결과가 없습니다");
       }
     
       // 유사도 TOP 3 예식장 이름 추출
@@ -47,7 +47,7 @@ const RecWedding = () => {
         });
       
         if (!detailRes.ok) {
-          throw new Error(`상세 정보 서버 응답 오류: ${detailRes.status}`);
+          //throw new Error(`상세 정보 서버 응답 오류: ${detailRes.status}`);
         }
       
         const hallDetails = await detailRes.json();
@@ -56,7 +56,7 @@ const RecWedding = () => {
         // 상세 정보 업데이트
         setHallDetails(hallDetails);
       } catch (detailErr) {
-        console.error("상세 정보 요청 오류:", detailErr);
+        //console.error("상세 정보 요청 오류:", detailErr);
         // 기본 정보만이라도 보여주기
         setHallDetails(result.recommendations.slice(0, 3).map(hall => ({
           whName: hall.예식장,
@@ -67,7 +67,7 @@ const RecWedding = () => {
         })));
       }
     } catch (err) {
-      console.error(" 네트워크 오류:", err);
+      //console.error(" 네트워크 오류:", err);
       alert("추천 서비스 요청 중 오류가 발생했습니다.");
     }
   };

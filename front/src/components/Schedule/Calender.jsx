@@ -73,7 +73,7 @@ const CalendarPage = () => {
       alert("공유 일정 사용자로, 일정 추가는 불가능합니다.");
       return;
     }
-    console.log("➕ 추가 시도 - title:", newTitle, "date:", newDate);
+    //console.log("➕ 추가 시도 - title:", newTitle, "date:", newDate);
 
     const eventData = {
       scheTitle: newTitle,
@@ -87,13 +87,13 @@ const CalendarPage = () => {
       resetForm();
       fetchEvents();
     } catch (err) {
-      console.error("일정 추가 실패:", err);
+      //console.error("일정 추가 실패:", err);
     }
   };
 
   // 🔹 일정 수정
   const handleUpdateEvent = async () => {
-    console.log("✏️ 수정 시도 - title:", newTitle, "date:", newDate);
+    //console.log("✏️ 수정 시도 - title:", newTitle, "date:", newDate);
     if (!selectedEvent?.scheIdx) return;
 
     // ✅ 템플릿은 카테고리 유지
@@ -111,14 +111,14 @@ const CalendarPage = () => {
       scheCategory: category,
     };
     // 확인한 값을 다시 로그로 출력
-    console.log("🟢 이벤트 데이터:", eventData);
+    //console.log("🟢 이벤트 데이터:", eventData);
 
     try {
       await updateSchedule(selectedEvent.scheIdx, eventData);
       resetForm();
       fetchEvents();
     } catch (err) {
-      console.error("일정 수정 실패:", err);
+      //console.error("일정 수정 실패:", err);
     }
   };
 
@@ -130,7 +130,7 @@ const CalendarPage = () => {
       resetForm();
       fetchEvents();
     } catch (err) {
-      console.error("일정 삭제 실패:", err);
+      //console.error("일정 삭제 실패:", err);
     }
   };
 
@@ -166,7 +166,7 @@ const CalendarPage = () => {
       }));
       setEvents(formatted);
     } catch (err) {
-      console.error("일정 조회 실패:", err);
+      //console.error("일정 조회 실패:", err);
     }
   };
 
@@ -233,7 +233,7 @@ const CalendarPage = () => {
 
       // 2️⃣ 공유 일정 없으면 본인 일정 조회
       const myData = await getUserSchedules();
-      console.log("📦 getUserSchedules() 결과:", myData);
+      //console.log("📦 getUserSchedules() 결과:", myData);
 
       const formattedMy = myData.map((item) => ({
         title: item.scheTitle,
@@ -259,7 +259,7 @@ const CalendarPage = () => {
       setSchedules(myData);
       setIsSharedUser(false); // 👈 개인 사용자로 인식
     } catch (err) {
-      console.error("❌ 전체 일정 로딩 실패:", err);
+      //console.error("❌ 전체 일정 로딩 실패:", err);
     }
   };
 
@@ -271,7 +271,7 @@ const CalendarPage = () => {
           setShowWeddingModal(true);
         }
       } catch (err) {
-        console.error("결혼식 날짜 조회 실패:", err);
+        //console.error("결혼식 날짜 조회 실패:", err);
         setAlertMessage("결혼식 날짜 조회에 실패했습니다.");
         setIsAlertVisible(true);
       }

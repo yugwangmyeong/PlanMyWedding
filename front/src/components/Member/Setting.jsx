@@ -33,10 +33,10 @@ const Setting = () => {
             const data = await response.json();
             setInviteList(data);
           } else {
-            console.error("초대 목록 조회 실패:", response.status);
+            //console.error("초대 목록 조회 실패:", response.status);
           }
         } catch (err) {
-          console.error("초대 목록 요청 중 오류:", err);
+          //console.error("초대 목록 요청 중 오류:", err);
         }
       };
 

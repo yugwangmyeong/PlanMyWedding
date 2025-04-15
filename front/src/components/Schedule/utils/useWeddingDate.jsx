@@ -18,7 +18,7 @@ const useWeddingDate = () => {
           setHasWeddingDate(false);
         }
       } catch (error) {
-        console.error("useWeddingDate 에러:", error);
+        //console.error("useWeddingDate 에러:", error);
         setWeddingDate(null);
         setHasWeddingDate(false);
       } finally {

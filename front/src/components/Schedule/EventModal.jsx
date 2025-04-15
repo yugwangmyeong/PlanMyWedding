@@ -20,7 +20,7 @@ const EventModal = (
   handleDeleteEvent,
   resetForm,
 }) => {
-  console.log("EventModal 렌더링 - isModalOpen:", isModalOpen);
+  //console.log("EventModal 렌더링 - isModalOpen:", isModalOpen);
   if (!isModalOpen) return null; // 모달이 열리지 않으면 아무것도 렌더링하지 않음
   
 
@@ -42,7 +42,7 @@ const EventModal = (
         <select
           value={category}
           onChange={(e) => {
-            console.log("🟢 선택된 category:", e.target.value);
+            //console.log("🟢 선택된 category:", e.target.value);
             setCategory(e.target.value);
           }}
         >

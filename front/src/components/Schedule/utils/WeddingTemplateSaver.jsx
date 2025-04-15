@@ -10,7 +10,7 @@ const WeddingTemplateAutoSaver = ({ weddingDate, onSaved }) => {
       try {
         const exists = await checkIfTemplateExists();
         if (exists) {
-          console.log("⛔ 이미 웨딩 템플릿이 존재하여 저장하지 않음");
+          //console.log("⛔ 이미 웨딩 템플릿이 존재하여 저장하지 않음");
           return;
         }
 
@@ -61,12 +61,12 @@ const WeddingTemplateAutoSaver = ({ weddingDate, onSaved }) => {
         }
 
         if (onSaved) onSaved();
-        console.log("✅ 웨딩 템플릿 자동 생성 및 저장 완료");
+        //console.log("✅ 웨딩 템플릿 자동 생성 및 저장 완료");
 
           // 성공적으로 저장된 후에 flag 업데이트
         isSavedRef.current = true;
       } catch (err) {
-        console.error("❌ 템플릿 저장 실패:", err);
+        //console.error("❌ 템플릿 저장 실패:", err);
       }
     };
 

@@ -46,22 +46,22 @@ const Register = () => {
 
       if (response.ok) {
         // 로그인 성공
-        console.log("회원가입 성공");
+        //console.log("회원가입 성공");
         
         navigate("/login");
         // 성공 후 처리 (예: 리디렉션)
       } else {
         // 회원가입 실패
-        console.log("회원가입 요청 데이터:", {
+        /*console.log("회원가입 요청 데이터:", {
           name,
           email,
           password,
-        });
+        });*/
         setError("회원가입에 실패했습니다. 다시 시도해주세요.");
       }
     } catch (error) {
       
-      console.error("회원가입 요청 오류:", error);
+      //console.error("회원가입 요청 오류:", error);
       setError("서버와의 연결에 실패했습니다.");
     }
   };

@@ -70,11 +70,11 @@ const Community = () => {
         setPosts(res.data);
         setCurrentPage(1);
       } else {
-        console.error("📛 응답 형식 오류", res.data);
+        //console.error("📛 응답 형식 오류", res.data);
         setPosts([]);
       }
     } catch (err) {
-      console.error("❌ 게시글 불러오기 실패:", err);
+      //console.error("❌ 게시글 불러오기 실패:", err);
       setPosts([]);
     }
   };
@@ -106,7 +106,7 @@ const Community = () => {
         setCurrentPage(pageNumber);
       }
     } catch (error) {
-      console.error("❌ 검색 실패:", error);
+      //console.error("❌ 검색 실패:", error);
       setPosts([]);
     }
   };

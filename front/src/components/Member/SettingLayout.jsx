@@ -40,7 +40,7 @@ const SettingLayout = () => {
         alert("탈퇴 실패");
       }
     } catch (err) {
-      console.error(err);
+      //console.error(err);
       alert("서버 오류");
     }
   };

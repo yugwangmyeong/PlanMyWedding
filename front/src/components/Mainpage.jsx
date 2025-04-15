@@ -21,10 +21,10 @@ const Mainpage = () => {
       try {
         // 1. 예산 데이터 불러오기
         const budgetRes = await getBudgetList();
-        console.log("📦 Mainpage에서 가져온 예산 목록:", budgetRes.data);
+        //console.log("📦 Mainpage에서 가져온 예산 목록:", budgetRes.data);
         setItems(budgetRes.data);
         const summary = calculateSummary(budgetRes.data);
-        console.log("✅ 계산된 summary:", summary);
+        //console.log("✅ 계산된 summary:", summary);
         setSummary(summary);
 
         // 2. 웨딩 템플릿 일정 불러오기
@@ -34,8 +34,8 @@ const Mainpage = () => {
           getWeddingDate(),
         ]);
 
-        console.log("📥 템플릿 원본 응답:", templateRes);
-        console.log("📥 결혼식 일정 응답:", weddingRes);
+        //console.log("📥 템플릿 원본 응답:", templateRes);
+        //console.log("📥 결혼식 일정 응답:", weddingRes);
 
         const templates = Array.isArray(templateRes)
           ? templateRes
@@ -58,10 +58,10 @@ const Mainpage = () => {
           }
         }
 
-        console.log("📦 병합된 템플릿 목록:", merged);
+        //console.log("📦 병합된 템플릿 목록:", merged);
         setTemplates(merged);
       } catch (err) {
-        console.error("❌ 템플릿 로딩 실패:", err);
+        //console.error("❌ 템플릿 로딩 실패:", err);
       }
     };
 

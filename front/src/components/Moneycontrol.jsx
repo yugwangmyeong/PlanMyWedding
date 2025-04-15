@@ -20,7 +20,7 @@ const MoneyControl = () => {
         setItems(res.data);
       })
       .catch((err) => {
-        console.error("예산 목록 로딩 실패:", err);
+        //console.error("예산 목록 로딩 실패:", err);
       });
   }, []);
 
@@ -41,7 +41,7 @@ const MoneyControl = () => {
         )
       );
     } catch (err) {
-      console.error("항목 저장 실패:", err);
+      //console.error("항목 저장 실패:", err);
     }
   };
 
@@ -51,7 +51,7 @@ const MoneyControl = () => {
       await deleteBudgetItem(bgIdx);
       setItems((prevItems) => prevItems.filter((item) => item.bgIdx !== bgIdx));
     } catch (err) {
-      console.error("삭제 실패:", err);
+      //console.error("삭제 실패:", err);
     }
   };
 

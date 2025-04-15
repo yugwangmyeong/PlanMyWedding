@@ -53,7 +53,7 @@ const CalendarSection = () => {
         }));
         setEvents(formatted);
       } catch (err) {
-        console.error("📛 일정 조회 실패:", err);
+        //console.error("📛 일정 조회 실패:", err);
       }
     };
 

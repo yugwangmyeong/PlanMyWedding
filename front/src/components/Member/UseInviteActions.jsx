@@ -21,7 +21,7 @@ export const UseInviteActions = ({setInviteList}) => {
         alert("❌ 초대 수락 실패");
       }
     } catch (error) {
-      console.error("초대 수락 오류:", error);
+      //console.error("초대 수락 오류:", error);
     }
   }, [setInviteList]);
 
@@ -42,7 +42,7 @@ export const UseInviteActions = ({setInviteList}) => {
         alert("거절 실패");
       }
     } catch (error) {
-      console.error("초대 거절 오류:", error);
+      //console.error("초대 거절 오류:", error);
     }
   }, [setInviteList]);
 
@@ -67,7 +67,7 @@ const handleDisconnect = async () => {
         alert("공유 해제 실패");
       }
     } catch (err) {
-      console.error("공유 해제 요청 중 오류:", err);
+      //console.error("공유 해제 요청 중 오류:", err);
     }
   };
 
@@ -84,17 +84,17 @@ export const fetchSharedUsername = async () => {
   
       if (response.ok) {
         const data = await response.text();
-        console.log("🔗 공유된 사용자 이름:", data);
+        //console.log("🔗 공유된 사용자 이름:", data);
         return data;
       } else if (response.status === 404) {
-        console.log("✅ 공유된 사용자 없음");
+        //console.log("✅ 공유된 사용자 없음");
         return null;
       } else {
-        console.error("❌ 공유된 사용자 조회 실패:", response.status);
+        //console.error("❌ 공유된 사용자 조회 실패:", response.status);
         return null;
       }
     } catch (err) {
-      console.error("❌ 공유된 사용자 조회 오류:", err);
+      //console.error("❌ 공유된 사용자 조회 오류:", err);
       return null;
     }
   

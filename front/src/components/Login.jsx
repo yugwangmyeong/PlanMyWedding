@@ -35,14 +35,14 @@ const Login = ({ setToken }) => {
 
         // ✅ 토큰 저장
         sessionStorage.setItem("token", data.token);
-        console.log("받은 토큰:", data.token);
+        //console.log("받은 토큰:", data.token);
         // ✅ 로그인 후 메인페이지로 이동 (새로고침 포함)
         window.location.href = "/mainpage";
       } else {
         setError("로그인에 실패했습니다. 다시 시도해주세요.");
       }
     } catch (error) {
-      console.error("로그인 요청 오류:", error);
+      //console.error("로그인 요청 오류:", error);
       setError("서버와의 연결에 실패했습니다.");
     }
   };

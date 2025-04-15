@@ -58,7 +58,7 @@ const BudgetRow = ({ item, onUpdate, onDelete, isNew }) => {
       setForm(savedItem);
       setPrevForm(savedItem);
     } catch (err) {
-      console.error("❌ 저장 실패:", err.response?.data || err.message);
+      //console.error("❌ 저장 실패:", err.response?.data || err.message);
     } finally {
       setSaving(false);
     }

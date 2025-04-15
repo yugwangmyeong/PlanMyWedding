@@ -39,7 +39,7 @@ const CommunityWrite = () => {
       const res = await axios.get(`http://192.168.219.50:8081/boot/api/user/email/${email}`);
       return res.data.userId;
     } catch (err) {
-      console.error("📛 userId 조회 실패:", err);
+      //console.error("📛 userId 조회 실패:", err);
       return null;
     }
   };
@@ -51,7 +51,7 @@ const CommunityWrite = () => {
       if (!email) return;
       const fetchedUserId = await getUserIdFromEmail(email);
       setUserId(fetchedUserId);
-      console.log("✅ 로그인 userId:", fetchedUserId);
+      //console.log("✅ 로그인 userId:", fetchedUserId);
     };
     fetchUserId();
   }, [token]);
@@ -64,7 +64,7 @@ const CommunityWrite = () => {
       const res = await axios.post("http://192.168.219.50:8081/boot/api/community/upload", formData);
       return res.data;
     } catch (err) {
-      console.error("이미지 업로드 실패", err);
+      //console.error("이미지 업로드 실패", err);
       return null;
     }
   };
@@ -94,7 +94,7 @@ const CommunityWrite = () => {
       commRegion: region
     };
 
-    console.log("📦 최종 요청 데이터:", requestData);
+    //console.log("📦 최종 요청 데이터:", requestData);
 
     try {
       if (isEditMode) {
@@ -107,11 +107,11 @@ const CommunityWrite = () => {
         if (res.data && res.data.commIdx) {
           navigate(`/community/post/${res.data.commIdx}`);
         } else {
-          console.error("commIdx가 응답에 없습니다:", res.data);
+          //console.error("commIdx가 응답에 없습니다:", res.data);
         }
       }
     } catch (error) {
-      console.error("요청 실패:", error);
+      //console.error("요청 실패:", error);
       alert("게시글 처리 중 오류 발생");
     }
   };
@@ -136,7 +136,7 @@ const CommunityWrite = () => {
       alert("게시글이 삭제되었습니다!");
       navigate("/community");  // 삭제 후 게시글 목록 페이지로 이동
     } catch (error) {
-      console.error("게시글 삭제 실패:", error);
+      //console.error("게시글 삭제 실패:", error);
       alert("게시글 삭제 중 오류 발생");
     }
   };

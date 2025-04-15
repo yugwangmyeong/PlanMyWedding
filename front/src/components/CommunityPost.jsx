@@ -39,7 +39,7 @@ const CommunityPost = () => {
       );
       return { email: payload.sub, username: payload.username };
     } catch (error) {
-      console.error("토큰 파싱 실패", error);
+      //console.error("토큰 파싱 실패", error);
       return null;
     }
   };
@@ -50,7 +50,7 @@ const CommunityPost = () => {
       const res = await axios.get(`${API_BASE}/user/email/${email}`);
       return res.data.userId;
     } catch (error) {
-      console.error("📛 userId 조회 실패:", error);
+      //console.error("📛 userId 조회 실패:", error);
       return null;
     }
   };
@@ -72,7 +72,7 @@ const CommunityPost = () => {
       setPost(res.data);
       setLikes(res.data.commLikes);
     } catch (error) {
-      console.error("📛 게시글 불러오기 실패:", error);
+      //console.error("📛 게시글 불러오기 실패:", error);
     }
   };
 
@@ -83,11 +83,11 @@ const CommunityPost = () => {
       if (Array.isArray(res.data)) {
         setComments(res.data.filter((comment) => comment != null));
       } else {
-        console.error("Unexpected comment data format:", res.data);
+        //console.error("Unexpected comment data format:", res.data);
         setComments([]);
       }
     } catch (err) {
-      console.error("📛 댓글 불러오기 실패:", err);
+      //console.error("📛 댓글 불러오기 실패:", err);
       setComments([]);
     }
   };
@@ -101,7 +101,7 @@ const CommunityPost = () => {
         await axios.put(`${BASE_URL}/${postId}/view`);
         viewHasIncreased.current = true;
       } catch (error) {
-        console.error("조회수 증가 실패:", error);
+        //console.error("조회수 증가 실패:", error);
       }
     };
     increaseViews();
@@ -125,7 +125,7 @@ const CommunityPost = () => {
       // 백엔드가 { liked: true } 형식으로 반환한다고 가정
       setLiked(res.data.liked);
     } catch (error) {
-      console.error("좋아요 상태 조회 실패:", error);
+      //console.error("좋아요 상태 조회 실패:", error);
     }
   };
 
@@ -149,7 +149,7 @@ const CommunityPost = () => {
       setLikes(res.data.commLikes);
       setLiked((prev) => !prev);
     } catch (error) {
-      console.error("📛 좋아요 토글 실패:", error);
+      //console.error("📛 좋아요 토글 실패:", error);
     }
   };
 
@@ -174,7 +174,7 @@ const CommunityPost = () => {
       setComments((prevComments) => [...prevComments, res.data]);
       setNewComment("");
     } catch (error) {
-      console.error("📛 댓글 작성 실패:", error);
+      //console.error("📛 댓글 작성 실패:", error);
     }
   };
 
@@ -202,7 +202,7 @@ const CommunityPost = () => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
     } catch (error) {
-      console.error("댓글 수정 실패:", error);
+      //console.error("댓글 수정 실패:", error);
     } finally {
       setIsUpdating(false);
       window.location.reload();
@@ -221,7 +221,7 @@ const CommunityPost = () => {
         prevComments.filter((c) => c.commentId !== commentId)
       );
     } catch (error) {
-      console.error("댓글 삭제 실패:", error);
+      //console.error("댓글 삭제 실패:", error);
     }
   };
 

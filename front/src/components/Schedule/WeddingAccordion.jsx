@@ -24,7 +24,7 @@ const WeddingAccordion = ({
   };
 
   useEffect(() => {
-    console.log("✅ 아코디언용 일정 데이터:", schedules);
+    //console.log("✅ 아코디언용 일정 데이터:", schedules);
 
     if (!weddingDate) return;
     const wedding = new Date(weddingDate);
@@ -46,17 +46,17 @@ const WeddingAccordion = ({
 
   // ✅ 선택된 일정 변화 추적
   useEffect(() => {
-    console.log(
+    /*console.log(
       "✅ [useEffect] 실제 선택된 selectedScheduleIdx:",
       selectedScheduleIdx
-    );
+    );*/
   }, [selectedScheduleIdx]);
 
   const handleScheduleClick = (schedule) => {
     setSelectedScheduleIdx(Number(schedule.scheIdx));
     onScheduleSelect(schedule);
 
-    console.log("📌 클릭된 scheIdx:", schedule.scheIdx);
+    //console.log("📌 클릭된 scheIdx:", schedule.scheIdx);
   };
 
   const groupedSchedules = schedules.reduce((acc, schedule) => {

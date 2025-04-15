@@ -7,7 +7,7 @@ const API_BASE = "http://192.168.219.50:8081/boot/api/schedule";
 export const getWeddingDate = async () => {
   const token = sessionStorage.getItem("token");
   if (!token) {
-    console.error("❗ 토큰이 없습니다. 로그인 후 다시 시도하세요.");
+    //console.error("❗ 토큰이 없습니다. 로그인 후 다시 시도하세요.");
     return;
   }
 
@@ -19,15 +19,15 @@ export const getWeddingDate = async () => {
     });
     return res.data;
   } catch (err) {
-    console.log("❗ token:", token);
+    //console.log("❗ token:", token);
 
     if (err.response?.status === 404) {
-      console.log("✅ 결혼식 일정 없음, 팝업 띄우세요");
+      //console.log("✅ 결혼식 일정 없음, 팝업 띄우세요");
       return null;
     }
 
-    console.error("❗ 오류 발생:", err);
-    throw err;
+    //console.error("❗ 오류 발생:", err);
+    //throw err;
   }
 };
 
@@ -35,7 +35,7 @@ export const getWeddingDate = async () => {
 export const saveWeddingDate = async (weddingDate) => {
   const token = sessionStorage.getItem("token");
   if (!token) {
-    console.error("❗ 토큰이 없습니다. 로그인 후 다시 시도하세요.");
+    //console.error("❗ 토큰이 없습니다. 로그인 후 다시 시도하세요.");
     return;
   }
 
@@ -51,25 +51,25 @@ export const saveWeddingDate = async (weddingDate) => {
     );
     return res.data;
   } catch (err) {
-    console.log("❗ token:", token);
+    //console.log("❗ token:", token);
 
     if (err.response?.status === 404) {
-      console.log("✅ 결혼식 일정 없음, 팝업 띄우세요");
+      //console.log("✅ 결혼식 일정 없음, 팝업 띄우세요");
       return null;
     }
 
-    console.error("❗ 오류 발생:", err);
-    throw err;
+    //console.error("❗ 오류 발생:", err);
+    //throw err;
   }
 };
 
 // ✅ 3. 일반 일정 생성
 export const createSchedule = async (event) => {
-  console.log("🐞 createSchedule 전달받은 event:", event); // 🔥 여기에 null이면 프론트 문제!
+  //console.log("🐞 createSchedule 전달받은 event:", event); // 🔥 여기에 null이면 프론트 문제!
 
   const token = sessionStorage.getItem("token");
   if (!token) {
-    console.error("❗ 토큰이 없습니다. 로그인 후 다시 시도하세요.");
+    //console.error("❗ 토큰이 없습니다. 로그인 후 다시 시도하세요.");
     return;
   }
 
@@ -89,19 +89,19 @@ export const createSchedule = async (event) => {
         },
       }
     );
-    console.log("🐞 createSchedule API 응답:", res.data);  // API 응답 로그 추가  
+    //console.log("🐞 createSchedule API 응답:", res.data);  // API 응답 로그 추가  
     return res.data;
   } catch (err) {
-    console.error("❗ 일정 생성 실패:", err);
-    throw err;
+    //console.error("❗ 일정 생성 실패:", err);
+    //throw err;
   }
 };
 
 
 
 export const updateSchedule = async (scheIdx, payload) => {
-  console.log("🛠 수정 요청 scheIdx:", scheIdx); // ← 이거 추가
-  console.log("🛠 수정 요청 payload:", payload); // 수정 요청 payload 확인
+  //console.log("🛠 수정 요청 scheIdx:", scheIdx); // ← 이거 추가
+  //console.log("🛠 수정 요청 payload:", payload); // 수정 요청 payload 확인
   const token = sessionStorage.getItem("token");
   const res = await axios.put(
     `http://192.168.219.50:8081/boot/api/schedule/event/${scheIdx}`,
@@ -138,7 +138,7 @@ export const getUserSchedules = async () => {
 export const deleteSchedule = async (scheIdx) => {
   const token = sessionStorage.getItem("token");
   if (!token) {
-    console.error("❗ 토큰이 없습니다. 로그인 후 다시 시도하세요.");
+    //console.error("❗ 토큰이 없습니다. 로그인 후 다시 시도하세요.");
     return;
   }
 
@@ -153,8 +153,8 @@ export const deleteSchedule = async (scheIdx) => {
     );
     return res.data;
   } catch (err) {
-    console.error("❌ 일정 삭제 실패:", err);
-    throw err;
+    //console.error("❌ 일정 삭제 실패:", err);
+    //throw err;
   }
 };
 
@@ -193,7 +193,7 @@ export const checkIfTemplateExists = async () => {
       Authorization: `Bearer ${token}`,
     },
   });
-  console.log("📡 템플릿 존재 확인 응답:", res.status);
-  if (!res.ok) throw new Error("템플릿 존재 여부 확인 실패");
+  //console.log("📡 템플릿 존재 확인 응답:", res.status);
+  //if (!res.ok) throw new Error("템플릿 존재 여부 확인 실패");
   return await res.json(); // true or false
 };
