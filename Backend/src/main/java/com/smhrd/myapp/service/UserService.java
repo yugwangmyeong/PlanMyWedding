@@ -1,23 +1,24 @@
 package com.smhrd.myapp.service;
 
-import com.smhrd.myapp.User.User;
-import com.smhrd.myapp.repository.ScheduleRepository;
-import com.smhrd.myapp.repository.UserRepository;
+import java.util.List;
+import java.util.Optional;
 
-import io.jsonwebtoken.lang.Collections;
-import lombok.RequiredArgsConstructor;
+import javax.transaction.Transactional;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import com.smhrd.myapp.User.User;
+import com.smhrd.myapp.entity.Community;
+import com.smhrd.myapp.repository.CommentRepository;
+import com.smhrd.myapp.repository.CommunityLikeRepository;
+import com.smhrd.myapp.repository.CommunityRepository;
+import com.smhrd.myapp.repository.ScheduleRepository;
+import com.smhrd.myapp.repository.UserRepository;
 
-import javax.transaction.Transactional;
-
-import java.util.Collection;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
@@ -25,6 +26,10 @@ public class UserService implements UserDetailsService{
 
     private final UserRepository userRepository;
     private final ScheduleRepository scheduleRepository;
+    
+    private final CommunityRepository communityRepository;
+    private final CommunityLikeRepository communityLikeRepository;
+    private final CommentRepository commentRepository;
 
     public boolean login(String email, String password) {
         Optional<User> user = userRepository.findByEmail(email);
@@ -41,6 +46,7 @@ public class UserService implements UserDetailsService{
     }
     
     // 회원 탈퇴 메서드
+    // 회원 탈퇴 메서드 (게시글, 좋아요, 댓글 등 연관 데이터도 함께 삭제)
     @Transactional
     public void deleteUserByEmail(String email) {
         Optional<User> optionalUser = userRepository.findByEmail(email);
@@ -48,13 +54,31 @@ public class UserService implements UserDetailsService{
 
         User user = optionalUser.get();
         
-
-        // 1️⃣ 유저 일정 먼저 삭제
+        // 1️⃣ 유저 일정 삭제
         scheduleRepository.deleteByUser(user);
 
-        // 2️⃣ 그 다음 유저 삭제
+        // 2️⃣ 사용자 작성 게시글 및 해당 게시글의 연관 데이터 삭제
+        List<Community> posts = communityRepository.findByUser(user);
+        if (posts != null && !posts.isEmpty()) {
+            for (Community post : posts) {
+                // 게시글에 달린 좋아요 삭제
+                communityLikeRepository.deleteByCommunity(post);
+                
+                // 게시글에 달린 댓글 삭제
+                commentRepository.deleteByCommunity(post);
+                
+                // 게시글 자체 삭제
+                communityRepository.delete(post);
+            }
+        }
+        
+        // 추가: 사용자가 다른 게시글에 남긴 좋아요나 댓글 등 별도 데이터가 있다면 아래 처리 가능
+        // 예: communityLikeRepository.deleteByUser(user);
+        
+        // 3️⃣ 최종적으로 유저 삭제
         userRepository.delete(user);
     }
+    
     
     @Transactional
     public boolean updateUser(String email, String currentPassword, String newUsername, String newPassword) {

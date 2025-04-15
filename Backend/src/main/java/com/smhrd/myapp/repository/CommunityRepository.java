@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import com.smhrd.myapp.User.User;
 import com.smhrd.myapp.entity.Community;
 
 public interface CommunityRepository extends JpaRepository<Community, Long> {
@@ -38,4 +39,5 @@ public interface CommunityRepository extends JpaRepository<Community, Long> {
                    "OR COMM_CONTENT LIKE :keyword", nativeQuery = true)
     Page<Community> searchByTitleOrContent(@Param("keyword") String keyword, Pageable pageable);
     
+    List<Community> findByUser(User user);
 }

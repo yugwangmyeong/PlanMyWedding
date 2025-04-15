@@ -6,7 +6,7 @@ import "./minihomesection.css";
 const MinihomeSlider = ({ templates }) => {
   const today = new Date();
 
-  // 7일 이내 일정 필터링
+  // 14일 이내 일정 필터링
   const upcomingEvents = templates.filter((item) => {
     const dateStr = item.scheduleDate;
     if (!dateStr) return false;
@@ -47,9 +47,19 @@ const MinihomeSlider = ({ templates }) => {
     setCurrentIndex((prev) => (prev + 1) % upcomingEvents.length);
   };
 
+  // 현재 이벤트가 있을 경우, 날짜를 ko-KR 형식으로 포맷
+  const formattedDate = currentEvent
+    ? new Date(currentEvent.scheduleDate).toLocaleDateString("ko-KR", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
+    : "";
+
   return (
     <>
       <div className={`minihome-content ${pictureData?.miniLoc}`}>
+      {formattedDate && <p className="minihome-date">{formattedDate}</p>}
         <img
           className="minihome-image"
           src={pictureData.miniImg}

@@ -64,6 +64,9 @@ const CalendarPage = () => {
     events: [],
   });
 
+
+
+
   // 🔹 일정 추가
   const handleAddEvent = async () => {
     if (isSharedUser) {
@@ -312,92 +315,93 @@ const CalendarPage = () => {
         <div className="calendar-main-fixed">
         <div className="calendar-left">
           <div className="calendar-main-wrapper">
-                <Calendar
-                  events={events}
-                  date={currentDate}
-                  onNavigate={(date) => setCurrentDate(date)}
-                  view="month"
-                  localizer={localizer}
-                  eventPropGetter={(event) => {
-                    const isHighlighted = selectedEvent?.scheIdx === event.scheIdx;
-                    const color =
-                      event.scheCategory === "essential"
-                        ? "#8E7DBE"
-                        : event.scheCategory === "preparation"
-                        ? "#BEE4D0"
-                        : event.scheCategory === "weddingTemplate"
-                        ? "#F7CFD8"
-                        : event.scheCategory === "wedding"
-                        ? "#9FB3DF"
-                        : "#d3d3d3";
-                    return {
-                      style: {
-                        backgroundColor: isHighlighted ? "#ff6347" : color,
-                        borderRadius: "8px",
-                        color: "white",
-                        padding: "2px 5px",
-                        fontSize: "14px",
-                        transition: "all 0.3s ease-in-out",
-                        transform: isHighlighted ? "scale(1.05)" : "scale(1)",
-                        boxShadow: isHighlighted ? "0 0 10px #ff6347" : "none",
-                      },
-                    };
-                  }}
-                  components={{ toolbar: CustomToolbar }}
-                  startAccessor="start"
-                  endAccessor="end"
-                  selectable
-                  onSelectSlot={(slotInfo) => {
-                    // 로컬 날짜 기준으로 YYYY-MM-DD 형식으로 반환 (en-CA 로케일 사용)
-                    const formattedStart = new Date(slotInfo.start).toLocaleDateString("en-CA");
-                    const formattedEnd = new Date(slotInfo.end).toLocaleDateString("en-CA");
-                    setNewDate(formattedStart);
-                    setNewEndDate(formattedEnd);
-                    setSelectedEvent(null);
-                    setIsModalOpen(true);
-                  }}
-                  
-                  onSelectEvent={(event) => {
-                    if (event.isShared) {
-                      alert("이 일정은 공유된 일정으로, 수정할 수 없습니다.");
-                      return;
-                    }
-                    setSelectedEvent(event);
-                    
-                    // 이벤트의 시작/종료 날짜를 로컬 날짜 기준으로 처리
-                    const formattedStart = new Date(event.start).toLocaleDateString("en-CA");
-                    const formattedEnd = new Date(event.end).toLocaleDateString("en-CA");
-                    
-                    setNewTitle(event.title);
-                    setNewDate(formattedStart);
-                    setNewEndDate(formattedEnd);
-                    setIsCompleted(event.scheStatus === "완료");
-                    setCategory(event.scheCategory || "custom");
-                    setIsModalOpen(true);
-                  }}
-                  
-                  onShowMore={(events, date) => {
-                    const { x, y } = clickCoords;
-                    const adjustedTop = Math.min(
-                      y + window.scrollY,
-                      window.innerHeight - 220
-                    );
-                    const adjustedLeft = Math.min(
-                      x + window.scrollX,
-                      window.innerWidth - 270
-                    );
-                    setMorePopupInfo({
-                      isOpen: true,
-                      date,
-                      events,
-                      position: {
-                        top: adjustedTop,
-                        left: adjustedLeft,
-                      },
-                    });
-                  }}
-                  style={{ height: 750 }}
-                />
+          <Calendar
+  events={events}
+  date={currentDate}
+  onNavigate={(date) => setCurrentDate(date)}
+  view="month"
+  localizer={localizer}  // localizer는 미리 정의되어 있어야 함
+  eventOrder={(a, b) => {
+    // a.start와 b.start는 Date 객체라고 가정한다.
+    const yearA = a.start.getFullYear();
+    const yearB = b.start.getFullYear();
+    if (yearA !== yearB) {
+      return yearA - yearB; // 2025 이벤트가 2026 이벤트보다 먼저 오도록 정렬
+    }
+    // 같은 연도면 기본적으로 Date의 시간 차이로 정렬
+    return a.start - b.start;
+  }}
+  eventPropGetter={(event) => {
+    const isHighlighted = selectedEvent?.scheIdx === event.scheIdx;
+    const color =
+      event.scheCategory === "essential"
+        ? "#8E7DBE"
+        : event.scheCategory === "preparation"
+        ? "#BEE4D0"
+        : event.scheCategory === "weddingTemplate"
+        ? "#F7CFD8"
+        : event.scheCategory === "wedding"
+        ? "#9FB3DF"
+        : "#d3d3d3";
+    return {
+      style: {
+        backgroundColor: isHighlighted ? "#ff6347" : color,
+        borderRadius: "8px",
+        color: "white",
+        padding: "2px 5px",
+        fontSize: "14px",
+        transition: "all 0.3s ease-in-out",
+        transform: isHighlighted ? "scale(1.05)" : "scale(1)",
+        boxShadow: isHighlighted ? "0 0 10px #ff6347" : "none",
+      },
+    };
+  }}
+  components={{ toolbar: CustomToolbar }}
+  startAccessor="start"
+  endAccessor="end"
+  selectable
+  onSelectSlot={(slotInfo) => {
+    setNewDate(new Date(slotInfo.start).toLocaleDateString("en-CA"));
+    setNewEndDate(new Date(slotInfo.end).toLocaleDateString("en-CA"));
+    setSelectedEvent(null);
+    setIsModalOpen(true);
+  }}
+  onSelectEvent={(event) => {
+    if (event.isShared) {
+      alert("이 일정은 공유된 일정으로, 수정할 수 없습니다.");
+      return;
+    }
+    setSelectedEvent(event);
+    setNewTitle(event.title);
+    setNewDate(new Date(event.start).toLocaleDateString("en-CA"));
+    setNewEndDate(new Date(event.end).toLocaleDateString("en-CA"));
+    setIsCompleted(event.scheStatus === "완료");
+    setCategory(event.scheCategory || "custom");
+    setIsModalOpen(true);
+  }}
+  onShowMore={(events, date) => {
+    const { x, y } = clickCoords;
+    const adjustedTop = Math.min(
+      y + window.scrollY,
+      window.innerHeight - 220
+    );
+    const adjustedLeft = Math.min(
+      x + window.scrollX,
+      window.innerWidth - 270
+    );
+    setMorePopupInfo({
+      isOpen: true,
+      date,
+      events,
+      position: {
+        top: adjustedTop,
+        left: adjustedLeft,
+      },
+    });
+  }}
+  style={{ height: 750, width: "100%" }} 
+/>
+
               </div>
             </div>
   

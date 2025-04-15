@@ -62,3 +62,7 @@
     cursor: pointer;
   }
   
+  .minihome-date {
+    margin-top: auto;
+    margin-bottom: auto;
+  }

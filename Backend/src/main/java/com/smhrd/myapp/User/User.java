@@ -2,6 +2,7 @@ package com.smhrd.myapp.User;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,6 +14,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.smhrd.myapp.entity.Community;
 
 import lombok.Data;
 
@@ -38,4 +40,6 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @JsonBackReference
     private List<Schedule> schedules; // 사용자의 일정을 조회할 수 있음
+    
+
 }
