@@ -32,11 +32,11 @@ const BudgetSection = ({ summary }) => {
   const remainingPercent = 100 - spentPercent;
 
   const chartData = {
-    labels: ["신랑 지출", "신부 지출", "남은 예산"],
+    labels: ["신랑 지출", "신부 지출", "함께 지출", "남은 예산"],
     datasets: [
       {
-        data: [groomSpent, brideSpent, remaining],
-        backgroundColor: ["#42a5f5", "#f48fb1", "#c8e6c9"],
+        data: [groomSpent, brideSpent, togetherSpent, remaining],
+        backgroundColor: ["#42a5f5", "#f48fb1", "#ce93d8", "#c8e6c9"],
         borderWidth: 1,
       },
     ],
