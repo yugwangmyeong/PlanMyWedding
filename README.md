@@ -4,7 +4,7 @@
 
 ---------------------------
 
-## 🧩 프로젝트 개요
+##  프로젝트 개요
 
 ### 📌 제안 배경
 - 30대 미혼 인구 증가, 결혼 의향 55% 이상
@@ -27,7 +27,7 @@
 | **Frontend** | React, Axios, Chart.js, FullCalendar,react big calendar |
 | **Backend**  | Spring Boot (JPA, MySQL), JWT 인증 |
 | **AI 추천**  | Flask (Python), Content-based Filtering |
-| **기타**     | GitHub, VS Code, Postman, Figma,notion 등 |
+| **기타**     | GitHub, VS Code, Figma,notion 등 |
 
 ---
 
@@ -46,7 +46,7 @@
 
 ### 🏛 웨딩홀 추천
 - 설문 기반 가중치 설정 (숨고 스타일 UI 참고)
-- 응답 기반 유사도 계산으로 상위 3개 웨딩홀 추천
+- 설문응답 기반 유사도 계산으로 상위 3개 웨딩홀 추천
 - Flask 서버와의 연동을 통한 추천 처리 예정
 
 ### 🌐 커뮤니티
