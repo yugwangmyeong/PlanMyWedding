@@ -177,7 +177,7 @@ export const saveWeddingTemplate = async (payload) => {
 
 export const getWeddingTemplates = async () => {
   const token = sessionStorage.getItem("token");
-  const response = await axios.get("http://192.168.219.50:8081/boot/api/schedule/weddingTemplate", {
+  const response = await axios.get("http://localhost:8081/boot/api/schedule/weddingTemplate", {
     headers: {
       Authorization: `Bearer ${token}`,
     },
@@ -188,7 +188,7 @@ export const getWeddingTemplates = async () => {
 export const checkIfTemplateExists = async () => {
   const token = sessionStorage.getItem("token");
  
-  const res = await fetch("http://192.168.219.50:8081/boot/api/schedule/events/template/exist", {
+  const res = await fetch("http://localhost:8081/boot/api/schedule/events/template/exist", {
     headers: {
       Authorization: `Bearer ${token}`,
     },

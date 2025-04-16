@@ -21,9 +21,11 @@ const WeddingTemplateAutoSaver = ({ weddingDate, onSaved }) => {
         const ratioTasks = [
           { title: "웨딩홀 투어", ratio: 0.1 },
           { title: "스드메 상담", ratio: 0.25 },
+          { title: "웨딩스튜디오 촬영일 예약", ratio: 0.3 }, // ✅ 추가
           { title: "청첩장 제작", ratio: 0.5 },
+          { title: "청첩장 발송", ratio: 0.55 },  // ✅ 추가
           { title: "예복/한복 맞춤", ratio: 0.7 },
-          { title: "신혼여행 예약", ratio: 0.85 },
+          { title: "신혼여행 예약", ratio: 0.60 },
         ];
 
         const fixedOffsets = [

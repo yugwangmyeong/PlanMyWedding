@@ -27,7 +27,6 @@ import {
 } from "./utils/WeddingApi";
 import HandleInvite from "../HandleInvite";
 
-
 const locales = { ko };
 const localizer = dateFnsLocalizer({
   format,
@@ -187,7 +186,7 @@ const CalendarPage = () => {
     try {
       // 1️⃣ 공유 일정 먼저 시도
       const sharedRes = await fetch(
-        "http://192.168.219.50:8081/boot/api/schedule/events/shared",
+        "http://localhost:8081/boot/api/schedule/events/shared",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -307,185 +306,211 @@ const CalendarPage = () => {
           </div>
         </div>
       </div>
-        <hr className="custom-line" />
+      <hr className="custom-line" />
 
-        <div className="calendar-main-fixed">
+      <div className="calendar-main-fixed">
         <div className="calendar-left">
           <div className="calendar-main-wrapper">
-                <Calendar
-                  events={events}
-                  date={currentDate}
-                  onNavigate={(date) => setCurrentDate(date)}
-                  view="month"
-                  localizer={localizer}
-                  eventPropGetter={(event) => {
-                    const isHighlighted = selectedEvent?.scheIdx === event.scheIdx;
-                    const color =
-                      event.scheCategory === "essential"
-                        ? "#8E7DBE"
-                        : event.scheCategory === "preparation"
-                        ? "#BEE4D0"
-                        : event.scheCategory === "weddingTemplate"
-                        ? "#F7CFD8"
-                        : event.scheCategory === "wedding"
-                        ? "#9FB3DF"
-                        : "#d3d3d3";
-                    return {
-                      style: {
-                        backgroundColor: isHighlighted ? "#ff6347" : color,
-                        borderRadius: "8px",
-                        color: "white",
-                        padding: "2px 5px",
-                        fontSize: "14px",
-                        transition: "all 0.3s ease-in-out",
-                        transform: isHighlighted ? "scale(1.05)" : "scale(1)",
-                        boxShadow: isHighlighted ? "0 0 10px #ff6347" : "none",
-                      },
-                    };
-                  }}
-                  components={{ toolbar: CustomToolbar }}
-                  startAccessor="start"
-                  endAccessor="end"
-                  selectable
-                  onSelectSlot={(slotInfo) => {
-                    // 로컬 날짜 기준으로 YYYY-MM-DD 형식으로 반환 (en-CA 로케일 사용)
-                    const formattedStart = new Date(slotInfo.start).toLocaleDateString("en-CA");
-                    const formattedEnd = new Date(slotInfo.end).toLocaleDateString("en-CA");
-                    setNewDate(formattedStart);
-                    setNewEndDate(formattedEnd);
-                    setSelectedEvent(null);
-                    setIsModalOpen(true);
-                  }}
-                  
-                  onSelectEvent={(event) => {
-                    if (event.isShared) {
-                      alert("이 일정은 공유된 일정으로, 수정할 수 없습니다.");
-                      return;
-                    }
-                    setSelectedEvent(event);
-                    
-                    // 이벤트의 시작/종료 날짜를 로컬 날짜 기준으로 처리
-                    const formattedStart = new Date(event.start).toLocaleDateString("en-CA");
-                    const formattedEnd = new Date(event.end).toLocaleDateString("en-CA");
-                    
-                    setNewTitle(event.title);
-                    setNewDate(formattedStart);
-                    setNewEndDate(formattedEnd);
-                    setIsCompleted(event.scheStatus === "완료");
-                    setCategory(event.scheCategory || "custom");
-                    setIsModalOpen(true);
-                  }}
-                  
-                  onShowMore={(events, date) => {
-                    const { x, y } = clickCoords;
-                    const adjustedTop = Math.min(
-                      y + window.scrollY,
-                      window.innerHeight - 220
-                    );
-                    const adjustedLeft = Math.min(
-                      x + window.scrollX,
-                      window.innerWidth - 270
-                    );
-                    setMorePopupInfo({
-                      isOpen: true,
-                      date,
-                      events,
-                      position: {
-                        top: adjustedTop,
-                        left: adjustedLeft,
-                      },
-                    });
-                  }}
-                  style={{ height: 750 }}
-                />
-              </div>
-            </div>
-  
-            <div className="calendar-main-side">
-              <WeddingAccordion
-                schedules={schedules}
-                weddingDate={weddingDate}
-                onAddEvent={handleAddEventModal}
-                onScheduleSelect={(schedule) => {
-                  setSelectedEvent(schedule);
-                  setNewTitle(schedule.scheTitle);
-                  setNewDate(schedule.scheduleDate);
-                  setCategory(schedule.scheCategory);
-                  setIsCompleted(schedule.scheStatus === "완료");
-                  setHighlightedDate(schedule.scheduleDate);
-                  setCurrentDate(new Date(schedule.scheduleDate));
-                }}
-              />
-            </div>
+            <Calendar
+              events={events}
+              date={currentDate}
+              onNavigate={(date) => setCurrentDate(date)}
+              view="month"
+              localizer={localizer}
+              eventPropGetter={(event) => {
+                const isHighlighted = selectedEvent?.scheIdx === event.scheIdx;
+                const color =
+                  event.scheCategory === "essential"
+                    ? "#8E7DBE"
+                    : event.scheCategory === "preparation"
+                    ? "#BEE4D0"
+                    : event.scheCategory === "weddingTemplate"
+                    ? "#F7CFD8"
+                    : event.scheCategory === "wedding"
+                    ? "#9FB3DF"
+                    : "#d3d3d3";
+                return {
+                  style: {
+                    backgroundColor: isHighlighted ? "#ff6347" : color,
+                    borderRadius: "8px",
+                    color: "white",
+                    padding: "2px 5px",
+                    fontSize: "14px",
+                    transition: "all 0.3s ease-in-out",
+                    transform: isHighlighted ? "scale(1.05)" : "scale(1)",
+                    boxShadow: isHighlighted ? "0 0 10px #ff6347" : "none",
+                  },
+                };
+              }}
+              components={{ toolbar: CustomToolbar }}
+              startAccessor="start"
+              endAccessor="end"
+              selectable
+              onSelectSlot={(slotInfo) => {
+                // 로컬 날짜 기준으로 YYYY-MM-DD 형식으로 반환 (en-CA 로케일 사용)
+                const formattedStart = new Date(
+                  slotInfo.start
+                ).toLocaleDateString("en-CA");
+                const formattedEnd = new Date(slotInfo.end).toLocaleDateString(
+                  "en-CA"
+                );
+                setNewDate(formattedStart);
+                setNewEndDate(formattedEnd);
+                setSelectedEvent(null);
+                setIsModalOpen(true);
+              }}
+              onSelectEvent={(event) => {
+                if (event.isShared) {
+                  alert("이 일정은 공유된 일정으로, 수정할 수 없습니다.");
+                  return;
+                }
+                setSelectedEvent(event);
+
+                // 이벤트의 시작/종료 날짜를 로컬 날짜 기준으로 처리
+                const formattedStart = new Date(event.start).toLocaleDateString(
+                  "en-CA"
+                );
+                const formattedEnd = new Date(event.end).toLocaleDateString(
+                  "en-CA"
+                );
+
+                setNewTitle(event.title);
+                setNewDate(formattedStart);
+                setNewEndDate(formattedEnd);
+                setIsCompleted(event.scheStatus === "완료");
+                setCategory(event.scheCategory || "custom");
+                setIsModalOpen(true);
+              }}
+              onShowMore={(events, date) => {
+                const { x, y } = clickCoords;
+                const adjustedTop = Math.min(
+                  y + window.scrollY,
+                  window.innerHeight - 220
+                );
+                const adjustedLeft = Math.min(
+                  x + window.scrollX,
+                  window.innerWidth - 270
+                );
+                setMorePopupInfo({
+                  isOpen: true,
+                  date,
+                  events,
+                  position: {
+                    top: adjustedTop,
+                    left: adjustedLeft,
+                  },
+                });
+              }}
+              style={{ height: 750 }}
+            />
           </div>
-  
-          <EventModal
-            isModalOpen={isModalOpen}
-            selectedEvent={selectedEvent}
-            newTitle={newTitle}
-            newDate={newDate}
-            newEndDate={newEndDate}
-            isCompleted={isCompleted}
-            setNewTitle={setNewTitle}
-            setNewDate={setNewDate}
-            setNewEndDate={setNewEndDate}
-            setIsCompleted={setIsCompleted}
-            handleAddEvent={handleAddEvent}
-            handleUpdateEvent={handleUpdateEvent}
-            handleDeleteEvent={handleDeleteEvent}
-            resetForm={resetForm}
-            category={category}
-            setCategory={setCategory}
+        </div>
+
+        <div className="calendar-main-side">
+          <WeddingAccordion
+            schedules={schedules}
+            weddingDate={weddingDate}
+            onAddEvent={handleAddEventModal}
+            onScheduleSelect={(schedule) => {
+              setSelectedEvent(schedule);
+              setNewTitle(schedule.scheTitle);
+              setNewDate(schedule.scheduleDate);
+              setCategory(schedule.scheCategory);
+              setIsCompleted(schedule.scheStatus === "완료");
+              setHighlightedDate(schedule.scheduleDate);
+              setCurrentDate(new Date(schedule.scheduleDate));
+            }}
           />
-  
-          {showWeddingModal && (
-            <WeddingDateModal
-              weddingDate={weddingDateInput}
-              setWeddingDate={setWeddingDateInput}
-              onSuccess={(savedDate) => {
-                setShowWeddingModal(false);
-              }}
-            />
-          )}
-  
-          {weddingDate && (
-            <WeddingTemplateAutoSaver
-              weddingDate={weddingDate}
-              onSaved={() => fetchAllEvents(setEvents, setSchedules)}
-            />
-          )}
-  
-          {isAlertVisible && (
-            <CustomAlert message={alertMessage} onClose={handleCloseAlert} />
-          )}
-  
-          {morePopupInfo.isOpen && (
-            <div
-              className="popupWrapper"
-              style={{
-                position: "absolute",
-                top: morePopupInfo.position.top,
-                left: morePopupInfo.position.left,
-              }}
-            >
-              <div className="popupCard">
-                <div className="popupHeader">
-                  📅 {new Date(morePopupInfo.date).toISOString().split("T")[0]} 일정
-                </div>
-                <div className="popupBody">
-                  {morePopupInfo.events.map((event, idx) => (
-                    <div key={idx} className="popupEvent">
-                      {event.title}
-                    </div>
-                  ))}
-                </div>
-                <button className="popupCloseBtn" onClick={null}>
-                  닫기
-                </button>
-              </div>
+        </div>
+      </div>
+
+      <EventModal
+        isModalOpen={isModalOpen}
+        selectedEvent={selectedEvent}
+        newTitle={newTitle}
+        newDate={newDate}
+        newEndDate={newEndDate}
+        isCompleted={isCompleted}
+        setNewTitle={setNewTitle}
+        setNewDate={setNewDate}
+        setNewEndDate={setNewEndDate}
+        setIsCompleted={setIsCompleted}
+        handleAddEvent={handleAddEvent}
+        handleUpdateEvent={handleUpdateEvent}
+        handleDeleteEvent={handleDeleteEvent}
+        resetForm={resetForm}
+        category={category}
+        setCategory={setCategory}
+      />
+
+      {showWeddingModal && (
+        <WeddingDateModal
+          weddingDate={weddingDateInput}
+          setWeddingDate={setWeddingDateInput}
+          onSuccess={(savedDate) => {
+            setShowWeddingModal(false);
+          }}
+        />
+      )}
+
+      {weddingDate && (
+        <WeddingTemplateAutoSaver
+          weddingDate={weddingDate}
+          onSaved={() => fetchAllEvents(setEvents, setSchedules)}
+        />
+      )}
+
+      {isAlertVisible && (
+        <CustomAlert message={alertMessage} onClose={handleCloseAlert} />
+      )}
+
+      {morePopupInfo.isOpen && (
+        <div
+          className="more-popup-wrapper"
+          style={{
+            position: "absolute",
+            top: morePopupInfo.position.top,
+            left: morePopupInfo.position.left,
+          }}
+        >
+          <div className="more-popup-card">
+            <div className="popup-header">
+              📅{" "}
+              {
+                new Date(
+                  new Date(morePopupInfo.date).setDate(
+                    new Date(morePopupInfo.date).getDate() +1
+                  )
+                )
+                  .toISOString()
+                  .split("T")[0]
+              }{" "}
+              일정
             </div>
-          )}
- 
+            <div className="popup-body">
+              {morePopupInfo.events.map((event, idx) => (
+                <div key={idx} className="popup-event">
+                  {event.title}
+                </div>
+              ))}
+            </div>
+            <button
+              className="popup-close-btn"
+              onClick={() =>
+                setMorePopupInfo({
+                  isOpen: false,
+                  date: null,
+                  events: [],
+                  position: { top: 0, left: 0 },
+                })
+              }
+            >
+              닫기
+            </button>
+          </div>
+        </div>
+      )}
+
       <Footer />
     </>
   );

@@ -7,7 +7,7 @@ export const UseInviteActions = ({setInviteList}) => {
   const handleAcceptInvite = useCallback(async (inviteId) => {
     try {
       const response = await fetch(
-        `http://192.168.219.50:8081/boot/api/schedule/invites/accept/${inviteId}`,
+        `http://localhost:8081/boot/api/schedule/invites/accept/${inviteId}`,
         {
           method: "POST",
           headers: { Authorization: `Bearer ${token}` },
@@ -28,7 +28,7 @@ export const UseInviteActions = ({setInviteList}) => {
   const handleRejectInvite = useCallback(async (inviteId) => {
     try {
       const response = await fetch(
-        `http://192.168.219.50:8081/boot/api/schedule/invites/reject/${inviteId}`,
+        `http://localhost:8081/boot/api/schedule/invites/reject/${inviteId}`,
         {
           method: "POST",
           headers: { Authorization: `Bearer ${token}` },
@@ -53,7 +53,7 @@ const handleDisconnect = async () => {
     const token = sessionStorage.getItem("token");
   
     try {
-      const response = await fetch("http://192.168.219.50:8081/boot/api/schedule/invites/disconnect", {
+      const response = await fetch("http://localhost:8081/boot/api/schedule/invites/disconnect", {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -76,7 +76,7 @@ const handleDisconnect = async () => {
 export const fetchSharedUsername = async () => {
     const token = sessionStorage.getItem("token");
     try {
-      const response= await fetch("http://192.168.219.50:8081/boot/api/schedule/shared-username", {
+      const response= await fetch("http://localhost:8081/boot/api/schedule/shared-username", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
