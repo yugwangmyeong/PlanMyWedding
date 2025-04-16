@@ -58,3 +58,16 @@
 ## 🔄 시스템 아키텍처
 ![image](https://github.com/user-attachments/assets/110a01ca-9f4b-4f3c-8b65-cc9fe31c4646)
 
+----
+
+
+frontend 
+
+cd front
+npm install
+npm start
+
+
+backend 
+
+??
