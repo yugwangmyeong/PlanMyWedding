@@ -24,10 +24,10 @@
 
 | 구분         | 기술 |
 |--------------|------|
-| **Frontend** | React, Axios, Chart.js, FullCalendar |
+| **Frontend** | React, Axios, Chart.js, FullCalendar,react big calendar |
 | **Backend**  | Spring Boot (JPA, MySQL), JWT 인증 |
 | **AI 추천**  | Flask (Python), Content-based Filtering |
-| **기타**     | GitHub, VS Code, Postman, Figma 등 |
+| **기타**     | GitHub, VS Code, Postman, Figma,notion 등 |
 
 ---
 
@@ -43,10 +43,9 @@
 - 항목별 예산/지출 실시간 입력 및 수정
 - 담당자 선택, 메모 작성 기능 포함
 - 총합, 신랑/신부 지출 비율 등 차트 시각화
-- 예산 공유 기능 및 초대/해제 가능
 
 ### 🏛 웨딩홀 추천
-- 설문 기반 가중치 설정 (숨고 스타일 UI)
+- 설문 기반 가중치 설정 (숨고 스타일 UI 참고)
 - 응답 기반 유사도 계산으로 상위 3개 웨딩홀 추천
 - Flask 서버와의 연동을 통한 추천 처리 예정
 
