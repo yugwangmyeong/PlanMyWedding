@@ -26,7 +26,8 @@
 | 구분         | 기술 |
 |--------------|------|
 | **Frontend** | React, Axios, Chart.js, FullCalendar,react big calendar |
-| **Backend**  |<img src="https://img.shields.io/badge/Spring%20Boot-6DB33F?style=flat-square&logo=springboot&logoColor=white"/>, JWT 인증 |
+| **Backend**  |<img src="https://img.shields.io/badge/Spring%20Boot-6DB33F?style=flat-square&logo=springboot&logoColor=white"/>, ![다운로드 (1)](https://github.com/user-attachments/assets/4554eaf4-a7bf-4fa3-9dc7-78ba6f946a65)
+|
 | **AI 추천**  | Flask (Python), Content-based Filtering |
 | **기타**     | GitHub, VS Code, Figma,notion 등 |
 
