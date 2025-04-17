@@ -81,7 +81,7 @@ npm start,
 
 ## 🖥 WEB 페이지
 ### 🎎 메인페이지
-![Image](https://github.com/user-attachments/assets/4bafd6e7-aac2-4410-893f-41972ee8ec4c)
+<img src="https://github.com/user-attachments/assets/4bafd6e7-aac2-4410-893f-41972ee8ec4c" width="50%"/>
 
 ----
 
