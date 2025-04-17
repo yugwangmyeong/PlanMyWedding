@@ -18,7 +18,7 @@
 - AI 기반 맞춤 웨딩홀 추천
 - 사용자 커뮤니티 및 협업 시스템
 
----
+---ㅈ
 
 ## 🛠 사용 기술
 <img src="https://img.shields.io/badge/Spring%20Boot-6DB33F?style=flat-square&logo=springboot&logoColor=white"/>
