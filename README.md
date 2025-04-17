@@ -62,13 +62,13 @@
 ----
 
 
-frontend 
+## 🖥frontend 
 
 cd front
 npm install
 npm start
 
 
-backend 
+##⌨backend 
 
 ??
