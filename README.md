@@ -79,35 +79,35 @@ npm start,
 
 ----
 
-## ⌨ WEB 페이지
-### 메인페이지
+## 🖥 WEB 페이지
+### 🎎 메인페이지
 ![Image](https://github.com/user-attachments/assets/4bafd6e7-aac2-4410-893f-41972ee8ec4c)
 
 ----
 
-### 회원가입
+### 😀 회원가입
 ![Image](https://github.com/user-attachments/assets/33a50aa0-ced3-4f9c-bb65-2ab448380aa9)
 
 ----
 
-### 일정 관리
+### 📆 일정 관리
 ![Image](https://github.com/user-attachments/assets/66b55b6f-0fdc-413b-b299-5a6facf51d36)
 
 ----
 
-### 예산 관리
+### 💰 예산 관리
 ![Image](https://github.com/user-attachments/assets/730a3420-7983-4c58-acf3-c1eb4b7daaf5)
 
 ----
 
-### 웨딩홀 추천 페이지
+### 🕍 웨딩홀 추천 페이지
 ![Image](https://github.com/user-attachments/assets/20b2cdc3-0f90-43bd-9f6d-29c150a59399)
 
 ![Image](https://github.com/user-attachments/assets/547f3f9d-9bb0-4af9-8249-3d42d3915e90)
 
 ----
 
-### 커뮤니티
+### 👪 커뮤니티
 ![Image](https://github.com/user-attachments/assets/627b888d-bf62-4f4e-9523-e4589e9a395b)
 
 ----
