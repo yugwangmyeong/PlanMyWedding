@@ -25,11 +25,27 @@
 
 | 구분         | 기술 |
 |--------------|------|
-| **Frontend** | React, Axios, Chart.js, FullCalendar,react big calendar |
-| **Backend**  |<img src="https://img.shields.io/badge/Spring%20Boot-6DB33F?style=flat-square&logo=springboot&logoColor=white"/>, ![다운로드 (1)](https://github.com/user-attachments/assets/4554eaf4-a7bf-4fa3-9dc7-78ba6f946a65)
-|
-| **AI 추천**  | Flask (Python), Content-based Filtering |
-| **기타**     | GitHub, VS Code, Figma,notion 등 |
+| **Frontend** | 
+<img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black"/>
+<img src="https://img.shields.io/badge/Axios-5A29E4?style=flat-square&logo=axios&logoColor=white"/>
+<img src="https://img.shields.io/badge/Chart.js-FF6384?style=flat-square&logo=chartdotjs&logoColor=white"/>
+<img src="https://img.shields.io/badge/FullCalendar-3E4E88?style=flat-square&logo=google-calendar&logoColor=white"/>
+<img src="https://img.shields.io/badge/React--Big--Calendar-DD0031?style=flat-square&logo=react&logoColor=white"/> |
+
+| **Backend**  | 
+<img src="https://img.shields.io/badge/Spring%20Boot-6DB33F?style=flat-square&logo=springboot&logoColor=white"/>
+<img src="https://img.shields.io/badge/JWT%20Auth-000000?style=flat-square&logo=jsonwebtokens&logoColor=white"/> |
+
+| **AI 추천**  | 
+<img src="https://img.shields.io/badge/Flask-000000?style=flat-square&logo=flask&logoColor=white"/>
+<img src="https://img.shields.io/badge/Content--based%20Filtering-FF8C00?style=flat-square"/> |
+
+| **기타**     | 
+<img src="https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white"/>
+<img src="https://img.shields.io/badge/VS%20Code-007ACC?style=flat-square&logo=visualstudiocode&logoColor=white"/>
+<img src="https://img.shields.io/badge/Figma-F24E1E?style=flat-square&logo=figma&logoColor=white"/>
+<img src="https://img.shields.io/badge/Notion-000000?style=flat-square&logo=notion&logoColor=white"/> |
+
 
 ---
 
