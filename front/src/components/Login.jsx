@@ -22,7 +22,7 @@ const Login = ({ setToken }) => {
     setError(""); // 에러 초기화
 
     try {
-      const response = await fetch("http://192.168.219.50:8081/boot/api/login", {
+      const response = await fetch("http://localhost:8081/boot/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

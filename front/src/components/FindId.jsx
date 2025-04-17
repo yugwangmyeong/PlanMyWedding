@@ -19,7 +19,7 @@ const FindId = () => {
     try {
       // 닉네임을 쿼리 파라미터로 전달하여 API 호출
       const response = await fetch(
-        `http://192.168.219.50:8081/boot/api/user/find-id?username=${encodeURIComponent(
+        `http://localhost:8081/boot/api/user/find-id?username=${encodeURIComponent(
           nickname
         )}`,
         {

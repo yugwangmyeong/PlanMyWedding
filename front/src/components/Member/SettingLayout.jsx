@@ -25,7 +25,7 @@ const SettingLayout = () => {
     const token = sessionStorage.getItem("token");
   
     try {
-      const res = await fetch("http://192.168.219.50:8081/boot/api/delete", {
+      const res = await fetch("http://localhost:8081/boot/api/delete", {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

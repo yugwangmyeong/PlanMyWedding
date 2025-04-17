@@ -12,7 +12,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api/community")
 @RequiredArgsConstructor
-@CrossOrigin(origins = {"http://localhost:3000", "http://192.168.219.50:3000"}) // 프론트엔드와 CORS 설정이 필요한 경우
+@CrossOrigin(origins = {"http://localhost:3000","http://본인IP:3000"}) // 프론트엔드와 CORS 설정이 필요한 경우
 public class CommentController {
 
     private final CommentService commentService;

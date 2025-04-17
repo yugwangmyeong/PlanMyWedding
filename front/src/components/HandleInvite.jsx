@@ -12,7 +12,7 @@ const HandleInvite = () => {
     const token = sessionStorage.getItem("token");
     try {
       await axios.post(
-        "http://192.168.219.50:8081/boot/api/schedule/invites",
+        "http://localhost:8081/boot/api/schedule/invites",
         { email },
         {
           headers: {
