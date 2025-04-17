@@ -26,9 +26,9 @@
 | 구분         | 기술 |
 |--------------|------|
 | **Frontend** | 
-<img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black"/>
-<img src="https://img.shields.io/badge/Axios-5A29E4?style=flat-square&logo=axios&logoColor=white"/>
-<img src="https://img.shields.io/badge/Chart.js-FF6384?style=flat-square&logo=chartdotjs&logoColor=white"/>
+<img src="https://img.shields.io/badge/React-61DAFB?style=flat-square&logo=react&logoColor=black"/>,
+<img src="https://img.shields.io/badge/Axios-5A29E4?style=flat-square&logo=axios&logoColor=white"/>,
+<img src="https://img.shields.io/badge/Chart.js-FF6384?style=flat-square&logo=chartdotjs&logoColor=white"/>,
 <img src="https://img.shields.io/badge/FullCalendar-3E4E88?style=flat-square&logo=google-calendar&logoColor=white"/>
 <img src="https://img.shields.io/badge/React--Big--Calendar-DD0031?style=flat-square&logo=react&logoColor=white"/>|
 
