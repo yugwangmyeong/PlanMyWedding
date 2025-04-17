@@ -62,18 +62,53 @@
 ----
 
 ## 🌊 시스템 흐름도
-![image](https://github.com/user-attachments/assets/110a01ca-9f4b-4f3c-8b65-cc9fe31c4646)
+![image]()
 
 ----
 
 
 ## 🖥 Front-end 
 
-cd front
-npm install
-npm start
+cd front,
+npm install,
+npm start,
 
 
 ## ⌨ Back-end 
 
 ??
+
+----
+
+## ⌨ WEB 페이지
+메인페이지
+![image]()
+
+회원가입
+![image]()
+
+일정 관리
+![image]()
+
+예산 관리
+![image]()
+
+웨딩홀 추천 페이지
+![image]()
+
+커뮤니티
+![image]()
+
+----
+
+## 😎 팀원 역할
+![image]()
+
+----
+
+## 💥 트러블 슈팅
+![image]()
+
+
+
+
