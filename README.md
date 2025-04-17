@@ -18,15 +18,15 @@
 - AI 기반 맞춤 웨딩홀 추천
 - 사용자 커뮤니티 및 협업 시스템
 
----ㅈ
+---
 
 ## 🛠 사용 기술
-<img src="https://img.shields.io/badge/Spring%20Boot-6DB33F?style=flat-square&logo=springboot&logoColor=white"/>
+
 
 | 구분         | 기술 |
 |--------------|------|
 | **Frontend** | React, Axios, Chart.js, FullCalendar,react big calendar |
-| **Backend**  | Spring Boot (JPA, MySQL), JWT 인증 |
+| **Backend**  |<img src="https://img.shields.io/badge/Spring%20Boot-6DB33F?style=flat-square&logo=springboot&logoColor=white"/>, JWT 인증 |
 | **AI 추천**  | Flask (Python), Content-based Filtering |
 | **기타**     | GitHub, VS Code, Figma,notion 등 |
 
