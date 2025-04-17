@@ -101,9 +101,9 @@ npm start,
 ----
 
 ### 🕍 웨딩홀 추천 페이지
-<div style="display: flex; gap: 10px;">
-  <img src="https://github.com/user-attachments/assets/20b2cdc3-0f90-43bd-9f6d-29c150a59399" width="40%"/>
-  <img src="https://github.com/user-attachments/assets/547f3f9d-9bb0-4af9-8249-3d42d3915e90" width="40%"/>
+<div style="display: flex; justify-content: center; gap: 10px;">
+  <img src="https://github.com/user-attachments/assets/20b2cdc3-0f90-43bd-9f6d-29c150a59399" width="45%"/>
+  <img src="https://github.com/user-attachments/assets/547f3f9d-9bb0-4af9-8249-3d42d3915e90" width="45%"/>
 </div>
 
 ----
