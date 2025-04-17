@@ -81,7 +81,7 @@ npm start,
 
 ## 🖥 WEB 페이지
 ### 🎎 메인페이지
-<img src="https://github.com/user-attachments/assets/4bafd6e7-aac2-4410-893f-41972ee8ec4c" width="50%"/>
+![Image](https://github.com/user-attachments/assets/4bafd6e7-aac2-4410-893f-41972ee8ec4c)
 
 ----
 
@@ -101,9 +101,8 @@ npm start,
 ----
 
 ### 🕍 웨딩홀 추천 페이지
-![Image](https://github.com/user-attachments/assets/20b2cdc3-0f90-43bd-9f6d-29c150a59399)
-
- <img src="https://github.com/user-attachments/assets/547f3f9d-9bb0-4af9-8249-3d42d3915e90.png" width="200" height="400">
+<img src="https://github.com/user-attachments/assets/20b2cdc3-0f90-43bd-9f6d-29c150a59399" width="50%"/>
+<img src="https://github.com/user-attachments/assets/547f3f9d-9bb0-4af9-8249-3d42d3915e90" width="50%"/>
 
 ----
 
