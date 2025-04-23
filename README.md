@@ -99,8 +99,15 @@
 
 ----
 
+
+----
+
 ## 추천시스템 github
 https://github.com/JoSeongGeun/project_py
 
 ----
 
+## 시연영상 youtube
+https://www.youtube.com/watch?v=q8-gxI0F9zk
+
+----
