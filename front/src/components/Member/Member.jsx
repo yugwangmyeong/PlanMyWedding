@@ -21,7 +21,7 @@ const Member = () => {
       return;
     }
 
-    fetch("http://192.168.219.50:8081/boot/api/member", {
+    fetch("http://localhost:8081/boot/api/member", {
       method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,

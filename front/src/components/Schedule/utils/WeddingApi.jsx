@@ -1,7 +1,7 @@
 // src/api/weddingApi.js
 import axios from "axios";
 
-const API_BASE = "http://192.168.219.50:8081/boot/api/schedule";
+const API_BASE = "http://localhost:8081/boot/api/schedule";
 
 // ✅ 1. 결혼식 날짜 조회
 export const getWeddingDate = async () => {

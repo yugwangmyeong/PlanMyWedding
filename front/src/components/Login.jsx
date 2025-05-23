@@ -22,7 +22,7 @@ const Login = ({ setToken }) => {
     setError(""); // 에러 초기화
 
     try {
-      const response = await fetch("http://192.168.219.50:8081/boot/api/login", {
+      const response = await fetch(`${process.env.REACT_APP_API_URL}/api/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -35,7 +35,7 @@ const Login = ({ setToken }) => {
 
         // ✅ 토큰 저장
         sessionStorage.setItem("token", data.token);
-        //console.log("받은 토큰:", data.token);
+        console.log("받은 토큰:", data.token);
         // ✅ 로그인 후 메인페이지로 이동 (새로고침 포함)
         window.location.href = "/mainpage";
       } else {

@@ -6,8 +6,8 @@ import Header from "./Header";
 import Footer from "./Footer";
 
 
- const BASE_URL = "http://192.168.219.50:8081/boot/api/community";
- const API_BASE = "http://192.168.219.50:8081/boot/api";
+ const BASE_URL = "http://localhost:8081/boot/api/community";
+ const API_BASE = "http://localhost:8081/boot/api";
 
 
 const CommunityPost = () => {

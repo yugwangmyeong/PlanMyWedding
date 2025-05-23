@@ -1,0 +1,142 @@
+.bbbb-frame {
+    position: relative;
+    width: 1920px;
+    height: 1115px;
+    background: #fff;
+    overflow: hidden;
+  }
+  
+  /* 배경 사각형 */
+  .rect-bg {
+    position: absolute;
+    left: 0;
+    top: 174px;
+    width: 1920px;
+    height: 827px;
+    background: #d9d9d9;
+  }
+  
+  /* 상단 바 */
+  .rect-bar {
+    position: absolute;
+    left: 334px;
+    top: 117px;
+    width: 602px;
+    height: 14px;
+    background: #d9d9d9;
+    border-radius: 25px;
+  }
+  
+  /* 카드 */
+  .rect-card {
+    position: absolute;
+    left: 334px;
+    top: 206px;
+    width: 350px;
+    height: 273px;
+    background: #fff;
+    border-radius: 25px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  
+  /* 텍스트 */
+  .percent {
+    position: absolute;
+    left: 995px;
+    top: 88px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 36px;
+    font-weight: 400;
+    color: #000;
+  }
+  
+  .title {
+    position: absolute;
+    left: 334px;
+    top: 46px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 36px;
+    font-weight: 400;
+    color: #000;
+  }
+  
+  .question {
+    position: absolute;
+    left: 359px;
+    top: 243px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    color: #000;
+  }
+  
+  .option-group {
+    position: absolute;
+    left: 359px;
+    width: 292px;
+    height: 57px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .option-group:first-of-type { top: 303px; }
+  .option-group:last-of-type { top: 383px; }
+  
+  .option-circle {
+    width: 25px;
+    height: 25px;
+    background: #fff;
+    border-radius: 50%;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+  }
+  
+  .option-text {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 20px;
+    color: #000;
+  }
+  
+  .option-group:first-of-type .option-text { left: 166px; top: 11px; content: "네"; }
+  .option-group:last-of-type .option-text { left: 166px; top: 11px; content: "아니요"; }
+  
+  /* 구분선 */
+  .divider {
+    position: absolute;
+    left: 0;
+    top: -25px;
+    width: 1935px;
+    height: 1px;
+    background: #d7d7d7;
+  }
+  
+  /* 헤더 그룹 */
+  .header-group {
+    position: absolute;
+    left: 102px;
+    top: -100px;
+    width: 1157px;
+    height: 71px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  .header-title {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 20px;
+    color: #292929;
+  }
+  
+  .header-nickname {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 20px;
+    color: #292929;
+  }
+  
+  .header-plan {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 30px;
+    color: #efa1dc;
+    line-height: 48px;
+  }

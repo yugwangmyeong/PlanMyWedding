@@ -15,6 +15,7 @@ import SettingLayout from "./components/Member/SettingLayout";
 import Community from "./components/Community.jsx";
 import FindId from "./components/FindId.jsx";
 import FindPassword from "./components/FindPassword.jsx";
+import BbbbFrame from "./components/BbbbFrame.jsx";
 
 function App() {
   const [token, setToken] = useState(null);
@@ -66,6 +67,7 @@ function App() {
             <Route path="member" element={<Member />} />
             
           </Route>
+          <Route path="/Bbbb" element={<BbbbFrame/>}></Route>
         </Routes>
       </div>
     </BrowserRouter>
